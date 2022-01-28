@@ -8,7 +8,7 @@ import Areas from "./Areas_list";
 import Dishes from "./Dishes_list";
 import About from "./footerF";
 import "./footer_style/footer-style.css";
-
+import '../../Components/main-style.css'
 import Social from "./socialMedia";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
