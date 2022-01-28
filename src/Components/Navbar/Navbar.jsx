@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css'
-// import logo from './../../../public/logo192.png' 
+// import logo from './../../images/logo-sm.png' 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
@@ -200,9 +200,9 @@ export default function Navbar() {
             <div className="row py-2" style={{ width: "100%" }}>
                 <div className="col-2">
                 <a className="navbar-brand navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" href="../index.html"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" 
                     style={{ boxShadow: "none", border: "none"}}>
-                    <img src='./../../../public/logo192.png' alt="" style={{ width: "40px", maxWidth: "100%", height: "auto"}}/>
+                    <img src="https://raw.githubusercontent.com/Sondos1233/Elmenus/main/images/logo-sm.png" alt="" style={{ width: "40px", maxWidth: "100%", height: "auto"}}/>
                     <i className="fa fa-caret-down" aria-hidden="true" style={{ color: "#e32207", fontSize: "2vw"}}></i>
                 </a>
                 </div>
