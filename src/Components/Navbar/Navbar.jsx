@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css'
+// import logo from './../../../public/logo192.png' 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
@@ -193,7 +194,78 @@ export default function Navbar() {
             </section>
         </nav>
 
-        
+        <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none" id= "pageNav-lg">
+        <section className="navbar navbar-expand-lg navbar-light pb-0" style={{ backgroundColor: "#fff" }}>
+            <div className="container-fluid">
+            <div className="row py-2" style={{ width: "100%" }}>
+                <div className="col-2">
+                <a className="navbar-brand navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" href="../index.html"
+                    style={{ boxShadow: "none", border: "none"}}>
+                    <img src='./../../../public/logo192.png' alt="" style={{ width: "40px", maxWidth: "100%", height: "auto"}}/>
+                    <i className="fa fa-caret-down" aria-hidden="true" style={{ color: "#e32207", fontSize: "2vw"}}></i>
+                </a>
+                </div>
+                <div className="col-10">
+                <form className= "search-form">
+                    <div className="input-group mb-2">
+                    <input type="text" className="form-control" placeholder="&#128269; Find A Restaurant" style={{ padding: "10px" }}/>
+                    </div>
+                </form>
+                </div>
+                <div className="col-12">
+                <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div className="navbar-nav">
+                    <a className="nav-link py-4 px-2" href="./Delivery.html">DELIVERY</a>
+                    <a className="nav-link py-4 px-2 active" href="./Dine-Out.html">DINE OUT</a>
+                    <a className="nav-link py-4 px-2" href="./Offers.html">OFFERS</a>
+                    </div>
+                    <div className="services py-3" style={{width: "52%", display: "flex", marginLeft: "auto"}}>
+                    <div style={{ marginLeft: "auto" }}>
+                        <a href="#" style={{ textDecoration: "none" }}>
+                        <button className="btn" style={{ fontSize: "12px", fontWeight: "700", backgroundColor: "white"}}>
+                            LOGIN
+                        </button>
+                        </a>
+                        <a href="#" style={{textDecoration: "none"}}>
+                        <button classNmae="btn"
+                            style={{ backgroundColor: "#e32207", color: "white", fontSize: "12px", fontWeight: "700"}}>
+                            SIGNUP
+                        </button>
+                        </a>
+                    </div>
+                    </div>
+                    <div className="cart-language  py-3"
+                    style={{ width: "auto", display: "flex", margin: "auto", borderLeft: "1px solid #dfe2e6"}}>
+                    <div style={{ marginLeft: "auto"}}>
+                        <a href="#" style={{ textDecoration: "none"}}>
+                        <i className="fa fa-shopping-bag" style={{ fontSize: "2vw", color: "gray", padding: "0 30px"}}></i>
+                        </a>
+                        <a href="#" style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw"}}>
+                        العربية
+                        </a>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div className="col-12 pt-2 ">
+                <ol className="breadcrumb" style={{ justifyContent: "center"}}>
+                    <li className="breadcrumb-item"><a href="#">Home</a></li>
+                    <li className="breadcrumb-item"><a href="#">cairo</a></li>
+                    <li className="breadcrumb-item"><a href="#">maadi</a></li>
+                    <li className="breadcrumb-item active" aria-current="page">new maadi</li>
+                </ol>
+                </div>
+                <div className="col-12 location-side" style={{ justifyContent: "center"}}>
+                <img src="https://elmenus.com/public/img/locationHeader.svg" alt="iconImage" className="imgIcon mx-2"/>
+                <h4 className="headerLocation mx-2">Dine-out in <span>Maadi</span></h4>
+                <button className="btn change-btn mx-2">CHANGE</button>
+                </div>
+            </div>
+            </div>
+        </section>
+    
+        </nav>
         
         </>
     );
