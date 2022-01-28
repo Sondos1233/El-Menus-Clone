@@ -110,12 +110,12 @@ export default function Navbar() {
 
                     <div style={{ marginLeft: "auto" }} id="sign_auth">
                     <a href="#" style={{ textDecoration: "none" }}>
-                    <button type="button" className="btn btn-primary text-white login-btn" data-bs-toggle="modal" data-bs-target="#LogInModal">
+                    <button type="button" className="btn login-btn btn-log" data-bs-toggle="modal" data-bs-target="#LogInModal">
                             LogIn
                             </button>
                     </a>
                     <a href="#" style={{ textDecoration: "none"}}>
-                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SignModal">
+                        <button type="button" className="btn btn-sign" data-bs-toggle="modal" data-bs-target="#SignModal">
                         SignUp
                         </button>
                     </a>
@@ -125,30 +125,17 @@ export default function Navbar() {
                 <div
                     className="cart-language py-3"
                     style= {{ width: "auto", display: "flex", margin: "auto", borderLeft: "1px solid #dfe2e6"}}
-                    // "
-                    // width: auto;
-                    // display: flex;
-                    // margin: auto;
-                    // border-left: 1px solid var(--border-color);
-                    // "
                 >
                     <div style={{ marginLeft: "auto"}}>
                     <a href="#" style={{ textDecoration: "none"}}>
                         <i
                         className="fal fa-shopping-bag"
                         style= {{ fontSize: "2vw", color: "gray", padding: "0 30px"}}
-                        // "font-size: 2vw; color: gray; padding: 0 30px"
                         ></i>
                     </a>
                     <a
                         href="#"
                         style= {{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw"}}
-                        // "
-                        // text-decoration: none;
-                        // color: gray;
-                        // padding: 10px;
-                        // font-size: 1.5vw;
-                        // "
                     >
                         العربية
                     </a>

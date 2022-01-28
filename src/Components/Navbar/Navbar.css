@@ -56,5 +56,17 @@ a{
 {
     margin-top: 5px; 
 }
-
+.btn-sign
+{
+    color: white;
+    background-color: #e32207;
+    border:#e32207;
+}
+.btn-log
+{
+    color: black;
+    background-color: white;
+    border:whitel
+    
+}
 
