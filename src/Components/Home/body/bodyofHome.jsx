@@ -1,10 +1,10 @@
 import HeaderOfBody from "./headerOfBody";
 import "../style/home.css";
-import "../../Components/main-style.css";
+import "../../main-style.css";
 import CardBody from "./cardOfBody";
-import order from "../../images/Home/track-order.svg";
-import noPhone from "../../images/Home/no-phone.svg";
-import FooterOfBody from "./footerOfBody";
+import order from "../../../images/Home/track-order.svg";
+import noPhone from "../../../images/Home/no-phone.svg";
+import FooterOfBody from "../body/footerOfBody"
 export default function Body() {
   return (
     <>

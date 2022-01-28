@@ -1,4 +1,4 @@
-import check from '../../images/Home/check-mark-circle.svg'
+import check from '../../../images/Home/check-mark-circle.svg'
 export default function FooterOfBody() {
     return (
       <>

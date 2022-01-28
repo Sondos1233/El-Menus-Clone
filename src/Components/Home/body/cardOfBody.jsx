@@ -1,5 +1,5 @@
 import "../style/home.css";
-import "../../Components/main-style.css";
+import "../../main-style.css";
 const CardBody = (props) => {
   return (
     <>

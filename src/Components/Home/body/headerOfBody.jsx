@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "../style/home.css";
-import "./../../Components/main-style.css";
+import "../../main-style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRulerHorizontal } from "@fortawesome/free-solid-svg-icons";
 export default function HeaderOfBody() {

@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "../style/home.css";
-import "./../../Components/main-style.css";
-import elmenusLogo from "../../images/Home/elmenusLogo.svg";
-import search from "../../images/Home/search.jpeg";
+import "../../main-style.css";
+import elmenusLogo from "../../../images/Home/elmenusLogo.svg";
+import search from "../../../images/Home/search.jpeg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faStore,faArrowRight,faMotorcycle,faUtensils} from '@fortawesome/free-solid-svg-icons'
 import Card from "./card";
