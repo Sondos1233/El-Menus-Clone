@@ -1,0 +1,26 @@
+#LogInModal , #SignModal{
+    margin-top: 100px;
+}
+
+#log .input-box input{
+    width: 220%;
+    margin-bottom: 4%;
+    margin-left: 24%;
+    border-radius: 5px;
+    padding: 4%;
+    border: 0.5px solid rgb(197, 195, 195);
+}
+
+#log .input-box input:valid{
+    background-color: rgb(155, 199, 235);
+}
+
+#log .btn{
+    width: 219%;
+    margin-left: 25%;
+}
+
+#log .ForgotPass{
+    margin-left: 30%;
+    margin-top: 9%;
+}
