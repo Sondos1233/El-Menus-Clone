@@ -179,6 +179,19 @@ export default function Navbar() {
                 </div>
             </div>
             </section>
+                        {/* "border-bottom: 1px solid var(--border-color);" */}
+        <section aria-label="breadcrumb" className="container-fluid d-lg-block d-none" style={{ borderBottom: "1px solid #dfe2eb"}}>
+            <div className="row" style={{ margin: "0 120px"}}>
+            <div className="col-12 pt-2">
+                <ol className="breadcrumb" >
+                <li className="breadcrumb-item" ><a href="#" className='color-a'>Home</a></li>
+                <li className="breadcrumb-item"><a href="#" className='color-a'>cairo</a></li>
+                <li className="breadcrumb-item"><a href="#" className='color-a'>maadi</a></li>
+                <li className="breadcrumb-item active" aria-current="page">new maadi</li>
+                </ol>
+            </div>
+            </div>
+        </section>
         </nav>
 
         <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none" id= "pageNav-lg">
