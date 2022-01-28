@@ -1,6 +1,45 @@
 import logo from '../../../images/JoinUs/logowithbg.png'
-
+import { useState } from 'react';
 export default function AddResForm() {
+  const pattern = new RegExp(/^(01)(0|1|2|5)[0-9]{8}$/);
+  const [user, setUser] = useState({
+    ResName:"",
+    OwnName: "",
+    Phone: ""
+  });
+  const [errors, setErrors] = useState({
+    NameErrors:null,
+    NameErrors: null,
+    PhoneErrors: null,
+  
+  });
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    })
+    if (e.target.name == "ResName" || e.target.name == "OwnName") {
+      setErrors({
+        ...errors,
+        NameErrors:
+          e.target.value.length == 0
+            ? "this field is required"
+            : null
+      });
+    } else if (e.target.name == "Phone") {
+      setErrors({
+        ...errors,
+       PhoneErrors:
+          e.target.value.length == 0
+            ? "this field is required"
+            : !pattern.test( e.target.value)
+            ? "Invalid Phone Format!"
+            : null
+      });
+    }
+  }
+  
+  
   return (
     <>
      <form className="card p-3 position-absolute">
@@ -17,8 +56,13 @@ export default function AddResForm() {
               className="form-control"
               id="ResName"
               placeholder="Res. Name"
+              name="ResName"
               required
+              onChange={(e) => {
+                handleChange(e);
+              }}
             />
+            <small className="text-danger">{errors.NameErrors}</small>
           </div>
           <div className="pb-3">
             <label for="OwName" className="form-label">Owner Name *</label>
@@ -27,8 +71,13 @@ export default function AddResForm() {
               className="form-control"
               id="OwName"
               placeholder="Full Name"
+              name="OwnName"
               required
+              onChange={(e) => {
+                handleChange(e);
+              }}
             />
+            <small className="text-danger">{errors.NameErrors}</small>
           </div>
           <div className="pb-3">
             <label for="phone" className="form-label">Phone Number *</label>
@@ -37,8 +86,13 @@ export default function AddResForm() {
               className="form-control"
               id="phone"
               placeholder="01XXXXXXXXX"
+              name="Phone"
               required
+              onChange={(e) => {
+                handleChange(e);
+              }}
             />
+            <small className="text-danger">{errors.PhoneErrors}</small>
           </div>
           <div className="pb-3">
             <label for="nBranch" className="form-label">Number of Branch</label>
