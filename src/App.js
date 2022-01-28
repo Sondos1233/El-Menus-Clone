@@ -1,11 +1,12 @@
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min'
 import './App.css';
-import Home from './Components/Home';
+import JoinUs from './Components/JoinUs/joinUs';
 function App() {
   return (
     <>
-    <Home/>
-      
+  
+      <JoinUs/>
     </>
   );
 }
