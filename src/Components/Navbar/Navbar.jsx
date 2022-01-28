@@ -179,7 +179,7 @@ export default function Navbar() {
                 </div>
             </div>
             </section>
-                        {/* "border-bottom: 1px solid var(--border-color);" */}
+        </nav>
         <section aria-label="breadcrumb" className="container-fluid d-lg-block d-none" style={{ borderBottom: "1px solid #dfe2eb"}}>
             <div className="row" style={{ margin: "0 120px"}}>
             <div className="col-12 pt-2">
@@ -192,7 +192,6 @@ export default function Navbar() {
             </div>
             </div>
         </section>
-        </nav>
 
         <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none" id= "pageNav-lg">
         <section className="navbar navbar-expand-lg navbar-light pb-0" style={{ backgroundColor: "#fff" }}>
