@@ -1,6 +1,6 @@
 import './App.css';
 import Modal from 'react-modal';
-import ModalLog from './Components/logInModal/logInModal';
+import ModalSUp from './Components/signUpModal/signUpModal';
 // import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 
@@ -9,7 +9,7 @@ function App() {
   return (
     <>
  
-    <ModalLog />
+    <ModalSUp />
 
 
 

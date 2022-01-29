@@ -1,3 +1,4 @@
+
 .ReactModal__Overlay {
     opacity: 0;
     transition: opacity 500ms;
@@ -40,7 +41,7 @@
     justify-content: center; */
 }
 
-#logLogo{
+#signLogo{
     width: 45%;
     margin-left: 28%;
     margin-bottom: 10%;
@@ -63,15 +64,15 @@
 
 
 
-.goglBtn{
-    background-color: #4267b2 !important;
+.crtBtn{
+    background-color: #e32207 !important;
     color: white !important;
 }
 
-.form-container .frgtPass{
+.form-container .note{
+    text-align: center;
     color: #e32207;
     font-size: 12px;
     font-weight: 500;
-    padding-left: 33%;
     padding-top: 6%;
 }
