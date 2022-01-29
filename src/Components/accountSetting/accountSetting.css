@@ -1,0 +1,46 @@
+
+.tabs{
+    background-color: transparent;
+    color: grey;
+    border-radius: 25px;
+    font-weight: bold;
+    width: 8%;
+    height: 43px;
+    border: none;
+    margin-left: 1%;
+}
+
+.tabs:hover{
+    background-color: #d3c8c87c;
+    color: grey;
+}
+
+.active-tabs{
+    background-color: #e32207;
+    color: white;
+    border-radius: 25px;
+    font-weight: bold;
+    width: 8%;
+    height: 43px;
+    border: none;
+    margin-left: 1%;
+}
+
+
+
+.hide{
+    display: none;
+}
+
+.active-changEmail {
+    display: block;
+}
+
+.active-changPass{
+    display: block;
+}
+
+.active-addressBook{
+    display: block;
+}
+

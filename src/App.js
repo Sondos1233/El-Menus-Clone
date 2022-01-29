@@ -1,9 +1,12 @@
-import logo from './logo.svg';
+
 import './App.css';
+import AccountSetting from './Components/accountSetting/accountSetting'
 
 function App() {
   return (
     <>
+
+    <AccountSetting />
     </>
   );
 }
