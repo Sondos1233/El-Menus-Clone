@@ -56,42 +56,72 @@
     clear: both;
 }
 
+.pills{
+    position: relative;
+}
+
 .btns{
     margin-top: 3%;
     margin-left: 22%;
 }
 
-.btns .Rev{
+.btns .tabs{
+    background-color: transparent;
+    color: grey;
     border-radius: 25px;
     font-weight: bold;
     width: 8%;
     height: 43px;
-}
-
-.btns .photo{
     border: none;
-    width: 8%;
-    height: 43px;
-    color: rgb(179, 175, 175);
-    border-radius: 25px;
-    font-weight: 500;
     margin-left: 1%;
 }
 
-.btns .photo:hover{
-    background-color: #d3c8c8;
-    color: rgb(179, 175, 175);
+.btns .active-tabs{
+    background-color: #e32207;
+    color: white;
+    border-radius: 25px;
+    font-weight: bold;
+    width: 8%;
+    height: 43px;
+    border: none;
+    margin-left: 1%;
 }
 
-.reviews img{
+
+.btns .tabs:hover{
+    background-color: #d3c8c87c;
+    color: grey;
+}
+
+.active-content img{
     width: 15%;
     display: block;
     margin-left: 43%;
     margin-top: 6%;
 }
 
-.reviews p{
+.active-content p{
     text-align: center;
+}
+
+.content{
+    display: none;
+}
+
+.active-content {
+    display: block;
+}
+
+
+.comingSoon{
+    display: none;
+}
+
+.active-comingSoon{
+    display: block;
+    position: absolute;
+    top: 161%;
+    left: 23%;
 }
 
 

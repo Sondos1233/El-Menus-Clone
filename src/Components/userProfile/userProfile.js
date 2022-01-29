@@ -1,8 +1,14 @@
+
 import './userProfile.css'
-import React from 'react';
+import React, {useState} from 'react';
 
 function Userprofile(){
 
+    const [toggleState, setToggleState] = useState(1);
+
+    const toggleTab = (index) => {
+      setToggleState(index);
+    };
 
     return(
         <>
@@ -24,17 +30,22 @@ function Userprofile(){
 
         <div className='clear'></div>
 
-        <section className="container-fluid">
+        <section className="container-fluid pills">
             <div className="btns">
-                <button className="btn btn-danger Rev">Reviews</button>
-                <button className="btn photo">Photo</button>
+                <button className="btn tabs" className={toggleState === 1 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(1)}>Reviews</button>
+                <button className="btn tabs" className={toggleState === 2 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(2)}>Photo</button>
             </div>
-            <div className="reviews">
+
+            <div className="content" className={toggleState === 1 ? "content  active-content" : "content"}>
                 <img src="	https://www.elmenus.com/public/img/empty-reviews.svg" alt="ratings"/>
                 <p>No reviews yet</p>
             </div>
+
+            <div className='comingSoon' className={toggleState === 2 ? "comingSoon  active-comingSoon" : "comingSoon"}>
+                <p>coming soon</p>
+            </div>
         </section>
-        
+
         </>
     )
 }
