@@ -74,7 +74,7 @@ function ModalSUp(){
     <>
     <div className="container-fluid">
 
-      {/* This Button instead of LogIn button till integration with navbar */}
+      {/* This Button instead of signUp button till integration with navbar */}
     <button className="btn btn-danger" onClick={() => { setModalIsOpen(true) }}>Open Modal</button>
     {/* ****************************************************************************** */}
 
