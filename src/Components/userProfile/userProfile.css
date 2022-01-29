@@ -1,0 +1,97 @@
+
+.head_content{
+    width: 100%;
+    margin-top: 7%;
+}
+
+.user_head{
+    width: 10%;
+    float: left;
+    margin-left: 30%;
+}
+
+.user_head img{
+    display: block;
+}
+
+.user_head button{
+    background-color: #8e52ff;
+    color: white;
+    border-radius: 5px;
+    height: 35px;
+    margin-top: 11%;
+    padding: 4%;
+}
+
+.user_head button:hover{
+    background-color: #7d38ff;
+}
+
+
+.user_data{
+    width: 30%;
+    float: left;
+}
+
+.user_data .p1{
+    font-size: 1rem;
+    line-height: 20px;
+    color: #464748;
+}
+
+.user_data .p2{
+    font-weight: bolder;
+    font-size: 2rem;
+    color: #1f0f10;
+}
+
+.user_data .p3{
+    font-weight: 900;
+    font-size: 1rem;
+    color: #7b7d7f;
+}
+
+
+.clear{
+    clear: both;
+}
+
+.btns{
+    margin-top: 3%;
+    margin-left: 22%;
+}
+
+.btns .Rev{
+    border-radius: 25px;
+    font-weight: bold;
+    width: 8%;
+    height: 43px;
+}
+
+.btns .photo{
+    border: none;
+    width: 8%;
+    height: 43px;
+    color: rgb(179, 175, 175);
+    border-radius: 25px;
+    font-weight: 500;
+    margin-left: 1%;
+}
+
+.btns .photo:hover{
+    background-color: #d3c8c8;
+    color: rgb(179, 175, 175);
+}
+
+.reviews img{
+    width: 15%;
+    display: block;
+    margin-left: 43%;
+    margin-top: 6%;
+}
+
+.reviews p{
+    text-align: center;
+}
+
+
