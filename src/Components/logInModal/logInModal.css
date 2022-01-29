@@ -1,26 +1,77 @@
-#LogInModal , #SignModal{
-    margin-top: 100px;
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 500ms;
+    
 }
 
-#log .input-box input{
-    width: 220%;
-    margin-bottom: 4%;
-    margin-left: 24%;
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+    
+}
+
+
+.bgForm{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.075);
+    position: relative;
+}
+
+.btn-close{
+    position: absolute;
+    top: 2%;
+    right: 1%;
+}
+
+.form-container{
+    position: absolute;
+    top: 9%;
+    background-color: white;
+    width: 31%;
+    padding: 3%;
+    margin-left: 39%;
+    border-radius: 4%;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+
+#logLogo{
+    width: 45%;
+    margin-left: 28%;
+    margin-bottom: 10%;
+}
+
+.inpt input{
+    height: 39px;
+    width: 100%;
     border-radius: 5px;
-    padding: 4%;
-    border: 0.5px solid rgb(197, 195, 195);
+    padding: 2%;
+
 }
 
-#log .input-box input:valid{
-    background-color: rgb(155, 199, 235);
+.button input{
+    height: 39px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 2%;
 }
 
-#log .btn{
-    width: 219%;
-    margin-left: 25%;
+
+
+.goglBtn{
+    background-color: #4267b2 !important;
+    color: white !important;
 }
 
-#log .ForgotPass{
-    margin-left: 30%;
-    margin-top: 9%;
+.form-container .frgtPass{
+    color: #e32207;
+    font-size: 12px;
+    font-weight: 500;
+    padding-left: 33%;
+    padding-top: 6%;
 }
