@@ -179,7 +179,7 @@ export default function Dineout() {
                     </div>
                 </div>
             </section>
-
+                {/* Discover By New Resturants */}
             <section class="newResturants-Slider container-fluid my-5 overflow-hidden">
                 <div class="row">
                     <div class="col-12 mx-5 py-4">
