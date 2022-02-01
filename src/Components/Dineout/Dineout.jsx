@@ -11,20 +11,36 @@ import FriedChickenImg from './../../images/Dineout/FriedChicken.jpg'
 import KosharyImg from './../../images/Dineout/koshary.jpg'
 import SandwichesImg from './../../images/Dineout/Sandwiches.jpg'
 // FireStore
-// import { db } from './../../Firebase/Firebase'
-// import { collection, getDocs } from 'firebase/firestore' 
+import { db } from './../../Firebase/Firebase'
+import { collection, collectionGroup, getDocs } from 'firebase/firestore'
 
 
 export default function Dineout() {
-    // const [Restaurants, setRestaurants] = useState([]);
-    // const resturantsCollection = collection(db, "Restaurant")
+    //Restaurants Collection
+    const [Restaurants, setRestaurants] = useState([]);
+    const resturantsCollection = collection(db, "Restaurant")
 
-    // useEffect(() => {
-    //     const getRestaurants = async () => {
-    //         const data = await getDocs(resturantsCollection)
-    //         console.log(data)
-    //     }
-    // }, [])
+    //Branches Collection
+    const [Branches, setBranches] = useState([]);
+    const BranchesCollection = collectionGroup(db, "Branches")
+
+    useEffect(() => {
+        const getRestaurants = async () => {
+            const Resdata = await getDocs(resturantsCollection)
+            // console.log(data)
+            setRestaurants(Resdata.docs.map((doc) => ({ ...doc.data() })))
+        }
+        getRestaurants()
+
+
+        const getBranches = async () => {
+            const Branchesdata = await getDocs(BranchesCollection)
+            // console.log(data)
+            setBranches(Branchesdata.docs.map((doc) => ({ ...doc.data() })))
+        }
+        getBranches()
+
+    }, [])
 
 
     const [dineOutbyPlace, setDineoutbyPlace] = useState([
@@ -56,6 +72,18 @@ export default function Dineout() {
 
     return (
         <>
+            {/* FOR TESTING ONLY */}
+            {/* <div>
+            {
+                Branches.map((Res)=>{
+                   return(
+                    <div>
+                    {Res.Address}
+                </div>
+                   )
+                })
+            }
+        </div> */}
             <section className="container-fluid my-5">
                 <div className="row mx-md-4">
                     <div className="col-12 text-center p-3">
@@ -152,10 +180,13 @@ export default function Dineout() {
                                     <div className="row">
                                         <div className="col-12 d-flex">
 
-                                            <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/155c7faa-aff2-439f-a4bc-89fd1746258f.jpg"></DineoutByCity>
-                                            <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/155c7faa-aff2-439f-a4bc-89fd1746258f.jpg"></DineoutByCity>
-                                            <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/155c7faa-aff2-439f-a4bc-89fd1746258f.jpg"></DineoutByCity>
-                                            <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/155c7faa-aff2-439f-a4bc-89fd1746258f.jpg"></DineoutByCity>
+                                            {
+                                                Restaurants.map((Res) => {
+                                                    return (
+                                                        <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/155c7faa-aff2-439f-a4bc-89fd1746258f.jpg"></DineoutByCity>
+                                                    )
+                                                })
+                                            }
 
                                         </div>
                                     </div>
@@ -182,11 +213,14 @@ export default function Dineout() {
                                     <div className="row">
                                         <div className="col-12 d-flex">
 
-                                            <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/de7f35a3-9f76-41ce-8ee1-d0d43bad4e63.jpg"></DineoutByCity>
-                                            <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/de7f35a3-9f76-41ce-8ee1-d0d43bad4e63.jpg"></DineoutByCity>
-                                            <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/de7f35a3-9f76-41ce-8ee1-d0d43bad4e63.jpg"></DineoutByCity>
-                                            <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/de7f35a3-9f76-41ce-8ee1-d0d43bad4e63.jpg"></DineoutByCity>
-
+                                            {/* https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/de7f35a3-9f76-41ce-8ee1-d0d43bad4e63.jpg */}
+                                            {
+                                                Restaurants.map((Res) => {
+                                                    return (
+                                                        <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/de7f35a3-9f76-41ce-8ee1-d0d43bad4e63.jpg"></DineoutByCity>
+                                                    )
+                                                })
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +229,7 @@ export default function Dineout() {
                     </div>
                 </div>
             </section>
-            
+
             {/* Discover By New Resturants */}
             <section className="newResturants-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
@@ -211,14 +245,20 @@ export default function Dineout() {
                                         <div className="col-12 d-flex">
 
                                             {
-                                                dineOutbyNewRes.map((Type) => {
+                                                Restaurants.map((Res) => {
                                                     return (
-                                                        <div className="item-1 px-2">
-                                                            <div className="box-disByDishes">
-                                                                <div className="slide-img">
-                                                                    <img src={Type.urlImage} alt="" />
-                                                                    <div className="detail-box">
-                                                                        <a href="#" className="meal-kind">{Type.title}</a>
+                                                       
+                                                        <div class="item-1 px-2 p-2">
+                                                            <div class="box-newResturants" style={{ height: "35vh"}}>
+                                                                <div class="slide-img">
+                                                                    <img
+                                                                        src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg" style={{ height: "19vh"}}
+                                                                        alt="" />
+                                                                    <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center"}}>
+                                                                        <a href="#" class="meal-kind">{Res.ResName}</a>
+                                                                        {/* <p class="resturantDesc" style={{ color: "rgb(161, 157, 157)", fontSize: "10px", margin: "auto", position: "relative", top: "15px"}}>
+                                                                            {Res.Type}
+                                                                        </p> */}
                                                                     </div>
                                                                 </div>
                                                             </div>
