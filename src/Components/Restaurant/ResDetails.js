@@ -54,6 +54,8 @@ const ResDet = ()=>{
                     </a>
                 </div>
             </div>
+
+            
         </>
     )
 }
