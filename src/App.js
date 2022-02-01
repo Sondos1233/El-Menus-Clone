@@ -1,13 +1,15 @@
 
-import './App.css';
+
 import { Provider } from 'react-redux';
-import store from './store/store';
+import './App.css';
+import Navbar from './Components/Navbar/Navbar';
+import store from './store/store'
 function App() {
   return (
     <>
-    <Provider store={store}>
-       
-    </Provider>
+     <Provider store={store}>
+      <Navbar/>
+      </Provider>
 
     </>
   );
