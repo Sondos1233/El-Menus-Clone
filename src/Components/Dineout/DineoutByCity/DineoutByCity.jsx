@@ -37,7 +37,7 @@ export default function DineoutbyCity(props) {
                     </div>
                     <div style={{ position: "relative", bottom: "20px", padding: "0 20px"}}>
                     <p style= {{ fontSize: "16px", color: "rgb(161, 157, 157)"}}>
-                        <span style={{ color: "black"}}>Adress</span>: kk
+                        <span style={{ color: "black"}}>Adress</span>: city street
                     </p>
                     </div>
                 </div>
