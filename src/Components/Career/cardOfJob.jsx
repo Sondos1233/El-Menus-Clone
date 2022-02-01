@@ -11,7 +11,7 @@ const CardOfJob = (props) => {
             </div>
           </div>
           <div className="col-lg-6 col-md-12 apply">
-            <a className="btn btn-primary me-4 social" href="">
+            <a className="btn btn-primary me-4 social" style={{backgroundColor:"#ff4612",borderColor:"#ff4612"}} href="">
               View Job
             </a>
           </div>

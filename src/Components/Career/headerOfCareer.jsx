@@ -25,7 +25,7 @@ import {
           </div>
           <div class="nav_social">
             <div class="d-flex">
-              <a href="" class="btn btn-primary">
+              <a href="#Home" class="btn btn-primary" style={{backgroundColor:"#ff4612" ,borderColor:"#ff4612"}}>
                 Company Website<FontAwesomeIcon icon={faArrowCircleRight} className='ms-2'/>
               </a>
               <a href="https://www.facebook.com/elmenus">

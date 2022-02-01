@@ -7,7 +7,8 @@ const BodyOfCareer = () => {
     // const re =  firebase.firestore().collection("Careers");
     // console.log(re)
     const [JobsData, setJobsData] = useState([]);
-    const CareersData = collection(db,"Careers")
+    const CareersData = collection(db,"Careers");
+
     // function getData() {
     //     db.collection("Careers").onSnapshot((snapshot) => {
     //         const data=[];
@@ -23,9 +24,9 @@ const BodyOfCareer = () => {
         // getData()
         const getData = async()=>{
             const data = await getDocs(CareersData);
-              //  console.log(data);
+              // console.log(data);
           setJobsData(data.docs.map((doc)=>({...doc.data(),id:doc.id})))
-          console.log(JobsData);
+        
         }
         getData()
       }, []);
@@ -60,9 +61,15 @@ const BodyOfCareer = () => {
             <div className="container">
                 <h3 className="text-center">Join Us</h3>
                 <h6 className="text-center mb-5">CURRENT OPENINGS</h6>
-                <div className="view-jobs">
-                    <Job title="test"/>
-
+                <div className="view-jobs"> 
+                { JobsData.map((data)=>{
+                  // console.log(data.Jobs);
+                  return(
+                    <Job title={data.Name} Job={data.Jobs}/>
+                  )
+                 
+                  })}
+                    
                 </div>
             </div>
         </section>

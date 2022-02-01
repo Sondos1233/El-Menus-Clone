@@ -2,10 +2,10 @@ body{
     font-family: 'Open Sans',sans-serif;
     font-size: 14px;
 }
-nav .social , .btn-primary {
+nav .social  {
     color: var(--bt-color);
 }
-nav .social:hover, .btn-primary:hover{
+nav .social:hover, .social:hover{
     color: var(--bt-hover);
 }
 .main{
