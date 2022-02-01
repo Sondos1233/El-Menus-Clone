@@ -1,5 +1,7 @@
 import './accountSetting.css'
 import React, {useState} from 'react';
+// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
 
 function AccountSetting(){
 
@@ -9,13 +11,16 @@ function AccountSetting(){
       setToggleState(index);
     };
 
+
+      
+
     return(
         <>
-        <div className='container-fluid'>
+        <div className='container-fluid d-flex'>
             <h1>Account Settings</h1>
 
             <hr />
-            <div className='btns'>
+            <div className='justify-content-center'>
                 <button className={toggleState === 1 ? "tab1 active-tab1" : "tab1"}
                 onClick={() => toggleTab(1)}>Change email</button>
                 <button className={toggleState === 2 ? "tab2 active-tab2" : "tab2"}
@@ -76,7 +81,15 @@ function AccountSetting(){
                             <button className='btn btn-danger'>Save Address</button>
                             <button className='btn cncle'>Cancel</button>
                         </div>
-                        <div className='col-6'>
+                        <div className='col-6 mt-5'>
+                            {/* <Map google={this.props.google} zoom={14}>
+                            <Marker onClick={this.onMarkerClick} name={'Current location'} />
+                            <InfoWindow onClose={this.onInfoWindowClose}>
+                                
+                            </InfoWindow>
+                            </Map> */}
+
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d27357.251534701132!2d31.363532949999996!3d31.00795555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sar!2seg!4v1643731875933!5m2!1sar!2seg" width="600" height="450" allowFullScreen="" loading="lazy"></iframe>
 
                         </div>
                     </div>
@@ -88,3 +101,7 @@ function AccountSetting(){
 }
 
 export default AccountSetting;
+
+// export default GoogleApiWrapper({
+//     apiKey: ("AIzaSyC0-XXmwY_ScpXq_VJxPvwTjXQ_r0jcF18")
+//   })(AccountSetting)
