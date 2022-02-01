@@ -1,4 +1,4 @@
-import '../offersCard/Delivery.scss'
+import '../Delivery.scss'
 import '../main-style.css'
 import OffersCard from '../offersCard/offersCard';
 import OffersFilter from '../offersFilter/OffersFilter';

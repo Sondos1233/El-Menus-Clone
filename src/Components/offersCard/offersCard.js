@@ -7,8 +7,8 @@ import {
   query,
   collectionGroup,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
-import "./Delivery.scss";
-import "./mixins.scss";
+import "../Delivery.scss";
+import "../mixins.scss";
 import "../main-style.css";
 
 const OffersCard = () => {

@@ -1,5 +1,5 @@
 import "../main-style.css";
-import "../offersCard/Delivery.scss"
+import "../Delivery.scss"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDotCircle} from "@fortawesome/free-solid-svg-icons";
 

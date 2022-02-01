@@ -1,6 +1,6 @@
 import "../main-style.css";
-import "../offersCard/Delivery.scss";
-import "../offersCard/mixins.scss"
+import "../Delivery.scss";
+import "../mixins.scss"
 const TDishesCard = () => {
   return (
     <>

@@ -1,4 +1,4 @@
-import '../offersCard/Delivery.scss'
+import '../Delivery.scss'
 import '../main-style.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDoorOpen} from "@fortawesome/free-solid-svg-icons";
