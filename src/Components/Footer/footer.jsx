@@ -18,19 +18,10 @@ import {
   faInstagramSquare
 } from "@fortawesome/free-brands-svg-icons";
 
-<<<<<<< HEAD
-class Footer extends React.Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-=======
 import { useSelector} from "react-redux";
 export default function Footer() {
     const language = useSelector((state) => state.language.lang);
   
->>>>>>> 5910a45b78b4feb7bc04a8e95938f5fc8cac50ff
     const City = [
       "Cairo",
       "Alexandria",
@@ -93,13 +84,9 @@ export default function Footer() {
 
     return (
       <>
-<<<<<<< HEAD
-        <footer class="main_footer">
-=======
 
         <footer class="main_footer" dir={language == "English" ? "rtl" : "ltr"}>
 
->>>>>>> 5910a45b78b4feb7bc04a8e95938f5fc8cac50ff
           <div class="container">
             <div class="row">
               <div class="col-xl-2 col-lg-12 footer-images">
@@ -167,14 +154,3 @@ export default function Footer() {
       </>
     );
   }
-<<<<<<< HEAD
-}
-
-export default Footer;
-=======
-
-
-
-
-
->>>>>>> 5910a45b78b4feb7bc04a8e95938f5fc8cac50ff

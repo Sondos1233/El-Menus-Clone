@@ -145,13 +145,10 @@ export default function Navbar() {
                     <a
                         href="#"
                         style= {{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw"}}
-<<<<<<< HEAD
-=======
 
                         onClick={() => {
                             toggleLanguage();
                           }}
->>>>>>> 5910a45b78b4feb7bc04a8e95938f5fc8cac50ff
                     >
                         {language}
 
@@ -211,13 +208,8 @@ export default function Navbar() {
             </div>
         </section>
 
-<<<<<<< HEAD
-        <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none" id= "pageNav-lg">
-=======
-
         <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none" id= "pageNav-lg" dir={language == "English" ? "rtl" : "ltr"}>
 
->>>>>>> 5910a45b78b4feb7bc04a8e95938f5fc8cac50ff
         <section className="navbar navbar-expand-lg navbar-light pb-0" style={{ backgroundColor: "#fff" }}>
             <div className="container-fluid">
             <div className="row py-2" style={{ width: "100%" }}>

@@ -11,13 +11,9 @@ function App() {
   return (
     <>
 
-          <Navbar />
-            {/* <Route path="" exact component={} /> */}
-            <Dineout/>
-          <Footer />
- 
-
-
+    {/* <Navbar/> */}
+    <Dineout/>
+    {/* <Footer/> */}
 
     </>
   );
