@@ -6,6 +6,10 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
+<<<<<<< HEAD
+=======
+import { Link } from 'react-router-dom';
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
 export default function Navbar() {
     const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
@@ -13,13 +17,21 @@ export default function Navbar() {
   const toggleLanguage = () => {
     dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
 
     return (
         <>
 
+<<<<<<< HEAD
         <nav class="nav-lg-Screen sticky-top d-lg-block d-none"  dir={language == "English" ? "rtl" : "ltr"}>
 
+=======
+        
+        <nav class="nav-lg-Screen sticky-top d-lg-block d-none"  dir={language == "English" ? "rtl" : "ltr"}>
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
         <section
             className="navbar navbar-expand-lg navbar-light pb-0"
             style={{ backgroundColor: "#e32207" }}
@@ -28,9 +40,9 @@ export default function Navbar() {
                 className="container-fluid"
                 style= {{ padding: "0 10px", backgroundColor: "white", borderBottom: "1px solid #dfe2e6"}}
             >
-                <a
+                <Link
                 className="navbar-brand p-3"
-                href="../index.html"
+                to="/Home"
                 style={{ borderRight: "1px solid #dfe2e6"}}
                 >
                 <img
@@ -38,7 +50,7 @@ export default function Navbar() {
                     alt=""
                     style={{ width: "120px", maxWidth: "100%", height: "auto" }}
                 />
-                </a>
+                </Link>
 
                 <button
                 className="navbar-toggler"
@@ -53,9 +65,9 @@ export default function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                    <a className="nav-item nav-link py-4 px-2" >DELIVERY</a>
-                    <a className=" nav-item nav-link py-4 px-2 active">DINE OUT</a>
-                    <a className=" nav-item nav-link py-4 px-2" >OFFERS</a>
+                <Link to="/Delivery" className="nav-link py-4 px-2" >DELIVERY</Link>
+                    <Link to="/DinOut" className="nav-link py-4 px-2 active" >DINE OUT</Link>
+                    <Link to="/Offers" className="nav-link py-4 px-2" >OFFERS</Link>
                 </div>
             
                 <div className="services py-3" style={{ display: "flex", marginLeft: "auto" }}>
@@ -146,6 +158,7 @@ export default function Navbar() {
                         href="#"
                         style= {{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw"}}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
                         onClick={() => {
@@ -156,6 +169,13 @@ export default function Navbar() {
                         {language}
 
                    
+=======
+                        onClick={() => {
+                            toggleLanguage();
+                          }}
+                    >
+                        {language}
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
                     </a>
                     </div>
                 </div>
@@ -212,12 +232,16 @@ export default function Navbar() {
         </section>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none" id= "pageNav-lg">
 =======
 
         <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none" id= "pageNav-lg" dir={language == "English" ? "rtl" : "ltr"}>
 
 >>>>>>> 5910a45b78b4feb7bc04a8e95938f5fc8cac50ff
+=======
+        <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none" id= "pageNav-lg" dir={language == "English" ? "rtl" : "ltr"}>
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
         <section className="navbar navbar-expand-lg navbar-light pb-0" style={{ backgroundColor: "#fff" }}>
             <div className="container-fluid">
             <div className="row py-2" style={{ width: "100%" }}>
@@ -239,9 +263,15 @@ export default function Navbar() {
                 <div className="col-12">
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
+<<<<<<< HEAD
                     <a className="nav-link py-4 px-2" href="./Delivery.html">DELIVERY</a>
                     <a className="nav-link py-4 px-2 active" href="./Dine-Out.html">DINE OUT</a>
                     <a className="nav-link py-4 px-2" href="./Offers.html">OFFERS</a>
+=======
+                    <Link to="/Delivery" className="nav-link py-4 px-2" >DELIVERY</Link>
+                    <Link to="/DinOut" className="nav-link py-4 px-2 active" >DINE OUT</Link>
+                    <Link to="/Offers" className="nav-link py-4 px-2" >OFFERS</Link>
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
                     </div>
                     <div className="services py-3" style={{width: "52%", display: "flex", marginLeft: "auto"}}>
                     <div style={{ marginLeft: "auto" }}>
