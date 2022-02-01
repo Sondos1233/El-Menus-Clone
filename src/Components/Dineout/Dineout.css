@@ -1,0 +1,152 @@
+body
+{
+    font-family: "Open Sans";
+}
+
+a{
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link
+{
+    color: black !important;
+    font-weight: 700;
+    font-size: 1vw;
+    margin: 0 2px
+   
+}
+.navbar-nav .nav-link:hover
+{
+    color: white !important;
+    background-color: #e32207;
+}
+.search-side
+{ 
+   box-shadow: 1px 1px 5px #dfe2e6;
+}
+.location-side
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    
+}
+.location-side .change-btn
+{
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid #e32207;
+    color: #e32207;
+
+}
+.location-side span
+{
+    color: #e32207;
+}
+.location-side .imgIcon
+{
+    width: 20px;
+    max-width: 100%;
+    height: auto;
+}
+.headerLocation
+{
+    margin-top: 5px; 
+}
+.breadcrumb li a
+{
+    text-decoration: none;
+    color: #e32207;
+    
+}
+.box-disByDishes,
+.box-newResturants{
+    width: 150px;
+    height: 200px;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.box-disArear,
+.box-hiddenGems{
+    width: 400px;
+    height: 400px;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.slide-img{
+    height: auto;
+    position: relative;
+}
+
+.slide-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-sizing: border-box;
+}
+
+.detail-box{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 10px 20px;
+    /* box-sizing: border-box; */
+}
+
+
+
+.meal-kind{
+    color: #333333;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    margin:auto;
+}
+
+#btn-ID
+{
+    background-color: white;
+    border:none
+}
+.dine-coffee
+{
+    border-radius: 10px;
+    min-height: 500px;
+    background-image: url('https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/b6b14b83-2225-11e8-924e-0242ac110011.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.inner-coffee
+{
+    background-image: linear-gradient(transparent, black);
+    margin-top: auto; 
+    width: 100%; 
+    margin-left: 0; 
+    border-radius: 5px;
+}
+.dine-content
+{
+    border-radius: 5px;
+    height: 100%;
+    background-image: url('https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/b6b14d74-2225-11e8-924e-0242ac110011.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/* // " background-image: linear-gradient(transparent, black); margin-top: auto; width: 100%; margin-left: 0; border-radius: 5px;" */
+
+.dine-content2
+{
+    background-image: linear-gradient(transparent, black);
+    margin-top: auto;
+    width: 100%;
+    margin-left: 0;
+    border-radius: 5px;
+}
