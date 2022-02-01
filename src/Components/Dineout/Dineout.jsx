@@ -27,7 +27,7 @@ export default function Dineout() {
     useEffect(() => {
         const getRestaurants = async () => {
             const Resdata = await getDocs(resturantsCollection)
-            // console.log(data)
+            // console.log(Resdata)
             setRestaurants(Resdata.docs.map((doc) => ({ ...doc.data() })))
         }
         getRestaurants()
@@ -35,7 +35,7 @@ export default function Dineout() {
 
         const getBranches = async () => {
             const Branchesdata = await getDocs(BranchesCollection)
-            // console.log(data)
+            // console.log(Branchesdata)
             setBranches(Branchesdata.docs.map((doc) => ({ ...doc.data() })))
         }
         getBranches()
