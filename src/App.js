@@ -9,6 +9,8 @@ import store from "./store/store";
 import Home from './Components/Home/Home';
 import Career from './Components/Career/Career';
 import OffersCard from './Components/offersCard/offersCard';
+import Offers from './Components/Offers/Offers';
+import OfferParent from './Components/Offers/OffersParent';
 import Delivery from './Components/Delivery/Delivery';
 import Restaurant from './Components/Restaurant/Restaurant';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -22,6 +24,7 @@ function App() {
           <Switch>
           <Route path ="/Delivery" exact component={Delivery} /> 
          <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
+         <Route path="/Offers" exact component={OfferParent}/>
           <Route path="/Careers" component={Career}/>
            <Route path="/JoinUs" component={JoinUs}/>
            <Route path="/" component={Home}/>
