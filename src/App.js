@@ -1,4 +1,6 @@
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min'
+import JoinUs from './Components/JoinUs/joinUs';
 import { Provider } from "react-redux";
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
@@ -11,19 +13,17 @@ function App() {
     <>
      {/* <Home/> */}
       <Provider store={store}>
-        <Home/>
+      
         <Router>
-        
           <Switch>
-            <Navbar/>
+          
+           <Route path="/JoinUs" component={JoinUs}/>
+           <Route path="/" component={Home}/>
           </Switch>
           <Footer />
         </Router>
        
       </Provider>
-
-
-
     </>
   );
 }

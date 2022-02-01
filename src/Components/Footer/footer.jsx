@@ -11,6 +11,7 @@ import "./footer_style/footer-style.css";
 import '../../Components/main-style.css'
 import Social from "./socialMedia";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import {
   faTwitterSquare,
   faLinkedin,
@@ -141,9 +142,13 @@ export default function Footer() {
                 </div>
                 <div class="col-xl-8 more-links">
                   <ul>
-                    {footerlist.map((fo) => {
-                      return <About name={fo}/>;
-                    })}
+                   
+                       <li><Link to="/">About Us</Link></li>
+                       <li><Link to="/">Terms and Conditions</Link></li>
+                       <li><Link to="/">Privacy</Link></li>
+                       <li><Link to="/Careers">Careers</Link></li>
+                       <li><Link to="/JoinUs">Join Us</Link></li>
+                
                   </ul>
                 </div>
                 <div class="col-xl-2 copyright mt-1">© 2021 elmenus</div>

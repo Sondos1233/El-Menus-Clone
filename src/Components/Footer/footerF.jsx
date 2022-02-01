@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 const About = (props) => {
     return (
       <>
-         <li><a href="">{props.name}</a></li>
+         <li><Link to="/JoinUs">{props.name}</Link></li>
       </>
     );
   };
