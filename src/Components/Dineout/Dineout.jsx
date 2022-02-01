@@ -3,16 +3,30 @@ import './Dineout.css'
 import DineoutbyPlace from './DineoutbyPlace/DineoutbyPlace';
 import DineoutByCity from './DineoutByCity/DineoutByCity'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import pizzaImg from './../../images/Dineout/pizza.jpg'
 import BurgersImg from './../../images/Dineout/Burgers.jpg'
 import ChinessImg from './../../images/Dineout/Chiness.jpg'
 import FriedChickenImg from './../../images/Dineout/FriedChicken.jpg'
 import KosharyImg from './../../images/Dineout/koshary.jpg'
 import SandwichesImg from './../../images/Dineout/Sandwiches.jpg'
+// FireStore
+// import { db } from './../../Firebase/Firebase'
+// import { collection, getDocs } from 'firebase/firestore' 
 
 
 export default function Dineout() {
+    // const [Restaurants, setRestaurants] = useState([]);
+    // const resturantsCollection = collection(db, "Restaurant")
+
+    // useEffect(() => {
+    //     const getRestaurants = async () => {
+    //         const data = await getDocs(resturantsCollection)
+    //         console.log(data)
+    //     }
+    // }, [])
+
+
     const [dineOutbyPlace, setDineoutbyPlace] = useState([
         { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/b6b14d74-2225-11e8-924e-0242ac110011.jpg", title: "Work Or Study" },
         { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/b6b15181-2225-11e8-924e-0242ac110011.jpg", title: "Casual Dining" },
@@ -42,14 +56,14 @@ export default function Dineout() {
 
     return (
         <>
-            <section class="container-fluid my-5">
-                <div class="row mx-md-4">
-                    <div class="col-12 text-center p-3">
-                        <h1 class="fw-bold">Discover restaurants to dine-out</h1>
+            <section className="container-fluid my-5">
+                <div className="row mx-md-4">
+                    <div className="col-12 text-center p-3">
+                        <h1 className="fw-bold">Discover restaurants to dine-out</h1>
                     </div>
 
-                    <div class="col-12 d-flex justify-content-between mt-4">
-                        <h3 class="fw-bold" style={{ color: "rgb(88, 86, 86)" }} >Discover by Moods</h3>
+                    <div className="col-12 d-flex justify-content-between mt-4">
+                        <h3 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }} >Discover by Moods</h3>
                         <div>
                             <a href="#">see All</a>
                             <span></span>
@@ -57,15 +71,15 @@ export default function Dineout() {
                     </div>
 
                     {/* Dine-out CONTENT */}
-                    <div class="col-12 col-lg-6 d-flex px-0 bg-danger mt-4 dine-coffee" >
+                    <div className="col-12 col-lg-6 d-flex px-0 bg-danger mt-4 dine-coffee" >
                         <div
-                            class="inner-coffee">
-                            <h1 class="mt-auto text-light fw-bold p-4" style={{ cursor: "pointer" }} onclick="filterByMood(event)">Coffeeshops</h1>
+                            className="inner-coffee">
+                            <h1 className="mt-auto text-light fw-bold p-4" style={{ cursor: "pointer" }} onclick="filterByMood(event)">Coffeeshops</h1>
                         </div>
                     </div>
 
-                    <div class="col-12 col-lg-6 d-flex mt-4">
-                        <div class="row px-md-3">
+                    <div className="col-12 col-lg-6 d-flex mt-4">
+                        <div className="row px-md-3">
                             {
                                 dineOutbyPlace.map((place) => {
                                     return (
@@ -81,29 +95,29 @@ export default function Dineout() {
 
 
             {/* Discover BY Types */}
-            <section class="disByDishes-Slider container-fluid my-5 overflow-hidden">
-                <div class="row">
-                    <div class="col-12 mx-3 py-3">
-                        <h3 class="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>Discover by Dishes</h3>
+            <section className="disByDishes-Slider container-fluid my-5 overflow-hidden">
+                <div className="row">
+                    <div className="col-12 mx-3 py-3">
+                        <h3 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>Discover by Dishes</h3>
                     </div>
 
-                    <div class="col-12">
-                        <div id="disByDishes-Slider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-12 d-flex" id="cardDishes">
+                    <div className="col-12">
+                        <div id="disByDishes-Slider" className="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                            <div className="carousel-inner">
+                                <div className="carousel-item active">
+                                    <div className="row">
+                                        <div className="col-12 d-flex" id="cardDishes">
                                             {/* <!-- Dieshes Container filled by JS --> */}
 
                                             {
                                                 dineOutbyType.map((Type) => {
                                                     return (
-                                                        <div class="item-1 px-2">
-                                                            <div class="box-disByDishes">
-                                                                <div class="slide-img">
+                                                        <div className="item-1 px-2">
+                                                            <div className="box-disByDishes">
+                                                                <div className="slide-img">
                                                                     <img src={Type.urlImage} alt="" />
-                                                                    <div class="detail-box">
-                                                                        <a href="#" class="meal-kind">{Type.title}</a>
+                                                                    <div className="detail-box">
+                                                                        <a href="#" className="meal-kind">{Type.title}</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -123,20 +137,20 @@ export default function Dineout() {
 
 
             {/* Discover BY City */}
-            <section class="disArear-Slider container-fluid my-5 overflow-hidden">
-                <div class="row">
+            <section className="disArear-Slider container-fluid my-5 overflow-hidden">
+                <div className="row">
 
-                    <div class="col-12 mx-3 py-3">
-                        <h4 class="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>Discover Maadi</h4>
+                    <div className="col-12 mx-3 py-3">
+                        <h4 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>Discover Maadi</h4>
                     </div>
 
-                    <div class="col-12">
-                        <div id="disArear-Slider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                            <div class="carousel-inner">
+                    <div className="col-12">
+                        <div id="disArear-Slider" className="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                            <div className="carousel-inner">
 
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-12 d-flex">
+                                <div className="carousel-item active">
+                                    <div className="row">
+                                        <div className="col-12 d-flex">
 
                                             <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/155c7faa-aff2-439f-a4bc-89fd1746258f.jpg"></DineoutByCity>
                                             <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/155c7faa-aff2-439f-a4bc-89fd1746258f.jpg"></DineoutByCity>
@@ -155,18 +169,18 @@ export default function Dineout() {
 
 
             {/* Discover By MOOD */}
-            <section class="hiddenGems-Slider container-fluid my-5 overflow-hidden">
-                <div class="row">
-                    <div class="col-12 mx-5 py-4">
-                        <h4 class="fw-bold" style={{ color: "color: rgb(88, 86, 86)" }}>Hidden Gems</h4>
+            <section className="hiddenGems-Slider container-fluid my-5 overflow-hidden">
+                <div className="row">
+                    <div className="col-12 mx-5 py-4">
+                        <h4 className="fw-bold" style={{ color: "color: rgb(88, 86, 86)" }}>Hidden Gems</h4>
                     </div>
-                    <div class="col-12">
-                        <div id="hiddenGems-Slider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                            <div class="carousel-inner">
+                    <div className="col-12">
+                        <div id="hiddenGems-Slider" className="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                            <div className="carousel-inner">
 
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-12 d-flex">
+                                <div className="carousel-item active">
+                                    <div className="row">
+                                        <div className="col-12 d-flex">
 
                                             <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/de7f35a3-9f76-41ce-8ee1-d0d43bad4e63.jpg"></DineoutByCity>
                                             <DineoutByCity srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/de7f35a3-9f76-41ce-8ee1-d0d43bad4e63.jpg"></DineoutByCity>
@@ -181,29 +195,30 @@ export default function Dineout() {
                     </div>
                 </div>
             </section>
-                {/* Discover By New Resturants */}
-            <section class="newResturants-Slider container-fluid my-5 overflow-hidden">
-                <div class="row">
-                    <div class="col-12 mx-5 py-4">
-                        <h3 class="fw-bold" style={{ color: "color: rgb(88, 86, 86)"}}>New Restaurants</h3>
+            
+            {/* Discover By New Resturants */}
+            <section className="newResturants-Slider container-fluid my-5 overflow-hidden">
+                <div className="row">
+                    <div className="col-12 mx-5 py-4">
+                        <h3 className="fw-bold" style={{ color: "color: rgb(88, 86, 86)" }}>New Restaurants</h3>
                     </div>
-                    <div class="col-12">
-                        <div id="newResturants-Slider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                            <div class="carousel-inner">
+                    <div className="col-12">
+                        <div id="newResturants-Slider" className="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                            <div className="carousel-inner">
 
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-12 d-flex">
+                                <div className="carousel-item active">
+                                    <div className="row">
+                                        <div className="col-12 d-flex">
 
-                                        {
+                                            {
                                                 dineOutbyNewRes.map((Type) => {
                                                     return (
-                                                        <div class="item-1 px-2">
-                                                            <div class="box-disByDishes">
-                                                                <div class="slide-img">
+                                                        <div className="item-1 px-2">
+                                                            <div className="box-disByDishes">
+                                                                <div className="slide-img">
                                                                     <img src={Type.urlImage} alt="" />
-                                                                    <div class="detail-box">
-                                                                        <a href="#" class="meal-kind">{Type.title}</a>
+                                                                    <div className="detail-box">
+                                                                        <a href="#" className="meal-kind">{Type.title}</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
