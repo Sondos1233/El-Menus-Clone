@@ -6,6 +6,7 @@ import {
     faFacebookSquare,
     faInstagramSquare
   } from "@fortawesome/free-brands-svg-icons";
+  import { Link } from 'react-router-dom';
   function HeaderOfCareer () {
     
   return (
@@ -25,9 +26,9 @@ import {
           </div>
           <div class="nav_social">
             <div class="d-flex">
-              <a href="#Home" class="btn btn-primary" style={{backgroundColor:"#ff4612" ,borderColor:"#ff4612"}}>
+              <Link to="/" class="btn btn-primary" style={{backgroundColor:"#ff4612" ,borderColor:"#ff4612"}}>
                 Company Website<FontAwesomeIcon icon={faArrowCircleRight} className='ms-2'/>
-              </a>
+              </Link>
               <a href="https://www.facebook.com/elmenus">
                 <FontAwesomeIcon icon={faFacebookSquare} className='ms-3 mt-2 fs-4 social'/>
               </a>

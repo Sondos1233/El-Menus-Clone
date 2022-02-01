@@ -14,26 +14,35 @@ import Restaurant from './Components/Restaurant/Restaurant';
 import { Provider } from "react-redux";
 import "./App.css";
 import Dineout from './Components/Dineout/Dineout';
-
+import Navbar from './Components/Navbar/Navbar'
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Fragment } from 'react';
 function App() {
+  const exclusion=["/","/JoinUs","/Careers"]
   return (
     <>
 
      {/* <Home/> */}
       <Provider store={store}>
-
+         
         <Router>
+          
           <Switch>
-          <Route path ="/Delivery" exact component={Delivery} /> 
-          <Route path="/DinOut" exact component={Dineout}/>
-         <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
-         <Route path="/Offers" exact component={OfferParent}/>
           <Route path="/Careers" component={Career}/>
            <Route path="/JoinUs" component={JoinUs}/>
-           <Route path="/" component={Home}/>
+           <Route path="/Home" component={Home}/>
+           <Fragment>
+            <Navbar/>
+            
+          <Route path ="/Delivery" exact component={Delivery} /> 
+          <Route path="/DinOut" exact component={Dineout}/>
+          <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
+          <Route path="/Offers" exact component={OfferParent}/>
+          </Fragment>
+           
           </Switch>
+         
           <Footer/>
         </Router>
        

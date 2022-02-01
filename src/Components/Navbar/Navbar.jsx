@@ -6,7 +6,7 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
-
+import { Link } from 'react-router-dom';
 export default function Navbar() {
     const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
@@ -227,9 +227,9 @@ export default function Navbar() {
                 <div className="col-12">
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                    <a className="nav-link py-4 px-2" href="./Delivery.html">DELIVERY</a>
-                    <a className="nav-link py-4 px-2 active" href="./Dine-Out.html">DINE OUT</a>
-                    <a className="nav-link py-4 px-2" href="./Offers.html">OFFERS</a>
+                    <Link to="/Delivery" className="nav-link py-4 px-2" href="./Delivery.html">DELIVERY</Link>
+                    <Link to="/DinOut" className="nav-link py-4 px-2 active" href="./Dine-Out.html">DINE OUT</Link>
+                    <Link to="/Offers" className="nav-link py-4 px-2" href="./Offers.html">OFFERS</Link>
                     </div>
                     <div className="services py-3" style={{width: "52%", display: "flex", marginLeft: "auto"}}>
                     <div style={{ marginLeft: "auto" }}>
