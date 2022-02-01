@@ -9,6 +9,7 @@ import {faStore,faArrowRight,faMotorcycle,faUtensils} from '@fortawesome/free-so
 import Card from "./card";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from "../../../store/action/languageAction";
+import { Link } from "react-router-dom";
 export default function Header() {
   const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
@@ -118,7 +119,13 @@ export default function Header() {
           <div className="section_footer ">
             <h6 className="section_footer_title text-center mb-4"> Or explore elmenus</h6>
             <div class=" row section_footer_links mx-1 py-3">
-               <Card name="Delivery" iconName={faMotorcycle} iconName2={faArrowRight} para="Get food delivered from amazing restaurants around you "/>
+              <Link to="/Delivery">
+              <Card name="Delivery" iconName={faMotorcycle} iconName2={faArrowRight} para="Get food delivered from amazing restaurants around you "/>
+              </Link>
+              <Link to="/DinOut">
+              <Card name="Dine Out" iconName={faUtensils} iconName2={faArrowRight} para="Browse restaurants by mood, cuisine, area or dish names "/>
+              </Link>
+               
                <Card name="Dine Out" iconName={faUtensils} iconName2={faArrowRight} para="Browse restaurants by mood, cuisine, area or dish names "/>
             </div>
           </div>
