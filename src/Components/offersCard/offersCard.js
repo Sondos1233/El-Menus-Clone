@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { firestore } from "../../firebase/firebase-config";
 import {
   collection,
@@ -77,7 +78,7 @@ const OffersCard = () => {
         <div className="container-fluid" id="aOfferCards">
           <div className="row mb-3 " id="aOfferCardsrow">
             <div className="col-lg-3 col-md-4 position-relative aproductDiv">
-              <a className="aLinkCard" href="./Restaurant.html">
+              <Link className="aLinkCard" to="/Restaurant/1">
                 <figure className="aFigRes">
                   <img
                     id="myimg"
@@ -112,7 +113,7 @@ const OffersCard = () => {
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
               <button type="button " id="previous" className="rounded-circle">
                 {" "}
                 <svg
