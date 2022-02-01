@@ -6,7 +6,6 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
-
 export default function Navbar() {
     const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
@@ -15,11 +14,12 @@ export default function Navbar() {
     dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
   };
 
+
     return (
         <>
 
-        
         <nav class="nav-lg-Screen sticky-top d-lg-block d-none"  dir={language == "English" ? "rtl" : "ltr"}>
+
         <section
             className="navbar navbar-expand-lg navbar-light pb-0"
             style={{ backgroundColor: "#e32207" }}
@@ -145,11 +145,14 @@ export default function Navbar() {
                     <a
                         href="#"
                         style= {{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw"}}
+
                         onClick={() => {
                             toggleLanguage();
                           }}
                     >
                         {language}
+
+                   
                     </a>
                     </div>
                 </div>
@@ -205,7 +208,9 @@ export default function Navbar() {
             </div>
         </section>
 
+
         <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none" id= "pageNav-lg" dir={language == "English" ? "rtl" : "ltr"}>
+
         <section className="navbar navbar-expand-lg navbar-light pb-0" style={{ backgroundColor: "#fff" }}>
             <div className="container-fluid">
             <div className="row py-2" style={{ width: "100%" }}>
