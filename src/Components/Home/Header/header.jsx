@@ -126,7 +126,7 @@ export default function Header() {
               <Card name="Dine Out" iconName={faUtensils} iconName2={faArrowRight} para="Browse restaurants by mood, cuisine, area or dish names "/>
               </Link>
                
-               <Card name="Dine Out" iconName={faUtensils} iconName2={faArrowRight} para="Browse restaurants by mood, cuisine, area or dish names "/>
+              
             </div>
           </div>
         </div>
