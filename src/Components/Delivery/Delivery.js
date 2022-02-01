@@ -2,6 +2,8 @@ import '../offersCard/Delivery.scss'
 import '../main-style.css'
 import OffersCard from '../offersCard/offersCard';
 import OffersFilter from '../offersFilter/OffersFilter';
+import TDishesCard from '../TopDishes/TDishesCard';
+import RestCard from '../RestayrantCard/RestCard';
 const Delivery = () => {
   return (
     <>
@@ -18,6 +20,15 @@ const Delivery = () => {
         <div class="row">
             <div class="col-lg-3">
                 <OffersFilter />
+            </div>
+            <div class="col-xl-9 col-lg-12">
+              <section class="aTopDishes" id="TD">
+                <TDishesCard />
+              </section>
+              <section class="aRestaurant mt-4">
+                  <p id="aTastPar">Restaurants <span style={{fontSize:"medium"}}>( 96 )</span> </p>
+                  <RestCard />
+              </section>
             </div>
         </div>
       </div>

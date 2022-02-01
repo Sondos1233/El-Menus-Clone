@@ -214,7 +214,7 @@
     box-shadow: 0px 0px 0px 2px rgb(207, 207, 207);
     .acheckmark {
       color: white;
-      padding-bottom: 12px;
+      padding-bottom: 2px;
       padding-left: 2px;
     }
   }
@@ -238,8 +238,8 @@
   }
   .aCheckdot {
     color: var(--first-color);
-    font-size: 22px;
-    margin-top: 9px;
+    font-size: 35px;
+    margin-top: 5px;
     padding-right: 10px;
     display: none;
   }
@@ -262,7 +262,7 @@
 .acontainerSort {
   margin-left: -24px;
   .aSortType {
-    @include mixins.font(14px, 600, 40px, #7b7d7f);
+    @include mixins.font(14px, 600, 40px, #596570);
   }
 }
 .aLink33More {

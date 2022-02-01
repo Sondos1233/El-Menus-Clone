@@ -10,8 +10,8 @@ import NavBar from './Components/Navbar/Navbar'
 function App() {
   return (
     <>
-    <Delivery />  
     <NavBar/>
+    <Delivery />  
     <Footer/>
 
       

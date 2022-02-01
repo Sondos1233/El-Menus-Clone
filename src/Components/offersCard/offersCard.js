@@ -47,24 +47,24 @@ const OffersCard = () => {
   return (
     <>
       {offer.map((i) => {
-        return <div>{i.Description}</div>;
+        return <div>{console.log( i.Description)}</div>;
       })}
 
-      <section class="container-fluid" class="aTastyOffers">
-        <div class="container-fluid" id="aWords">
-          <div class="row">
-            <div class="col-6">
+      <section className="container-fluid aTastyOffers">
+        <div className="container-fluid" id="aWords">
+          <div className="row">
+            <div className="col-6">
               <p id="aTastPar">Tasty Offers</p>
             </div>
-            <div class="col-6 ">
-              <a class="float-end p-2" id="aSeeallLink" href="#">
+            <div className="col-6 ">
+              <a className="float-end p-2" id="aSeeallLink" href="#">
                 See All{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-caret-right-fill"
+                  className="bi bi-caret-right-fill"
                   viewBox="0 0 16 16"
                 >
                   <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
@@ -74,38 +74,38 @@ const OffersCard = () => {
           </div>
         </div>
 
-        <div class="container-fluid" id="aOfferCards">
-          <div class="row mb-3 " id="aOfferCardsrow">
-            <div class="col-lg-3 col-md-4 position-relative aproductDiv">
-              <a class="aLinkCard" href="./Restaurant.html">
-                <figure class="aFigRes">
+        <div className="container-fluid" id="aOfferCards">
+          <div className="row mb-3 " id="aOfferCardsrow">
+            <div className="col-lg-3 col-md-4 position-relative aproductDiv">
+              <a className="aLinkCard" href="./Restaurant.html">
+                <figure className="aFigRes">
                   <img
                     id="myimg"
                     src="	https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/2ee22548-148d-426e-9423-a6150ac149fc.jpg" //{/*url2*/}
-                    class="card-img-top aImgCard"
+                    className="card-img-top aImgCard"
                     alt="..."
                   />
-                  <figcaption class="aImgCaption">
-                    <h4 class="aImgTitle">
+                  <figcaption className="aImgCaption">
+                    <h4 className="aImgTitle">
                       Broasted Fried Chicken with Syrian Flavor
                     </h4>
                   </figcaption>
                 </figure>
 
-                <div class=" position-relative card-body aCardBody">
+                <div className=" position-relative card-body aCardBody">
                   <img
                     id="aImgRes"
                     src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/7ce1525f-bba1-4434-bd64-22a440fb74fb.jpg" //{/*url1*/}
                     alt=""
-                    class="rounded-3 me-3 float-start"
+                    className="rounded-3 me-3 float-start"
                   />
 
-                  <h3 class="card-title " id="aResName">
+                  <h3 className="card-title " id="aResName">
                     {/*Res.ResName*/} kkljk
                   </h3>
-                  <div class="mt-3">
+                  <div className="mt-3">
                     <div
-                      class="alert-success aDisAlert aDisAlertof"
+                      className="alert-success aDisAlert aDisAlertof"
                       role="alert"
                     >
                       {/*doc.data().Description*/}
@@ -113,14 +113,14 @@ const OffersCard = () => {
                   </div>
                 </div>
               </a>
-              <button type="button " id="previous" class="rounded-circle">
+              <button type="button " id="previous" className="rounded-circle">
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
                   height="20"
                   fill="white"
-                  class="bi bi-chevron-left"
+                  className="bi bi-chevron-left"
                   viewBox="0 0 20 16"
                 >
                   <path
@@ -130,7 +130,7 @@ const OffersCard = () => {
                 </svg>{" "}
               </button>
 
-              <button type="button" id="next" class="rounded-circle">
+              <button type="button" id="next" className="rounded-circle">
                 {" "}
                 <b>
                   {" "}
@@ -139,7 +139,7 @@ const OffersCard = () => {
                     width="20"
                     height="20"
                     fill="white"
-                    class="bi bi-chevron-right"
+                    className="bi bi-chevron-right"
                     viewBox="0 0 20 16"
                   >
                     <path

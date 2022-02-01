@@ -1,5 +1,10 @@
 import '../offersCard/Delivery.scss'
-import '../main-style.css'
+import '../main-style.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faDoorOpen} from "@fortawesome/free-solid-svg-icons";
+import {faCheck} from "@fortawesome/free-solid-svg-icons";
+import {faPercent} from "@fortawesome/free-solid-svg-icons";
+import RadioButton from '../Radiobutton/RadioButton';
 const OffersFilter = ()=>{
     return(
         <>
@@ -20,100 +25,44 @@ const OffersFilter = ()=>{
                     <div>
                         <label className="abox position-relative d-block">
                             <input type="checkbox" name="" />
-                            <span className="acheck position-absolute"><i className="fas fa-check acheckmark"></i></span>
+                            <span className="acheck position-absolute"><FontAwesomeIcon icon={faCheck} className="acheckmark"></FontAwesomeIcon></span>
                         </label>
-                        <i className="fas fa-door-open" style={{color: "#7b7d7f" ,marginLeft: "40px", fontSize:"15px"}}> &nbsp;
-                            Open now</i>
+                        <FontAwesomeIcon icon={faDoorOpen} style={{color: "#7b7d7f" ,marginLeft: "40px", fontSize:"15px"}}> &nbsp;
+                            </FontAwesomeIcon>Open now
                         <br />
+                        
                         <label className="abox position-relative d-block mt-2">
                             <input type="checkbox" name="" />
-                            <span className="acheck position-absolute"><i className="fas fa-check acheckmark"></i></span>
+                            <span className="acheck position-absolute"><FontAwesomeIcon icon={faCheck} className="acheckmark"></FontAwesomeIcon></span>
                         </label>
-                        <i className="fas fa-percent" style={{color: "#7b7d7f" ,marginLeft: "40px", fontSize:"15px"}}> &nbsp;
-                            Promo</i>
+                        <FontAwesomeIcon icon={faPercent} style={{color: "#7b7d7f" ,marginLeft: "40px", fontSize:"15px"}}> &nbsp;
+                            </FontAwesomeIcon> Promo
                     </div>
                     <hr />
                     <h5 className="aSortbyTitle">Sort by:</h5>
                     <div className="container-fluid acontainerSort">
                         <div className="row">
-                            <div className="col-2">
-                                <label className="aRadio">
-                                    <input type="radio" name="sort" id="" />
-                                    <span className="adot"></span> <i className="fas fa-dot-circle aCheckdot"> </i>
-                                </label>
-                            </div>
-                            <div className="col-10 aSortType">Popular</div>
 
-                            <div className="col-2 ">
-                                <label className="aRadio">
-                                    <input type="radio" name="sort" id="" />
-                                    <span className="adot"></span> <i className="fas fa-dot-circle aCheckdot"> </i>
-                                </label>
-                            </div>
-                            <div className="col-10 aSortType">Rating</div>
-                            <div className="col-2 ">
-                                <label className="aRadio">
-                                    <input type="radio" name="sort" id="" />
-                                    <span className="adot"></span> <i className="fas fa-dot-circle aCheckdot"> </i>
-                                </label>
-                            </div>
-                            <div className="col-10  aSortType">Delivery Time</div>
+                            <RadioButton data="popular" name="sort" />
+
+                            <RadioButton data ="Rating" name="sort" />
+
+                            <RadioButton data="Delivery Time" name="sort" />
+                            
                         </div>
                     </div>
                     <hr />
                     <h5 className="aSortbyTitle">Dishes:</h5>
                     <div className="container-fluid acontainerSort">
                         <div className="row" id="afilterRowButtons">
-                            <div className="col-2">
-                                <label className="aRadio">
-                                    <input type="radio" name="type" id="" />
-                                    <span className="adot"></span> <i className="fas fa-dot-circle aCheckdot"> </i>
-                                </label>
-                            </div>
-                            <div className="col-10 aSortType">Pizza</div>
+                            <RadioButton data="Pizza" name="type" />
 
-                            <div className="col-2 ">
-                                <label className="aRadio">
-                                    <input type="radio" name="type" id="" />
-                                    <span className="adot"></span> <i className="fas fa-dot-circle aCheckdot"> </i>
-                                </label>
-                            </div>
-                            <div className="col-10 aSortType">Fried Chicken</div>
-                            <div className="col-2 ">
-                                <label className="aRadio">
-                                    <input type="radio" name="type" id="" />
-                                    <span className="adot"></span> <i className="fas fa-dot-circle aCheckdot"> </i>
-                                </label>
-                            </div>
-                            <div className="col-10  aSortType">Pasta</div>
-                            <div className="col-2 ">
-                                <label className="aRadio">
-                                    <input type="radio" name="type" id="" />
-                                    <span className="adot"></span> <i className="fas fa-dot-circle aCheckdot"> </i>
-                                </label>
-                            </div>
-                            <div className="col-10  aSortType">Grilled Chicken</div>
-                            <div className="col-2 ">
-                                <label className="aRadio">
-                                    <input type="radio" name="type" id="" />
-                                    <span className="adot"></span> <i className="fas fa-dot-circle aCheckdot"> </i>
-                                </label>
-                            </div>
-                            <div className="col-10  aSortType">Burgers</div>
-                            <div className="col-2 ">
-                                <label className="aRadio">
-                                    <input type="radio" name="type" id="" />
-                                    <span className="adot"></span> <i className="fas fa-dot-circle aCheckdot"> </i>
-                                </label>
-                            </div>
-                            <div className="col-10  aSortType">Shawerma</div>
-                            <div className="col-2 ">
-                                <label className="aRadio">
-                                    <input type="radio" name="type" id="" />
-                                    <span className="adot"></span> <i className="fas fa-dot-circle aCheckdot"> </i>
-                                </label>
-                            </div>
-                            <div className="col-10  aSortType">Grilles</div>
+                            <RadioButton data="Pasta" name="type" />
+                            <RadioButton data="Grilled Chicken" name="type" />
+                            <RadioButton data="Burgers" name="type" />
+                            <RadioButton data="Shawerma" name="type" />
+                            <RadioButton data="Grilles" name="type" />
+
                             <div className="mt-2 mb-2"><a href="#" className="aLink33More">+33 more</a></div>
                         
                         
