@@ -1,0 +1,15 @@
+@mixin backgrounds($bg) {
+    background-color: $bg;
+}
+
+@mixin font($size,$weight,$height,$color) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $height;
+    color: $color;
+}
+
+@mixin border($rad:0,$px:0) {
+    border-radius: $rad;
+    border: $px ;
+}
