@@ -119,12 +119,9 @@ export default function Header() {
           <div className="section_footer ">
             <h6 className="section_footer_title text-center mb-4"> Or explore elmenus</h6>
             <div class=" row section_footer_links mx-1 py-3">
-              <Link to="/Delivery">
-              <Card name="Delivery" iconName={faMotorcycle} iconName2={faArrowRight} para="Get food delivered from amazing restaurants around you "/>
-              </Link>
-              <Link to="/DinOut">
-              <Card name="Dine Out" iconName={faUtensils} iconName2={faArrowRight} para="Browse restaurants by mood, cuisine, area or dish names "/>
-              </Link>
+              <Card name="Delivery" link="/Delivery" iconName={faMotorcycle} iconName2={faArrowRight} para="Get food delivered from amazing restaurants around you "/>
+              <Card name="Dine Out" link="/DinOut" iconName={faUtensils} iconName2={faArrowRight} para="Browse restaurants by mood, cuisine, area or dish names "/>
+             
                
               
             </div>
