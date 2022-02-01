@@ -7,11 +7,21 @@ import search from "../../../images/Home/search.jpeg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faStore,faArrowRight,faMotorcycle,faUtensils} from '@fortawesome/free-solid-svg-icons'
 import Card from "./card";
+import { useSelector, useDispatch } from "react-redux";
+import changeLanguage from "../../../store/action/languageAction";
 export default function Header() {
+  const language = useSelector((state) => state.language.lang);
+  const dispatch = useDispatch();
+
+  const toggleLanguage = () => {
+    dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
+    
+  };
   return (
     <>
-    <div className="home_main">
-      <nav className="navbar navbar-light px-5 py-4">
+    <div className="home_main"  >
+      <nav className="navbar navbar-light px-5 py-4"
+       >
         <div className="container-fluid">
           <div className="home_logo">
             <a className="navbar-brand" href="">
@@ -45,6 +55,16 @@ export default function Header() {
                 >
                   SignUp
                 </button>
+                <button
+                  type="button"
+                  className="btn btn-link text-white login-btn"
+                  onClick={() => {
+                    toggleLanguage();
+                  }}
+                >
+                 {language}
+                </button>
+                
               </div>
             </form>
           </div>
