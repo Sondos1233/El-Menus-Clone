@@ -28,9 +28,9 @@ export default function Navbar() {
                 className="container-fluid"
                 style= {{ padding: "0 10px", backgroundColor: "white", borderBottom: "1px solid #dfe2e6"}}
             >
-                <a
+                <Link
                 className="navbar-brand p-3"
-                href="../index.html"
+                to="/Home"
                 style={{ borderRight: "1px solid #dfe2e6"}}
                 >
                 <img
@@ -38,7 +38,7 @@ export default function Navbar() {
                     alt=""
                     style={{ width: "120px", maxWidth: "100%", height: "auto" }}
                 />
-                </a>
+                </Link>
 
                 <button
                 className="navbar-toggler"
@@ -53,9 +53,9 @@ export default function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                    <a className="nav-item nav-link py-4 px-2" >DELIVERY</a>
-                    <a className=" nav-item nav-link py-4 px-2 active">DINE OUT</a>
-                    <a className=" nav-item nav-link py-4 px-2" >OFFERS</a>
+                <Link to="/Delivery" className="nav-link py-4 px-2" >DELIVERY</Link>
+                    <Link to="/DinOut" className="nav-link py-4 px-2 active" >DINE OUT</Link>
+                    <Link to="/Offers" className="nav-link py-4 px-2" >OFFERS</Link>
                 </div>
             
                 <div className="services py-3" style={{ display: "flex", marginLeft: "auto" }}>
@@ -227,9 +227,9 @@ export default function Navbar() {
                 <div className="col-12">
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                    <Link to="/Delivery" className="nav-link py-4 px-2" href="./Delivery.html">DELIVERY</Link>
-                    <Link to="/DinOut" className="nav-link py-4 px-2 active" href="./Dine-Out.html">DINE OUT</Link>
-                    <Link to="/Offers" className="nav-link py-4 px-2" href="./Offers.html">OFFERS</Link>
+                    <Link to="/Delivery" className="nav-link py-4 px-2" >DELIVERY</Link>
+                    <Link to="/DinOut" className="nav-link py-4 px-2 active" >DINE OUT</Link>
+                    <Link to="/Offers" className="nav-link py-4 px-2" >OFFERS</Link>
                     </div>
                     <div className="services py-3" style={{width: "52%", display: "flex", marginLeft: "auto"}}>
                     <div style={{ marginLeft: "auto" }}>
