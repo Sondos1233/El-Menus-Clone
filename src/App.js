@@ -11,16 +11,11 @@ function App() {
   return (
     <>
 
-      <Provider store={store}>
-        <Router>
           <Navbar />
-          <Switch>
             {/* <Route path="" exact component={} /> */}
             <Dineout/>
-          </Switch>
           <Footer />
-        </Router>
-      </Provider>
+ 
 
 
 
