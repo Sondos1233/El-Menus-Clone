@@ -19,7 +19,7 @@ import Navbar from './Components/Navbar/Navbar'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Fragment } from 'react';
 function App() {
-  const exclusion=["/","/JoinUs","/Careers"]
+  
   return (
     <>
 
@@ -42,7 +42,7 @@ function App() {
           </Fragment>
            
           </Switch>
-         
+
           <Footer/>
         </Router>
        
