@@ -10,7 +10,10 @@ import About from "./footerF";
 import "./footer_style/footer-style.css";
 import '../../Components/main-style.css'
 import Social from "./socialMedia";
+<<<<<<< HEAD
+=======
 import { Link } from "react-router-dom";
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTwitterSquare,
@@ -19,11 +22,26 @@ import {
   faInstagramSquare
 } from "@fortawesome/free-brands-svg-icons";
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+class Footer extends React.Component {
+  constructor() {
+    super();
+  }
+
+  render() {
+=======
+=======
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
 import { useSelector} from "react-redux";
 export default function Footer() {
     const language = useSelector((state) => state.language.lang);
   
+<<<<<<< HEAD
+>>>>>>> 5910a45b78b4feb7bc04a8e95938f5fc8cac50ff
+=======
 
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
     const City = [
       "Cairo",
       "Alexandria",
@@ -86,7 +104,17 @@ export default function Footer() {
 
     return (
       <>
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <footer class="main_footer">
+=======
+
         <footer class="main_footer" dir={language == "English" ? "rtl" : "ltr"}>
+
+>>>>>>> 5910a45b78b4feb7bc04a8e95938f5fc8cac50ff
+=======
+        <footer class="main_footer" dir={language == "English" ? "rtl" : "ltr"}>
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
           <div class="container">
             <div class="row">
               <div class="col-xl-2 col-lg-12 footer-images">
@@ -141,11 +169,17 @@ export default function Footer() {
                 </div>
                 <div class="col-xl-8 more-links">
                   <ul>
+<<<<<<< HEAD
+                    {footerlist.map((fo) => {
+                      return <About name={fo}/>;
+                    })}
+=======
                     <li><Link to="/"></Link>About Us</li>
                     <li><Link to="/"></Link>Terms and Conditions</li>
                     <li><Link to="/"></Link>Privacy</li>
                     <li><Link to="/Careers">Careers</Link></li>
                     <li><Link to="/JoinUs">Join Us</Link></li>
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
                   </ul>
                 </div>
                 <div class="col-xl-2 copyright mt-1">© 2021 elmenus</div>
@@ -156,6 +190,20 @@ export default function Footer() {
       </>
     );
   }
+<<<<<<< HEAD
+<<<<<<< HEAD
+}
+
+export default Footer;
+=======
 
 
 
+
+
+>>>>>>> 5910a45b78b4feb7bc04a8e95938f5fc8cac50ff
+=======
+
+
+
+>>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff

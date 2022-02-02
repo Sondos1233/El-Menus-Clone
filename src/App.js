@@ -1,4 +1,3 @@
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import JoinUs from './Components/JoinUs/joinUs';
@@ -18,11 +17,11 @@ import Navbar from './Components/Navbar/Navbar'
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Fragment } from 'react';
+
 function App() {
   
   return (
     <>
-
      {/* <Home/> */}
       <Provider store={store}>
          
@@ -49,16 +48,6 @@ function App() {
       </Provider>
 </>
   )
-
-
-
-
-  
-
-
-
-    
-
 }
 
 export default App;
