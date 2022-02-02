@@ -9,10 +9,9 @@ import {faStore,faArrowRight,faMotorcycle,faUtensils} from '@fortawesome/free-so
 import Card from "./card";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from "../../../store/action/languageAction";
-<<<<<<< HEAD
-=======
+
 import { Link } from "react-router-dom";
->>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
+
 export default function Header() {
   const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
@@ -122,16 +121,8 @@ export default function Header() {
           <div className="section_footer ">
             <h6 className="section_footer_title text-center mb-4"> Or explore elmenus</h6>
             <div class=" row section_footer_links mx-1 py-3">
-<<<<<<< HEAD
-               <Card name="Delivery" iconName={faMotorcycle} iconName2={faArrowRight} para="Get food delivered from amazing restaurants around you "/>
-               <Card name="Dine Out" iconName={faUtensils} iconName2={faArrowRight} para="Browse restaurants by mood, cuisine, area or dish names "/>
-=======
-              <Card name="Delivery" link="/Delivery" iconName={faMotorcycle} iconName2={faArrowRight} para="Get food delivered from amazing restaurants around you "/>
-              <Card name="Dine Out" link="/DinOut" iconName={faUtensils} iconName2={faArrowRight} para="Browse restaurants by mood, cuisine, area or dish names "/>
-             
-               
-              
->>>>>>> d9fc59ad4e44b0734e80926e66af3080086f6dff
+               <Card link="/Delivery" name="Delivery" iconName={faMotorcycle} iconName2={faArrowRight} para="Get food delivered from amazing restaurants around you "/>
+               <Card link="/Dinout" name="Dine Out" iconName={faUtensils} iconName2={faArrowRight} para="Browse restaurants by mood, cuisine, area or dish names "/>
             </div>
           </div>
         </div>

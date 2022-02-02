@@ -28,7 +28,7 @@ function App() {
         <Router>
           
           <Switch>
-          <Route path="/Careers" component={Career}/>
+           <Route path="/Careers" component={Career}/>
            <Route path="/JoinUs" component={JoinUs}/>
            <Route path="/Home" component={Home}/>
            <Fragment>
