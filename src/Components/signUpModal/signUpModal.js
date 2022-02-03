@@ -1,13 +1,15 @@
 import React, {useState} from "react";
-import ReactModal from 'react-modal'
-import './signUpModal.css'
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '../../firebase-config'
+import ReactModal from 'react-modal';
+import './signUpModal.css';
 
 
 function ModalSUp(){
  
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const [user, setUser] = useState({
+  const [userVal, setUserVal] = useState({
     Name: "",
     email: "",
     password: "",
@@ -21,8 +23,8 @@ function ModalSUp(){
 
   const handleChange = (e) => {
     if (e.target.name == "Name") {
-        setUser({
-            ...user,
+      setUserVal({
+            ...userVal,
             Name: e.target.value
         });
         setErrors({
@@ -37,8 +39,8 @@ function ModalSUp(){
 
     }
     else if (e.target.name == "email") {
-        setUser({
-            ...user,
+      setUserVal({
+            ...userVal,
             email: e.target.value
         });
         setErrors({
@@ -52,8 +54,8 @@ function ModalSUp(){
         });
 
     } else if (e.target.name == "password") {
-        setUser({
-            ...user,
+      setUserVal({
+            ...userVal,
             password: e.target.value
         });
         setErrors({
@@ -68,10 +70,56 @@ function ModalSUp(){
     }
 
 }
+
+
+//=======================Authentecation===============================
+
+  const [registerName, setRegisterName] = useState("");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  // const [loginEmail, setLoginEmail] = useState("");
+  // const [loginPassword, setLoginPassword] = useState("");
+
+  // const[user, setUser] = useState({});
+
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   setUser(currentUser);
+  // });
+
+  
+
+  const register = async () => {
+      try{
+        const user = await createUserWithEmailAndPassword(auth, registerEmail,registerPassword,registerName);
+        console.log(user);
+      } catch (error){
+        console.log(error.message);
+      }
+  };
+
+  // const login = async () => {
+  //   try{
+  //     const user = await signInWithEmailAndPassword(auth, loginEmail,loginPassword);
+  //     console.log(user);
+  //   } catch (error){
+  //     console.log(error.message);
+  //   }
+  // }
+  // //  <button onClick={login}>log In</button>    // //by this button i 'll log In
+  // //  <h1>User Login: {user?.email}</h1>  // //by this i 'll show user name after he logIned
+
+  // const logout = async () => {
+  //   await signOut (auth);
+  // };
+
+  // // <button onClick={signOut}>Sign Out</button>    // //by this button i 'll log out
+  
   
   return( 
     
     <>
+
+    {/* ************************************Modal******************************* */}
     <div className="container-fluid">
 
       {/* This Button instead of signUp button till integration with navbar */}
@@ -86,23 +134,23 @@ function ModalSUp(){
         <img id="signLogo" src="images/logo.jpg" />
         <form id="log" action="#">
         <div className="inpt mt-3">
-            <input type='text' placeholder="Name" className={`form-control ${errors.nameError ? `border-danger` : ``}`} value={user.Name} name="Name" onChange={(e) => { handleChange(e) }} />
+            <input type='text' placeholder="Name" className={`form-control ${errors.nameError ? `border-danger` : ``}`}  name="Name" onChange={(e) => { handleChange(e) }} onChange={(event) => { setRegisterName(event.target.valve); }} />
             <small className="text-danger">{errors.nameError}</small>
           </div>
-
+         
           <div className="inpt mt-3">
             <input type='text' placeholder="Email" className={`form-control ${errors.emailError ? `border-danger` : ``}`}
-            value={user.email} name="email" onChange={(e) => { handleChange(e) }} />
+             name="email" onChange={(e) => { handleChange(e) }} onChange={(event) => { setRegisterEmail(event.target.valve); }}/>
             <small className="text-danger">{errors.emailError}</small>
           </div>
 
           <div className="inpt mt-3">
-            <input type='password' placeholder="Password" className={`form-control ${errors.passwordError ? `border-danger` : ``}`} value={user.password} name="password" onChange={(e) => { handleChange(e) }} />
+            <input type='password' placeholder="Password" className={`form-control ${errors.passwordError ? `border-danger` : ``}`} name="password" onChange={(e) => { handleChange(e) }} onChange={(event) => { setRegisterPassword(event.target.valve); }}/>
             <small className="text-danger">{errors.passwordError}</small>
           </div>
 
           <div className="button mt-3">
-            <input type="submit" className="btn crtBtn" value="Create an account"  />
+            <input type="submit" className="btn crtBtn" value="Create an account" onClick={register}/>
           </div>
 
         </form>

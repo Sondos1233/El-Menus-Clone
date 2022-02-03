@@ -1,26 +1,21 @@
 import './App.css';
 import Modal from 'react-modal';
 import ModalSUp from './Components/signUpModal/signUpModal';
-// import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-
+import { BrowserRouter as Router, Switch, Route, Routes } from 'react-router-dom';
+import NavBar from './Components/Navbar/Navbar'
 
 Modal.setAppElement('#root')
 function App() {
   return (
     <>
+
+    <NavBar/>
+
+    {/* <ModalSUp /> */}
  
-    <ModalSUp />
 
 
-
-    {/* <Router>
-    <Test/>  
-   
-      <Switch>
-      <Route component={Modal} path="/form" exact/>
-      </Switch>
-    </Router>
-     */}
+        {/* <Route component={ModalSUp} path="/signUpForm" exact/> */}
 
     </>
   );
