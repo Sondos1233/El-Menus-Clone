@@ -9,9 +9,9 @@ function App() {
   return (
     <>
 
-    <NavBar/>
+    {/* <NavBar/> */}
 
-    {/* <ModalSUp /> */}
+    <ModalSUp />
  
 
 

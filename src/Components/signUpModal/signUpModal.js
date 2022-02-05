@@ -9,69 +9,6 @@ function ModalSUp(){
  
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const [userVal, setUserVal] = useState({
-    Name: "",
-    email: "",
-    password: "",
-  });
-
-  const [errors, setErrors] = useState({
-    nameError: null,
-    emailError: null,
-    passwordError: null,
-  });
-
-  const handleChange = (e) => {
-    if (e.target.name == "Name") {
-      setUserVal({
-            ...userVal,
-            Name: e.target.value
-        });
-        setErrors({
-            ...errors,
-            nameError:
-                e.target.value.length == 0
-                    ? "This field is Required" :
-                    e.target.value.length > 10
-                        ? "You have to enter less than 10"
-                        : null
-        });
-
-    }
-    else if (e.target.name == "email") {
-      setUserVal({
-            ...userVal,
-            email: e.target.value
-        });
-        setErrors({
-            ...errors,
-            emailError:
-                e.target.value.length == 0
-                    ? "This field is Required" :
-                    e.target.value.length > 30
-                        ? "You have to enter less than 30"
-                        : null
-        });
-
-    } else if (e.target.name == "password") {
-      setUserVal({
-            ...userVal,
-            password: e.target.value
-        });
-        setErrors({
-            ...errors,
-            passwordError:
-                e.target.value.length == 0
-                    ? "This field is Required" :
-                    e.target.value.length > 10
-                        ? "You have to enter less than 10"
-                        : null
-        });
-    }
-
-}
-
-
 //=======================Authentecation===============================
 
   const [registerName, setRegisterName] = useState("");
@@ -81,7 +18,6 @@ function ModalSUp(){
   // const [loginPassword, setLoginPassword] = useState("");
 
   // const[user, setUser] = useState({});
-
   // onAuthStateChanged(auth, (currentUser) => {
   //   setUser(currentUser);
   // });
@@ -90,7 +26,7 @@ function ModalSUp(){
 
   const register = async () => {
       try{
-        const user = await createUserWithEmailAndPassword(auth, registerEmail,registerPassword,registerName);
+        const user = await createUserWithEmailAndPassword(auth, registerName, registerEmail,registerPassword);
         console.log(user);
       } catch (error){
         console.log(error.message);
@@ -134,19 +70,15 @@ function ModalSUp(){
         <img id="signLogo" src="images/logo.jpg" />
         <form id="log" action="#">
         <div className="inpt mt-3">
-            <input type='text' placeholder="Name" className={`form-control ${errors.nameError ? `border-danger` : ``}`}  name="Name" onChange={(e) => { handleChange(e) }} onChange={(event) => { setRegisterName(event.target.valve); }} />
-            <small className="text-danger">{errors.nameError}</small>
+            <input type='text' placeholder="Name" className="form-control" onChange={(event) => { setRegisterName(event.target.valve); }} required/>
           </div>
          
           <div className="inpt mt-3">
-            <input type='text' placeholder="Email" className={`form-control ${errors.emailError ? `border-danger` : ``}`}
-             name="email" onChange={(e) => { handleChange(e) }} onChange={(event) => { setRegisterEmail(event.target.valve); }}/>
-            <small className="text-danger">{errors.emailError}</small>
+            <input type='text' placeholder="Email" className="form-control" onChange={(event) => { setRegisterEmail(event.target.valve); }} required/>
           </div>
 
           <div className="inpt mt-3">
-            <input type='password' placeholder="Password" className={`form-control ${errors.passwordError ? `border-danger` : ``}`} name="password" onChange={(e) => { handleChange(e) }} onChange={(event) => { setRegisterPassword(event.target.valve); }}/>
-            <small className="text-danger">{errors.passwordError}</small>
+            <input type='password' placeholder="Password" className="form-control" onChange={(event) => { setRegisterPassword(event.target.valve); }} required/>
           </div>
 
           <div className="button mt-3">
@@ -162,6 +94,6 @@ function ModalSUp(){
     </ReactModal>
     </div>
     </>
-  )
+  );
 }
 export default ModalSUp;
