@@ -1,12 +1,12 @@
 
 import logo from '../../images/Career/thumb_photo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faArrowCircleRight} from '@fortawesome/free-solid-svg-icons'
+import {faArrowCircleRight,faSearchLocation} from '@fortawesome/free-solid-svg-icons'
 import {
     faFacebookSquare,
-    faInstagramSquare
+    faInstagramSquare,
   } from "@fortawesome/free-brands-svg-icons";
-  function HeaderOfCareer () {
+  function HeaderOfCareer (props) {
     
   return (
     <>
@@ -43,8 +43,10 @@ import {
             {/* <!--picture staff--> */}
         <div class="container">
             <div class="info text-center position-relative text-white ">
-                <h2>Join our growing talented team</h2>
-                <h3 class="mt-3">Impact Millions of Monthly Users</h3>
+                <h2>{props.head}</h2>
+               
+                <h3 class="mt-3"> <FontAwesomeIcon icon={props.icon} className="me-2"/> {props.Name}</h3>
+                
             </div>
         </div>
         </div>

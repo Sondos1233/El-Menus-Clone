@@ -30,7 +30,8 @@ const Job = (props) => {
       <>
            <section class="group">
                 <h5 class="ms-4">{props.title}</h5>
-                {console.log(props.Job),
+                {
+                // console.log(props.Job),
                 
                 props.Job.map((data)=>{
                   //  console.log(data["Name"])
