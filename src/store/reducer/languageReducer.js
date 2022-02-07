@@ -1,12 +1,8 @@
 const initial = {
     lang: "العربية",
-<<<<<<< HEAD
+
 }
-=======
-  
-    
-  };
->>>>>>> Footer
+
   
   export default function languageReducer(state = initial, action) {
     switch (action.type) {

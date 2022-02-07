@@ -19,8 +19,6 @@ import { Fragment } from 'react';
 import './App.css';
 import description from './Components/Job/description';
 import Footer from './Components/Footer/footer';
-import { Provider } from 'react-redux';
-import store from './store/store'
 function App() {
   
   return (
@@ -31,7 +29,7 @@ function App() {
       <Provider store={store}>
          
         <Router>
-        {/* <Route path="/" component={Home}/> */}
+        <Route path="/" component={Home} />
           <Switch>
            <Route path="/Careers" component={Career}/>
            <Route path="/description/:Name" component={description}/>
