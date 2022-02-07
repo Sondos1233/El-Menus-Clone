@@ -6,7 +6,7 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
-
+import { Link } from 'react-router-dom';
 export default function Navbar() {
     const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
@@ -28,7 +28,8 @@ export default function Navbar() {
                 className="container-fluid"
                 style= {{ padding: "0 10px", backgroundColor: "white", borderBottom: "1px solid #dfe2e6"}}
             >
-                <a
+                <Link
+                to="/Home"
                 className="navbar-brand p-3"
                 href="../index.html"
                 style={{ borderRight: "1px solid #dfe2e6"}}
@@ -38,7 +39,7 @@ export default function Navbar() {
                     alt=""
                     style={{ width: "120px", maxWidth: "100%", height: "auto" }}
                 />
-                </a>
+                </Link>
 
                 <button
                 className="navbar-toggler"
@@ -53,9 +54,9 @@ export default function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                    <a className="nav-item nav-link py-4 px-2" >DELIVERY</a>
-                    <a className=" nav-item nav-link py-4 px-2 active">DINE OUT</a>
-                    <a className=" nav-item nav-link py-4 px-2" >OFFERS</a>
+                    <a href='/Delivery' className="nav-item nav-link py-4 px-2" >DELIVERY</a>
+                    <a href="/Dinout" className=" nav-item nav-link py-4 px-2 active">DINE OUT</a>
+                    <a href="/Offers" className=" nav-item nav-link py-4 px-2" >OFFERS</a>
                 </div>
             
                 <div className="services py-3" style={{ display: "flex", marginLeft: "auto" }}>

@@ -1,5 +1,4 @@
 
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import JoinUs from './Components/JoinUs/joinUs';
@@ -19,26 +18,25 @@ import { Fragment } from 'react';
 import './App.css';
 import description from './Components/Job/description';
 import Footer from './Components/Footer/footer';
+import Navbar from './Components/Navbar/Navbar';
 function App() {
   
   return (
     <>
-
-
      {/* <Home/> */}
       <Provider store={store}>
          
         <Router>
-        <Route path="/" component={Home} />
+        
           <Switch>
-           <Route path="/Careers" component={Career}/>
-           <Route path="/description/:Name" component={description}/>
-           <Route path="/JoinUs" component={JoinUs}/>
-           <Route path="/Home" component={Home}/>
+          <Route path="/" exact component={Home}/>
+           <Route path="/Careers" exact component={Career}/>
+           <Route path="/description/:Name" exactcomponent={description}/>
+           <Route path="/JoinUs" exact component={JoinUs}/>
+           <Route path="/Home" exact component={Home}/>
           
            <Fragment>
-            {/* <Navbar/> */}
-            
+           <Navbar/>
           <Route path ="/Delivery" exact component={Delivery} /> 
           <Route path="/DinOut" exact component={Dineout}/>
           <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
@@ -54,6 +52,7 @@ function App() {
 </>
   
   )
+
 
 }
 

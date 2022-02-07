@@ -19,6 +19,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import { useSelector} from "react-redux";
+import { Link } from "react-router-dom";
 export default function Footer() {
     const language = useSelector((state) => state.language.lang);
   
@@ -140,9 +141,14 @@ export default function Footer() {
                 </div>
                 <div class="col-xl-8 more-links">
                   <ul>
-                    {footerlist.map((fo) => {
+                    {/* {footerlist.map((fo) => {
                       return <About name={fo}/>;
-                    })}
+                    })} */}
+                    <Link to=""><li>About Us</li></Link>
+                    <Link to=""><li>Terms and Conditions</li></Link>
+                    <Link to=""><li>Privacy</li></Link>
+                    <Link to="/Careers"><li>Careers</li></Link>
+                    <Link to="/JoinUs"><li>Join Us</li></Link>
                   </ul>
                 </div>
                 <div class="col-xl-2 copyright mt-1">© 2021 elmenus</div>

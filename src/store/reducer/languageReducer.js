@@ -1,7 +1,9 @@
 const initial = {
     lang: "العربية",
 
-}
+  
+    
+  };
 
   
   export default function languageReducer(state = initial, action) {
