@@ -9,7 +9,6 @@ import { auth } from '../firebase/firebase.config';
 import { firestore } from '../firebase/firebase.config';
 import {addDoc, collection} from 'firebase/firestore'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
 
