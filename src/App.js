@@ -1,4 +1,5 @@
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import JoinUs from './Components/JoinUs/joinUs';
@@ -17,12 +18,14 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Fragment } from 'react';
 import './App.css';
 import description from './Components/Job/description';
-
-
+import Footer from './Components/Footer/footer';
+import { Provider } from 'react-redux';
+import store from './store/store'
 function App() {
   
   return (
     <>
+
 
      {/* <Home/> */}
       <Provider store={store}>
@@ -46,13 +49,14 @@ function App() {
           
           </Switch>
 
-          {/* <Footer/> */}
+          <Footer/>
         </Router>
        
       </Provider>
 </>
   
   )
+
 }
 
 export default App;
