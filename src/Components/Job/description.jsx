@@ -19,6 +19,7 @@ import "../Job/style.css";
 import logo from "../../images/Career/logo_horizontal.svg";
 import indeed from "../../images/Career/indeed.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import List from "./List";
 export default function description(props) {
   const param = reactRouterDom.useParams();
   console.log(param.Name);
@@ -79,13 +80,9 @@ export default function description(props) {
                 {JobsData.map((data) => {
                   console.log(data.Responsibilities);
                   return (
-                    <>
-                      <li>{data.Responsibilities[0]}</li>
-                      <li>{data.Responsibilities[1]}</li>
-                      <li>{data.Responsibilities[2]}</li>
-                      <li>{data.Responsibilities[3]}</li>
-                      <li>{data.Responsibilities[4]}</li>
-                    </>
+                   
+                      <List data={data.Responsibilities}/>
+                   
                   );
                 })}
               </ul>
@@ -93,13 +90,7 @@ export default function description(props) {
               <ul>
                 {JobsData.map((data) => {
                   return (
-                    <>
-                      <li>{data.Requirements[0]}</li>
-                      <li>{data.Requirements[1]}</li>
-                      <li>{data.Requirements[2]}</li>
-                      <li>{data.Requirements[3]}</li>
-                      <li>{data.Requirements[4]}</li>
-                    </>
+                      <List data={data.Requirements}/>
                   );
                 })}
               </ul>
