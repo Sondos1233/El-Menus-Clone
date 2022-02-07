@@ -26,7 +26,6 @@ const BodyOfCareer = () => {
             const data = await getDocs(CareersData);
               // console.log(data);
           setJobsData(data.docs.map((doc)=>({...doc.data(),id:doc.id})))
-        
         }
         getData()
       }, []);

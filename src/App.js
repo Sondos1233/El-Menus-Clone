@@ -1,7 +1,7 @@
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import JoinUs from './Components/JoinUs/joinUs';
-import Footer from './Components/Footer/footer';
 import store from "./store/store";
 import Home from './Components/Home/Home';
 import Career from './Components/Career/Career';
@@ -13,40 +13,45 @@ import Restaurant from './Components/Restaurant/Restaurant';
 import { Provider } from "react-redux";
 import "./App.css";
 import Dineout from './Components/Dineout/Dineout';
-import Navbar from './Components/Navbar/Navbar'
-
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Fragment } from 'react';
+import './App.css';
+import description from './Components/Job/description';
+
 
 function App() {
   
   return (
     <>
+
      {/* <Home/> */}
       <Provider store={store}>
          
         <Router>
-          
+        {/* <Route path="/" component={Home}/> */}
           <Switch>
            <Route path="/Careers" component={Career}/>
+           <Route path="/description/:Name" component={description}/>
            <Route path="/JoinUs" component={JoinUs}/>
            <Route path="/Home" component={Home}/>
+          
            <Fragment>
-            <Navbar/>
+            {/* <Navbar/> */}
             
           <Route path ="/Delivery" exact component={Delivery} /> 
           <Route path="/DinOut" exact component={Dineout}/>
           <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
           <Route path="/Offers" exact component={OfferParent}/>
           </Fragment>
-           
+          
           </Switch>
 
-          <Footer/>
+          {/* <Footer/> */}
         </Router>
        
       </Provider>
 </>
+  
   )
 }
 

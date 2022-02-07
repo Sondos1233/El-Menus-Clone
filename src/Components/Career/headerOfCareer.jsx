@@ -1,13 +1,16 @@
 
 import logo from '../../images/Career/thumb_photo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faArrowCircleRight} from '@fortawesome/free-solid-svg-icons'
+  import { Link } from 'react-router-dom';
+  
+
+import {faArrowCircleRight,faSearchLocation} from '@fortawesome/free-solid-svg-icons'
 import {
     faFacebookSquare,
-    faInstagramSquare
+    faInstagramSquare,
   } from "@fortawesome/free-brands-svg-icons";
-  import { Link } from 'react-router-dom';
-  function HeaderOfCareer () {
+  function HeaderOfCareer (props) {
+
     
   return (
     <>
@@ -15,7 +18,7 @@ import {
         <div class="container">
           <div class="home_logo">
             <h1>
-              <a class="navbar-brand" href="#">
+              <a class="navbar-brand" href="/Home">
                 <img
                   src={logo}
                   alt=""
@@ -26,9 +29,10 @@ import {
           </div>
           <div class="nav_social">
             <div class="d-flex">
-              <Link to="/" class="btn btn-primary" style={{backgroundColor:"#ff4612" ,borderColor:"#ff4612"}}>
-                Company Website<FontAwesomeIcon icon={faArrowCircleRight} className='ms-2'/>
-              </Link>
+           
+              <Link to="/Home" class="btn btn-primary" style={{backgroundColor:"#ff4612" ,borderColor:"#ff4612"}}>
+                Company Website<FontAwesomeIcon icon={faArrowCircleRight} className='ms-2'/></Link>
+
               <a href="https://www.facebook.com/elmenus">
                 <FontAwesomeIcon icon={faFacebookSquare} className='ms-3 mt-2 fs-4 social'/>
               </a>
@@ -44,8 +48,12 @@ import {
             {/* <!--picture staff--> */}
         <div class="container">
             <div class="info text-center position-relative text-white ">
-                <h2>Join our growing talented team</h2>
-                <h3 class="mt-3">Impact Millions of Monthly Users</h3>
+
+                <h2>{props.head}</h2>
+               
+                <h3 class="mt-3"> <FontAwesomeIcon icon={props.icon} className="me-2"/> {props.Name}</h3>
+                
+
             </div>
         </div>
         </div>

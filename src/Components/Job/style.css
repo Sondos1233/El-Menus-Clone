@@ -1,0 +1,100 @@
+h2.title{
+    font-size: 24px;
+    font-weight: 600;
+    /* color: #2a333d; */
+    margin-top: 0;
+    margin-bottom: 30px;
+    line-height: 1.4;
+
+}
+h3.descrip{
+    font-size: 20px;
+    font-weight: 600;
+    color: #ff4612;
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+p.description{
+    text-align: justify;
+}
+.app{
+  
+   padding-left:250px
+}
+.bodyJob{
+    border-top: 1px solid #e6f0f6 ;
+}
+.Bread{
+    --bs-breadcrumb-divider:'>'
+}
+/* .crumbCareer{
+} */
+.crumbCareer a{
+    text-decoration: none;
+    color: #2a333d;
+ 
+
+}
+.crumbCareer a:hover{
+    color: var(--bt-color);
+}
+.footerDes{
+    border-top:1px solid #e6f0f6 ;
+}
+.btn-thebiggest{
+    
+    background: var(--bt-color);
+    font-size: 18px;
+    text-align: center;
+    padding: 20px 0;
+    display: block;
+    width: 100%;
+    color: #fff;
+    border-radius: 0;
+    border-radius: 4px;
+    margin-bottom: 20px;
+
+}
+.btn-thebiggest:hover{
+    color: white;
+     background-color: var(--bt-hover);
+}
+
+.btn-indeed{
+    border-radius: 4px;
+    border: 1px solid #ccd1d9;
+    color: #2164f3;
+    padding: 7px 20px;
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.btn-indeed:hover{
+    border: 1px solid #2164f3;
+    color: #2164f3;
+
+}
+.socials-share{
+    border: 1px solid #ccd1d9;
+    margin-bottom: 20px;
+    margin-top: 60px;
+    border-radius: 4px;
+    padding: 12px 0;
+    text-align: center;
+ 
+}
+.socials-share h4{
+    margin: 0px 0px 15px 0px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.socials-share-i{
+    padding:6px 12px;
+    margin: 0 8px;
+}
+.columnLeft{
+    border-left: 1px solid #ccd1d9 ;
+   
+}
