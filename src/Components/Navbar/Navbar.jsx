@@ -9,9 +9,18 @@ import { auth } from '../firebase/firebase.config';
 import { firestore } from '../firebase/firebase.config';
 import {addDoc, collection} from 'firebase/firestore'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import changeLanguage from '../../store/action/languageAction';
 
 
 export default function Navbar() {
+    const language = useSelector((state) => state.language.lang);
+  const dispatch = useDispatch();
+
+  const toggleLanguage = () => {
+    dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
+  };
 
 //=========================Modals state========================
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -72,9 +81,9 @@ export default function Navbar() {
 
     return (
         <>
-
-        
         <nav className="nav-lg-Screen sticky-top d-lg-block d-none navCont">
+        <nav class="nav-lg-Screen sticky-top d-lg-block d-none"  dir={language == "English" ? "rtl" : "ltr"}>
+
         <section
             className="navbar navbar-expand-lg navbar-light pb-0"
             style={{ backgroundColor: "#e32207" }}
@@ -202,8 +211,11 @@ export default function Navbar() {
                     <a
                         href="#"
                         style= {{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw"}}
+                        onClick={() => {
+                            toggleLanguage();
+                          }}
                     >
-                        العربية
+                        {language}
                     </a>
                     </div>
                 </div>
@@ -246,6 +258,7 @@ export default function Navbar() {
             </div>
             </section>
         </nav>
+        </nav>
         <section aria-label="breadcrumb" className="container-fluid d-lg-block d-none" style={{ borderBottom: "1px solid #dfe2eb"}}>
             <div className="row navCont" style={{ margin: "0 120px"}}>
             <div className="col-12 pt-2">
@@ -259,7 +272,9 @@ export default function Navbar() {
             </div>
         </section>
 
+
         <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none navCont" id= "pageNav-lg">
+        <nav className="nav-lg-Screen sticky-top d-sm-block d-lg-none d-none" id= "pageNav-lg" dir={language == "English" ? "rtl" : "ltr"}>
         <section className="navbar navbar-expand-lg navbar-light pb-0" style={{ backgroundColor: "#fff" }}>
             <div className="container-fluid">
             <div className="row py-2" style={{ width: "100%" }}>
@@ -336,7 +351,7 @@ export default function Navbar() {
         </section>
     
         </nav>
-
+        </nav>
         
     {/* ************************************ٍSignUp Modal******************************* */}
         <div className="container-fluid modalContainer">
