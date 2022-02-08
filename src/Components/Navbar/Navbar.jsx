@@ -95,6 +95,7 @@ export default function Navbar() {
                 className="navbar-brand p-3"
                 href="../index.html"
                 style={{ borderRight: "1px solid #dfe2e6"}}
+                href="/Home"
                 >
                 <img
                     src="https://elmenus.com/public/img/newLogo.svg"
