@@ -79,12 +79,12 @@ export default function Header() {
 
   return (
     <>
-    <div className="home_main"  >
+    <div className="home_main">
       <nav className="navbar navbar-light px-5 py-4"
        >
         <div className="container-fluid">
           <div className="home_logo">
-            <a className="navbar-brand" href="">
+            <a className="navbar-brand" href="/Home">
               <img
                 src={elmenusLogo}
                 alt=""
