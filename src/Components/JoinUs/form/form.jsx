@@ -1,12 +1,33 @@
 import logo from '../../../images/JoinUs/logowithbg.png'
 import { useState } from 'react';
+
 export default function AddResForm() {
+import db from '../firebase';
+import { collection, getDocs,docs, doc,addDoc } from "firebase/firestore";
+export default function AddResForm() {
+  const  Ownerscollection= collection(db,"Owner")
+
   const pattern = new RegExp(/^(01)(0|1|2|5)[0-9]{8}$/);
   const [user, setUser] = useState({
     ResName:"",
     OwnName: "",
     Phone: ""
   });
+
+  // console.log(user.ResName)
+  
+    const createOwner= async ()=>{
+      await addDoc(Ownerscollection,{
+        NameRes:user.ResName,
+        Owner:user.OwnName,
+        phone:user.Phone
+      })
+      alert("Sucess");
+    
+    }
+  
+  
+
   const [errors, setErrors] = useState({
     NameErrors:null,
     NameErrors: null,
@@ -156,7 +177,8 @@ export default function AddResForm() {
             <textarea className="form-control" id="Textarea" rows="2"></textarea>
           </div>
           <div className="position-absolute formSubmit">
-            <button onclick="AddRes()" type="submit" className="btn btn-primary mb-3" id="myBtn">
+
+            <button onClick={createOwner}  className="btn btn-primary mb-3" id="myBtn">
               Subscribe!
             </button>
           </div>
@@ -164,4 +186,4 @@ export default function AddResForm() {
       
     </>
   );
-}
+            }}
