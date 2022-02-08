@@ -19,7 +19,7 @@ import Restaurant from './Components/Restaurant/Restaurant';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Fragment } from 'react';
 import description from './Components/Job/description';
-// import Footer from './Components/Footer/footer';
+import Footer from './Components/Footer/footer';
 // import Navbar from './Components/Navbar/Navbar';
 function App() {
   
@@ -49,7 +49,7 @@ function App() {
           
           </Switch>
 
-          {/* <Footer/> */}
+          <Footer/>
         </Router>
        
       </Provider>
