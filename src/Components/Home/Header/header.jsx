@@ -9,6 +9,14 @@ import {faStore,faArrowRight,faMotorcycle,faUtensils} from '@fortawesome/free-so
 import Card from "./card";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from "../../../store/action/languageAction";
+import React, {useState, useEffect} from "react";
+// import ReactModal from 'react-modal';
+import { auth } from '../../firebase/firebase.config';
+// import { firestore } from '../../firebase/firebase.config';
+// import {addDoc, collection} from 'firebase/firestore'
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+
+
 export default function Header() {
   const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
@@ -17,6 +25,58 @@ export default function Header() {
     dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
     
   };
+
+  //=========================Modals state========================
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const [logModalIsOpen, setLogModalIsOpen] = useState(false);
+
+  //=======================LogIn===============================
+
+  const initialState = { email: '', password: '' };
+  const [logInput, setLogInput] = useState(initialState);
+ 
+    const handleChange = ({target}) =>{
+        setLogInput({
+            ...logInput,
+            [target.name]: target.value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          await signInWithEmailAndPassword(auth ,logInput.email, logInput.password);
+          setLogInput(initialState);
+          setLogModalIsOpen(false);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+  //=======================SignUp===============================
+
+      const initialSignState = { email: '', password: '', name: '' };
+      const [signInput, setSignInput] = useState('');
+
+      const handleSignChange = ({ target }) => {
+        setSignInput({
+          ...signInput,
+          [target.name]: target.value,
+        });
+      };
+
+      const handleSignSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          await createUserWithEmailAndPassword(auth ,signInput.email, signInput.password, signInput.name);
+          setSignInput(initialSignState);
+          setModalIsOpen(false);
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+
   return (
     <>
     <div className="home_main"  >
@@ -37,13 +97,14 @@ export default function Header() {
 
           <div className="home_sign">
             <form className="d-flex">
-              {/* <!-- Button trigger modal --> */}
               <div id="sign_auth">
+             
                 <button
                   type="button"
                   className="btn btn-link text-white login-btn"
                   data-bs-toggle="modal"
                   data-bs-target="#LogInModal"
+                  onClick={() => { setLogModalIsOpen(true); setModalIsOpen(false) }}
                 >
                   LogIn
                 </button>
@@ -52,9 +113,11 @@ export default function Header() {
                   className="btn btn-primary"
                   data-bs-toggle="modal"
                   data-bs-target="#SignModal"
+                  onClick={() => { setModalIsOpen(true); setLogModalIsOpen(false)}}
                 >
                   SignUp
                 </button>
+              
                 <button
                   type="button"
                   className="btn btn-link text-white login-btn"
@@ -64,6 +127,7 @@ export default function Header() {
                 >
                  {language}
                 </button>
+                
                 
               </div>
             </form>
@@ -127,6 +191,88 @@ export default function Header() {
       </section>
       {/* <!--footer section--> */}
       </div>
+
+      {/* ************************************ٍSignUp Modal******************************* */}
+      <div className="container-fluid modalContainer">
+        {/* This Button instead of signUp button till integration with navbar */}
+        {/* <button className="btn btn-danger" onClick={() => { setModalIsOpen(true) }}>Open Modal</button> */}
+        {/* ****************************************************************************** */}
+
+        <ReactModal isOpen={modalIsOpen} onRequestClose={() => { setModalIsOpen(false) }}>
+        <div className="bgForm">
+        <button type="button" className="btn-close" onClick={() => { setModalIsOpen(false) }}></button>
+
+        <form className="form-container" onSubmit={handleSignSubmit}>
+        <img id="signLogo" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397754952/e518a9efa57162be0afd9826667d697e.jpg" />
+        <div id="log">
+        <div className="inpt mt-3">
+            <input type='text' placeholder="Name" className="form-control" name='name' autoComplete="off" value={signInput.name} onChange={handleSignChange}/>
+            </div>
+        
+            <div className="inpt mt-3">
+            <input type='text' placeholder="Email" className="form-control" name='email' autoComplete="off" value={signInput.email} onChange={handleSignChange}/>
+            </div>
+
+            <div className="inpt mt-3">
+            <input type='password' placeholder="Password" className="form-control" name='password' autoComplete="off" value={signInput.password} onChange={handleSignChange}/>
+            </div>
+
+            <div className="submitBtn mt-3">
+        
+            <button type="submit" className="btn crtBtn">Create an account</button>
+            </div>
+
+        </div>
+        <div className="note">
+            <a>By creating an account, you agree to our Terms of service and Privacy policy</a>
+        </div>
+        </form>
+        </div>
+        </ReactModal>
+        </div>
+
+        {/* ***********************************LogIn Modal************************************************** */}
+        <div className="container-fluid modalContainer">
+
+      {/* This Button instead of LogIn button till integration with navbar */}
+        {/* <button className="btn btn-danger" onClick={() => { setModalIsOpen(true) }}>Open Modal</button> */}
+       {/* ****************************************************************************** */}
+
+    <ReactModal isOpen={logModalIsOpen} onRequestClose={() => { setLogModalIsOpen(false) }}>
+    <div className="bgForm">
+      <button type="button" className="btn-close" onClick={() => { setLogModalIsOpen(false) }}></button>
+
+      <div className="form-container">
+        <img id="logLogo" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397754952/e518a9efa57162be0afd9826667d697e.jpg" />
+        <form id="log" onSubmit={handleSubmit}>
+          <div className="inpt mt-3">
+            <input type='text' placeholder="email" className="form-control" name="email" onChange={handleChange} value={logInput.email} autoComplete="off" />
+          </div>
+
+          <div className="inpt mt-3">
+            <input type='password' placeholder="password" className="form-control" name='password' onChange={handleChange} value={logInput.password} autoComplete="off" />
+          </div>
+        
+          <div className="button mt-3">
+            <button type="submit" className="btn btn-danger">Log in</button>
+          </div>
+
+          <div className="button mt-3">
+            <button type="submit" className="btn goglBtn">Log in with Facebook</button>
+          </div>
+
+          <div className="button mt-3">
+            <button type="submit" className="btn btn-primary">Log in with Google</button>
+          </div>
+
+        </form>
+        <div className="frgtPass">
+          <a>I forget my password</a>
+        </div>
+      </div>
+      </div>
+    </ReactModal>
+    </div>
     </>
   );
 }
