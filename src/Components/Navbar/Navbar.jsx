@@ -54,6 +54,8 @@ export default function Navbar() {
       };
 
       
+
+      
 //=======================SignUp===============================
 
         const initialSignState = { email: '', password: '', name: '' };
@@ -76,6 +78,12 @@ export default function Navbar() {
             console.log(error.message);
         }
         };
+
+        // onAuthStateChanged(auth, (user) => {
+        //     if (user) {
+            
+                
+        // }})
    
 
     return (
