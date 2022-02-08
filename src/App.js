@@ -1,4 +1,9 @@
 
+import './App.css';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
+import AccountSetting from './Components/accountSetting/accountSetting'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import JoinUs from './Components/JoinUs/joinUs';
@@ -39,6 +44,7 @@ function App() {
           <Route path="/DinOut" exact component={Dineout}/>
           <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
           <Route path="/Offers" exact component={OfferParent}/>
+          <Route path="/account" component={AccountSetting}/>
           </Fragment>
           
           </Switch>
@@ -52,6 +58,6 @@ function App() {
   )
 
 
-}
+  }
 
 export default App;
