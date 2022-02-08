@@ -1,9 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Dineout.css'
-// import DineoutbyPlace from './DineoutbyPlace/DineoutbyPlace';
 import FilterCard from './FilterCard.js/FilterCard';
 import DineoutByCity from './DineoutByCity/DineoutByCity'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from 'react';
 import pizzaImg from './../../images/Dineout/pizza.jpg'
 import BurgersImg from './../../images/Dineout/Burgers.jpg'
@@ -49,8 +47,6 @@ export default function Dineout() {
         }
         getBranches()
 
-        //Restaurant Query By Type
-
     }, [])
 
 
@@ -72,21 +68,11 @@ export default function Dineout() {
         { urlImage: SandwichesImg, title: "Sandwiches" },
     ])
 
-    const [dineOutbyNewRes, setDineOutbyNewRes] = useState([
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "pizza" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Burgers" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Chiness" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Koshary" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "FriedChecken" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Sandwiches" },
-    ])
-
 
     //Functions
     const [clicked, setClicked] = useState(false);
     const filterByType = (e) => {
         setQueryByType([])
-        // console.log(e.target.text)
         if(clicked == false){
             const QueryByTypeDocs = query(
                 collection(db, "Restaurant"),
@@ -111,7 +97,6 @@ export default function Dineout() {
     } 
 
     const filterByMood = (e) => {
-        // console.logzz/
         console.log(e.target.innerText)
         setQueryByMood([])
         if (clicked == false) {
@@ -137,11 +122,6 @@ export default function Dineout() {
 
 
     }
-
-  
-    
-
-
 
     return (
         <>
@@ -192,7 +172,6 @@ export default function Dineout() {
                                             backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat"
                                         }}>
                                             <div class="dine-content2">
-                                                {/* "font-size: 20px; cursor: pointer;"  */}
                                                 <h1 class="mt-auto text-light fw-bold p-4" style={{ fontSize: "20px", cursor: "pointer"}} onClick={(e) => { filterByMood(e) }} >{place.title}</h1>
                                             </div>
                                         </div>
@@ -393,9 +372,6 @@ export default function Dineout() {
                                     <div className="row">
                                         <div className="col-12 d-flex">
 
-                                            {/* <p class="resturantDesc" style={{ color: "rgb(161, 157, 157)", fontSize: "10px", margin: "auto", position: "relative", top: "15px"}}>
-                                                                            {Res.Type}
-                                                                        </p> */}
                                             {
                                                 Restaurants.map((Res) => {
                                                     return (
