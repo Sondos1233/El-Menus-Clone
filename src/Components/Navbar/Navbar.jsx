@@ -51,23 +51,29 @@ export default function Navbar() {
           console.log(error);
         }
       };
+
+      
 //=======================SignUp===============================
 
-    const signInitialState = {name: '' ,email: '', password: '' };
-    const [signUpInput, setSignUpInput] = useState(signInitialState);
+    const signUpInitialState = {email: '', password: '', name: ''  };
+    const [signUpInput, setSignUpInput] = useState(signUpInitialState);
     
-    async function handleSignSubmit(name, email, password){
-        console.log(name, email, password);
-        var data = {
-            name: name,
-            email: email,
-            password: password
-        };
-        try{
-            await addDoc(collection(firestore, "User"), data);
-        }catch(error){
-            console.log(error);
-        }
+    async function handleSignSubmit( email, password, name){
+        createUserWithEmailAndPassword(auth, email, password, name)
+        .then((userCreate) => {
+            //console.log(userCreate.user.uid);
+            const data = {  
+              email: email,
+              password:password,
+              name: name
+            };
+      
+            addDoc(collection(firestore, "User"), data);
+      
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
         
     }
     const handleSignChange = (e) =>{
@@ -76,6 +82,30 @@ export default function Navbar() {
             [e.target.name]: [e.target.value]
         });
     };
+
+    // const initialSignState = { email: '', password: '', name: '' };
+
+        
+    //     const [input, setInput] = useState('');
+    //     const [error, setError] = useState('');
+
+    //     const handleSignChange = ({ target }) => {
+    //         setInput({
+    //         ...input,
+    //         [target.name]: target.value,
+    //         });
+    //         setError('');
+    //     };
+
+    //     const handleSignSubmit = (e) => {
+    //         e.preventDefault();
+    //         try {
+    //          createUserWithEmailAndPassword(auth ,input.email, input.password, input.name);
+    //         setInput(signUpInitialState);
+    //         } catch (err) {
+    //         console.log(err.message);
+    //         }
+    //     };
    
 
     return (
@@ -366,15 +396,15 @@ export default function Navbar() {
         <img id="signLogo" src="images/logowithbg.png" />
         <div id="log">
         <div className="inpt mt-3">
-            <input type='text' placeholder="Name" className="form-control" name='name' onChange={(e) => handleSignChange(e)} autoComplete="off"/>
+            <input type='text' placeholder="Name" className="form-control" name='name' onChange={handleSignChange} autoComplete="off"/>
             </div>
         
             <div className="inpt mt-3">
-            <input type='text' placeholder="Email" className="form-control" name='email' onChange={(e) => handleSignChange(e)}  autoComplete="off"/>
+            <input type='text' placeholder="Email" className="form-control" name='email' onChange={handleSignChange}  autoComplete="off"/>
             </div>
 
             <div className="inpt mt-3">
-            <input type='password' placeholder="Password" className="form-control" name='password' onChange={(e) => handleSignChange(e)}  autoComplete="off"/>
+            <input type='password' placeholder="Password" className="form-control" name='password' onChange={handleSignChange}  autoComplete="off"/>
             </div>
 
             <div className="submitBtn mt-3">
