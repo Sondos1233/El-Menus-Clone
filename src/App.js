@@ -11,11 +11,9 @@ import Career from './Components/Career/Career';
 import OfferParent from './Components/Offers/OffersParent';
 import Delivery from './Components/Delivery/Delivery';
 import Restaurant from './Components/Restaurant/Restaurant';
-import "./App.css";
-import Dineout from './Components/Dineout/Dineout';
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Fragment } from 'react';
-import './App.css';
 import description from './Components/Job/description';
 // import Footer from './Components/Footer/footer';
 // import Navbar from './Components/Navbar/Navbar';

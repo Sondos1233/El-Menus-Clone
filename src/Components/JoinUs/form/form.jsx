@@ -1,9 +1,8 @@
 import logo from '../../../images/JoinUs/logowithbg.png'
 import { useState } from 'react';
 
-export default function AddResForm() {
 import db from '../firebase';
-import { collection, getDocs,docs, doc,addDoc } from "firebase/firestore";
+import { collection,addDoc } from "firebase/firestore";
 export default function AddResForm() {
   const  Ownerscollection= collection(db,"Owner")
 
@@ -186,4 +185,4 @@ export default function AddResForm() {
       
     </>
   );
-            }}
+            }
