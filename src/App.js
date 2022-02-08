@@ -1,8 +1,7 @@
-
 import './App.css';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-
-import AccountSetting from './Components/accountSetting/accountSetting'
+import Userprofile from './Components/userProfile/userProfile';
+import AccountSetting from './Components/accountSetting/accountSetting';
+import{ BrowserRouter as  Router, Route, Routes } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min'
@@ -44,7 +43,8 @@ function App() {
           <Route path="/DinOut" exact component={Dineout}/>
           <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
           <Route path="/Offers" exact component={OfferParent}/>
-          <Route path="/account" component={AccountSetting}/>
+          <Route element={ <Userprofile />} path="/userProfile" exact />        
+            <Route element={<AccountSetting />} path="/accountSetting" exact />
           </Fragment>
           
           </Switch>
