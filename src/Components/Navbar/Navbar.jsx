@@ -47,6 +47,7 @@ export default function Navbar() {
         try {
           await signInWithEmailAndPassword(auth ,logInput.email, logInput.password);
           setLogInput(initialState);
+          setLogModalIsOpen(false);
         } catch (error) {
           console.log(error);
         }
@@ -55,57 +56,26 @@ export default function Navbar() {
       
 //=======================SignUp===============================
 
-    const signUpInitialState = {email: '', password: '', name: ''  };
-    const [signUpInput, setSignUpInput] = useState(signUpInitialState);
-    
-    async function handleSignSubmit( email, password, name){
-        createUserWithEmailAndPassword(auth, email, password, name)
-        .then((userCreate) => {
-            //console.log(userCreate.user.uid);
-            const data = {  
-              email: email,
-              password:password,
-              name: name
-            };
-      
-            addDoc(collection(firestore, "User"), data);
-      
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
-        
-    }
-    const handleSignChange = (e) =>{
-        setSignUpInput({
-            ...signUpInput,
-            [e.target.name]: [e.target.value]
+        const initialSignState = { email: '', password: '', name: '' };
+        const [signInput, setSignInput] = useState('');
+
+        const handleSignChange = ({ target }) => {
+        setSignInput({
+            ...signInput,
+            [target.name]: target.value,
         });
-    };
+        };
 
-    // const initialSignState = { email: '', password: '', name: '' };
-
-        
-    //     const [input, setInput] = useState('');
-    //     const [error, setError] = useState('');
-
-    //     const handleSignChange = ({ target }) => {
-    //         setInput({
-    //         ...input,
-    //         [target.name]: target.value,
-    //         });
-    //         setError('');
-    //     };
-
-    //     const handleSignSubmit = (e) => {
-    //         e.preventDefault();
-    //         try {
-    //          createUserWithEmailAndPassword(auth ,input.email, input.password, input.name);
-    //         setInput(signUpInitialState);
-    //         } catch (err) {
-    //         console.log(err.message);
-    //         }
-    //     };
+        const handleSignSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await createUserWithEmailAndPassword(auth ,signInput.email, signInput.password, signInput.name);
+            setSignInput(initialSignState);
+            setModalIsOpen(false);
+        } catch (error) {
+            console.log(error.message);
+        }
+        };
    
 
     return (
@@ -382,8 +352,8 @@ export default function Navbar() {
         </nav>
         </nav>
         
-    {/* ************************************ٍSignUp Modal******************************* */}
-        <div className="container-fluid modalContainer">
+     {/* ************************************ٍSignUp Modal******************************* */}
+     <div className="container-fluid modalContainer">
         {/* This Button instead of signUp button till integration with navbar */}
         {/* <button className="btn btn-danger" onClick={() => { setModalIsOpen(true) }}>Open Modal</button> */}
         {/* ****************************************************************************** */}
@@ -393,18 +363,18 @@ export default function Navbar() {
         <button type="button" className="btn-close" onClick={() => { setModalIsOpen(false) }}></button>
 
         <form className="form-container" onSubmit={handleSignSubmit}>
-        <img id="signLogo" src="images/logowithbg.png" />
+        <img id="signLogo" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397754952/e518a9efa57162be0afd9826667d697e.jpg" />
         <div id="log">
         <div className="inpt mt-3">
-            <input type='text' placeholder="Name" className="form-control" name='name' onChange={handleSignChange} autoComplete="off"/>
+            <input type='text' placeholder="Name" className="form-control" name='name' autoComplete="off" value={signInput.name} onChange={handleSignChange}/>
             </div>
         
             <div className="inpt mt-3">
-            <input type='text' placeholder="Email" className="form-control" name='email' onChange={handleSignChange}  autoComplete="off"/>
+            <input type='text' placeholder="Email" className="form-control" name='email' autoComplete="off" value={signInput.email} onChange={handleSignChange}/>
             </div>
 
             <div className="inpt mt-3">
-            <input type='password' placeholder="Password" className="form-control" name='password' onChange={handleSignChange}  autoComplete="off"/>
+            <input type='password' placeholder="Password" className="form-control" name='password' autoComplete="off" value={signInput.password} onChange={handleSignChange}/>
             </div>
 
             <div className="submitBtn mt-3">
@@ -420,6 +390,9 @@ export default function Navbar() {
         </div>
         </ReactModal>
         </div>
+
+
+
 
         {/* ***********************************LogIn Modal************************************************** */}
         <div className="container-fluid modalContainer">
