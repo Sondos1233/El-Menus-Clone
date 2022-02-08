@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Dineout.css'
-import DineoutbyPlace from './DineoutbyPlace/DineoutbyPlace';
+// import DineoutbyPlace from './DineoutbyPlace/DineoutbyPlace';
+import FilterCard from './FilterCard.js/FilterCard';
 import DineoutByCity from './DineoutByCity/DineoutByCity'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from 'react';
@@ -26,6 +27,9 @@ export default function Dineout() {
 
     // //QuerybyType
     const [QueryByType, setQueryByType] = useState([]);
+    
+    //QueryMood
+    const [QueryByMood, setQueryByMood] = useState([]);
 
 
     useEffect(() => {
@@ -82,6 +86,7 @@ export default function Dineout() {
     const [clicked, setClicked] = useState(false);
     const filterByType = (e) => {
         setQueryByType([])
+        // console.log(e.target.text)
         if(clicked == false){
             const QueryByTypeDocs = query(
                 collection(db, "Restaurant"),
@@ -103,6 +108,34 @@ export default function Dineout() {
         }
 
        
+    } 
+
+    const filterByMood = (e) => {
+        // console.logzz/
+        console.log(e.target.innerText)
+        setQueryByMood([])
+        if (clicked == false) {
+            const QueryByMoodDocs = query(
+                collection(db, "Restaurant"),
+                limit(10),
+                where("Mood", "array-contains", e.target.innerText)
+            );
+
+            const getResByMoodQuery = async () => {
+                const QueryData = await getDocs(QueryByMoodDocs)
+                // console.log(QueryData)
+                setQueryByMood(QueryData.docs.map((doc) => ({ ...doc.data() })))
+
+            }
+            getResByMoodQuery()
+
+            setClicked(true)
+        } 
+        else {
+            setClicked(false)
+        }
+
+
     }
 
   
@@ -115,7 +148,7 @@ export default function Dineout() {
             {/* FOR TESTING ONLY */}
             {/* <div>
                 {
-                    QueryByMood.map((test) => {
+                    QueryByType.map((test) => {
                         return (
                             <div>
                                 {test.ResName}
@@ -153,7 +186,18 @@ export default function Dineout() {
                             {
                                 dineOutbyPlace.map((place) => {
                                     return (
-                                        <DineoutbyPlace urlImage={place.urlImage} title={place.title}></DineoutbyPlace>
+                                        <div class="col-md-4 col-6 my-1 px-1" style={{ minHeight: "100px", maxHeight: "400px" }}>
+                                        <div class="d-flex px-0" style={{
+                                            borderRadius: "5px", height: "100%", backgroundImage: `url(${place.urlImage})`,
+                                            backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat"
+                                        }}>
+                                            <div class="dine-content2">
+                                                {/* "font-size: 20px; cursor: pointer;"  */}
+                                                <h1 class="mt-auto text-light fw-bold p-4" style={{ fontSize: "20px", cursor: "pointer"}} onClick={(e) => { filterByMood(e) }} >{place.title}</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        // <DineoutbyPlace urlImage={place.urlImage} title={place.title}></DineoutbyPlace>
                                     )
                                 })
                             }
@@ -165,7 +209,37 @@ export default function Dineout() {
 
 
                 </div>
+
+                
             </section>
+
+            {/* fILTER BY MOOD */}
+            <section className='overflow-hidden'>
+            <div className="col-12 mx-4 overflow-hidden">
+                        <div id="disByDishes-Slider" className="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                            <div className="carousel-inner">
+                                <div className="carousel-item active">
+                                    <div className="row">
+                                        <div className="col-12 d-flex" id="cardDishes">
+                                            {/* <!-- Dieshes Container filled by JS --> */}
+
+                                            {
+                                                QueryByMood.map((Type) => {
+                                                    return (
+                                                     
+                                                        <FilterCard image = "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg" name = {Type.ResName} type= {Type.Mood}></FilterCard>
+                                                    )
+                                                })
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+           
 
 
             {/* Discover BY Types */}
@@ -225,19 +299,7 @@ export default function Dineout() {
                                                 QueryByType.map((Type) => {
                                                     return (
                                                      
-                                                        <div class="item-1 px-2 p-2">
-                                                            <div class="box-newResturants" style={{ height: "35vh" }}>
-                                                                <div class="slide-img">
-                                                                    <img
-                                                                        src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg" style={{ height: "19vh" }}
-                                                                        alt="" />
-                                                                    <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
-                                                                        <a href="#" class="meal-kind">{Type.ResName}</a>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <FilterCard image = "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg" name = {Type.ResName} type={Type.Type}></FilterCard>
                                                     )
                                                 })
                                             }
