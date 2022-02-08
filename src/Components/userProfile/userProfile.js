@@ -1,6 +1,7 @@
 
 import './userProfile.css'
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 
 function Userprofile(){
 
@@ -17,7 +18,7 @@ function Userprofile(){
             <div className="head_content">
                 <div className="user_head">
                     <img src="	https://www.elmenus.com/public/img/arbitrary-user.svg" alt="User name" className="user-profile" />
-                    <button>Edit Profile</button>
+                    <Link to="/accountSetting"> <button>Edit Profile</button></Link>
                 </div>
                 <div className="user_data">
                     <p className='p1'>Your profile</p>

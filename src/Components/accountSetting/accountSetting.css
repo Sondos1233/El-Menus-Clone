@@ -1,0 +1,277 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Gilroy", "Open Sans", sans-serif;;
+}
+
+body{
+    width: 100%;
+}
+
+.container-fluid{
+    display: flex;
+    flex-direction: column;
+    padding-top: 5%;
+}
+
+.container-fluid h1{
+    font-weight: 800;
+    font-size: 2rem;
+    line-height: 36px;
+    color: #1f0f10;
+    text-align: center;
+
+}
+
+
+.tab1{
+    margin-left: 31%;
+    background-color: transparent;
+    padding: 0% 1%;
+    color: grey;
+    border-radius: 25px;
+    width: 12%;
+    height: 43px;
+    border: none;
+    margin-left: 1%;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 23px;
+}
+
+.active-tab1{
+    margin-left: 31%;
+    background-color: #e32207;
+    padding: 0% 1%;
+    color: #ffffff;
+    border-radius: 25px;
+    width: 12%;
+    height: 43px;
+    border: none;
+    margin-left: 1%;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 23px;
+}
+
+.tab1:hover{
+    background-color: #d3c8c87c;
+    color: #7f7f7f;
+}
+
+.tab2{
+    background-color: transparent;
+    padding: 0% 1%;
+    color: grey;
+    border-radius: 25px;
+    width: 12%;
+    height: 43px;
+    border: none;
+    margin-left: 1%;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 23px;
+}
+
+.active-tab2{
+    background-color: #e32207;
+    padding: 0% 1%;
+    color: #ffffff;
+    border-radius: 25px;
+    width: 12%;
+    height: 43px;
+    border: none;
+    margin-left: 1%;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 23px;
+}
+
+.tab2:hover{
+    background-color: #d3c8c87c;
+    color: #7f7f7f;
+}
+
+.tab3{
+    background-color: transparent;
+    padding: 0% 1%;
+    color: grey;
+    border-radius: 25px;
+    width: 12%;
+    height: 43px;
+    border: none;
+    margin-left: 1%;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 23px;
+}
+
+.active-tab3{
+    background-color: #e32207;
+    padding: 0% 1%;
+    color: #ffffff;
+    border-radius: 25px;
+    width: 12%;
+    height: 43px;
+    border: none;
+    margin-left: 1%;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 23px;
+}
+
+.tab3:hover{
+    background-color: #d3c8c87c;
+    color: #7f7f7f;
+}
+
+
+
+.hide{
+    display: none;
+}
+
+.active-changEmail {
+    display: block;
+}
+
+.active-changPass{
+    display: block;
+}
+
+.active-addressBook{
+    display: block;
+}
+
+.ch{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    color:#000000;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.active-changEmail label{
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    margin-left: 35%;
+    margin-top: 1%;
+}
+
+
+.active-changEmail input{
+    width: 33%;
+    border-radius: 5px;
+    margin-left: 35%;
+    margin-top: 3px;
+}
+
+.active-changEmail button{
+    width: 12%;
+    height: 46px;
+    background-color: #e32207;
+    border-color: #e32207;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    margin-left: 35%;
+    margin-top: 4%;
+    padding-right: 50px;
+}
+
+.active-changPass label{
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    margin-left: 35%;
+    margin-top: 2%;
+}
+
+.active-changPass input{
+    width: 33%;
+    border-radius: 5px;
+    margin-left: 35%;
+    margin-top: 3px;
+}
+
+input::placeholder {
+    font-size: 0.9em;
+    font-family:  'Times New Roman', Times, serif;
+  }
+
+.active-changPass button{
+    width: 13%;
+    height: 46px;
+    background-color: #e32207;
+    border-color: #e32207;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    margin-left: 35%;
+    margin-top: 4%;
+    padding-right: 50px;
+}
+
+.address label{
+    font-weight: 600;;
+    font-size: 14px;
+    line-height: 20px;
+    color: #7d7e7e;
+    margin-top: 6%;
+    margin-left: 14%;
+}
+
+.address input{
+    width: 80%;
+    margin-left: 14%;
+}
+
+/* .addDetails label{
+    margin-left: 46%;
+} */
+
+.build input, .build label{
+    margin-left: 45%;
+}
+
+.apart input, .apart label{
+    margin-left: 0;
+}
+
+.floor input, .floor label{
+    margin-left: 24%;
+}
+
+.address button{
+    width: 28%;
+    height: 46px;
+    background-color: #e32207;
+    border-color: #e32207;
+    color: white;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    margin-left: 14%;
+    margin-top: 3%;
+}
+
+.address .cncle{
+    background-color: transparent;
+    border: 1px solid grey;
+    margin-left: 2%;
+    color: black;
+    width: 15%;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 40%);
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: .01em;
+    padding-right: 24px;
+    padding-left: 24px;
+}
+
