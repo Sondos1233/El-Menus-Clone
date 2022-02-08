@@ -9,9 +9,6 @@ import {faStore,faArrowRight,faMotorcycle,faUtensils} from '@fortawesome/free-so
 import Card from "./card";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from "../../../store/action/languageAction";
-
-import { Link } from "react-router-dom";
-
 export default function Header() {
   const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
