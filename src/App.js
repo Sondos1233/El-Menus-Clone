@@ -1,13 +1,13 @@
 import './App.css';
-import Userprofile from './Components/userProfile/userProfile';
-import AccountSetting from './Components/accountSetting/accountSetting';
-import{ BrowserRouter as  Router, Route, Routes } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min'
+import Userprofile from './Components/userProfile/userProfile';
+import AccountSetting from './Components/accountSetting/accountSetting';
+
+
 import JoinUs from './Components/JoinUs/joinUs';
 import { Provider } from "react-redux";
-import "./App.css";
 import Dineout from './Components/Dineout/Dineout';
 import store from "./store/store";
 import Home from './Components/Home/Home';
@@ -43,8 +43,8 @@ function App() {
           <Route path="/DinOut" exact component={Dineout}/>
           <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
           <Route path="/Offers" exact component={OfferParent}/>
-          <Route element={ <Userprofile />} path="/userProfile" exact />        
-            <Route element={<AccountSetting />} path="/accountSetting" exact />
+          <Route  path="/userProfile" exact component={Userprofile} />        
+            <Route exact path="/accountSetting" component={AccountSetting}  />
           </Fragment>
           
           </Switch>
