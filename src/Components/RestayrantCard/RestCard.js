@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
 import { faStar, faCircle, faStreetView } from "@fortawesome/free-solid-svg-icons";
-import { firestore } from "../../firebase/firebase-config";
+import { firestore } from "../../Firebase/firebase-config";
 import {
     collection,
     getDocs,
