@@ -18,6 +18,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthState
 
 
 export default function Header() {
+  const [city,setCity]=useState('Cairo')
   const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
 
@@ -25,7 +26,10 @@ export default function Header() {
     dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
     
   };
-
+  const handleChangeCity = (e) => {
+    setCity( e.target.value);
+  }
+console.log(city)
   //=========================Modals state========================
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -159,18 +163,20 @@ export default function Header() {
               <div className="col-xl-2 col-xs-5">
                 <div className="input-holder2">
                   <input
-                    type="text"
+                    className="floating-label-field floating-label-field--s3"
+                    type="Search"
                     name="city"
                     list="cityname"
-                    value="Cairo"
+                    value={city}
+                    onChange={(e) => {handleChangeCity(e);}}
                   />
-                  <datalist id="cityname">
+                  <datalist id="cityname" >
                     <option value="Boston"></option>
                     <option value="Cambridge"></option>
                   </datalist>
                 </div>
               </div>
-              <div class="col-xl-2 col-xs-5">
+              <div className="col-xl-2 col-xs-5">
               <a  href="">
               <button type="submit" className="submit-btn btn btn-primary">
                 Go

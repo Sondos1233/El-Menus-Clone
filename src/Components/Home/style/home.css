@@ -93,6 +93,9 @@ nav .btn {
 .home_main_section_content button{
     margin-left: -24px;
 }
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}  
 
 .home_main_section .input-holder input {
     width: 100%;
