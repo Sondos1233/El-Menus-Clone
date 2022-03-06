@@ -23,6 +23,7 @@ import {
 
 export default function Footer() {
     const language = useSelector((state) => state.language.lang);
+
     const City = [
       "Cairo",
       "Alexandria",
@@ -86,7 +87,6 @@ export default function Footer() {
     return (
       <>
         <footer class="main_footer" dir={language == "English" ? "rtl" : "ltr"}>
-
           <div class="container">
             <div class="row">
               <div class="col-xl-2 col-lg-12 footer-images">
@@ -157,4 +157,3 @@ export default function Footer() {
       </>
     );
   }
-  

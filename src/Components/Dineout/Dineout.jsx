@@ -229,7 +229,7 @@ export default function Dineout() {
                                                             <div class="box-newResturants" style={{ height: "35vh" }}>
                                                                 <div class="slide-img">
                                                                     <img
-                                                                        src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg" style={{ height: "19vh" }}
+                                                                        src={Type.ImageURL} style={{ height: "19vh" }}
                                                                         alt="" />
                                                                     <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
                                                                         <a href="#" class="meal-kind">{Type.ResName}</a>
@@ -271,7 +271,7 @@ export default function Dineout() {
 
                                                 Restaurants.map((Res) => {
                                                     return (
-                                                        <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/155c7faa-aff2-439f-a4bc-89fd1746258f.jpg"></DineoutByCity>
+                                                        <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
                                                     )
                                                 })
                                             }
@@ -304,7 +304,7 @@ export default function Dineout() {
                                             {
                                                 Restaurants.map((Res) => {
                                                     return (
-                                                        <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/de7f35a3-9f76-41ce-8ee1-d0d43bad4e63.jpg"></DineoutByCity>
+                                                        <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
                                                     )
                                                 })
                                             }
@@ -342,7 +342,7 @@ export default function Dineout() {
                                                             <div class="box-newResturants" style={{ height: "35vh" }}>
                                                                 <div class="slide-img">
                                                                     <img
-                                                                        src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg" style={{ height: "19vh" }}
+                                                                        src={Res.ImageLogo} style={{ height: "19vh" }}
                                                                         alt="" />
                                                                     <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
                                                                         <a href="#" class="meal-kind">{Res.ResName}</a>

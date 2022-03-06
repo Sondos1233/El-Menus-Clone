@@ -1,8 +1,16 @@
+
+import { collectionGroup } from "firebase/firestore";
+import { Link } from "react-router-dom";
+import db from "./Firebase/firebase";
+import { collection, getDocs,docs, doc } from "firebase/firestore";
+import { useEffect,useState } from "react";
 const CardOfJob = (props) => {
+  
+
   return (
     <>
-      <div className="card mt-4">
-        <div className="row ms-2 my-4">
+      <div className="card cardJob mt-4">
+        <div className="row ms-2 mb-4">
           <div className="col-lg-6 col-md-12">
             <h6 className="mb-3">{props.head}</h6>
             <div className="oper">
@@ -11,9 +19,13 @@ const CardOfJob = (props) => {
             </div>
           </div>
           <div className="col-lg-6 col-md-12 apply">
-            <a className="btn btn-primary me-4 social" style={{backgroundColor:"#ff4612",borderColor:"#ff4612"}} href="">
+
+            <Link to={`/description/${props.head}`}   className="btn btn-need me-4 mt-3 " style={{backgroundColor:"#ff4612",borderColor:"#ff4612"}} href="" onClick={() => {
+               
+              }} >
               View Job
-            </a>
+            </Link>
+
           </div>
         </div>
       </div>

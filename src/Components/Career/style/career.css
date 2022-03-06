@@ -89,14 +89,15 @@ nav .social:hover, .social:hover{
 .view-jobs .group .apply{
     text-align: right;
 }
-.btn-primary {
+.btn-need {
     color: #fff;
     background-color: var(--bt-color);
     border-color: var(--bt-color);
 }
-.btn-primary:hover{
+.btn-need:hover{
     background-color: var(--bt-hover);
     border-color: var(--bt-hover);
+    color: #fff;
 }
 .bg{
     height: 20px;
@@ -152,4 +153,8 @@ footer img{
         display: none;
     }
     
+}
+.cardJob{
+    box-shadow:none;
+    border: 1px solid #cdcfcf;
 }
