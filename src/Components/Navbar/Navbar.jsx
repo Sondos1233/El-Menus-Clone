@@ -99,8 +99,9 @@ export default function Navbar() {
                     >
                         <div
                             className="container-fluid"
-                            style={{ padding: "0 10px", backgroundColor: "white", borderBottom: "1px solid #dfe2e6" }}
+                            style={{ flexDirection: "row",padding: "0 10px", backgroundColor: "white", borderBottom: "1px solid #dfe2e6" }}
                         >
+                            
                             <a
                                 className="navbar-brand p-3"
                                 href="../index.html"
@@ -231,6 +232,7 @@ export default function Navbar() {
                                 </div>
                             </div>
                         </div>
+
                     </section>
                     <section
                         className="search-bar container-fluid"
