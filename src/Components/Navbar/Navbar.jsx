@@ -237,7 +237,7 @@ export default function Navbar() {
                     </section>
                     <section
                         className="search-bar container-fluid"
-                        style={{ backgroundColor: "white", borderBottom: "1px solid #dfe2e6" }}
+                        style={{ backgroundColor: "white", borderBottom: "1px solid #dfe2e6" , padding: "0"}}
                     // style="background-color: white; border-bottom: 1px solid var(--border-color)"
                     >
                         <div className="row mx-4">
@@ -272,7 +272,7 @@ export default function Navbar() {
                     </section>
                 </nav>
             </nav>
-            <section aria-label="breadcrumb" className="container-fluid d-lg-block d-none" style={{ borderBottom: "1px solid #dfe2eb" }}>
+            <section aria-label="breadcrumb" className="container-fluid d-lg-block d-none" style={{ borderBottom: "1px solid #dfe2eb" , padding: "0"}}>
                 <div className="row navCont" style={{ margin: "0 120px" }}>
                     <div className="col-12 pt-2">
                         <ol className="breadcrumb" >

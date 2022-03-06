@@ -126,7 +126,7 @@ export default function Dineout() {
             </div> */}
 
             {/* Discover By MOOD */}
-            <section className="container-fluid my-5">
+            <section className="container-fluid my-5" style={{padding: "0"}}>
                 <div className="row mx-md-4">
                     <div className="col-12 text-center p-3">
                         <h1 className="fw-bold">Discover restaurants to dine-out</h1>
