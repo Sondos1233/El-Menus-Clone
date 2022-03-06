@@ -99,9 +99,8 @@ export default function Navbar() {
                     >
                         <div
                             className="container-fluid"
-                            style={{ flexDirection: "row",padding: "0 10px", backgroundColor: "white", borderBottom: "1px solid #dfe2e6" }}
+                            style={{ flexDirection: "row", padding: "0 10px", backgroundColor: "white", borderBottom: "1px solid #dfe2e6" }}
                         >
-                            
                             <a
                                 className="navbar-brand p-3"
                                 href="../index.html"
@@ -133,7 +132,7 @@ export default function Navbar() {
                                     <a className=" nav-item nav-link py-4 px-2" >OFFERS</a>
                                 </div>
 
-                                <div className="services py-3" style={{ display: "flex", marginLeft: "auto" }}>
+                                <div className="services py-3" style={{ display: "flex", paddingLeft: "30px" }}>
                                     {/* ==================================================================================================================== */}
                                     <div style={{ display: "none", marginLeft: "auto" }} id="auth" >
                                         <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} >
@@ -210,7 +209,7 @@ export default function Navbar() {
                                 </div>
                                 <div
                                     className="cart-language py-3"
-                                    style={{ width: "auto", display: "flex", margin: "auto", borderLeft: "1px solid #dfe2e6" }}
+                                    style={{ width: "auto", display: "flex", marginLeft: "80px", borderLeft: "1px solid #dfe2e6" }}
                                 >
                                     <div style={{ marginLeft: "auto" }}>
                                         <a href="#" style={{ textDecoration: "none" }}>
@@ -232,7 +231,6 @@ export default function Navbar() {
                                 </div>
                             </div>
                         </div>
-
                     </section>
                     <section
                         className="search-bar container-fluid"
