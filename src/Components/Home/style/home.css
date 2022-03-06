@@ -96,6 +96,12 @@ nav .btn {
 input[type="search"]::-webkit-search-cancel-button {
     display: none;
 }  
+datalist {
+	display: none;
+}
+input::-webkit-calendar-picker-indicator {
+	display: none;
+}
 
 .home_main_section .input-holder input {
     width: 100%;
@@ -414,3 +420,5 @@ input:focus{
     padding-left: 33%;
     padding-top: 6%;
 }
+
+
