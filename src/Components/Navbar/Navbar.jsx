@@ -133,7 +133,7 @@ export default function Navbar() {
                                 </div>
 
                                 <div className="rightNav" style={{ display: "flex", marginLeft: "auto" }}>
-                                    <div className="services py-3" style={{ margin: "10px 20px"}}>
+                                    <div className="services" style={{ margin: "10px 20px"}}>
                                         {/* ==================================================================================================================== */}
                                         <div style={{ display: "none", marginLeft: "auto" }} id="auth" >
                                             <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} >
@@ -209,7 +209,7 @@ export default function Navbar() {
                                         {/* ==================================================================================================================== */}
                                     </div>
                                     <div
-                                        className="cart-language py-3"
+                                        className="cart-language"
                                         style={{ width: "auto", display: "flex", marginLeft: "auto", borderLeft: "1px solid #dfe2e6" }}
                                     >
                                         <div style={{ marginLeft: "auto" }}>
