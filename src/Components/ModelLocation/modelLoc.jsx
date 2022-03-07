@@ -65,6 +65,7 @@ export default function ModelLocation() {
     }
 
     const getAreaName = (e) => {
+        localStorage.setItem('areaName', e.target.text)
         setAreaName(e.target.text)
         setShowText(true)
     }
@@ -184,7 +185,9 @@ export default function ModelLocation() {
                                         showText ? (
                                             <div>
                                                 <span style={{ fontSize: "20px" }}>{areaName}</span>
-                                                <a href="" style={{ marginLeft: "40%" }}> SELECT </a>
+                                                <a style={{ marginLeft: "40%", cursor: "pointer", color: "#e32207" }} onClick={()=>{
+                                                    window.location.reload(false)
+                                                }}> SELECT </a>
                                             </div>
                                         ) : (
                                             <>
