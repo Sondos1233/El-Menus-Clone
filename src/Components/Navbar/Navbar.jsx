@@ -1,20 +1,27 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Navbar.css'
+import './Navbar.css';
 // import logo from './../../images/logo-sm.png' 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import {faSearch, faUser} from "@fortawesome/free-solid-svg-icons";
 import React, {useState, useEffect} from "react";
 import ReactModal from 'react-modal';
 import { auth } from '../firebase/firebase.config';
-import { firestore } from '../firebase/firebase.config';
+import { firestore } from '../../Firebase/firebase-config';
 import {addDoc, collection} from 'firebase/firestore'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
 
-
 export default function Navbar() {
-    const language = useSelector((state) => state.language.lang);
+
+  // let user = localStorage.getItem('email')
+  // let userName = user.split("@")[0];
+  // userName = userName[0].toUpperCase() + userName.slice(1);
+
+
+//=======================Handle language=====================
+
+  const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
 
   const toggleLanguage = () => {
@@ -26,14 +33,12 @@ export default function Navbar() {
 
     const [logModalIsOpen, setLogModalIsOpen] = useState(false);
 
-//=========================Buttons state========================
-
-    // const [ btnExist, setBtnExist] = useState(true);
-
-//=======================LogIn===============================
+//=======================LogIn & validation===============================
 
   const initialState = { email: '', password: '' };
   const [logInput, setLogInput] = useState(initialState);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
  
     const handleChange = ({target}) =>{
         setLogInput({
@@ -44,20 +49,50 @@ export default function Navbar() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setFormErrors(validate(logInput));
+        setIsSubmit(true);
         try {
           await signInWithEmailAndPassword(auth ,logInput.email, logInput.password);
+          // localStorage.setItem("email", logInput.email);
+
           setLogInput(initialState);
           setLogModalIsOpen(false);
+
         } catch (error) {
           console.log(error);
         }
       };
+      useEffect(() => {
+        console.log(formErrors);
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
+          console.log(logInput);
+        }
+      }, [formErrors]);
+      const validate = (values) => {
+        const errors = {};
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        if (!values.email) {
+          errors.email = "Email is required!";
+        } else if (!regex.test(values.email)) {
+          errors.email = "This is not a valid email format!";
+        }
+        if (!values.password) {
+          errors.password = "Password is required";
+        } else if (values.password.length < 4) {
+          errors.password = "Password must be more than 4 characters";
+        } else if (values.password.length > 10) {
+          errors.password = "Password cannot exceed more than 10 characters";
+        }
+        return errors;
+      };
 
       
-//=======================SignUp===============================
+//=======================SignUp & validation===============================
 
-        const initialSignState = { email: '', password: '', name: '' };
-        const [signInput, setSignInput] = useState('');
+        const initialSignState = { email: '', password: '', name: ''};
+        const [signInput, setSignInput] = useState(initialSignState);
+        const [signFormErrors, setSignFormErrors] = useState({});
+        const [isSignSubmit, setIsSignSubmit] = useState(false);
 
         const handleSignChange = ({ target }) => {
         setSignInput({
@@ -68,14 +103,53 @@ export default function Navbar() {
 
         const handleSignSubmit = async (e) => {
         e.preventDefault();
+        setSignFormErrors(signValidate(signInput));
+        setIsSignSubmit(true);
         try {
-            await createUserWithEmailAndPassword(auth ,signInput.email, signInput.password, signInput.name);
+            await createUserWithEmailAndPassword(auth , signInput.email, signInput.password, signInput.name);
+            // localStorage.setItem("email", signInput.email);
+
             setSignInput(initialSignState);
             setModalIsOpen(false);
         } catch (error) {
             console.log(error.message);
         }
         };
+
+        useEffect(() => {
+          console.log(signFormErrors);
+          if (Object.keys(signFormErrors).length === 0 && isSignSubmit) {
+            console.log(signInput);
+          }
+        }, [signFormErrors]);
+        const signValidate = (signValues) => {
+          const signErrors = {};
+          const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+          if (!signValues.email) {
+            signErrors.email = "Email is required!";
+          } else if (!regex.test(signValues.email)) {
+            signErrors.email = "This is not a valid email format!";
+          }
+          if (!signValues.password) {
+            signErrors.password = "Password is required";
+          } else if (signValues.password.length < 4) {
+            signErrors.password = "Password must be more than 4 characters";
+          } else if (signValues.password.length > 10) {
+            signErrors.password = "Password cannot exceed more than 10 characters";
+          }
+          if (!signValues.name) {
+            signErrors.name = "Username is required!";
+          }
+          return signErrors;
+        };
+
+        // const signout = () =>{
+        //   signOut(auth);
+        //   localStorage.removeItem("email");
+        //   // localStorage.removeItem("password");
+        //   // localStorage.removeItem("name");
+        //   console.log('user logged out');
+        // }
    
 
     return (
@@ -123,8 +197,8 @@ export default function Navbar() {
                 </div>
             
                 <div className="services py-3" style={{ display: "flex", marginLeft: "auto" }}>
-{/* ==================================================================================================================== */}
-                    <div style={{ display: "none", marginLeft: "auto"}} id="auth" >
+{/* ======================================================userIcon============================================================== */}
+                    <div style={{ marginLeft: "auto", display: "none"}} id="auth">
                     <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} >
                         <a
                         className="nav-link py-4 px-2 ms-5"
@@ -163,6 +237,7 @@ export default function Navbar() {
                             id="drop"
                             >
                             <li className="no-hover">
+                            <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
                                 <a
                                 className="dropdown-item p-5"
                                 id="Account_inf"
@@ -172,15 +247,15 @@ export default function Navbar() {
                             <li><a className="dropdown-item" href="#">Account Setting</a></li>
                             <li><hr className="dropdown-divider" /></li>
                             <li>
-                                <button className="dropdown-item" onClick={()=>signOut(auth)}>Log out</button>
+                                <button className="dropdown-item">Log out</button>
                             </li>
                             </ul>
                         </div>
                         </a>
                     </div>
                     </div>
-{/* ==================================================================================================================== */}
-                    <div style={{ marginLeft: "auto" }} id="sign_auth">
+{/* ===============================================================Buttons===================================================== */}
+                    <div style={{ marginLeft: "auto"}} id="sign_auth">
                     <a href="#" style={{ textDecoration: "none" }}>
                     <button type="button" className="btn login-btn btn-log" data-bs-toggle="modal" data-bs-target="#LogInModal"
                     onClick={() => { setLogModalIsOpen(true); setModalIsOpen(false) }}>
@@ -301,8 +376,8 @@ export default function Navbar() {
                     <a className="nav-link py-4 px-2" href="./Offers.html">OFFERS</a>
                     </div>
                     <div className="services py-3" style={{width: "52%", display: "flex", marginLeft: "auto"}}>
-{/* ==================================================================================================================== */}
-                    <div style={{ marginLeft: "auto" }}>
+{/* ==========================================================Buttons========================================================== */}
+                    <div style={{ marginLeft: "auto"}}>
                         <a href="#" style={{ textDecoration: "none" }}>
                         <button className="btn" style={{ fontSize: "12px", fontWeight: "700", backgroundColor: "white"}}
                         onClick={() => { setLogModalIsOpen(true); setModalIsOpen(false)}}>
@@ -367,15 +442,18 @@ export default function Navbar() {
         <img id="signLogo" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397754952/e518a9efa57162be0afd9826667d697e.jpg" />
         <div id="log">
         <div className="inpt mt-3">
-            <input type='text' placeholder="Name" className="form-control" name='name' autoComplete="off" value={signInput.name} onChange={handleSignChange}/>
+            <input type='text' placeholder="Name" className="form-control" name='name' value={signInput.name} onChange={handleSignChange}/>
+            <p style={{color: "red", fontSize: "12px"}}>{signFormErrors.name}</p>
             </div>
         
             <div className="inpt mt-3">
-            <input type='text' placeholder="Email" className="form-control" name='email' autoComplete="off" value={signInput.email} onChange={handleSignChange}/>
+            <input type='text' placeholder="Email" className="form-control" name='email' value={signInput.email} onChange={handleSignChange}/>
+            <p style={{color: "red", fontSize: "12px"}}>{signFormErrors.email}</p> 
             </div>
 
             <div className="inpt mt-3">
-            <input type='password' placeholder="Password" className="form-control" name='password' autoComplete="off" value={signInput.password} onChange={handleSignChange}/>
+            <input type='password' placeholder="Password" className="form-control" name='password' value={signInput.password} onChange={handleSignChange}/>
+            <p style={{color: "red", fontSize: "12px"}}>{signFormErrors.password}</p>
             </div>
 
             <div className="submitBtn mt-3">
@@ -404,30 +482,33 @@ export default function Navbar() {
 
     <ReactModal isOpen={logModalIsOpen} onRequestClose={() => { setLogModalIsOpen(false) }}>
     <div className="bgForm">
+        
       <button type="button" className="btn-close" onClick={() => { setLogModalIsOpen(false) }}></button>
 
       <div className="form-container">
         <img id="logLogo" src="images/logowithbg.png" />
         <form id="log" onSubmit={handleSubmit}>
           <div className="inpt mt-3">
-            <input type='text' placeholder="email" className="form-control" name="email" onChange={handleChange} value={logInput.email} autoComplete="off"/>
+            <input type='text' placeholder="email" className="form-control" name="email" onChange={handleChange} value={logInput.email}/>
+            <p style={{color: "red", fontSize: "12px"}}>{formErrors.email}</p>
           </div>
 
           <div className="inpt mt-3">
-            <input type='password' placeholder="password" className="form-control" name='password' onChange={handleChange} value={logInput.password} autoComplete="off"/>
+            <input type='password' placeholder="password" className="form-control" name='password' onChange={handleChange} value={logInput.password}/>
+           <p style={{color: "red", fontSize: "12px"}}>{formErrors.password}</p>
+          </div>  
+
+          <div className="button mt-3">
+            <button className="btn goglBtn">Log in with Google</button>
           </div>
-        
+
           <div className="button mt-3">
             <button type="submit" className="btn btn-danger">Log in</button>
           </div>
 
-          <div className="button mt-3">
-            <button type="submit" className="btn goglBtn">Log in with Facebook</button>
-          </div>
-
-          <div className="button mt-3">
-            <button type="submit" className="btn btn-primary">Log in with Google</button>
-          </div>
+          {/* <div className="button mt-3">
+            <button className="btn btn-primary" style={{fontSize: "18px", fontWeight: "400"}}></button>
+          </div> */}
 
         </form>
         <div className="frgtPass">

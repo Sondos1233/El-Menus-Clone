@@ -18,6 +18,13 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthState
 
 
 export default function Header() {
+
+  // let user = localStorage.getItem('email')
+  // let userName = user.split("@")[0];
+  // userName = userName[0].toUpperCase() + userName.slice(1);
+
+//=======================Handle language=====================
+
   const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
 
@@ -31,10 +38,12 @@ export default function Header() {
 
   const [logModalIsOpen, setLogModalIsOpen] = useState(false);
 
-  //=======================LogIn===============================
+  //=======================LogIn & validation===============================
 
   const initialState = { email: '', password: '' };
   const [logInput, setLogInput] = useState(initialState);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
  
     const handleChange = ({target}) =>{
         setLogInput({
@@ -45,8 +54,12 @@ export default function Header() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setFormErrors(validate(logInput));
+        setIsSubmit(true);
         try {
           await signInWithEmailAndPassword(auth ,logInput.email, logInput.password);
+          // localStorage.setItem("email", logInput.email);
+
           setLogInput(initialState);
           setLogModalIsOpen(false);
         } catch (error) {
@@ -54,10 +67,36 @@ export default function Header() {
         }
       };
 
-  //=======================SignUp===============================
+      useEffect(() => {
+        console.log(formErrors);
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
+          console.log(logInput);
+        }
+      }, [formErrors]);
+      const validate = (values) => {
+        const errors = {};
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        if (!values.email) {
+          errors.email = "Email is required!";
+        } else if (!regex.test(values.email)) {
+          errors.email = "This is not a valid email format!";
+        }
+        if (!values.password) {
+          errors.password = "Password is required";
+        } else if (values.password.length < 4) {
+          errors.password = "Password must be more than 4 characters";
+        } else if (values.password.length > 10) {
+          errors.password = "Password cannot exceed more than 10 characters";
+        }
+        return errors;
+      };
+
+  //=======================SignUp & validation===============================
 
       const initialSignState = { email: '', password: '', name: '' };
-      const [signInput, setSignInput] = useState('');
+      const [signInput, setSignInput] = useState(initialSignState);
+      const [signFormErrors, setSignFormErrors] = useState({});
+      const [isSignSubmit, setIsSignSubmit] = useState(false);
 
       const handleSignChange = ({ target }) => {
         setSignInput({
@@ -68,13 +107,43 @@ export default function Header() {
 
       const handleSignSubmit = async (e) => {
         e.preventDefault();
+        setSignFormErrors(signValidate(signInput));
+        setIsSignSubmit(true);
         try {
           await createUserWithEmailAndPassword(auth ,signInput.email, signInput.password, signInput.name);
+          // localStorage.setItem("email", signInput.email);
+
           setSignInput(initialSignState);
           setModalIsOpen(false);
         } catch (error) {
           console.log(error.message);
         }
+      };
+      useEffect(() => {
+        console.log(signFormErrors);
+        if (Object.keys(signFormErrors).length === 0 && isSignSubmit) {
+          console.log(signInput);
+        }
+      }, [signFormErrors]);
+      const signValidate = (signValues) => {
+        const signErrors = {};
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        if (!signValues.email) {
+          signErrors.email = "Email is required!";
+        } else if (!regex.test(signValues.email)) {
+          signErrors.email = "This is not a valid email format!";
+        }
+        if (!signValues.password) {
+          signErrors.password = "Password is required";
+        } else if (signValues.password.length < 4) {
+          signErrors.password = "Password must be more than 4 characters";
+        } else if (signValues.password.length > 10) {
+          signErrors.password = "Password cannot exceed more than 10 characters";
+        }
+        if (!signValues.name) {
+          signErrors.name = "Username is required!";
+        }
+        return signErrors;
       };
 
   return (
@@ -207,14 +276,17 @@ export default function Header() {
         <div id="log">
         <div className="inpt mt-3">
             <input type='text' placeholder="Name" className="form-control" name='name' autoComplete="off" value={signInput.name} onChange={handleSignChange}/>
+            <p style={{color: "red", fontSize: "12px"}}>{signFormErrors.name}</p>
             </div>
         
             <div className="inpt mt-3">
             <input type='text' placeholder="Email" className="form-control" name='email' autoComplete="off" value={signInput.email} onChange={handleSignChange}/>
+            <p style={{color: "red", fontSize: "12px"}}>{signFormErrors.email}</p>   
             </div>
 
             <div className="inpt mt-3">
             <input type='password' placeholder="Password" className="form-control" name='password' autoComplete="off" value={signInput.password} onChange={handleSignChange}/>
+            <p style={{color: "red", fontSize: "12px"}}>{signFormErrors.password}</p>
             </div>
 
             <div className="submitBtn mt-3">
@@ -247,10 +319,12 @@ export default function Header() {
         <form id="log" onSubmit={handleSubmit}>
           <div className="inpt mt-3">
             <input type='text' placeholder="email" className="form-control" name="email" onChange={handleChange} value={logInput.email} autoComplete="off" />
+            <p style={{color: "red", fontSize: "12px"}}>{formErrors.email}</p>
           </div>
 
           <div className="inpt mt-3">
             <input type='password' placeholder="password" className="form-control" name='password' onChange={handleChange} value={logInput.password} autoComplete="off" />
+            <p style={{color: "red", fontSize: "12px"}}>{formErrors.password}</p>
           </div>
         
           <div className="button mt-3">
@@ -258,11 +332,11 @@ export default function Header() {
           </div>
 
           <div className="button mt-3">
-            <button type="submit" className="btn goglBtn">Log in with Facebook</button>
+            <button className="btn goglBtn">Log in with Google</button>
           </div>
 
           <div className="button mt-3">
-            <button type="submit" className="btn btn-primary">Log in with Google</button>
+            <button className="btn btn-primary" style={{fontSize: "17px", fontWeight: "400"}}>Log in with Google</button>
           </div>
 
         </form>
