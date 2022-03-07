@@ -1,32 +1,66 @@
+import "../../main-style.css";
+import  "../style/home.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import "../style/home.css";
-import "../../main-style.css";
+import { Link } from "react-router-dom";
 import elmenusLogo from "../../../images/Home/elmenusLogo.svg";
 import search from "../../../images/Home/search.jpeg";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStore, faArrowRight, faMotorcycle, faUtensils } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faStore,
+  faArrowRight,
+  faMotorcycle,
+  faUtensils,
+} from "@fortawesome/free-solid-svg-icons";
 import Card from "./card";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from "../../../store/action/languageAction";
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import ReactModal from 'react-modal';
-import { auth } from '../../firebase/firebase.config';
-// import { firestore } from '../../firebase/firebase.config';
-// import {addDoc, collection} from 'firebase/firestore'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
-
+import ReactModal from "react-modal";
+import { auth } from "../../firebase/firebase.config";
+import { firestore } from "../../firebase/firebase.config";
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
+import { useContext } from "react";
+import { cityContext } from "../../Context/City";
 
 export default function Header() {
-  const language = useSelector((state) => state.language.lang);
+  const listOfCities = collection(firestore, "Cities");
+  const listOfRes = collection(firestore,"Rest")
+  const [CityList, setCityList] = useState([]);
+  const [ResList, setResList] = useState([]);
+const {City,setCity}=useContext(cityContext)  
+const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
 
   const toggleLanguage = () => {
     dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
 
   };
-
+  const handleChangeCity = (e) => {
+    e.preventDefault();
+    localStorage.setItem('Name', City);
+    setCity(e.target.value);
+  
+  };
+  console.log(City)
+  useEffect(() => {
+    const getCity = async () => {
+      const data = await getDocs(listOfCities);
+      setCityList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    const getRes = async()=>{
+      const data = await getDocs(listOfRes);
+      setResList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+    getCity();
+    getRes();
+  }, []);
   //=========================Modals state========================
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -34,7 +68,7 @@ export default function Header() {
 
   //=======================LogIn===============================
 
-  const initialState = { email: '', password: '' };
+  const initialState = { email: "", password: "" };
   const [logInput, setLogInput] = useState(initialState);
 
   const handleChange = ({ target }) => {
@@ -144,14 +178,24 @@ export default function Header() {
               <h1 className="home_main_title">
                 Discover & Order the food you love.
               </h1>
-              <form className="row">
+              <div className="row">
                 <div className="col-xl col-xs"></div>
                 <div className="col-xl-7 col-xs-12">
                   <div className="input-holder">
                     <span className="icon">
                       <FontAwesomeIcon icon={faStore} />
                     </span>
-                    <input type="text" placeholder="Find a Restaurant" />
+                    <input type="Search" placeholder="Find a Restaurant" list="Restaurant" />
+                    <datalist id="Restaurant"  >
+                      {/* {ResList.map((data) => {
+                        console.log(data);
+                        return <option value={data.id}>{data.ResName}</option>;
+                      })} */}
+                      <option value="Mac"></option> 
+                      <option value="7amza"> </option>
+                      <option value="zaks"> </option>
+                      <option value="KFC"> </option>
+                    </datalist>
                     <span className="search-icon">
                       <img src={search} />
                     </span>
@@ -159,32 +203,61 @@ export default function Header() {
                 </div>
                 <div className="col-xl-2 col-xs-5">
                   <div className="input-holder2">
+                    
                     <input
-                      type="text"
+                      className="floating-label-field floating-label-field--s3"
+                      type="Search"
                       name="city"
                       list="cityname"
-                      value="Cairo"
+                      value={City}
+                      autoComplete="off"
+                      onChange={(e) => {
+                        handleChangeCity(e);
+                      }}
                     />
+                      {/* <span>value={localStorage.getItem('Name')}</span> */}
+
                     <datalist id="cityname">
-                      <option value="Boston"></option>
-                      <option value="Cambridge"></option>
+                      {CityList.map((data) => {
+                        console.log(data);
+                        return <option value={data.Name}></option>;
+                      })}
+                      {/* <option value="">sondos</option> */}
+                      
                     </datalist>
                   </div>
                 </div>
-                <div class="col-xl-2 col-xs-5">
+                <div className="col-xl-2 col-xs-5 position-relative py-1" >
                   <a href="">
-                    <button type="submit" className="submit-btn btn btn-primary">
-                      Go
-                      <span className="icon"><FontAwesomeIcon icon={faArrowRight} /> </span>
-                    </button></a>
+                    <button
+                      
+                      className="btn-primary btn py-3 "
+                    >
+                      Go <FontAwesomeIcon icon={faArrowRight} />{" "}
+                      
+                    </button>
+                  </a>
                 </div>
-              </form>
+              </div>
             </div>
             <div className="section_footer ">
-              <h6 className="section_footer_title text-center mb-4"> Or explore elmenus</h6>
+              <h6 className="section_footer_title text-center mb-4">
+                {" "}
+                Or explore elmenus
+              </h6>
               <div class=" row section_footer_links mx-1 py-3">
-                <Card link="/Delivery" name="Delivery" iconName={faMotorcycle} iconName2={faArrowRight} para="Get food delivered from amazing restaurants around you " />
-                <Card link="/Dinout" name="Dine Out" iconName={faUtensils} iconName2={faArrowRight} para="Browse restaurants by mood, cuisine, area or dish names " />
+                <Card
+                  name="Delivery"
+                  iconName={faMotorcycle}
+                  iconName2={faArrowRight}
+                  para="Get food delivered from amazing restaurants around you "
+                />
+                <Card
+                  name="Dine Out"
+                  iconName={faUtensils}
+                  iconName2={faArrowRight}
+                  para="Browse restaurants by mood, cuisine, area or dish names "
+                />
               </div>
             </div>
           </div>
@@ -193,7 +266,7 @@ export default function Header() {
         {/* <!--footer section--> */}
       </div>
 
-      ************************************ٍSignUp Modal*******************************
+      {/* ************************************ٍSignUp Modal******************************* */}
       <div className="container-fluid modalContainer">
         {/* This Button instead of signUp button till integration with navbar */}
         {/* <button className="btn btn-danger" onClick={() => { setModalIsOpen(true) }}>Open Modal</button> */}
@@ -243,33 +316,60 @@ export default function Header() {
     <div className="bgForm">
       <button type="button" className="btn-close" onClick={() => { setLogModalIsOpen(false) }}></button>
 
-      <div className="form-container">
-        <img id="logLogo" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397754952/e518a9efa57162be0afd9826667d697e.jpg" />
-        <form id="log" onSubmit={handleSubmit}>
-          <div className="inpt mt-3">
-            <input type='text' placeholder="email" className="form-control" name="email" onChange={handleChange} value={logInput.email} autoComplete="off" />
-          </div>
+            <div className="form-container">
+              <img
+                id="logLogo"
+                src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397754952/e518a9efa57162be0afd9826667d697e.jpg"
+              />
+              <form id="log" onSubmit={handleSubmit}>
+                <div className="inpt mt-3">
+                  <input
+                    type="text"
+                    placeholder="email"
+                    className="form-control"
+                    name="email"
+                    onChange={handleChange}
+                    value={logInput.email}
+                    autoComplete="off"
+                  />
+                </div>
 
-          <div className="inpt mt-3">
-            <input type='password' placeholder="password" className="form-control" name='password' onChange={handleChange} value={logInput.password} autoComplete="off" />
-          </div>
-        
-          <div className="button mt-3">
-            <button type="submit" className="btn btn-danger">Log in</button>
-          </div>
+                <div className="inpt mt-3">
+                  <input
+                    type="password"
+                    placeholder="password"
+                    className="form-control"
+                    name="password"
+                    onChange={handleChange}
+                    value={logInput.password}
+                    autoComplete="off"
+                  />
+                </div>
 
-          <div className="button mt-3">
-            <button type="submit" className="btn goglBtn">Log in with Facebook</button>
-          </div>
+                <div className="button mt-3">
+                  <button type="submit" className="btn btn-danger">
+                    Log in
+                  </button>
+                </div>
 
-          <div className="button mt-3">
-            <button type="submit" className="btn btn-primary">Log in with Google</button>
-          </div>
+                <div className="button mt-3">
+                  <button type="submit" className="btn goglBtn">
+                    Log in with Facebook
+                  </button>
+                </div>
 
-        </form>
-        <div className="frgtPass">
-          <a>I forget my password</a>
-        </div>
+                <div className="button mt-3">
+                  <button type="submit" className="btn btn-primary">
+                    Log in with Google
+                  </button>
+                </div>
+              </form>
+              <div className="frgtPass">
+                <a>I forget my password</a>
+              </div>
+            </div>
+          </div>
+        </ReactModal>
       </div>
       </div>
     </ReactModal>
