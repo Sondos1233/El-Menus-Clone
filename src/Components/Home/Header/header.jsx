@@ -235,15 +235,15 @@ const language = useSelector((state) => state.language.lang);
                   </div>
                 </div>
                 <div className="col-xl-2 col-xs-5 position-relative py-1" >
-                  <a href="">
+                  <Link to="/Delivery">
                     <button
                       
                       className="btn-primary btn py-3 "
                     >
-                      Go <FontAwesomeIcon icon={faArrowRight} />{" "}
+                      Go <FontAwesomeIcon icon={faArrowRight} />
                       
                     </button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
