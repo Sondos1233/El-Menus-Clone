@@ -14,6 +14,16 @@ import SandwichesImg from './../../images/Dineout/Sandwiches.jpg'
 import { db } from './../../Firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
 
+//Shrouk Slider JS CODE
+function updateSlidePosition(e, direction) {
+    const firstSlideWidth = e.querySelector(".slider__slide").offsetWidth;
+
+    if (direction === "prev") {
+        e.scrollLeft = e.scrollLeft - firstSlideWidth;
+    } else {
+        e.scrollLeft = e.scrollLeft + firstSlideWidth;
+    }
+}
 
 export default function Dineout() {
     // //Restaurants Collection
@@ -242,7 +252,7 @@ export default function Dineout() {
                                                     return (
                                                         <div class="item-1 px-2 p-2">
                                                         <div class="box-newResturants" style={{ height: "35vh" }}>
-                                                            <div class="slide-img">
+                                                            <div class="slide-img" style={{width: "100%", boxShadow: "none"}}>
                                                                 <img
                                                                     src={Type.urlImage} style={{ height: "19vh" }}
                                                                     alt="" />
@@ -416,7 +426,7 @@ export default function Dineout() {
 
                                                         <div class="item-1 px-2 p-2">
                                                             <div class="box-newResturants" style={{ height: "35vh" }}>
-                                                                <div class="slide-img">
+                                                                <div class="slide-img" style={{width: "100%", boxShadow: "none"}}>
                                                                     <img
                                                                         src={Res.ImageLogo} style={{ height: "19vh" }}
                                                                         alt="" />

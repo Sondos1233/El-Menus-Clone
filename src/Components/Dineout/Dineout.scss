@@ -1,0 +1,123 @@
+/* Shrouk Slider*/
+
+// $breakpoint: 980px;
+
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+
+.slider {
+    width: 100%;
+    // max-width: 900px;
+    margin: 24px auto;
+    overflow: hidden;
+
+    // &.slider--last .slider__arrow-next,
+    // &.slider--first .slider__arrow-prev {
+    //     display: none;
+    // }
+}
+
+.slider__wrapper {
+    position: relative;
+}
+
+.slider__inner {
+    display: flex;
+    overflow-x: scroll;
+    // flex-flow: row nowrap;
+    flex-direction: row;
+    margin-bottom: 24px;
+    gap: 24px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+        height: 12px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 24px;
+        background-color: lightgrey;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+}
+
+.slider__slide {
+    // flex: 1 0 80%;
+    width: 100%;
+    height: auto;
+    // box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    scroll-snap-align: center;
+
+    // @media (min-width: $breakpoint) {
+    //     flex-basis: 26%;
+    //     max-width: 26%;
+    // }
+}
+
+.slide__content {
+    
+    position: relative;
+    overflow: hidden;
+
+    &:before {
+        content: "";
+        display: block;
+        padding-top: 56%;
+    }
+}
+
+.slider__image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider__dots {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 12px;
+
+    // @media (min-width: $breakpoint) {
+    //     display: none;
+    // }
+}
+
+.slider__arrow {
+    background-color: #ef2a00 ;
+    color: #fff;
+    outline: none;
+    border-radius: 50%;
+    border: 1px solid #ef2a00;
+    font-size: 22px;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    display: block;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.slider__arrow-prev {
+    left: 0;
+}
+
+.slider__arrow-next {
+    right: 0;
+}
