@@ -239,7 +239,7 @@ const language = useSelector((state) => state.language.lang);
                   </div>
                 </div>
                 <div className="col-xl-2 col-xs-5 position-relative py-1" >
-                  <Link to="/Delivery">
+                  <Link to="/Dineout">
                     <button
                       
                       className="btn-primary btn py-3 "
