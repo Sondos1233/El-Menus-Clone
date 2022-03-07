@@ -21,6 +21,9 @@ import { ResProvider } from "./Components/Context/Resturant";
 function App() {
   const [City, setCity] = useState("Cairo");
   const [Res, setRes] = useState("");
+
+
+  
   console.log(City);
   return (
     <>
@@ -55,5 +58,9 @@ function App() {
     </>
   );
 }
+
+
+
+
 
 export default App;
