@@ -42,21 +42,31 @@ export default function ModelLocation() {
     // const CitiesCollection = collection(db, "Cities")
 
 
-    // useEffect(() => {
-    //     // Restaurant Collection
-    //     const getCites = async () => {
-    //         const Resdata = await getDocs(CitiesCollection)
-    //         // console.log(Resdata)
-    //         setCities(Resdata.docs.map((doc) => ({ ...doc.data() })))
-    //     }
-    //     getCites()
+    useEffect(() => {
+        // Restaurant Collection
+        // const getCites = async () => {
+        //     const Resdata = await getDocs(CitiesCollection)
+        //     // console.log(Resdata)
+        //     setCities(Resdata.docs.map((doc) => ({ ...doc.data() })))
+        // }
+        // getCites()
 
-    // }, [])
+        if(localStorage.getItem("Name")){
+            setShowArea(true);
+            setCity(localStorage.getItem("Name"))
+        }
+        else{
+            // console.log("no")
+        }
+
+    }, [])
 
     const getAreas = (e) => {
         console.log(e.target.text)
         setShowArea(true)
-        setCity(e.target.text)
+        // setCity(e.target.text)
+        localStorage.setItem('Name', e.target.text)
+        setCity(localStorage.getItem("Name"))
         // setAreas([])
         // const QueryCityName = query(
         //     collection(db, "Cities"),
@@ -86,12 +96,12 @@ export default function ModelLocation() {
             </button>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" style={{ "borderRadius": "20" }}>
-                    <div class="modal-content">
+                <div class="modal-dialog modal-dialog-centered" style={{ borderRadius: "10px"}}>
+                    <div class="modal-content " style={{ "borderRadius": "20" }}>
                         <button type="button" class="btn-close m-4" data-bs-dismiss="modal" aria-label="Close"></button>
                         {
                             showArea ? (
-                                <div className="bg-light">
+                                <div className="bg-light" style={{ borderRadius: "10px" }}>
                                     <span className="iconstyle" onClick={() => {
                                         setShowArea(false);
                                         setShowText(false)
@@ -101,7 +111,7 @@ export default function ModelLocation() {
                                 <></>
                             )
                         }
-                        <div className="text-center bg-light p-5">
+                        <div className="text-center bg-light p-5" style={{ borderRadius: "5px" }}>
                             <img src="https://www.elmenus.com/public/img/svg-icons/dineout-marker.svg" width={100} height={100} alt="" />
                             {
                                 showArea ? (
@@ -115,14 +125,29 @@ export default function ModelLocation() {
                                 list="Cities"
                                 onChange={(e) => {
                                     setShowArea(true)
-                                    setCity(e.target.value)
+                                    if(showArea){
+                                
+                                       setAreaName(e.target.value)
+                                       setShowText(true)
+                                    }
+                                    else{
+                                        setCity(e.target.value)
+                                        localStorage.setItem('Name', e.target.value)
+                                    }
                                 }}
                             />
                             <datalist id="Cities">
                                 {
-                                    cities.map((city) => {
-                                        return <option value={city.Name}>{city.Name}</option>
-                                    })
+                                    showArea ? (
+                                        areas.map((area) => {
+                                            return <option value={area}>{area}</option>
+                                        })
+                                    ) : (
+                                        cities.map((city) => {
+                                            return <option value={city.Name}>{city.Name}</option>
+                                        })
+                                       
+                                    )
                                 }
 
                             </datalist>
