@@ -39,7 +39,7 @@ function App() {
          <Fragment>
          <Navbar/>
         <Route path ="/Delivery" exact component={Delivery} /> 
-        <Route path="/DinOut" exact component={Dineout}/>
+        <Route path="/Dineout" exact component={Dineout}/>
         <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
         <Route path="/Offers" exact component={OfferParent}/>
         {/* <Route  path="/userProfile" exact component={Userprofile} />        

@@ -68,15 +68,6 @@ export default function Dineout() {
         { urlImage: SandwichesImg, title: "Sandwiches" },
     ])
 
-    const [dineOutbyNewRes, setDineOutbyNewRes] = useState([
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "pizza" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Burgers" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Chiness" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Koshary" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "FriedChecken" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Sandwiches" },
-    ])
-
 
     //Functions
     const [clicked, setClicked] = useState(false);
