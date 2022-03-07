@@ -198,7 +198,8 @@ const language = useSelector((state) => state.language.lang);
                         console.log(data);
                         return <option value={data.id}>{data.ResName}</option>;
                       })} */}
-                      <option value="Mac"></option> 
+                      <Link to="/Delivery">  <option value="Mac"></option> </Link>
+                    
                       <option value="7amza"> </option>
                       <option value="zaks"> </option>
                       <option value="KFC"> </option>
