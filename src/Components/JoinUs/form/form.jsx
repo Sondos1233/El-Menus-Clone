@@ -2,7 +2,9 @@ import logo from '../../../images/JoinUs/logowithbg.png'
 import { useState } from 'react';
 import db from '../firebase';
 import { collection, getDocs,docs, doc,addDoc } from "firebase/firestore";
+import { CAlert } from '@coreui/bootstrap-react'
 export default function AddResForm() {
+  const [visible, setVisible] = useState(false)
   const  Ownerscollection= collection(db,"Owner")
   const pattern = new RegExp(/^(01)(0|1|2|5)[0-9]{8}$/);
   const [user, setUser] = useState({
@@ -12,37 +14,57 @@ export default function AddResForm() {
   });
   // console.log(user.ResName)
   
-    const createOwner= async ()=>{
+    const createOwner= async (e)=>{
+      e.preventDefault();
+      // db.collection('Owner').add("aa");
       await addDoc(Ownerscollection,{
-        NameRes:user.ResName,
-        Owner:user.OwnName,
-        phone:user.Phone
+        ResName:user.ResName,
+        OwnerName:user.OwnName,
+        Phone:user.Phone,
+        isActivated:false
       })
       alert("Sucess");
+      setVisible(true)
     
     }
   
   
   const [errors, setErrors] = useState({
-    NameErrors:null,
-    NameErrors: null,
+    NameResErrors:null,
+    NameOwnerErrors: null,
     PhoneErrors: null,
   
   });
   const handleChange = (e) => {
+    const patterenResName= new RegExp("^[A-Za-z0-9]{3,}$");
+    const patterenOwnerName= new RegExp("^[A-Za-z]{3,}(( )[A-Za-z]{3,})*( )[A-Za-z]{3,}$")
     setUser({
       ...user,
       [e.target.name]: e.target.value,
     })
-    if (e.target.name == "ResName" || e.target.name == "OwnName") {
+    if (e.target.name == "ResName") {
       setErrors({
         ...errors,
-        NameErrors:
+        NameResErrors:
           e.target.value.length == 0
             ? "this field is required"
+            : !patterenResName.test( e.target.value)
+            ? "Restaurant Name must be at least 3 Characters!"
             : null
       });
-    } else if (e.target.name == "Phone") {
+    } else if(e.target.name=="OwnName"){
+      setErrors({
+        ...errors,
+        NameOwnerErrors:
+          e.target.value.length == 0
+            ? "this field is required"
+            : !patterenOwnerName.test( e.target.value)
+            ? "Restaurant Name must be at least 2 words and only Characters!"
+            : null
+      });
+
+    }
+    else if (e.target.name == "Phone") {
       setErrors({
         ...errors,
        PhoneErrors:
@@ -53,11 +75,14 @@ export default function AddResForm() {
             : null
       });
     }
+   
   }
   
   
   return (
     <>
+ 
+   
      <form className="card p-3 position-absolute">
           {/* <!--header of Form--> */}
           <header className="text-center mb-3">
@@ -78,7 +103,7 @@ export default function AddResForm() {
                 handleChange(e);
               }}
             />
-            <small className="text-danger">{errors.NameErrors}</small>
+            <small className="text-danger">{errors.NameResErrors}</small>
           </div>
           <div className="pb-3">
             <label for="OwName" className="form-label">Owner Name *</label>
@@ -93,7 +118,7 @@ export default function AddResForm() {
                 handleChange(e);
               }}
             />
-            <small className="text-danger">{errors.NameErrors}</small>
+            <small className="text-danger">{errors.NameOwnerErrors}</small>
           </div>
           <div className="pb-3">
             <label for="phone" className="form-label">Phone Number *</label>
@@ -170,12 +195,21 @@ export default function AddResForm() {
           <div className="pb-3">
             <label for="Textarea" className="form-label">Additional Comment</label>
             <textarea className="form-control" id="Textarea" rows="2"></textarea>
+            
           </div>
           <div className="position-absolute formSubmit">
-            <button onClick={createOwner}  className="btn btn-primary mb-3" id="myBtn">
+
+            <button 
+            disabled={!user.ResName||!user.OwnName||!user.Phone}
+            onClick={(e) => {
+                createOwner(e);
+              }}className="btn btn-primary mb-3" id="myBtn">
               Subscribe!
             </button>
+
           </div>
+          <CAlert color="success" dismissible visible={visible} onClose={() => setVisible(false)} >Add Sucess! we will contact with you </CAlert>
+
         </form>
       
     </>
