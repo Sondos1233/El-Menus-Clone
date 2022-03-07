@@ -36,6 +36,8 @@ export default function Navbar() {
     const initialState = { email: '', password: '' };
     const [logInput, setLogInput] = useState(initialState);
 
+
+
     const handleChange = ({ target }) => {
         setLogInput({
             ...logInput,
@@ -265,7 +267,7 @@ export default function Navbar() {
                                     alt="iconImage"
                                     className="imgIcon mx-2"
                                 />
-                                <h4 className="headerLocation mx-2">Dine-out in <span>Maadi</span></h4>
+                                <h4 className="headerLocation mx-2">Dine-out in <span>{localStorage.getItem('areaName')}</span></h4>
                                 <button className="btn change-btn mx-2" onClick={() => { openModel() }}>CHANGE</button>
                             </div>
                         </div>
@@ -276,10 +278,10 @@ export default function Navbar() {
                 <div className="row navCont" style={{ margin: "0 120px" }}>
                     <div className="col-12 pt-2">
                         <ol className="breadcrumb" >
-                            <li className="breadcrumb-item" ><a href="#" className='color-a'>Home</a></li>
-                            <li className="breadcrumb-item"><a href="#" className='color-a'>cairo</a></li>
-                            <li className="breadcrumb-item"><a href="#" className='color-a'>maadi</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">new maadi</li>
+                            <li className="breadcrumb-item" ><Link to="/Home">Home</Link></li>
+                            <li className="breadcrumb-item"><a href="#" className='color-a'>{localStorage.getItem('Name')}</a></li>
+                            <li className="breadcrumb-item"><a href="#" className='color-a'>{localStorage.getItem('areaName')}</a></li>
+                            <li className="breadcrumb-item active" aria-current="page">{localStorage.getItem('areaName')} Restaurants </li>
                         </ol>
                     </div>
                 </div>
