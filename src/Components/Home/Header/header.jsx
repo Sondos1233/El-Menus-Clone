@@ -35,6 +35,7 @@ export default function Header() {
   const [CityList, setCityList] = useState([]);
   const [ResList, setResList] = useState([]);
 const {City,setCity}=useContext(cityContext)  
+const {Res,setRes}=useContext(cityContext)  
 const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
 
@@ -48,6 +49,9 @@ const language = useSelector((state) => state.language.lang);
     setCity(e.target.value);
   
   };
+  const handleChangeRes =(e) =>{
+     setRes(e.target.value);
+  }
   console.log(City)
   useEffect(() => {
     const getCity = async () => {
@@ -185,7 +189,10 @@ const language = useSelector((state) => state.language.lang);
                     <span className="icon">
                       <FontAwesomeIcon icon={faStore} />
                     </span>
-                    <input type="Search" placeholder="Find a Restaurant" list="Restaurant" />
+                    <input type="Search" placeholder="Find a Restaurant" list="Restaurant" 
+                     onChange={(e) => {
+                      handleChangeRes(e);
+                    }}/>
                     <datalist id="Restaurant"  >
                       {/* {ResList.map((data) => {
                         console.log(data);
