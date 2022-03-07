@@ -99,9 +99,8 @@ export default function Navbar() {
                     >
                         <div
                             className="container-fluid"
-                            style={{ flexDirection: "row",padding: "0 10px", backgroundColor: "white", borderBottom: "1px solid #dfe2e6" }}
+                            style={{ flexDirection: "row", padding: "0 10px", backgroundColor: "white", borderBottom: "1px solid #dfe2e6" }}
                         >
-                            
                             <a
                                 className="navbar-brand p-3"
                                 href="../index.html"
@@ -133,110 +132,112 @@ export default function Navbar() {
                                     <a className=" nav-item nav-link py-4 px-2" >OFFERS</a>
                                 </div>
 
-                                <div className="services py-3" style={{ display: "flex", marginLeft: "auto" }}>
-                                    {/* ==================================================================================================================== */}
-                                    <div style={{ display: "none", marginLeft: "auto" }} id="auth" >
-                                        <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} >
-                                            <a
-                                                className="nav-link py-4 px-2 ms-5"
-                                                href=""
-                                                style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.3vw" }}
-                                            ><i className="far fa-bell pe-2"></i>Notification</a
-                                            >
-                                            <a
-                                                className="nav-link py-4 px-2 ms-5"
-                                                href=""
-                                                style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.3vw" }}
-                                            ><i className="fas fa-receipt pe-2"></i>My order</a
-                                            >
-                                            <a className="nav-link py-4 pt-3 ms-5" href="">
-                                                <div
-                                                    className="text-white"
-                                                    style={{ borderLeft: "1px solid #dfe2e6" }}
+                                <div className="rightNav" style={{ display: "flex", marginLeft: "auto" }}>
+                                    <div className="services" style={{ margin: "10px 20px"}}>
+                                        {/* ==================================================================================================================== */}
+                                        <div style={{ display: "none", marginLeft: "auto" }} id="auth" >
+                                            <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} >
+                                                <a
+                                                    className="nav-link py-4 px-2 ms-5"
+                                                    href=""
+                                                    style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.3vw" }}
+                                                ><i className="far fa-bell pe-2"></i>Notification</a
                                                 >
-                                                    <span id="image" className="me-2"></span>
-                                                    <span id="text" className="text-center"> </span>
+                                                <a
+                                                    className="nav-link py-4 px-2 ms-5"
+                                                    href=""
+                                                    style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.3vw" }}
+                                                ><i className="fas fa-receipt pe-2"></i>My order</a
+                                                >
+                                                <a className="nav-link py-4 pt-3 ms-5" href="">
+                                                    <div
+                                                        className="text-white"
+                                                        style={{ borderLeft: "1px solid #dfe2e6" }}
+                                                    >
+                                                        <span id="image" className="me-2"></span>
+                                                        <span id="text" className="text-center"> </span>
 
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-                                                        id="dropdownMenuReference"
-                                                        data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                        data-bs-reference="parent"
-                                                    >
-                                                        <span className="visually-hidden">Toggle Dropdown</span>
-                                                    </button>
-                                                    <ul
-                                                        className="dropdown-menu dropdown-menu-end"
-                                                        aria-labelledby="dropdownMenuReference"
-                                                        style={{ width: "400px" }}
-                                                        id="drop"
-                                                    >
-                                                        <li className="no-hover">
-                                                            <a
-                                                                className="dropdown-item p-5"
-                                                                id="Account_inf"
-                                                            ></a>
-                                                        </li>
-                                                        <li><hr className="dropdown-divider" /></li>
-                                                        <li><a className="dropdown-item" href="#">Account Setting</a></li>
-                                                        <li><hr className="dropdown-divider" /></li>
-                                                        <li>
-                                                            <button className="dropdown-item" onClick={() => signOut(auth)}>Log out</button>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                                                            id="dropdownMenuReference"
+                                                            data-bs-toggle="dropdown"
+                                                            aria-expanded="false"
+                                                            data-bs-reference="parent"
+                                                        >
+                                                            <span className="visually-hidden">Toggle Dropdown</span>
+                                                        </button>
+                                                        <ul
+                                                            className="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="dropdownMenuReference"
+                                                            style={{ width: "400px" }}
+                                                            id="drop"
+                                                        >
+                                                            <li className="no-hover">
+                                                                <a
+                                                                    className="dropdown-item p-5"
+                                                                    id="Account_inf"
+                                                                ></a>
+                                                            </li>
+                                                            <li><hr className="dropdown-divider" /></li>
+                                                            <li><a className="dropdown-item" href="#">Account Setting</a></li>
+                                                            <li><hr className="dropdown-divider" /></li>
+                                                            <li>
+                                                                <button className="dropdown-item" onClick={() => signOut(auth)}>Log out</button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {/* ==================================================================================================================== */}
+                                        <div style={{ marginLeft: "auto" }} id="sign_auth">
+                                            <a href="#" style={{ textDecoration: "none" }}>
+                                                <button type="button" className="btn login-btn btn-log" data-bs-toggle="modal" data-bs-target="#LogInModal"
+                                                    onClick={() => { setLogModalIsOpen(true); setModalIsOpen(false) }}>
+                                                    LogIn
+                                                </button>
+                                            </a>
+                                            <a href="#" style={{ textDecoration: "none" }}>
+                                                <button type="button" className="btn btn-sign" data-bs-toggle="modal" data-bs-target="#SignModal"
+                                                    onClick={() => { setModalIsOpen(true); setLogModalIsOpen(false) }}>
+                                                    SignUp
+                                                </button>
+                                            </a>
+
+                                        </div>
+                                        {/* ==================================================================================================================== */}
+                                    </div>
+                                    <div
+                                        className="cart-language"
+                                        style={{ width: "auto", display: "flex", marginLeft: "auto", borderLeft: "1px solid #dfe2e6" }}
+                                    >
+                                        <div style={{ marginLeft: "auto" }}>
+                                            <a href="#" style={{ textDecoration: "none" }}>
+                                                <i
+                                                    className="fal fa-shopping-bag"
+                                                    style={{ fontSize: "2vw", color: "gray", padding: "0 30px" }}
+                                                ></i>
+                                            </a>
+                                            <a
+                                                href="#"
+                                                style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw" }}
+                                                onClick={() => {
+                                                    toggleLanguage();
+                                                }}
+                                            >
+                                                {language}
                                             </a>
                                         </div>
                                     </div>
-                                    {/* ==================================================================================================================== */}
-                                    <div style={{ marginLeft: "auto" }} id="sign_auth">
-                                        <a href="#" style={{ textDecoration: "none" }}>
-                                            <button type="button" className="btn login-btn btn-log" data-bs-toggle="modal" data-bs-target="#LogInModal"
-                                                onClick={() => { setLogModalIsOpen(true); setModalIsOpen(false) }}>
-                                                LogIn
-                                            </button>
-                                        </a>
-                                        <a href="#" style={{ textDecoration: "none" }}>
-                                            <button type="button" className="btn btn-sign" data-bs-toggle="modal" data-bs-target="#SignModal"
-                                                onClick={() => { setModalIsOpen(true); setLogModalIsOpen(false) }}>
-                                                SignUp
-                                            </button>
-                                        </a>
+                                </div>
 
-                                    </div>
-                                    {/* ==================================================================================================================== */}
-                                </div>
-                                <div
-                                    className="cart-language py-3"
-                                    style={{ width: "auto", display: "flex", margin: "auto", borderLeft: "1px solid #dfe2e6" }}
-                                >
-                                    <div style={{ marginLeft: "auto" }}>
-                                        <a href="#" style={{ textDecoration: "none" }}>
-                                            <i
-                                                className="fal fa-shopping-bag"
-                                                style={{ fontSize: "2vw", color: "gray", padding: "0 30px" }}
-                                            ></i>
-                                        </a>
-                                        <a
-                                            href="#"
-                                            style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw" }}
-                                            onClick={() => {
-                                                toggleLanguage();
-                                            }}
-                                        >
-                                            {language}
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-
                     </section>
                     <section
                         className="search-bar container-fluid"
-                        style={{ backgroundColor: "white", borderBottom: "1px solid #dfe2e6" }}
+                        style={{ backgroundColor: "white", borderBottom: "1px solid #dfe2e6" , padding: "0"}}
                     // style="background-color: white; border-bottom: 1px solid var(--border-color)"
                     >
                         <div className="row mx-4">
@@ -271,7 +272,7 @@ export default function Navbar() {
                     </section>
                 </nav>
             </nav>
-            <section aria-label="breadcrumb" className="container-fluid d-lg-block d-none" style={{ borderBottom: "1px solid #dfe2eb" }}>
+            <section aria-label="breadcrumb" className="container-fluid d-lg-block d-none" style={{ borderBottom: "1px solid #dfe2eb" , padding: "0"}}>
                 <div className="row navCont" style={{ margin: "0 120px" }}>
                     <div className="col-12 pt-2">
                         <ol className="breadcrumb" >

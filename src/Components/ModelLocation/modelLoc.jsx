@@ -13,23 +13,23 @@ export default function ModelLocation() {
             Area: ["New Cairo", "Naser City", "Maadi"]
         },
         {
-            Name: "Cairo",
+            Name: "Giza",
             Area: ["New Cairo", "Naser City", "Maadi"]
         },
         {
-            Name: "Cairo",
+            Name: "Qena",
             Area: ["New Cairo", "Naser City", "Maadi"]
         },
         {
-            Name: "Cairo",
+            Name: "Port Said",
             Area: ["New Cairo", "Naser City", "Maadi"]
         },
         {
-            Name: "Cairo",
+            Name: "Suhag",
             Area: ["New Cairo", "Naser City", "Maadi"]
         },
         {
-            Name: "Cairo",
+            Name: "Menia",
             Area: ["New Cairo", "Naser City", "Maadi"]
         },
     ]);
@@ -110,15 +110,22 @@ export default function ModelLocation() {
                                     <h3 style={{ fontWeight: "bold" }}>Choose Location</h3>
                                 )
                             }
-                            <input className="form-control" type="text" placeholder="Your Location eg. Degla, Maadi" 
-                            style={{ width: "400px", marginLeft: "20px", boxShadow: "1px 1px 1px 1px grey" }} 
-                            onChange = {(e)=>{
-                                if(areas.includes(e.target.value)){
-                                    console.log(e.target.value)
-                                }
-                            }}
+                            <input className="form-control" type="search" placeholder="Your Location eg. Degla, Maadi"
+                                style={{ width: "400px", marginLeft: "20px", boxShadow: "1px 1px 1px 1px grey" }}
+                                list="Cities"
+                                onChange={(e) => {
+                                    setShowArea(true)
+                                    setCity(e.target.value)
+                                }}
                             />
+                            <datalist id="Cities">
+                                {
+                                    cities.map((city) => {
+                                        return <option value={city.Name}>{city.Name}</option>
+                                    })
+                                }
 
+                            </datalist>
                         </div>
                         <hr />
 
