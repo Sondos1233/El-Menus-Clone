@@ -7,79 +7,60 @@ import { db } from './../../Firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
 
 export default function ModelLocation() {
-    const [cities, setCities] = useState([
-        {
-            Name: "Cairo",
-            Area: ["New Cairo", "Naser City", "Maadi"]
-        },
-        {
-            Name: "Giza",
-            Area: ["New Cairo", "Naser City", "Maadi"]
-        },
-        {
-            Name: "Qena",
-            Area: ["New Cairo", "Naser City", "Maadi"]
-        },
-        {
-            Name: "Port Said",
-            Area: ["New Cairo", "Naser City", "Maadi"]
-        },
-        {
-            Name: "Suhag",
-            Area: ["New Cairo", "Naser City", "Maadi"]
-        },
-        {
-            Name: "Menia",
-            Area: ["New Cairo", "Naser City", "Maadi"]
-        },
-    ]);
-    const [areas, setAreas] = useState(["New Cairo", "Naser City", "Maadi"]);
+    const [cities, setCities] = useState([]);
+    const [QueryByType2, setQueryByType2] = useState([]);
+    const [areas, setAreas] = useState([])
     const [showArea, setShowArea] = useState(false)
     const [showText, setShowText] = useState(false)
     const [areaName, setAreaName] = useState('');
     const [city, setCity] = useState("");
 
-    // const CitiesCollection = collection(db, "Cities")
+    const CitiesCollection = collection(db, "Cities")
 
 
     useEffect(() => {
         // Restaurant Collection
-        // const getCites = async () => {
-        //     const Resdata = await getDocs(CitiesCollection)
-        //     // console.log(Resdata)
-        //     setCities(Resdata.docs.map((doc) => ({ ...doc.data() })))
-        // }
-        // getCites()
+        const getCites = async () => {
+            const Resdata = await getDocs(CitiesCollection)
+            // console.log(Resdata)
+            setCities(Resdata.docs.map((doc) => ({ ...doc.data() })))
+        }
+        getCites()
 
-        if(localStorage.getItem("Name")){
+        if (localStorage.getItem("Name")) {
             setShowArea(true);
             setCity(localStorage.getItem("Name"))
+            getAreas(localStorage.getItem("Name"))
         }
-        else{
+        else {
             // console.log("no")
         }
 
     }, [])
 
-    const getAreas = (e) => {
-        console.log(e.target.text)
+
+    const [QueryByType, setQueryByType] = useState([]);
+    const getAreas = (value) => {
         setShowArea(true)
         // setCity(e.target.text)
-        localStorage.setItem('Name', e.target.text)
+        console.log(value)
+        localStorage.setItem('Name', value)
         setCity(localStorage.getItem("Name"))
-        // setAreas([])
-        // const QueryCityName = query(
-        //     collection(db, "Cities"),
-        //     limit(10),
-        //     where("Name", "==", e.target.text)
-        // );
 
-        // const getDocs = async () => {
-        //     const QueryData = await getDocs(QueryCityName)
-        //     // console.log(Branchesdata)
-        //     setAreas(QueryData.docs.map((doc) => ({ ...doc.data() })))
-        // }
-        // getDocs()
+        // Query
+
+        const QueryByTypeDocs2 = query(
+            collection(db, "Cities"),
+            limit(10),
+            where("Name", "==", value)
+        );
+
+        const getResByTypeQuery2 = async () => {
+            const QueryData = await getDocs(QueryByTypeDocs2)
+            // console.log(Branchesdata)
+            setQueryByType2(QueryData.docs.map((doc) => ({ ...doc.data() })))
+        }
+        getResByTypeQuery2()
         // console.log(areas)
     }
 
@@ -96,9 +77,10 @@ export default function ModelLocation() {
             </button>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" style={{ borderRadius: "10px"}}>
+                <div class="modal-dialog modal-dialog-centered" style={{ borderRadius: "10px" }}>
                     <div class="modal-content " style={{ "borderRadius": "20" }}>
                         <button type="button" class="btn-close m-4" data-bs-dismiss="modal" aria-label="Close"></button>
+
                         {
                             showArea ? (
                                 <div className="bg-light" style={{ borderRadius: "10px" }}>
@@ -125,12 +107,13 @@ export default function ModelLocation() {
                                 list="Cities"
                                 onChange={(e) => {
                                     setShowArea(true)
-                                    if(showArea){
-                                
-                                       setAreaName(e.target.value)
-                                       setShowText(true)
+                                    if (showArea) {
+                                       
+                                        setAreaName(e.target.value)
+                                        setShowText(true)
                                     }
-                                    else{
+                                    else {
+                                        getAreas(e.target.value)
                                         setCity(e.target.value)
                                         localStorage.setItem('Name', e.target.value)
                                     }
@@ -139,14 +122,26 @@ export default function ModelLocation() {
                             <datalist id="Cities">
                                 {
                                     showArea ? (
-                                        areas.map((area) => {
-                                            return <option value={area}>{area}</option>
+                                        QueryByType2.map((area) => {
+                                            return (
+                                                <div>
+                                                    {
+                                                        area.Area.map((m)=>{
+                                                            return(
+                                                                <option value={m}>{m}</option>
+                                                            )
+                                                        })
+                                                        
+                                                    }
+                                                       
+                                                </div>
+                                            )
                                         })
                                     ) : (
                                         cities.map((city) => {
                                             return <option value={city.Name}>{city.Name}</option>
                                         })
-                                       
+
                                     )
                                 }
 
@@ -161,14 +156,23 @@ export default function ModelLocation() {
                                         {
                                             !showArea && cities.map((city) => {
                                                 return (
-                                                    <li><a onClick={(e) => { getAreas(e) }}>{city.Name}</a></li>
+                                                    <li><a onClick={(e) => { getAreas(e.target.text) }}>{city.Name}</a></li>
                                                 )
                                             })
                                         }
                                         {
-                                            showArea && areas.map((city) => {
+                                            showArea && QueryByType2.map((city) => {
+                                           
                                                 return (
-                                                    <li><a onClick={(e) => { getAreaName(e) }}>{city}</a></li>
+                                                   <div>
+                                                    {
+                                                        city.Area.map((m)=>{
+                                                            return(
+                                                                <li><a onClick={(e) => { getAreaName(e) }}> {m} </a></li>
+                                                            )
+                                                        })
+                                                    }
+                                                    </div>
                                                 )
                                             })
                                         }
