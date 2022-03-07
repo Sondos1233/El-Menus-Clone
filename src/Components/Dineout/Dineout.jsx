@@ -255,7 +255,6 @@ export default function Dineout() {
             {/* Discover BY City */}
             <section className="disArear-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
-
                     <div className="col-12 mx-3 py-3">
                         <h4 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>Discover Maadi</h4>
                     </div>
@@ -282,7 +281,6 @@ export default function Dineout() {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
 

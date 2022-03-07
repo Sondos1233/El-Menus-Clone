@@ -45,8 +45,12 @@ const language = useSelector((state) => state.language.lang);
   };
   const handleChangeCity = (e) => {
     e.preventDefault();
-    localStorage.setItem('Name', City);
+    console.log(e.target.value)
+    let x = e.target.value;
     setCity(e.target.value);
+    // console.log(City)
+    localStorage.setItem('Name', x);
+
   
   };
   const handleChangeRes =(e) =>{
