@@ -1,5 +1,5 @@
 import './App.css';
-import Userprofile from './Components/userProfile/userProfile';
+import Userprofile from './Components/userProfile/userProfile'
 import AccountSetting from './Components/accountSetting/accountSetting';
 import{ BrowserRouter as  Router, Route, Routes } from 'react-router-dom';
 
@@ -9,13 +9,14 @@ function App() {
 
       <Router>
         <Routes>
-            <Route element={ <Userprofile />} path="/userProfile" exact />        
-            <Route element={<AccountSetting />} path="/accountSetting" exact />         
-          </Routes>
+        <Route exact path="/" element={<Userprofile />} ></Route>
+        <Route path="/accountSetting" element={<AccountSetting />} ></Route>
+        </Routes>
       </Router>
 
-    {/* <Userprofile />
-    <AccountSetting /> */}
+
+    {/* <Userprofile /> */}
+    {/* <AccountSetting /> */}
 
     </>
   );
