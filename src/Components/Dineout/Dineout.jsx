@@ -68,15 +68,6 @@ export default function Dineout() {
         { urlImage: SandwichesImg, title: "Sandwiches" },
     ])
 
-    const [dineOutbyNewRes, setDineOutbyNewRes] = useState([
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "pizza" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Burgers" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Chiness" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Koshary" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "FriedChecken" },
-        { urlImage: "https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg", title: "Sandwiches" },
-    ])
-
 
     //Functions
     const [clicked, setClicked] = useState(false);
@@ -126,7 +117,7 @@ export default function Dineout() {
             </div> */}
 
             {/* Discover By MOOD */}
-            <section className="container-fluid my-5">
+            <section className="container-fluid my-5" style={{padding: "0"}}>
                 <div className="row mx-md-4">
                     <div className="col-12 text-center p-3">
                         <h1 className="fw-bold">Discover restaurants to dine-out</h1>
@@ -229,7 +220,7 @@ export default function Dineout() {
                                                             <div class="box-newResturants" style={{ height: "35vh" }}>
                                                                 <div class="slide-img">
                                                                     <img
-                                                                        src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg" style={{ height: "19vh" }}
+                                                                        src={Type.ImageURL} style={{ height: "19vh" }}
                                                                         alt="" />
                                                                     <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
                                                                         <a href="#" class="meal-kind">{Type.ResName}</a>
@@ -255,7 +246,6 @@ export default function Dineout() {
             {/* Discover BY City */}
             <section className="disArear-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
-
                     <div className="col-12 mx-3 py-3">
                         <h4 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>Discover Maadi</h4>
                     </div>
@@ -271,7 +261,7 @@ export default function Dineout() {
 
                                                 Restaurants.map((Res) => {
                                                     return (
-                                                        <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/155c7faa-aff2-439f-a4bc-89fd1746258f.jpg"></DineoutByCity>
+                                                        <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
                                                     )
                                                 })
                                             }
@@ -282,7 +272,6 @@ export default function Dineout() {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
 
@@ -304,7 +293,7 @@ export default function Dineout() {
                                             {
                                                 Restaurants.map((Res) => {
                                                     return (
-                                                        <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/de7f35a3-9f76-41ce-8ee1-d0d43bad4e63.jpg"></DineoutByCity>
+                                                        <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
                                                     )
                                                 })
                                             }
@@ -342,7 +331,7 @@ export default function Dineout() {
                                                             <div class="box-newResturants" style={{ height: "35vh" }}>
                                                                 <div class="slide-img">
                                                                     <img
-                                                                        src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/66ada169-d8cd-4021-af20-ad7518ac74d2.jpg" style={{ height: "19vh" }}
+                                                                        src={Res.ImageLogo} style={{ height: "19vh" }}
                                                                         alt="" />
                                                                     <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
                                                                         <a href="#" class="meal-kind">{Res.ResName}</a>

@@ -81,6 +81,8 @@ nav .btn {
     line-height: 68px;
     margin: 20px auto 30px;
     opacity: 0.9;
+
+  
 }
 
 .input-holder,.input-holder2 {
@@ -92,6 +94,15 @@ nav .btn {
 }
 .home_main_section_content button{
     margin-left: -24px;
+}
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}  
+datalist {
+	display: none;
+}
+input::-webkit-calendar-picker-indicator {
+	display: none;
 }
 
 .home_main_section .input-holder input {
@@ -411,3 +422,114 @@ input:focus{
     padding-left: 33%;
     padding-top: 6%;
 }
+
+/* 
+@media(min-width: 1200px) {
+    .home_main nav .home_sign{
+        display: none;
+    }
+    .home_main nav .home_logo{
+        display: block;
+        margin: auto;
+    }
+    .home_main_title{
+        font-size: 28px;
+        font-weight: 900;
+        line-height: 1.5;
+        margin: 30px auto 70px;
+    }
+    .section_footer_link1{
+        border: none;
+        border-bottom:1px solid #a9acae;
+        
+    }
+    .order_online_footer{
+        text-align: center;
+        margin: auto;
+        display: block;
+    }
+    .order_online_footer .delivery-btn{
+        display: block;
+        margin: auto;
+        margin-top: 0;
+        width: 30%;
+    }
+    
+    
+    .home_main_section_content button,.input-holder2{
+        margin-left:0;
+    }
+    
+    .input-holder2{
+        margin-top: 8px;
+        width: 100%;
+          
+    }
+    .input-holder2 input{
+        width: 100%;
+    }
+    
+    .home_main_section_content .submit-btn{
+        width: 40%;
+        margin-top: 8px;
+        margin-left: 30%;
+    
+    }
+    
+    
+    
+}
+@media(min-width:500px) {
+    .home_main nav .home_sign{
+        display: none;
+    }
+    .home_main nav .home_logo{
+        display: block;
+        margin: auto;
+    }
+    .home_main_title{
+        font-size: 28px;
+        font-weight: 900;
+        line-height: 1.5;
+        margin: 30px auto 70px;
+    }
+    .section_footer_link1{
+        border: none;
+        border-bottom:1px solid #a9acae;;
+    }
+    .order_online_footer{
+        text-align: center;
+        margin: auto;
+    }
+    .order_online_footer .delivery-btn{
+        display: block;
+        margin: auto;
+        margin-top: 0;
+        width: 40%;
+    }
+    
+    .home_main_section_content button ,.input-holder2{
+        margin-left:0;
+    }
+    .input-holder{
+        width: 100%;
+     
+    }
+    .input-holder2{
+        margin-top: 8px;
+        width: 100%;
+          
+    }
+    .input-holder2 input{
+        width: 100%;
+    }
+    
+    .home_main_section_content .submit-btn{
+        width: 40%;
+        margin-top: 8px;
+        margin-left: 30%;
+    
+    }
+    
+} */
+

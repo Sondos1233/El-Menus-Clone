@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector} from "react-redux";
 import logo from "../../images/footer/newLogo.svg";
 import appStore from "../../images/footer/get-appstore.png";
 import gPlay from "../../images/footer/get-gplay.png";
@@ -10,6 +11,7 @@ import About from "./footerF";
 import "./footer_style/footer-style.css";
 import '../../Components/main-style.css'
 import Social from "./socialMedia";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTwitterSquare,
@@ -18,11 +20,9 @@ import {
   faInstagramSquare
 } from "@fortawesome/free-brands-svg-icons";
 
-import { useSelector} from "react-redux";
-import { Link } from "react-router-dom";
+
 export default function Footer() {
     const language = useSelector((state) => state.language.lang);
-  
 
     const City = [
       "Cairo",
@@ -141,14 +141,12 @@ export default function Footer() {
                 </div>
                 <div class="col-xl-8 more-links">
                   <ul>
-                    {/* {footerlist.map((fo) => {
-                      return <About name={fo}/>;
-                    })} */}
-                    <Link to=""><li>About Us</li></Link>
-                    <Link to=""><li>Terms and Conditions</li></Link>
-                    <Link to=""><li>Privacy</li></Link>
-                    <Link to="/Careers"><li>Careers</li></Link>
-                    <Link to="/JoinUs"><li>Join Us</li></Link>
+
+                    <li><Link to="/"></Link>About Us</li>
+                    <li><Link to="/"></Link>Terms and Conditions</li>
+                    <li><Link to="/"></Link>Privacy</li>
+                    <li><Link to="/Careers">Careers</Link></li>
+                    <li><Link to="/JoinUs">Join Us</Link></li>
                   </ul>
                 </div>
                 <div class="col-xl-2 copyright mt-1">© 2021 elmenus</div>
@@ -159,6 +157,3 @@ export default function Footer() {
       </>
     );
   }
-
-
-

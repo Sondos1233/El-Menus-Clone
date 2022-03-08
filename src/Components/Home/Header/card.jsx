@@ -14,7 +14,7 @@ const Card = (props) => {
                     <p class="description">{props.para} 
                     <FontAwesomeIcon icon={props.iconName2} className="pt-1 ico"/>
                     </p>
-   
+               
                   </Link> 
             </div>
       </>

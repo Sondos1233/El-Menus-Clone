@@ -1,0 +1,40 @@
+.vertical-scrollable{
+    height: 250px;
+    overflow-y: scroll; 
+}
+.listStyle{
+    list-style: none;
+}
+.listStyle a{
+    color: black;
+    font-size: large;
+    cursor: pointer;
+}
+.listStyle li{
+    margin-top: 10px;
+}
+.listStyle li:hover{
+    color: #e32207;
+}
+.divstylee{
+  /* background-color: antiquewhite; */
+  margin-left: 50px;
+  margin-top: 50px;
+}
+.divstylee p{
+    font-weight: bold;
+    margin-left: 25px;
+}
+.iconstyle{
+    color: #e32207;
+    font-size: 20px;
+    margin-left: 10px;
+    position: relative;
+    top: 10px;
+}
+a{
+    color: #e32207;
+}
+a:hover{
+    color: #e32207;
+}

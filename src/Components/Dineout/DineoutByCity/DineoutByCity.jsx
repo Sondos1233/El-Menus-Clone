@@ -16,7 +16,7 @@ export default function DineoutbyCity(props) {
                 alt="" style={{height: "40vh"}}/>
                 <div class="detail-box ">
                 <img
-                    src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/c3855416-6df2-4b0e-acc8-20dcf78554f8.jpg"
+                    src={props.srcLogo}
                     alt="" style={{ width: "50px", maxWidth: "100%", height: "auto", padding: "5px 0"}}/>
                 <div class="px-3">
                     <p class="resturantDesc m-0" style={{ color: "color: rgb(161, 157, 157)", fontSize: "10px"}}>
