@@ -5,7 +5,7 @@ import { collection, getDocs,docs, doc,addDoc } from "firebase/firestore";
 import { CAlert } from '@coreui/bootstrap-react'
 export default function AddResForm() {
   const [visible, setVisible] = useState(false)
-  const  Ownerscollection= collection(db,"Owner")
+  const  Restcollection= collection(db,"Restaurant")
   const pattern = new RegExp(/^(01)(0|1|2|5)[0-9]{8}$/);
   const [user, setUser] = useState({
     ResName:"",
@@ -17,7 +17,7 @@ export default function AddResForm() {
     const createOwner= async (e)=>{
       e.preventDefault();
       // db.collection('Owner').add("aa");
-      await addDoc(Ownerscollection,{
+      await addDoc(Restcollection,{
         ResName:user.ResName,
         OwnerName:user.OwnName,
         Phone:user.Phone,
