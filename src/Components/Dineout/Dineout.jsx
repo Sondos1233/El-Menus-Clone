@@ -36,17 +36,21 @@ export default function Dineout() {
 
     // //QuerybyType
     const [QueryByType, setQueryByType] = useState([]);
-    
+
     //QueryMood
     const [QueryByMood, setQueryByMood] = useState([]);
+    const [QueryByMood2, setQueryByMood2] = useState([]);
 
+
+    // QueryCity
+    const [QueryByCity, setQueryByCity] = useState([]);
 
     useEffect(() => {
         // Restaurant Collection
         const getRestaurants = async () => {
             const Resdata = await getDocs(resturantsCollection)
             // console.log(Resdata)
-            setRestaurants(Resdata.docs.map((doc) => ({ ...doc.data() })))
+            setRestaurants(Resdata.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
         }
         getRestaurants()
 
@@ -57,6 +61,38 @@ export default function Dineout() {
             setBranches(Branchesdata.docs.map((doc) => ({ ...doc.data() })))
         }
         getBranches()
+
+        // Query for romantic section
+        const QueryByMoodDocs2 = query(
+            collection(db, "Restaurant"),
+            limit(10),
+            where("Mood", "array-contains", "Romantic")
+        );
+
+        const getResByMoodQuery2 = async () => {
+            const QueryData = await getDocs(QueryByMoodDocs2)
+            // console.log(QueryData)
+            setQueryByMood2(QueryData.docs.map((doc) => ({ ...doc.data() })))
+
+        }
+        getResByMoodQuery2()
+
+        // Query for City
+        const QueryByCityDocs = query(
+            collectionGroup(db, "Branches"),
+            limit(10),
+            where("LocName", "==", "Nasr City")
+        );
+
+        const getResByCityQuery = async () => {
+            const QueryData = await getDocs(QueryByCityDocs)
+            // console.log(QueryData)
+            setQueryByCity(QueryData.docs.map((doc) => ({ ...doc.data() })))
+
+        }
+        getResByCityQuery()
+
+
 
     }, [])
 
@@ -84,13 +120,13 @@ export default function Dineout() {
     const [clicked, setClicked] = useState(false);
     const filterByType = (e) => {
         setQueryByType([])
-        if(clicked == false){
+        if (clicked == false) {
             const QueryByTypeDocs = query(
                 collection(db, "Restaurant"),
                 limit(10),
                 where("Type", "array-contains", e.target.text)
             );
-    
+
             const getResByTypeQuery = async () => {
                 const QueryData = await getDocs(QueryByTypeDocs)
                 // console.log(Branchesdata)
@@ -100,12 +136,12 @@ export default function Dineout() {
 
             setClicked(true)
         }
-        else{
+        else {
             setClicked(false)
         }
 
-       
-    } 
+
+    }
 
     const filterByMood = (e) => {
         console.log(e.target.innerText)
@@ -126,7 +162,7 @@ export default function Dineout() {
             getResByMoodQuery()
 
             setClicked(true)
-        } 
+        }
         else {
             setClicked(false)
         }
@@ -138,11 +174,14 @@ export default function Dineout() {
         <>
             {/* FOR TESTING ONLY */}
             {/* <div>
+                jiji
+            </div>
+            <div>
                 {
-                    QueryByType.map((test) => {
+                    QueryByCity.map((test) => {
                         return (
                             <div>
-                                {test.ResName}
+                                {test.LocName}
                             </div>
                         )
                     })
@@ -178,15 +217,15 @@ export default function Dineout() {
                                 dineOutbyPlace.map((place) => {
                                     return (
                                         <div class="col-md-4 col-6 my-1 px-1" style={{ minHeight: "100px", maxHeight: "400px" }}>
-                                        <div class="d-flex px-0" style={{
-                                            borderRadius: "5px", height: "100%", backgroundImage: `url(${place.urlImage})`,
-                                            backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat"
-                                        }}>
-                                            <div class="dine-content2">
-                                                <h1 class="mt-auto text-light fw-bold p-4" style={{ fontSize: "20px", cursor: "pointer"}} onClick={(e) => { filterByMood(e) }} >{place.title}</h1>
+                                            <div class="d-flex px-0" style={{
+                                                borderRadius: "5px", height: "100%", backgroundImage: `url(${place.urlImage})`,
+                                                backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat"
+                                            }}>
+                                                <div class="dine-content2">
+                                                    <h1 class="mt-auto text-light fw-bold p-4" style={{ fontSize: "20px", cursor: "pointer" }} onClick={(e) => { filterByMood(e) }} >{place.title}</h1>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                         // <DineoutbyPlace urlImage={place.urlImage} title={place.title}></DineoutbyPlace>
                                     )
                                 })
@@ -195,41 +234,37 @@ export default function Dineout() {
                         </div>
                     </div>
 
-                  
+
 
 
                 </div>
 
-                
+
             </section>
 
             {/* fILTER BY MOOD */}
-            <section className='overflow-hidden'>
-            <div className="col-12 mx-4 overflow-hidden">
-                        <div id="disByDishes-Slider" className="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                            <div className="carousel-inner">
-                                <div className="carousel-item active">
-                                    <div className="row">
-                                        <div className="col-12 d-flex" id="cardDishes">
-                                            {/* <!-- Dieshes Container filled by JS --> */}
+            <div className="col-12">
+                <div id="disByDishes-Slider container-fluid" >
+                    <div className="row container-fluid">
+                        <div className="col-12" id="cardDishes">
+                            <div className="row container-fluid">
+                                {/* <!-- Dieshes Container filled by JS --> */}
 
-                                            {
-                                                QueryByMood.map((Type) => {
-                                                    return (
-                                                     
-                                                        <FilterCard image = {Type.ImageURL} name = {Type.ResName} type= {Type.Mood}></FilterCard>
-                                                    )
-                                                })
-                                            }
+                                {
+                                    QueryByMood.map((Type) => {
+                                        return (
 
-                                        </div>
-                                    </div>
-                                </div>
+                                            <FilterCard image={Type.ImageURL} logo={Type.ImageLogo} name={Type.ResName} type={Type.Mood}></FilterCard>
+                                        )
+                                    })
+                                }
+
                             </div>
                         </div>
                     </div>
-            </section>
-           
+                </div>
+            </div>
+
 
 
             <section className="disByDishes-Slider container-fluid my-5 overflow-hidden">
@@ -251,19 +286,18 @@ export default function Dineout() {
                                                 dineOutbyType.map((Type) => {
                                                     return (
                                                         <div class="item-1 px-2 p-2">
-                                                        <div class="box-newResturants" style={{ height: "35vh" }}>
-                                                            <div class="slide-img" style={{width: "100%", boxShadow: "none"}}>
-                                                                <img
-                                                                    src={Type.urlImage} style={{ height: "19vh" }}
-                                                                    alt="" />
-                                                                <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
-                                                                    <a style={{ cursor: "pointer"}} class="meal-kind" onClick={(e) => { filterByType(e) }}>{Type.title}</a>
-
+                                                            <div class="box-newResturants" style={{ height: "35vh" }}>
+                                                                <div class="slide-img" style={{ width: "100%", boxShadow: "none" }}>
+                                                                    <img
+                                                                        src={Type.urlImage} style={{ height: "19vh" }}
+                                                                        alt="" />
+                                                                    <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
+                                                                        <a style={{ cursor: "pointer" }} class="meal-kind" onClick={(e) => { filterByType(e) }}>{Type.title}</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    
+
                                                     )
                                                 })
                                             }
@@ -278,9 +312,9 @@ export default function Dineout() {
                     {/* Filter By Type Display */}
                     <div className="col-12">
                         <div id="disByDishes-Slider container-fluid" >
-                            <div className="row">
-                                <div className="col-12 d-flex" id="cardDishes">
-                                    <div className="row">
+                            <div className="row container-fluid">
+                                <div className="col-12" id="cardDishes">
+                                    <div className="row container-fluid">
                                         {/* <!-- Dieshes Container filled by JS --> */}
 
                                         {
@@ -298,21 +332,21 @@ export default function Dineout() {
                                                         </div>
                                                     </div> */}
                                                 return (
-                                                    <div className="col-4 my-4">
+                                                    <div className="my-4 col-md-4 col-6" >
                                                         <div className="card">
                                                             <div className="card-body shadow shadow-lg">
                                                                 <img src={Type.ImageURL}
-                                                                    alt="" className="card-img" style={{ width: "100%", height: "auto"}}/>
-                                                                <div className="Rest-box" style={{display: "flex", flexDirection: "row"}}>
-                                                                    <div className="Rest-logo" style={{ width: "50px", height: "auto", margin: "10px"}}>
-                                                                        <img src={Type.ImageLogo} 
-                                                                        alt="" style={{ width: "100%", height: "auto", border: "2px solid lightgrey", borderRadius: "10px",boxShadow: "1px 1px 5px"}}/>
+                                                                    alt="" className="card-img" style={{ width: "100%", height: "250px" }} />
+                                                                <div className="Rest-box" style={{ display: "flex", flexDirection: "row" }}>
+                                                                    <div className="Rest-logo" style={{ width: "50px", height: "auto", margin: "10px" }}>
+                                                                        <img src={Type.ImageLogo}
+                                                                            alt="" style={{ width: "100%", height: "45px", border: "2px solid lightgrey", borderRadius: "10px", boxShadow: "1px 1px 5px" }} />
                                                                     </div>
-                                                                    <div className= "Rest-data my-2">
-                                                                        <p className="Rest-type m-0" style= {{color: "lightgrey", fontSize: "12px", fontWeight: "700"}}>
+                                                                    <div className="Rest-data my-2">
+                                                                        <p className="Rest-type m-0" style={{ color: "lightgrey", fontSize: "12px", fontWeight: "700" }}>
                                                                             European Coffee & Drinks
                                                                         </p>
-                                                                        <a href= "#" className= "Rest-name m-0" style= {{fontWeight: "700"}}>
+                                                                        <a href="#" className="Rest-name m-0" style={{ fontWeight: "700" }}>
                                                                             {Type.ResName}
                                                                         </a>
                                                                         <p className="Rest-rate m-0">
@@ -320,13 +354,13 @@ export default function Dineout() {
                                                                             <svg data-v-21f5376e="" data-v-34cbeed1="" height="14" width="14" viewBox="0 0 14 14" class="vue-star-rating-star" step="10"><linearGradient data-v-21f5376e="" id="m6ck1m" x1="0" x2="100%" y1="0" y2="0"><stop data-v-21f5376e="" offset="100%" stop-color="#faad1d"></stop> <stop data-v-21f5376e="" offset="100%" stop-color="#d8d8d8"></stop></linearGradient> <filter data-v-21f5376e="" id="vvdmam" height="130%" width="130%" filterUnits="userSpaceOnUse"><feGaussianBlur data-v-21f5376e="" stdDeviation="0" result="coloredBlur"></feGaussianBlur> <feMerge data-v-21f5376e=""><feMergeNode data-v-21f5376e="" in="coloredBlur"></feMergeNode> <feMergeNode data-v-21f5376e="" in="SourceGraphic"></feMergeNode></feMerge></filter> <polygon data-v-21f5376e="" points="6.363636363636363,0.7070707070707071,2.121212121212121,14,12.727272727272727,5.515151515151515,0,5.515151515151515,10.606060606060606,14" fill="url(#m6ck1m)" stroke="#fff" filter="url(#vvdmam)"></polygon> <polygon data-v-21f5376e="" points="6.363636363636363,0.7070707070707071,2.121212121212121,14,12.727272727272727,5.515151515151515,0,5.515151515151515,10.606060606060606,14" fill="url(#m6ck1m)" stroke="#999" stroke-width="0" stroke-linejoin="miter"></polygon> <polygon data-v-21f5376e="" points="6.363636363636363,0.7070707070707071,2.121212121212121,14,12.727272727272727,5.515151515151515,0,5.515151515151515,10.606060606060606,14" fill="url(#m6ck1m)"></polygon></svg>
                                                                             <svg data-v-21f5376e="" data-v-34cbeed1="" height="14" width="14" viewBox="0 0 14 14" class="vue-star-rating-star" step="10"><linearGradient data-v-21f5376e="" id="m6ck1m" x1="0" x2="100%" y1="0" y2="0"><stop data-v-21f5376e="" offset="100%" stop-color="#faad1d"></stop> <stop data-v-21f5376e="" offset="100%" stop-color="#d8d8d8"></stop></linearGradient> <filter data-v-21f5376e="" id="vvdmam" height="130%" width="130%" filterUnits="userSpaceOnUse"><feGaussianBlur data-v-21f5376e="" stdDeviation="0" result="coloredBlur"></feGaussianBlur> <feMerge data-v-21f5376e=""><feMergeNode data-v-21f5376e="" in="coloredBlur"></feMergeNode> <feMergeNode data-v-21f5376e="" in="SourceGraphic"></feMergeNode></feMerge></filter> <polygon data-v-21f5376e="" points="6.363636363636363,0.7070707070707071,2.121212121212121,14,12.727272727272727,5.515151515151515,0,5.515151515151515,10.606060606060606,14" fill="url(#m6ck1m)" stroke="#fff" filter="url(#vvdmam)"></polygon> <polygon data-v-21f5376e="" points="6.363636363636363,0.7070707070707071,2.121212121212121,14,12.727272727272727,5.515151515151515,0,5.515151515151515,10.606060606060606,14" fill="url(#m6ck1m)" stroke="#999" stroke-width="0" stroke-linejoin="miter"></polygon> <polygon data-v-21f5376e="" points="6.363636363636363,0.7070707070707071,2.121212121212121,14,12.727272727272727,5.515151515151515,0,5.515151515151515,10.606060606060606,14" fill="url(#m6ck1m)"></polygon></svg>
                                                                             <svg data-v-21f5376e="" data-v-34cbeed1="" height="14" width="14" viewBox="0 0 14 14" class="vue-star-rating-star" step="10"><linearGradient data-v-21f5376e="" id="m6ck1m" x1="0" x2="100%" y1="0" y2="0"><stop data-v-21f5376e="" offset="100%" stop-color="#faad1d"></stop> <stop data-v-21f5376e="" offset="100%" stop-color="#d8d8d8"></stop></linearGradient> <filter data-v-21f5376e="" id="vvdmam" height="130%" width="130%" filterUnits="userSpaceOnUse"><feGaussianBlur data-v-21f5376e="" stdDeviation="0" result="coloredBlur"></feGaussianBlur> <feMerge data-v-21f5376e=""><feMergeNode data-v-21f5376e="" in="coloredBlur"></feMergeNode> <feMergeNode data-v-21f5376e="" in="SourceGraphic"></feMergeNode></feMerge></filter> <polygon data-v-21f5376e="" points="6.363636363636363,0.7070707070707071,2.121212121212121,14,12.727272727272727,5.515151515151515,0,5.515151515151515,10.606060606060606,14" fill="url(#m6ck1m)" stroke="#fff" filter="url(#vvdmam)"></polygon> <polygon data-v-21f5376e="" points="6.363636363636363,0.7070707070707071,2.121212121212121,14,12.727272727272727,5.515151515151515,0,5.515151515151515,10.606060606060606,14" fill="url(#m6ck1m)" stroke="#999" stroke-width="0" stroke-linejoin="miter"></polygon> <polygon data-v-21f5376e="" points="6.363636363636363,0.7070707070707071,2.121212121212121,14,12.727272727272727,5.515151515151515,0,5.515151515151515,10.606060606060606,14" fill="url(#m6ck1m)"></polygon></svg>
-                                                                            <span style= {{color: "grey", fontSize: "12px"}}>
+                                                                            <span style={{ color: "grey", fontSize: "12px" }}>
                                                                                 1092 Ratings
-                                                                            </span> 
+                                                                            </span>
                                                                         </p>
                                                                     </div>
                                                                 </div>
-                                                                <p className="Rest-address mx-2" style= {{fontWeight: "700", color: "grey"}}>
+                                                                <p className="Rest-address mx-2" style={{ fontWeight: "700", color: "grey" }}>
                                                                     Royal Maadi Hotel, 11 Road 18, Maadi Sarayat
                                                                 </p>
                                                             </div>
@@ -354,20 +388,21 @@ export default function Dineout() {
                     <div className="col-12 d-flex">
                         <div class="Shrouk-Slider slider slider--first js-slider">
                             <div class="slider__wrapper">
-                                <button class="slider__arrow slider__arrow-prev js-slider-prev" onClick={(e)=>{
-                                        updateSlidePosition(e.nextElementSibling, "prev")
+                                <button class="slider__arrow slider__arrow-prev js-slider-prev" onClick={(e) => {
+                                    updateSlidePosition(e.nextElementSibling, "prev")
                                 }}>&#8249;</button>
                                 <div class="slider__inner js-slider-inner">
                                     {
                                         Restaurants.map((Res) => {
                                             return (
                                                 <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
-                                            )
+                                          
+                                                )
                                         })
                                     }
                                 </div>
-                                <button class="slider__arrow slider__arrow-next js-slider-next" onClick={(e)=>{
-                                        updateSlidePosition(e.previousElementSibling, "next")
+                                <button class="slider__arrow slider__arrow-next js-slider-next" onClick={(e) => {
+                                    updateSlidePosition(e.previousElementSibling, "next")
                                 }} >&#8250;</button>
                             </div>
                         </div>
@@ -380,7 +415,7 @@ export default function Dineout() {
             <section className="hiddenGems-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
                     <div className="col-12 mx-5 py-4">
-                        <h4 className="fw-bold" style={{ color: "color: rgb(88, 86, 86)" }}>Hidden Gems</h4>
+                        <h4 className="fw-bold" style={{ color: "color: rgb(88, 86, 86)" }}>Romantic</h4>
                     </div>
                     <div className="col-12">
                         <div id="hiddenGems-Slider" className="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
@@ -391,7 +426,7 @@ export default function Dineout() {
                                         <div className="col-12 d-flex">
 
                                             {
-                                                Restaurants.map((Res) => {
+                                                QueryByMood2.map((Res) => {
                                                     return (
                                                         <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
                                                     )
@@ -424,15 +459,14 @@ export default function Dineout() {
                                                 Restaurants.map((Res) => {
                                                     return (
 
-                                                        <div class="item-1 px-2 p-2">
-                                                            <div class="box-newResturants" style={{ height: "35vh" }}>
-                                                                <div class="slide-img" style={{width: "100%", boxShadow: "none"}}>
+                                                        <div class="item-1 p-2">
+                                                            <div class="box-newResturants" style={{ height: "30vh", width: "13vw" }}>
+                                                                <div class="slide-img" style={{ width: "auto", boxShadow: "none" }}>
                                                                     <img
-                                                                        src={Res.ImageLogo} style={{ height: "19vh" }}
+                                                                        src={Res.ImageLogo} style={{ height: "19vh", width: "13vw" }}
                                                                         alt="" />
                                                                     <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
-                                                                        <a href="#" class="meal-kind">{Res.ResName}</a>
-
+                                                                        <a href="#" class="meal-kind" style={{ fontSize: "13px" }}>{Res.ResName}</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
