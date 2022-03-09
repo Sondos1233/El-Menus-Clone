@@ -3,7 +3,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "../style/home.css";
 import "../../main-style.css";
 import elmenusLogo from "../../../images/Home/elmenusLogo.svg";
-import search from "../../../images/Home/search.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStore,
@@ -211,26 +210,22 @@ export default function Header() {
               <h1 className="home_main_title">
                 Discover & Order the food you love.
               </h1>
-              <form className="row">
-                <div className="col-xl col-xs"></div>
-                <div className="col-xl-7 col-xs-12">
+              <div className="row d-flex justify-content-between" style={{"width":'80%',"marginLeft":"80px"}} >
+                
+                <div className="col-md-8 col-sm-12 ">
                   <div className="input-holder">
                     <span className="icon">
                       <FontAwesomeIcon icon={faStore} />
                     </span>
-                    <input type="Search" placeholder="Find a Restaurant" onChange={(e) => {
+                    <input type="Search"  placeholder="Find a Restaurant" onChange={(e) => {
                         handleChangeRes(e);
                       }} />
-                    
-                    
                     <span className="search-icon text-secondary">
                       <FontAwesomeIcon icon={faSearch}/>
                     </span>
-                    
-                    
-                  </div>
-                  <span>
+                    </div>
 
+                    <span className="position-relative">
                     {
                        showRes&&<ul className="list-group list-group-flush dropdownRes">
                        {filteredList(ResList,SearchRes).map((Res) => {
@@ -244,14 +239,10 @@ export default function Header() {
                        </ul>
                      }
                     </span>
-
                 </div>
-                <div className="col-xl-2 col-xs-5">
+                <div className=" col-md-2 col-sm-6 ">
                   <div className="input-holder2">
-                    
                     <input
-                      className="floating-label-field floating-label-field--s3"
-                      icon="Search"
                       type="Search"
                       name="city"
                       list="cityname"
@@ -261,6 +252,7 @@ export default function Header() {
                         handleChangeCity(e);
                       }}
                     />
+                    </div>
                       {/* <span>value={localStorage.getItem('Name')}</span> */}
 
                     <datalist id="cityname">
@@ -271,24 +263,24 @@ export default function Header() {
                       {/* <option value="">sondos</option> */}
                       
                     </datalist>
-                  </div>
+                  
                 </div>
-                <div className="col-xl-2 col-xs-5 position-relative py-1" >
-                  <a href="">
+                <div className=" col-md-2 col-sm-6 position-relative" >
+                  
                     <button
-                      
-                      className="btn-primary btn py-3 "
+                      style={{"width":"100%","lineHeight":"55px"}}
+                      className="btn-primary btn "
                     >
-                      Go <FontAwesomeIcon icon={faArrowRight} />{" "}
+                      Go <FontAwesomeIcon icon={faArrowRight} />
                       
                     </button>
-                  </a>
+                  
                 </div>
-              </form>
+              </div>
             </div>
             <div className="section_footer ">
               <h6 className="section_footer_title text-center mb-4">
-                {" "}
+
                 Or explore elmenus
               </h6>
               <div class=" row section_footer_links mx-1 py-3">
@@ -309,6 +301,7 @@ export default function Header() {
           </div>
           <div style={{ height: 200 }}></div>
         </section>
+        
         {/* <!--footer section--> */}
       </div>
 
