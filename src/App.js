@@ -23,36 +23,37 @@ function App() {
   const [Res, setRes] = useState("");
 
 
-  
+
   console.log(City);
   return (
     <>
-      <CityProvider value={{ City, setCity}}>
-        <ResProvider value={{Res,setRes}}>
+      <CityProvider value={{ City, setCity }}>
+        <ResProvider value={{ Res, setRes }}>
           <Provider store={store}>
-          <Router>
-        
-        <Switch>
-        <Route path="/" exact component={Home}/>
-         <Route path="/Careers" exact component={Career}/>
-         <Route path="/description/:Name" exactcomponent={description}/>
-         <Route path="/JoinUs" exact component={JoinUs}/>
-         <Route path="/Home" exact component={Home}/>
-        
-         <Fragment>
-         <Navbar/>
-        <Route path ="/Delivery" exact component={Delivery} /> 
-        <Route path="/Dineout" exact component={Dineout}/>
-        <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
-        <Route path="/Offers" exact component={OfferParent}/>
-        {/* <Route  path="/userProfile" exact component={Userprofile} />        
-          <Route exact path="/accountSetting" component={AccountSetting}  /> */}
-        </Fragment>
-        
-        </Switch>
+            <Router>
 
-        <Footer/>
-      </Router>          </Provider>
+              <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/Careers" exact component={Career} />
+                <Route path="/description/:Name" exactcomponent={description} />
+                <Route path="/JoinUs" exact component={JoinUs} />
+                <Route path="/Home" exact component={Home} />
+
+                <Fragment>
+                  <Navbar />
+                  <Route path="/Delivery" exact component={Delivery} />
+                  <Route path="/Dineout" exact component={Dineout} />
+                  <Route path="/Restaurant/:id" exact component={Restaurant} />
+                  <Route path="/Offers" exact component={OfferParent} />
+                  {/* <Route  path="/userProfile" exact component={Userprofile} />        
+          <Route exact path="/accountSetting" component={AccountSetting}  /> */}
+                </Fragment>
+
+              </Switch>
+
+              <Footer />
+            </Router>
+          </Provider>
         </ResProvider>
       </CityProvider>
     </>

@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { firestore } from "../../Firebase/firebase-config";
-import {
-  collection,
-  getDocs,
-  docs,
-  query,
-  collectionGroup,
-} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+import {collection,getDocs,docs,query,collectionGroup} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import "../Delivery.scss";
 import "../mixins.scss";
 import "../main-style.css";
@@ -52,7 +46,7 @@ const OffersCard = () => {
       })}
 
       <section className="container-fluid aTastyOffers">
-        <div className="container-fluid" id="aWords">
+        {/* <div className="container-fluid" id="aWords">
           <div className="row">
             <div className="col-6">
               <p id="aTastPar">Tasty Offers</p>
@@ -73,11 +67,11 @@ const OffersCard = () => {
               </a>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="container-fluid" id="aOfferCards">
           <div className="row mb-3 " id="aOfferCardsrow">
-            <div className="col-lg-3 col-md-4 position-relative aproductDiv">
+            <div className="col-lg-12 col-md-4 position-relative aproductDiv">
               <Link className="aLinkCard" to="/Restaurant/1">
                 <figure className="aFigRes">
                   <img
@@ -102,7 +96,7 @@ const OffersCard = () => {
                   />
 
                   <h3 className="card-title " id="aResName">
-                    {/*Res.ResName*/} kkljk
+                    {/*Res.ResName*/} RES NAME
                   </h3>
                   <div className="mt-3">
                     <div
@@ -114,7 +108,8 @@ const OffersCard = () => {
                   </div>
                 </div>
               </Link>
-              <button type="button " id="previous" className="rounded-circle">
+
+              {/* <button type="button " id="previous" className="rounded-circle">
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -129,9 +124,9 @@ const OffersCard = () => {
                     d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
                   />
                 </svg>{" "}
-              </button>
+              </button> */}
 
-              <button type="button" id="next" className="rounded-circle">
+              {/* <button type="button" id="next" className="rounded-circle">
                 {" "}
                 <b>
                   {" "}
@@ -149,7 +144,8 @@ const OffersCard = () => {
                     />
                   </svg>{" "}
                 </b>
-              </button>
+              </button> */}
+
             </div>
           </div>
         </div>

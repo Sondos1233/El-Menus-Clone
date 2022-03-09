@@ -152,5 +152,54 @@ a{
     border-radius: 5px;
 }
 
+/* // Carousel Buttons styles */
+.styles-module_carousel-base__3keqD{
+  position: relative;
+  
+}
+
+[data-direction="left"]{
+  position: absolute;
+  left:10px;
+  top:50%;
+  width:30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--first-color);
+
+}
+
+[data-direction="right"]{
+  position: absolute;
+  right: 10px;
+  top:50%;
+  width:30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--first-color);
+
+}
+
+[data-direction="left"]::after{
+  content: "‹";
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  margin-right: 5px;
+  line-height: 22px;
+}
+
+[data-direction="right"]::after {
+  content: "›";
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  margin-left:5px;
+  line-height: 22px;
+}
+/* // End of Carousel Buttons styles */
+
 
 

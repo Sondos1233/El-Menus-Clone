@@ -8,19 +8,21 @@ import Offers from "./Offers";
 
 export default function OfferParent() {
     //Restaurants Collection
-    const [Restaurants, setRestaurants] = useState([]);
+    const [Restaurants, setRestaurants] = useState([
+        1,2,3,4,5,6,7,8,9
+    ]);
     const resturantsCollection = collection(db, "Restaurant")
 
 
-    useEffect(() => {
-        const getRestaurants = async () => {
-            const Resdata = await getDocs(resturantsCollection)
-            // console.log(Resdata)
-            setRestaurants(Resdata.docs.map((doc) => ({ ...doc.data() })))
-        }
-        getRestaurants()
+    // useEffect(() => {
+    //     const getRestaurants = async () => {
+    //         const Resdata = await getDocs(resturantsCollection)
+    //         // console.log(Resdata)
+    //         setRestaurants(Resdata.docs.map((doc) => ({ ...doc.data() })))
+    //     }
+    //     getRestaurants()
 
-    }, [])
+    // }, [])
 
     return (
         <>
