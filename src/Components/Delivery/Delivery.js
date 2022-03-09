@@ -4,7 +4,7 @@ import OffersCard from '../offersCard/offersCard';
 import OffersFilter from '../offersFilter/OffersFilter';
 import TDishesCard from '../TopDishes/TDishesCard';
 import RestCard from '../RestayrantCard/RestCard';
-const Delivery = () => {
+const Delivery = () => { 
   return (
     <>
       <section class="container-fluid" id="aDiscountdiv">

@@ -1,24 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
 import { faStar, faCircle, faStreetView } from "@fortawesome/free-solid-svg-icons";
-import { firestore } from "../../Firebase/firebase-config";
+import { firestore ,storage } from "../../firebase/firebase-config";
 import {
     collection,
-    getDocs,
-    docs,
+    getDocs,getDoc,
+    doc,docs,
     query,
     collectionGroup,
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 const RestCard = () => {
     const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
-
   const RestaurantCollecRef = collection(firestore, "Restaurant");
-
   useEffect(() => {
-    const getRes = async () => {
+   const getRes = async () => {
       const data = await getDocs(RestaurantCollecRef);
       setRes(
         data.docs.map((doc) => {
@@ -27,7 +26,7 @@ const RestCard = () => {
             doc.data().IsAccepted == true
           ) {
           }
-          return doc.data();
+          return doc;
         })
       );
     };
@@ -71,11 +70,11 @@ function hello(rate){
               return(
           <div className="col-lg-4 col-md-12">
             <div className="aContentCard">
-              <Link to="/Restaurant/id" className="aLinkCard">
+              <Link to={`/Restaurant/${res.id}`} className="aLinkCard">
                 <div className="card aD">
-                  <figure className="aFigRes position-relative">
+                  <figure className="aFigRes position-relative"> 
                     <img
-                      src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/11f6836e-26a0-4a7a-ab99-5f99c025a67c.jpg"
+                      src={res.data().ImagURL}//{attract[index]}
                       className="aImg card-img-top"
                       alt="..."
                     />
@@ -97,22 +96,22 @@ function hello(rate){
                       <div className=" d-flex bd-highlight flex-row align-items-start">
                         <img
                           id="aImgRes"
-                          src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/fce4e598-a3a8-11e8-b2ca-0242ac110002.jpg"
+                          src={res.data().ImageLogo}//{logo[index]}
                           alt=""
                           className="rounded-3 me-3 "
                         />
                         <h3 id="aResName">
-                          {res.ResName}
+                          {res.data().ResName}
                           <br />
                           
                           {
-                         k = hello(res.Rate)
+                         k = hello(res.data().Rate)
                          }
                          {
                              k.forEach(i=> i)
                          }
                           
-                          <span id="aResType">{res.Type+" , "}</span>
+                          <span id="aResType">{res.data().Type+" , "}</span>
                         </h3>
                       </div>
                     </div>

@@ -1,0 +1,8 @@
+@use "mixins";
+.aboutDivInfo{
+  @include mixins.backgrounds(#F1F2F2);
+  .aboutDivText{
+      @include mixins.font(15px,500,21px,black);
+      
+  }
+}

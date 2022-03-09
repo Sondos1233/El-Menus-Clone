@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { firestore } from "../../Firebase/firebase-config";
+import { firestore , storage } from "../../firebase/firebase-config";
 import {
   collection,
   getDocs,
-  docs,
+  docs,doc,getDoc,
   query,
   collectionGroup,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+import {
+  getStorage,
+  ref,
+  getDownloadURL,
+} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-storage.js";
+import 'firebase/storage';
 import "../Delivery.scss";
 import "../mixins.scss";
 import "../main-style.css";
@@ -15,11 +21,14 @@ import "../main-style.css";
 const OffersCard = () => {
   const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
-
+  const [logo, setLogo] = useState([]);
+  const [attract,setAttract] = useState([])
   const RestaurantCollecRef = collection(firestore, "Restaurant");
+  
+  let arr=[]; let arr2=[];
 
   useEffect(() => {
-    const getRes = async () => {
+   const getRes = async () => {
       const data = await getDocs(RestaurantCollecRef);
       setRes(
         data.docs.map((doc) => {
@@ -28,7 +37,8 @@ const OffersCard = () => {
             doc.data().IsAccepted == true
           ) {
           }
-          return doc.data();
+          //getLogo(doc.id)
+          return doc;
         })
       );
     };
@@ -74,11 +84,11 @@ const OffersCard = () => {
             {Res.map((res,index)=>{
               return(
                   <div className="col-lg-3 col-md-4 position-relative aproductDiv">
-                    <Link className="aLinkCard" to="/Restaurant/1">
+                    <Link className="aLinkCard" to={`/Restaurant/${res.id}`}>
                       <figure className="aFigRes">
                         <img
                           id="myimg"
-                          src="	https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/2ee22548-148d-426e-9423-a6150ac149fc.jpg" //{/*url2*/}
+                          src={res.data().ImageURL}
                           className="card-img-top aImgCard"
                           alt="..."
                         />
@@ -92,13 +102,14 @@ const OffersCard = () => {
                       <div className=" position-relative card-body aCardBody">
                         <img
                           id="aImgRes"
-                          src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/7ce1525f-bba1-4434-bd64-22a440fb74fb.jpg" //{/*url1*/}
+                   
+                          src={res.data().ImageLogo}
                           alt=""
                           className="rounded-3 me-3 float-start"
                         />
       
                         <h3 className="card-title " id="aResName">
-                          {res.ResName} 
+                          {res.data().ResName} 
                         </h3>
                         <div className="mt-3">
                           <div

@@ -139,14 +139,14 @@ html {
         .aRightIcon{
             display: none;
         }
-        /*.list-group-item-action:focus{
+        .list-group-item-action:focus{
             @include mixins.font(16px,400,23px,white);
             @include mixins.border(12px!important,0 !important);
             @include mixins.backgrounds(var(--first-color !important));
             .aRightIcon{
                 display: inline-block;
             }
-        }*/
+        }
         .list-group-item:hover{
             @include mixins.font(16px,400,23px,white);
             @include mixins.border(12px!important,0 !important);
@@ -172,6 +172,9 @@ html {
         }
         .aItem{
             @include mixins.font(28px,600,31px,#2a2b2c)
+        }
+        .aItem:active{
+
         }
     }
     

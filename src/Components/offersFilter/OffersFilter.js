@@ -5,7 +5,7 @@ import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faPercent } from "@fortawesome/free-solid-svg-icons";
 import RadioButton from "../Radiobutton/RadioButton";
-import { firestore } from "../../Firebase/firebase-config";
+import { firestore } from "../../firebase/firebase-config";
 import {
   collection,
   getDocs,

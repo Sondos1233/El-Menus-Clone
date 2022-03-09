@@ -2,7 +2,7 @@ import "../main-style.css";
 import "../Delivery.scss"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDotCircle} from "@fortawesome/free-solid-svg-icons";
-import { firestore } from "../../Firebase/firebase-config"
+import { firestore } from "../../firebase/firebase-config";
 import {
     collection,
     getDocs,
@@ -11,7 +11,7 @@ import {
     where,
     collectionGroup,
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
-import {useState,useEffect} from 'react'
+import {useState,useEffect} from 'react';
 const RadioButton = (props) => {
   const [offer, setOffer] = useState([]);
   const TestQuery = async(el)=>{
@@ -26,10 +26,6 @@ const RadioButton = (props) => {
       )
       
   }
-  useEffect(()=>{
-    TestQuery(props.data);
-  }
-  )
   return (
     <>
       <div className="col-2">
