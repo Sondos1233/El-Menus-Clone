@@ -14,10 +14,9 @@ import description from './Components/Job/description';
 import Footer from './Components/Footer/footer';
 import Navbar from './Components/Navbar/Navbar';
 import { CityProvider } from "./Components/Context/City";
-
 import { useState } from "react";
 import { ResProvider } from "./Components/Context/Resturant";
-
+import {AboutUs} from './Components/AboutUs/AboutUs'
 function App() {
   const [City, setCity] = useState("Cairo");
   const [Res, setRes] = useState("");
@@ -42,6 +41,7 @@ function App() {
         <Route path="/DinOut" exact component={Dineout}/>
         <Route path ="/Restaurant/:id" exact component={Restaurant} /> 
         <Route path="/Offers" exact component={OfferParent}/>
+        <Route path="/AboutUs" exact component={AboutUs}/>
         {/* <Route  path="/userProfile" exact component={Userprofile} />        
           <Route exact path="/accountSetting" component={AccountSetting}  /> */}
         </Fragment>

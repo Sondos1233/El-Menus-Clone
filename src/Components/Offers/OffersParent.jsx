@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faStar, faMotorcycle, faCircle, faMapMarkedAlt, faPercentage, faCreditCard } from '@fortawesome/free-solid-svg-icons'
-import {db} from '../../Firebase/Firebase'
+import {db} from '../../firebase/Firebase'
 import { collection, collectionGroup, getDocs } from 'firebase/firestore'
 import { useEffect, useState } from 'react';
 import Offers from "./Offers";

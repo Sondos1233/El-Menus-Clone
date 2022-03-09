@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../Dineout.css'
 import { useEffect, useState } from 'react';
-import { db } from './../../../Firebase/Firebase'
+import { db } from './../../../firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
 
 export default function DineoutbyPlace(props) {
