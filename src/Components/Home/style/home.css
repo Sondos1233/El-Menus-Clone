@@ -244,7 +244,26 @@ input:focus{
 .clear{
     clear: both;
 }
-
+.dropdownRes li{
+    border: none;
+}
+.dropdownRes li:hover{
+    background-color: rgb(228, 226, 226);
+}
+.logoResDrop{
+    border-radius: 4px;
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    border: #464748;
+    --webkit-box-shadow: 0px 0px 6px 1px rgba(115,115,115,0.47);
+    -moz-box-shadow: 0px 0px 6px 1px rgba(115,115,115,0.47);
+    box-shadow: 0px 0px 6px 1px rgba(115,115,115,0.47);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
 /* *****************SignUp Modal styling ****************/
 
 .modalContainer{

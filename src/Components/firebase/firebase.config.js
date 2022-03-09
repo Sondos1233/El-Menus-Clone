@@ -13,6 +13,13 @@ const firebaseConfig = {
   storageBucket: "elmenusclone.appspot.com",
   messagingSenderId: "57271621220",
   appId: "1:57271621220:web:ba8d19b9fddb0988db7171"
+  // apiKey: "AIzaSyBjiXw0hpBM8ke5rZlLdvDdO-2z2Cgwhwo",
+  // authDomain: "assiti-employee.firebaseapp.com",
+  // databaseURL: "https://assiti-employee-default-rtdb.firebaseio.com",
+  // projectId: "assiti-employee",
+  // storageBucket: "assiti-employee.appspot.com",
+  // messagingSenderId: "345110750554",
+  // appId: "1:345110750554:web:b57b81db324d698bd8ff63"
 };
 
 // Initialize Firebase

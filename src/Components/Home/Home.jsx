@@ -10,7 +10,7 @@ export default function Home() {
       <div  dir={language == "English" ? "rtl" : "ltr"}>
         <Header/>
         <Body/>
-        </div>
+      </div>
       </>
     );
   }

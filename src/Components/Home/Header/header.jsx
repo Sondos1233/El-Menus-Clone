@@ -10,7 +10,9 @@ import {
   faArrowRight,
   faMotorcycle,
   faUtensils,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import Card from "./card";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from "../../../store/action/languageAction";
@@ -29,12 +31,15 @@ import { useContext } from "react";
 import { cityContext } from "../../Context/City";
 
 export default function Header() {
+  const[showRes,setshowRes]=useState(false)
   const listOfCities = collection(firestore, "Cities");
-  const listOfRes = collection(firestore,"Rest")
+  const listOfRes = collection(firestore,"Restaurant")
   const [CityList, setCityList] = useState([]);
   const [ResList, setResList] = useState([]);
-const {City,setCity}=useContext(cityContext)  
-const language = useSelector((state) => state.language.lang);
+  const[SearchRes,setSearchRes] = useState('');
+  const[ResListbySearch,setResListbySearch]=useState([])
+  const {City,setCity}=useContext(cityContext)  
+  const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
 
   const toggleLanguage = () => {
@@ -46,7 +51,16 @@ const language = useSelector((state) => state.language.lang);
     setCity(e.target.value);
   
   };
-  console.log(City)
+ const handleChangeRes=(e) =>{
+   if(e.target.value==''){
+   setshowRes(false)
+   }else{
+    setshowRes(true)
+    setSearchRes(e.target.value)
+   }
+   console.log(ResListbySearch)
+ }
+  // console.log(City)
   useEffect(() => {
     const getCity = async () => {
       const data = await getDocs(listOfCities);
@@ -59,6 +73,20 @@ const language = useSelector((state) => state.language.lang);
     getCity();
     getRes();
   }, []);
+  const bySearchRes = (Res, SearchRes) => {
+    if(Res.IsActivated){
+      if (SearchRes) {
+        return Res.ResName.toLowerCase().includes(SearchRes.toLowerCase());
+      } else return 'Not Match any Res';
+    }
+    
+  };
+  
+  const filteredList = (ResList, SearchRes) => {
+    // console.log(ResList,SearchRes)
+    return ResList.filter(Res => bySearchRes(Res, SearchRes));
+  }
+  
   //=========================Modals state========================
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -190,25 +218,40 @@ const language = useSelector((state) => state.language.lang);
                     <span className="icon">
                       <FontAwesomeIcon icon={faStore} />
                     </span>
-                    <input type="Search" placeholder="Find a Restaurant" list="Restaurant" />
-                    <datalist id="Restaurant" style={{display:"none"}}>
-                      {ResList.map((data) => {
-                        console.log(data);
-                        return <option value={data.id}>{data.ResName}</option>;
-                      })}
-                      {/* <option value="Mac"> </option> */}
-                      
-                    </datalist>
-                    <span className="search-icon">
-                      <img src={search} />
+                    <input type="Search" placeholder="Find a Restaurant" onChange={(e) => {
+                        handleChangeRes(e);
+                      }} />
+                    
+                    
+                    <span className="search-icon text-secondary">
+                      <FontAwesomeIcon icon={faSearch}/>
                     </span>
+                    
+                    
                   </div>
+                  <span>
+
+                    {
+                       showRes&&<ul className="list-group list-group-flush dropdownRes">
+                       {filteredList(ResList,SearchRes).map((Res) => {
+                         return <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item py-2"><span className="logoResDrop p-1 mx-3"><img src={Res.ImageLogo} width="20px" height="20px"/></span>{Res.ResName}</li></Link>;
+                       })}
+                        {/* <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item">Zaks</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Mac</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Kfc</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">blal</li></Link> */}
+ 
+                       </ul>
+                     }
+                    </span>
+
                 </div>
                 <div className="col-xl-2 col-xs-5">
                   <div className="input-holder2">
                     
                     <input
                       className="floating-label-field floating-label-field--s3"
+                      icon="Search"
                       type="Search"
                       name="city"
                       list="cityname"
@@ -222,7 +265,7 @@ const language = useSelector((state) => state.language.lang);
 
                     <datalist id="cityname">
                       {CityList.map((data) => {
-                        console.log(data);
+                        // console.log(data);
                         return <option value={data.Name}></option>;
                       })}
                       {/* <option value="">sondos</option> */}
