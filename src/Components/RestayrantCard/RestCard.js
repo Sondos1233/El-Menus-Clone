@@ -74,7 +74,7 @@ function hello(rate){
                 <div className="card aD">
                   <figure className="aFigRes position-relative"> 
                     <img
-                      src={res.data().ImagURL}//{attract[index]}
+                      src={res.data().ImageURL}//{attract[index]}
                       className="aImg card-img-top"
                       alt="..."
                     />

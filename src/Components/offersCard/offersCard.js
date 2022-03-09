@@ -124,7 +124,7 @@ const OffersCard = () => {
                   </div>
                   )
                 })
-            })
+            }
           </div>
               <button type="button " id="previous" className="rounded-circle">
                 {" "}

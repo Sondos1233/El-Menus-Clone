@@ -14,13 +14,18 @@ import {
 import {useState,useEffect} from 'react';
 const RadioButton = (props) => {
   const [offer, setOffer] = useState([]);
+  const [opt, setOpt] = useState(props.data);
   const TestQuery = async(el)=>{
+    const type = el.target.value;
+    setOpt(type);
+    //console.log(type)
     //console.log(el)
-    let qmm = query(collection(firestore,'Restaurant'),where('Type','array-contains',el));
+    let qmm = query(collection(firestore,'Restaurant'),where('Type','array-contains',type));
     var queryResult=await getDocs(qmm);
-    console.log(queryResult);
+    //console.log(queryResult);
     setOffer(
       queryResult.docs.map((doc)=>{
+        console.log(doc.data())
         return (doc.data())
       })
       )
@@ -30,12 +35,14 @@ const RadioButton = (props) => {
     <>
       <div className="col-2">
         <label className="aRadio">
-          <input onClick={()=>TestQuery(props.data)} type="radio" name={props.name} id="" />
+          <input onClick={TestQuery} type="radio" name={props.name} id="" value={props.data} />
           <span className="adot"></span>{" "}
           <FontAwesomeIcon icon={faDotCircle} className="aCheckdot"> </FontAwesomeIcon>
         </label>
       </div>
-      <div className="col-10 aSortType">{props.data}</div>
+      <div className="col-10 aSortType">{props.data}</div>{offer.map(i=>{
+        return i.ResName
+        })}
     </>
   );
 };

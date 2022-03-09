@@ -25,8 +25,9 @@ const OffersFilter = () => {
       const querySnapshot = await getDocs(q);
       let setTypes = new Set();
       querySnapshot.forEach((doc) => {
-          //console.log(doc.id, " => ", doc.data().Type);
-          for (let len = 0; len < doc.data().Type.length; len++) {
+        //console.log(doc);
+          //console.log( doc.data().Type?.length);
+          for (let len = 0; len < doc.data().Type?.length; len++) {
               setTypes.add(doc.data().Type[len])
               //console.log(setTypes)
             }
@@ -121,15 +122,10 @@ return (
           <div className="row" id="afilterRowButtons">
               {
                   Res.map((res,index)=>{
+                   // console.log(res)
                       return <RadioButton data={res} name="type" />
                     })
                 }
-
-            <div className="mt-2 mb-2">
-              <a href="#" className="aLink33More">
-                +33 more
-              </a>
-            </div>
           </div>
         </div>
       </section>
