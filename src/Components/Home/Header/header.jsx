@@ -325,7 +325,12 @@ export default function Header() {
                         console.log(data);
                         return <option value={data.id}>{data.ResName}</option>;
                       })} */}
+<<<<<<< HEAD
                       <option value="Mac"></option>
+=======
+                      <Link to="/Delivery">  <option value="Mac"></option> </Link>
+                    
+>>>>>>> about
                       <option value="7amza"> </option>
                       <option value="zaks"> </option>
                       <option value="KFC"> </option>

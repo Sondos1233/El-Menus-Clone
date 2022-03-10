@@ -1,0 +1,16 @@
+.Terms_header{
+    color: rgb(92, 91, 91);
+}
+.Terms_header h2{
+    font-weight: 600;
+    line-height: 1.1;
+    font-size: 30px;
+} 
+.Terms_header h2 , .Terms_header h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.Terms_header p{
+    margin: 0 0 10px;
+    
+}
