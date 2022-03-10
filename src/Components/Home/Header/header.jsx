@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Link } from "react-router-dom";
 import elmenusLogo from "../../../images/Home/elmenusLogo.svg";
-import search from "../../../images/Home/search.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStore,
@@ -12,7 +11,9 @@ import {
   faMotorcycle,
   faUtensils,
   faUser,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import Card from "./card";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from "../../../store/action/languageAction";
@@ -31,14 +32,15 @@ import { useContext } from "react";
 import { cityContext } from "../../Context/City";
 
 export default function Header() {
-
-//================================Handle Cities===============================================
+  const[showRes,setshowRes]=useState(false)
   const listOfCities = collection(firestore, "Cities");
-  const listOfRes = collection(firestore,"Rest")
+  const listOfRes = collection(firestore,"Restaurant")
   const [CityList, setCityList] = useState([]);
   const [ResList, setResList] = useState([]);
   const {City,setCity}=useContext(cityContext)  
   const {Res,setRes}=useContext(cityContext)  
+  const[SearchRes,setSearchRes] = useState('');
+  const[ResListbySearch,setResListbySearch]=useState([]); 
   const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
 
@@ -57,10 +59,17 @@ export default function Header() {
 
   
   };
-  const handleChangeRes =(e) =>{
-     setRes(e.target.value);
-  }
-  console.log(City)
+ 
+ const handleChangeRes=(e) =>{
+   if(e.target.value==''){
+   setshowRes(false)
+   }else{
+    setshowRes(true)
+    setSearchRes(e.target.value)
+   }
+   console.log(ResListbySearch)
+ }
+  // console.log(City)
   useEffect(() => {
     const getCity = async () => {
       const data = await getDocs(listOfCities);
@@ -87,6 +96,20 @@ export default function Header() {
 
   const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
 
+  const bySearchRes = (Res, SearchRes) => {
+    if(Res.IsActivated){
+      if (SearchRes) {
+        return Res.ResName.toLowerCase().includes(SearchRes.toLowerCase());
+      } else return 'Not Match any Res';
+    }
+    
+  };
+  
+  const filteredList = (ResList, SearchRes) => {
+    // console.log(ResList,SearchRes)
+    return ResList.filter(Res => bySearchRes(Res, SearchRes));
+  }
+  
   //=========================Modals state========================
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -305,9 +328,9 @@ export default function Header() {
               <h1 className="home_main_title">
                 Discover & Order the food you love.
               </h1>
-              <div className="row">
-                <div className="col-xl col-xs"></div>
-                <div className="col-xl-7 col-xs-12">
+              <div className="row d-flex justify-content-between" style={{"width":'80%',"marginLeft":"80px"}} >
+                
+                <div className="col-md-8 col-sm-12 ">
                   <div className="input-holder">
                     <span className="icon">
                       <FontAwesomeIcon icon={faStore} />
@@ -320,30 +343,35 @@ export default function Header() {
                         handleChangeRes(e);
                       }}
                     />
-                    <datalist id="Restaurant">
-                      {/* {ResList.map((data) => {
-                        console.log(data);
-                        return <option value={data.id}>{data.ResName}</option>;
-                      })} */}
-<<<<<<< HEAD
-                      <option value="Mac"></option>
-=======
-                      <Link to="/Delivery">  <option value="Mac"></option> </Link>
-                    
->>>>>>> about
-                      <option value="7amza"> </option>
-                      <option value="zaks"> </option>
-                      <option value="KFC"> </option>
-                    </datalist>
-                    <span className="search-icon">
-                      <img src={search} />
+                   
+
+                    <input type="Search"  placeholder="Find a Restaurant" onChange={(e) => {
+                        handleChangeRes(e);
+                      }} />
+                    <span className="search-icon text-secondary">
+                      <FontAwesomeIcon icon={faSearch}/>
                     </span>
-                  </div>
+                    </div>
+
+                    <span className="position-relative">
+                    {
+                       showRes&&<ul className="list-group list-group-flush dropdownRes">
+                       {filteredList(ResList,SearchRes).map((Res) => {
+                         return <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item py-2"><span className="logoResDrop p-1 mx-3"><img src={Res.ImageLogo} width="20px" height="20px"/></span>{Res.ResName}</li></Link>;
+                       })}
+                        {/* <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item">Zaks</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Mac</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Kfc</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">blal</li></Link> */}
+ 
+                       </ul>
+                     }
+
+                    </span>
                 </div>
-                <div className="col-xl-2 col-xs-5">
+                <div className=" col-md-2 col-sm-6 ">
                   <div className="input-holder2">
                     <input
-                      className="floating-label-field floating-label-field--s3"
                       type="Search"
                       name="city"
                       list="cityname"
@@ -353,29 +381,34 @@ export default function Header() {
                         handleChangeCity(e);
                       }}
                     />
-                    {/* <span>value={localStorage.getItem('Name')}</span> */}
+                    </div>
+                      {/* <span>value={localStorage.getItem('Name')}</span> */}
 
                     <datalist id="cityname">
                       {CityList.map((data) => {
-                        console.log(data);
+                        // console.log(data);
                         return <option value={data.Name}></option>;
                       })}
                       {/* <option value="">sondos</option> */}
                     </datalist>
-                  </div>
+                  
                 </div>
-                <div className="col-xl-2 col-xs-5 position-relative py-1">
-                  <Link to="/Dineout">
-                    <button className="btn-primary btn py-3 ">
+                <div className=" col-md-2 col-sm-6 position-relative" >
+                  
+                    <button
+                      style={{"width":"100%","lineHeight":"55px"}}
+                      className="btn-primary btn "
+                    >
                       Go <FontAwesomeIcon icon={faArrowRight} />
+                      
                     </button>
-                  </Link>
+                  
                 </div>
               </div>
             </div>
             <div className="section_footer ">
               <h6 className="section_footer_title text-center mb-4">
-                {" "}
+
                 Or explore elmenus
               </h6>
               <div class=" row section_footer_links mx-1 py-3">
@@ -396,6 +429,7 @@ export default function Header() {
           </div>
           <div style={{ height: 200 }}></div>
         </section>
+        
         {/* <!--footer section--> */}
       </div>
 

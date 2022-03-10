@@ -10,7 +10,7 @@ export default function FooterOfBody() {
                <span class="mx-3"><img src={check} class="me-1"/>Order online</span>
 
              </p>
-             <a href="" class="btn btn-primary delivery-btn p-3">ORDER ONLINE NOW</a>
+             <a href="" class="btn btn-primary  p-3">ORDER ONLINE NOW</a>
            </div>
          </div>
       </>
