@@ -23,7 +23,7 @@ const Meals = (props) => {
     "Menu"
   );
 
-  let CategArray = localStorage.getItem("MenuName").split(",");
+  let CategArray = localStorage.getItem("MenuName")?.split(",");
 
   let l = 0;
   useEffect(() => {l+=1;
