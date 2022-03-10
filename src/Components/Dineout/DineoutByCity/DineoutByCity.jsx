@@ -9,7 +9,7 @@ export default function DineoutbyCity(props) {
     return (
         <>
             {/* <div class="box-disArear m-2" > */}
-                {/* <div class="slider__slide mx-2 my-2"> */}
+                <div class="slider__slide mx-2 my-2">
                     {/* <div class="slide__content"> */}
                         <div class="slide-img">
                             <img
@@ -42,7 +42,7 @@ export default function DineoutbyCity(props) {
                             </div>
                         </div>
                     {/* </div> */}
-                {/* </div> */}
+                </div>
             {/* </div> */}
 
             

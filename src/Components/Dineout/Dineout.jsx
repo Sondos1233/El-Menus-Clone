@@ -1,42 +1,20 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Dineout.css'
 import './Dineout.scss'
-import DineoutbyPlace from './DineoutbyPlace/DineoutbyPlace';
 import FilterCard from './FilterCard.js/FilterCard';
 import DineoutByCity from './DineoutByCity/DineoutByCity'
 import { useEffect, useState } from 'react';
-import { Carousel } from '@trendyol-js/react-carousel';
 import pizzaImg from './../../images/Dineout/pizza.jpg'
 import BurgersImg from './../../images/Dineout/Burgers.jpg'
 import ChinessImg from './../../images/Dineout/Chiness.jpg'
 import FriedChickenImg from './../../images/Dineout/FriedChicken.jpg'
 import KosharyImg from './../../images/Dineout/koshary.jpg'
 import SandwichesImg from './../../images/Dineout/Sandwiches.jpg'
-
-
 // FireStore
-import { db } from '../../firebase/Firebase'
+import { db } from './../../firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
 
-//Shrouk Slider JS CODE
-function updateSlidePosition(e, direction) {
-    const firstSlideWidth = e.querySelector(".slider__slide").offsetWidth;
-
-    if (direction === "prev") {
-        e.scrollLeft = e.scrollLeft - firstSlideWidth;
-    } else {
-        e.scrollLeft = e.scrollLeft + firstSlideWidth;
-    }
-}
-
 export default function Dineout() {
-
-    const discovdrByDishCardsCarouselNumber = 8;
-    const discoverByCirtCardsCarouselNumber = 4;
-    //test array to rendeer items in carousel
-    const [itemsArr, setItemsArr] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-
-
     // //Restaurants Collection
     const [Restaurants, setRestaurants] = useState([]);
     const resturantsCollection = collection(db, "Restaurant")
@@ -200,7 +178,7 @@ export default function Dineout() {
             </div> */}
 
             {/* Discover By MOOD */}
-            <section className="container-fluid my-5" style={{ padding: "0" }}>
+            <section className="container-fluid my-5">
                 <div className="row mx-md-4">
                     <div className="col-12 text-center p-3">
                         <h1 className="fw-bold">Discover restaurants to dine-out</h1>
@@ -278,7 +256,6 @@ export default function Dineout() {
 
 
 
-            {/* Discover BY dishes */}
             <section className="disByDishes-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
                     <div className="col-12 mx-3 py-3">
@@ -295,9 +272,7 @@ export default function Dineout() {
 
                                             {
                                                 // onClick={(e) => { filterByType(e) }}
-
-                                                <Carousel show={discovdrByDishCardsCarouselNumber} slide={2} transition={0.5}>
-                                                    {   dineOutbyType.map((Type) => {
+                                                dineOutbyType.map((Type) => {
                                                     return (
                                                         <div class="item-1 px-2 p-2">
                                                             <div class="box-newResturants" style={{ height: "35vh" }}>
@@ -313,12 +288,7 @@ export default function Dineout() {
                                                         </div>
 
                                                     )
-                                                })}
-
-                                                </Carousel>
-
-                                             
-
+                                                })
                                             }
 
                                         </div>
@@ -398,42 +368,35 @@ export default function Dineout() {
 
 
             {/* Discover BY City */}
-            <section className="">
+            <section className="disArear-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
                     <div className="col-12 mx-3 py-3">
                         <h4 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>Discover Maadi</h4>
                     </div>
 
-                    <div className="">
-                        {/* <div class="Shrouk-Slider slider slider--first js-slider">
+                    <div className="col-12 d-flex">
+                        <div class="Shrouk-Slider slider slider--first js-slider">
                             <div class="slider__wrapper">
-                                <button class="slider__arrow slider__arrow-prev js-slider-prev" >&#8249;</button> */}
-                                {/* <div class="slider__inner js-slider-inner"> */}
-                                
-                                        <Carousel show={discoverByCirtCardsCarouselNumber} slide={2} transition={0.5}>
-                                        {
-                                            Restaurants.map((Res) => {
-                                                return (
-                                                    <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
-                                              
-                                                    )
-                                            })
-                                            
-                                        }
-                                        </Carousel>
-                                   
-                                {/* </div> */}
-                                {/* <button class="slider__arrow slider__arrow-next js-slider-next">&#8250;</button> */}
+                    
+                                <div class="slider__inner js-slider-inner">
+                                    {
+                                        Restaurants.map((Res) => {
+                                            return (
+                                                <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
+                                          
+                                                )
+                                        })
+                                    }
+                                </div>
+                            
                             </div>
                         </div>
-                    {/* </div>
-                </div> */}
-
-                   
+                    </div>
+                </div>
             </section>
 
 
-            {/* Hidden Gems Section */}
+            {/* Discover By MOOD */}
             <section className="hiddenGems-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
                     <div className="col-12 mx-5 py-4">
@@ -446,18 +409,6 @@ export default function Dineout() {
                                 <div className="carousel-item active">
                                     <div className="row">
                                         <div className="col-12 d-flex">
-
-                                        <Carousel show={discoverByCirtCardsCarouselNumber} slide={2} transition={0.5}>
-                                        {
-                                            itemsArr.map((Res) => {
-                                                return (
-
-                                                    <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
-                                                )
-                                            })
-                                            
-                                        }
-                                        </Carousel>
 
                                             {
                                                 QueryByMood2.map((Res) => {
@@ -518,14 +469,9 @@ export default function Dineout() {
                 </div>
             </section>
 
-
-
         </>
     );
 }
-
-
-
 
 
 
