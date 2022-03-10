@@ -45,7 +45,7 @@ export default function DineoutbyPlace(props) {
                 }}>
                     <div class="dine-content2">
                         {/* "font-size: 20px; cursor: pointer;"  */}
-                        <h1 class="mt-auto text-light fw-bold p-4" style={{ fontSize: "20px", cursor: "pointer" }} onClick={(e) => { filterByMood(e) }}>{props.title}</h1>
+                        <a class="mt-auto text-light fw-bold p-4" style={{ fontSize: "20px", cursor: "pointer" }} onClick={(e) => { filterByMood(e) }}>{props.title}</a>
                     </div>
                 </div>
             </div>

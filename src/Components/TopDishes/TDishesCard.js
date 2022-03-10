@@ -2,13 +2,20 @@ import "../main-style.css";
 import "../Delivery.scss";
 import "../mixins.scss"
 const TDishesCard = () => {
+
   return (
     <>
-      <div className="container-fluid aWords" >
-        <div className="row">
-          <div className="col-6">
+      {/* <div className="container-fluid aWords p-0" > */}
+        {/* <div className="row m-0 p-1"> */}
+
+          {/* <div className="col-6">
             <p id="aTastPar">Discover Top Dishes</p>
           </div>
+
+
+
+
+
           <div className="col-6">
             <a className="float-end pt-2 ms-5" id="aSeeallLink" href="#">
               See All{" "}
@@ -23,19 +30,21 @@ const TDishesCard = () => {
                 <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
               </svg>
             </a>
-          </div>
-          <div className="container">
-            <div className="row position-relative">
-              <div className="col aDivTopDish">
+          </div> */}
+
+          {/* <div className="container">
+            <div className="row position-relative"> */}
+
+              <div className="aDivTopDish">
                 <a href="#">
                   <img
-                    width="100%"
                     src="https://www.elmenus.com/public/img/should-delete/all-dishes.png"
                     alt=""
                   />
                 </a>
               </div>
-              <div className="col aDivTopDish">
+
+              {/* <div className="col aDivTopDish">
                 <a href="#">
                   <img
                     width="100%"
@@ -44,6 +53,7 @@ const TDishesCard = () => {
                   />
                 </a>
               </div>
+
               <div className="col aDivTopDish">
                 <a href="#">
                   <img
@@ -53,6 +63,7 @@ const TDishesCard = () => {
                   />
                 </a>
               </div>
+
               <div className="col aDivTopDish">
                 <a href="#">
                   <img
@@ -62,6 +73,7 @@ const TDishesCard = () => {
                   />
                 </a>
               </div>
+
               <div className="col aDivTopDish">
                 <a href="#">
                   <img
@@ -71,6 +83,7 @@ const TDishesCard = () => {
                   />
                 </a>
               </div>
+
               <div className="col aDivTopDish">
                 <a href="#">
                   <img
@@ -80,6 +93,7 @@ const TDishesCard = () => {
                   />
                 </a>
               </div>
+
               <button type="button" className="aprevious rounded-circle" >
                 {" "}
                 <svg
@@ -96,6 +110,7 @@ const TDishesCard = () => {
                   />
                 </svg>{" "}
               </button>
+
               <button type="button" className="anext rounded-circle" >
                 {" "}
                 <b>
@@ -114,11 +129,12 @@ const TDishesCard = () => {
                     />
                   </svg>{" "}
                 </b>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+              </button> */}
+
+            {/* </div>
+          </div> */}
+        {/* </div> */}
+      {/* </div> */}
     </>
   );
 };
