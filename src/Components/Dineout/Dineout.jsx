@@ -377,9 +377,7 @@ export default function Dineout() {
                     <div className="col-12 d-flex">
                         <div class="Shrouk-Slider slider slider--first js-slider">
                             <div class="slider__wrapper">
-                                <button class="slider__arrow slider__arrow-prev js-slider-prev" onClick={(e) => {
-                                    updateSlidePosition(e.nextElementSibling, "prev")
-                                }}>&#8249;</button>
+                    
                                 <div class="slider__inner js-slider-inner">
                                     {
                                         Restaurants.map((Res) => {
@@ -390,9 +388,7 @@ export default function Dineout() {
                                         })
                                     }
                                 </div>
-                                <button class="slider__arrow slider__arrow-next js-slider-next" onClick={(e) => {
-                                    updateSlidePosition(e.previousElementSibling, "next")
-                                }} >&#8250;</button>
+                            
                             </div>
                         </div>
                     </div>
