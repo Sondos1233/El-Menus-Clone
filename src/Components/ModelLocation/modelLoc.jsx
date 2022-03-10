@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import './modelLoc.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Modal } from 'react-bootstrap'
 // FireStore
 import { db } from './../../Firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
@@ -73,9 +74,7 @@ export default function ModelLocation() {
 
     return (
         <>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Launch demo modal
-            </button>
+            
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" style={{ borderRadius: "10px" }}>

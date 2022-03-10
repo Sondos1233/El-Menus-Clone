@@ -81,17 +81,16 @@ export default function Navbar() {
     };
 
     const openModel = () => {
-        return(
-            <>
-            <DineoutbyCity></DineoutbyCity>
-        </>
-        )
+       
     }
 
 
     return (
         <>
-        <ModelLocation></ModelLocation>
+        {/* <button >
+                Launch demo modal
+            </button> */}
+        <ModelLocation id= "#exampleModal"></ModelLocation>
             <nav className="nav-lg-Screen sticky-top d-lg-block d-none navCont">
                 <nav class="nav-lg-Screen sticky-top d-lg-block d-none" dir={language == "English" ? "rtl" : "ltr"}>
 
@@ -268,7 +267,7 @@ export default function Navbar() {
                                     className="imgIcon mx-2"
                                 />
                                 <h4 className="headerLocation mx-2">Dine-out in <span>{localStorage.getItem('areaName')}</span></h4>
-                                <button className="btn change-btn mx-2" onClick={() => { openModel() }}>CHANGE</button>
+                                <button className="btn change-btn mx-2"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">CHANGE</button>
                             </div>
                         </div>
                     </section>
