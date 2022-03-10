@@ -1,0 +1,18 @@
+@use "mixins";
+.aDivCoverModel{
+    height: 300px;
+    max-height: 300px;
+  overflow: hidden;
+    position: relative;
+    width: 100%;
+    .aImgCoverModel{
+        top: -50%;
+        width: 100%;
+        filter: brightness(60%);
+        position: absolute;
+    }
+}
+
+.aDescPro{
+@include mixins.font(14px,400,20px,#a9acae)
+}
