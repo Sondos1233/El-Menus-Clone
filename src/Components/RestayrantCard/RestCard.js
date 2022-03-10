@@ -11,7 +11,7 @@ import {
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import NoData from '../../images/NoData.svg'
 const RestCard = (props) => {
   const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
@@ -83,7 +83,7 @@ function hello(rate){
     <p id="aTastPar">Restaurants <span style={{fontSize:"medium"}} className="mb-1">{`(${filteredList(Res,props.Type).length})`}</span> </p>
       <div className="container-fluid aResDiv ">
         <div className="row" id="aResDivrow">
-        {filteredList(Res,props.Type).map((res,index)=>{
+          {filteredList(Res,props.Type).length?(filteredList(Res,props.Type).map((res,index)=>{
               return(
           <div className="col-lg-4 col-md-12">
             <div className="aContentCard">
@@ -179,7 +179,10 @@ function hello(rate){
           
             </div>
           </div>
-        )})}
+        )})):(<div className="text-center">
+          <img src={NoData} width="300px" height="300px"/>
+        </div>)}
+        
         </div>
 
         <div className="mt-5 mb-5 d-grid gap-1">
