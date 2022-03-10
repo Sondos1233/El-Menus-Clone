@@ -15,7 +15,7 @@ import SandwichesImg from './../../images/Dineout/Sandwiches.jpg'
 
 
 // FireStore
-import { db } from './../../Firebase/Firebase'
+import { db } from '../../firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
 
 //Shrouk Slider JS CODE

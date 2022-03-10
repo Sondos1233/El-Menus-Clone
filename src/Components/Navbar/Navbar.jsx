@@ -6,13 +6,10 @@ import {faSearch, faUser} from "@fortawesome/free-solid-svg-icons";
 import React, {useState, useEffect} from "react";
 import ReactModal from 'react-modal';
 import { auth } from '../firebase/firebase.config';
-import { firestore } from '../../Firebase/firebase-config';
-import {addDoc, collection} from 'firebase/firestore'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
 import { Link } from 'react-router-dom';
-import DineoutbyCity from '../Dineout/DineoutByCity/DineoutByCity';
 import ModelLocation from '../ModelLocation/modelLoc';
 
 export default function Navbar() {

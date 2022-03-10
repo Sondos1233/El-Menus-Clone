@@ -89,21 +89,13 @@ nav .btn {
     position: relative;
     
 }
-.input-holder2{
-    margin-left: -24px;
-}
-.home_main_section_content button{
-    margin-left: -24px;
+.input-holder{
+    margin-right: -24px;
 }
 input[type="search"]::-webkit-search-cancel-button {
     display: none;
 }  
-datalist {
-	display: none;
-}
-input::-webkit-calendar-picker-indicator {
-	display: none;
-}
+
 
 .home_main_section .input-holder input {
     width: 100%;
@@ -122,16 +114,17 @@ input:focus{
 
 .home_main_section .search-icon {
     position: absolute;
-    right: 18px;
+    right: 25px;
     top: 34%;
 }
 .home_main_section .icon{
     position: absolute;
-    left: 18px;
+    left: 25px;
     top: 34%;
     color: #cdcfcf;
 }
 .home_main_section .input-holder2 input{
+    width: 100%;
     background-color: #f2f5f7;
     border: none;
     border-left: 1px solid #e8ebed;
@@ -144,11 +137,7 @@ input:focus{
     -ms-border-radius: 0 4px 4px 0;
     -o-border-radius: 0 4px 4px 0;
 }
-.home_main_section_content .submit-btn{
-    height: 65px;
-    width: 70%;
-    position: relative;
-}
+
 .section_footer{
     margin-top: 100px;
     position: relative;
@@ -246,7 +235,30 @@ input:focus{
 .clear{
     clear: both;
 }
-
+.dropdownRes{
+   margin-top: -10px;
+   padding-right: 10px;
+}
+.dropdownRes li{
+    border: none;
+}
+.dropdownRes li:hover{
+    background-color: rgb(228, 226, 226);
+}
+.logoResDrop{
+    border-radius: 4px;
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    border: #464748;
+    --webkit-box-shadow: 0px 0px 6px 1px rgba(115,115,115,0.47);
+    -moz-box-shadow: 0px 0px 6px 1px rgba(115,115,115,0.47);
+    box-shadow: 0px 0px 6px 1px rgba(115,115,115,0.47);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
 /* *****************SignUp Modal styling ****************/
 
 .modalContainer{
