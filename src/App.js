@@ -19,8 +19,6 @@ import { ResProvider } from "./Components/Context/Resturant";
 import { AboutUs } from "./Components/AboutUs/AboutUs";
 import { Terms } from "./Components/Terms/Terms";
 import { Privacy } from "./Components/Terms/Privacy";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 function App() {
   const [City, setCity] = useState("Cairo");
   const [Res, setRes] = useState("");

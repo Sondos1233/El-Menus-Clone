@@ -13,14 +13,12 @@ import {
   faUser,
   faSearch
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import Card from "./card";
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from "../../../store/action/languageAction";
 import React, { useState, useEffect } from "react";
 import ReactModal from "react-modal";
-import { auth } from "../../firebase/firebase.config";
-import { firestore } from "../../firebase/firebase.config";
+import { auth,firestore } from "../../firebase/firebase.config";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import {
   signInWithEmailAndPassword,
