@@ -3,6 +3,8 @@ import Home from "./Components/Home/Home";
 import { Provider } from "react-redux";
 import JoinUs from "./Components/JoinUs/joinUs";
 import Dineout from "./Components/Dineout/Dineout";
+import Dineout from './Components/Dineout/Dineout';
+import Navbar from "./Components/Navbar/Navbar";
 import store from "./store/store";
 import Career from "./Components/Career/Career";
 import OfferParent from "./Components/Offers/OffersParent";
