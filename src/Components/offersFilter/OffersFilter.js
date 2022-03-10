@@ -5,7 +5,7 @@ import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faPercent } from "@fortawesome/free-solid-svg-icons";
 import RadioButton from "../Radiobutton/RadioButton";
-import { firestore } from "../../Firebase/firebase-config";
+import { firestore } from "../../firebase/firebase-config";
 import {
   collection,
   getDocs,
@@ -16,7 +16,6 @@ import {
 import { useEffect, useState } from "react";
 const OffersFilter = () => {
   const [Res, setRes] = useState([]);
-
   const RestaurantCollecRef = collectionGroup(firestore, "Restaurant");
 
   useEffect(() => {
@@ -121,7 +120,7 @@ return (
                    // console.log(res)
                       return <RadioButton data={res} name="type" />
                     })
-                }
+              }
           </div>
         </div>
       </section>

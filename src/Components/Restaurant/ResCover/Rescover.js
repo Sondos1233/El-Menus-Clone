@@ -1,7 +1,7 @@
 import '../../main-style.css'
 import '../../Restaurant.scss'
 import '../../mixins.scss'
-import { firestore } from "../../../Firebase/firebase-config";
+import { firestore } from "../../../firebase/firebase-config";
 import {
   collection,
   getDocs,

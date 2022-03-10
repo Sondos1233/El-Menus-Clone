@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
 import { faStar, faCircle, faStreetView } from "@fortawesome/free-solid-svg-icons";
-import { firestore ,storage } from "../../Firebase/firebase-config";
+import { firestore ,storage } from "../../firebase/firebase-config";
 import {
     collection,
     getDocs,getDoc,
@@ -12,12 +12,13 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const RestCard = () => {
-    const [Res, setRes] = useState([]);
+const RestCard = (props) => {
+  const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
   const RestaurantCollecRef = collection(firestore, "Restaurant");
   useEffect(() => {
    const getRes = async () => {
+     
       const data = await getDocs(RestaurantCollecRef);
       setRes(
         data.docs.map((doc) => {
@@ -29,7 +30,8 @@ const RestCard = () => {
           return doc;
         })
       );
-    };
+    
+     }
     getRes();
     const bla = async () => {
       let q = query(collectionGroup(firestore, "Offers"));
@@ -40,6 +42,20 @@ const RestCard = () => {
     };
     bla();
   });
+  const byFilterRes = (Res, Type) => {
+    if(Res.IsActivated){
+      if (Type && Type !='All Dishes') {
+        return Res.Type.includes(Type);
+      }else if(Type =='All Dishes'){
+          return Res
+      }
+       else return Res;
+    }
+  };
+  const filteredList = (ResList, Type) => {
+    return ResList.filter(Res => byFilterRes(Res.data(), Type));
+  }
+
 let k;
   let counter = 0;
 function hello(rate){
@@ -64,9 +80,10 @@ function hello(rate){
 }
   return (
     <>
+    <p id="aTastPar">Restaurants <span style={{fontSize:"medium"}} className="mb-1">{`(${filteredList(Res,props.Type).length})`}</span> </p>
       <div className="container-fluid aResDiv ">
         <div className="row" id="aResDivrow">
-        {Res.map((res,index)=>{
+        {filteredList(Res,props.Type).map((res,index)=>{
               return(
           <div className="col-lg-4 col-md-12">
             <div className="aContentCard">
@@ -75,7 +92,7 @@ function hello(rate){
                   <figure className="aFigRes position-relative"> 
                     <img
                       src={res.data().ImageURL}//{attract[index]}
-                      className="aImg card-img-top"
+                      className="aImg card-img-top "
                       alt="..."
                     />
                     <div className="aSliderImgCrd d-flex justify-content-end ">
@@ -159,7 +176,7 @@ function hello(rate){
                   </div>
                 </div>
               </Link>
-            {counter++}
+          
             </div>
           </div>
         )})}
