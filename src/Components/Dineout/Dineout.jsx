@@ -14,17 +14,6 @@ import SandwichesImg from './../../images/Dineout/Sandwiches.jpg'
 import { db } from './../../Firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
 
-//Shrouk Slider JS CODE
-function updateSlidePosition(e, direction) {
-    const firstSlideWidth = e.querySelector(".slider__slide").offsetWidth;
-
-    if (direction === "prev") {
-        e.scrollLeft = e.scrollLeft - firstSlideWidth;
-    } else {
-        e.scrollLeft = e.scrollLeft + firstSlideWidth;
-    }
-}
-
 export default function Dineout() {
     // //Restaurants Collection
     const [Restaurants, setRestaurants] = useState([]);
