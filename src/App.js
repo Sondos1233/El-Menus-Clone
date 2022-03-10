@@ -18,6 +18,7 @@ import { useState } from "react";
 import { ResProvider } from "./Components/Context/Resturant";
 import {AboutUs} from './Components/AboutUs/AboutUs'
 import {Terms} from './Components/Terms/Terms'
+import {Privacy} from './Components/Terms/Privacy'
 function App() {
   const [City, setCity] = useState("Cairo");
   const [Res, setRes] = useState("");
@@ -44,6 +45,7 @@ function App() {
         <Route path="/Offers" exact component={OfferParent}/>
         <Route path="/AboutUs" exact component={AboutUs}/>
         <Route path="/Terms" exact component={Terms}/>
+        <Route path="/Privacy" exact component={Privacy} />
         {/* <Route  path="/userProfile" exact component={Userprofile} />        
           <Route exact path="/accountSetting" component={AccountSetting}  /> */}
         </Fragment>

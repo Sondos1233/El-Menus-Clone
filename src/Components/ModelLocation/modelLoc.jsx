@@ -3,7 +3,7 @@ import './modelLoc.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 // FireStore
-import { db } from './../../firebase/Firebase'
+import { db } from './../../Firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
 
 export default function ModelLocation() {

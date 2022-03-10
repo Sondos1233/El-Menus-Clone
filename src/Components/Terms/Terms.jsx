@@ -1,3 +1,4 @@
+import './Terms.css'
 export  function Terms() {
   return (
     <>
