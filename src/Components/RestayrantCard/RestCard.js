@@ -8,7 +8,7 @@ import {
     doc,docs,
     query,
     collectionGroup,
-    where
+    where,limit
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -16,19 +16,24 @@ import NoData from '../../images/NoData.svg'
 const RestCard = (props) => {
   const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
-  const RestaurantCollecRef = collection(firestore, "Restaurant");
+  const [Area,setArea] = useState('Naser City')
+
+  
   useEffect(() => {
    const getRes = async () => {
-     
+    var Area = localStorage.getItem('areaName')
+    const RestaurantCollecRef = query(
+      collection(firestore, "Restaurant"),
+      limit(10),
+      where("Areas", "array-contains", Area.trim())
+  );
+    
       const data = await getDocs(RestaurantCollecRef);
       setRes(
         data.docs.map((doc) => {
-          if (
-            doc.data().IsActivated == undefined ||
-            doc.data().IsActivated == true
-          ) {
-          }
+         
           return doc;
+         
         })
       );
     
@@ -43,18 +48,27 @@ const RestCard = (props) => {
     };
     bla();
   });
+ ;
   const byFilterRes = (Res, Type) => {
     if(Res.IsActivated){
       if (Type && Type !='All Dishes') {
         return Res.Type.includes(Type);
       }else if(Type =='All Dishes'){
-          return Res
+          return Res // const byAreas = (Res, Area) => {
+  //   if(Res.IsActivated){
+  //     if (Area) {
+  //       return Res.Areas.includes(Area);
+  //     } else return Res;
+  //   }
+  // }
       }
        else return Res;
     }
   };
-  const filteredList = (ResList, Type) => {
+  const filteredList = (ResList,Type,Area) => {
     return ResList.filter(Res => byFilterRes(Res.data(), Type));
+    //  ResList.filter(Res => byAreas(Res.data(), Area));
+    
   }
 
 let k;
