@@ -1,6 +1,6 @@
 /* Shrouk Slider*/
 
-$breakpoint: 980px;
+// $breakpoint: 980px;
 
 *,
 :after,
@@ -52,16 +52,15 @@ $breakpoint: 980px;
 .slider__slide {
     // flex: 1 0 80%;
     width: 100%;
-    height: 400px;
-    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
+    height: auto;
+    // box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    // max-width: 80%;
     scroll-snap-align: center;
 
-    @media (min-width: $breakpoint) {
-        flex-basis: 26%;
-        max-width: 26%;
-    }
+    // @media (min-width: $breakpoint) {
+    //     flex-basis: 26%;
+    //     max-width: 26%;
+    // }
 }
 
 .slide__content {
@@ -93,9 +92,9 @@ $breakpoint: 980px;
     justify-content: center;
     gap: 12px;
 
-    @media (min-width: $breakpoint) {
-        display: none;
-    }
+    // @media (min-width: $breakpoint) {
+    //     display: none;
+    // }
 }
 
 .slider__arrow {

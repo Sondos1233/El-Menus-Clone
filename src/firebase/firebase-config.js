@@ -15,6 +15,7 @@ apiKey: "AIzaSyC0-XXmwY_ScpXq_VJxPvwTjXQ_r0jcF18",
   appId: "1:57271621220:web:ff707ce3b18b1b76db7171",
   measurementId: "G-GT1JVN96RD"
 };
+  
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

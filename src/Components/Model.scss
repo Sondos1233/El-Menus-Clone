@@ -1,0 +1,40 @@
+@use "mixins";
+.aDivCoverModel{
+    height: 300px;
+    max-height: 300px;
+  overflow: hidden;
+    position: relative;
+    width: 100%;
+    .aImgCoverModel{
+        width: 100%;
+        filter: brightness(60%);
+        position: absolute;
+    }
+}
+
+.aDescPro{
+@include mixins.font(14px,400,20px,#a9acae)
+}
+.aModalFooter{
+  position: sticky;
+  z-index: 1;
+  bottom: 0;
+  border-top: 0;
+  background: #fff;
+  padding: 15px;
+  .aBuyButton{
+    @include mixins.font(16px,500,33px,white);
+    background-color: var(--first-color);
+    width:100%;
+    margin:10px;
+    padding:20px 30px;
+  }
+  .aPlusMinus{
+    text-align: center;
+    padding:10px;
+    width: 100%;
+    button,span{
+      @include mixins.font(50px,500,33px,grey);
+    }
+  }
+}

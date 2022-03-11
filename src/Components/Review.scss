@@ -1,0 +1,8 @@
+@use "mixins";
+.btnAddReview{
+    @include mixins.font(15px, 400, 20px, white);
+    @include mixins.backgrounds(var(--first-color));
+}
+h4{
+    @include mixins.font(24px, 600, 22px , #2a2b2c)
+}

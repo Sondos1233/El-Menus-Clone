@@ -1,6 +1,5 @@
 import "./App.css";
 import Home from "./Components/Home/Home";
-import { Provider } from "react-redux";
 import JoinUs from "./Components/JoinUs/joinUs";
 import Dineout from "./Components/Dineout/Dineout";
 import store from "./store/store";
@@ -9,7 +8,6 @@ import OfferParent from "./Components/Offers/OffersParent";
 import Delivery from "./Components/Delivery/Delivery";
 import Restaurant from "./Components/Restaurant/Restaurant";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Fragment } from "react";
 import description from "./Components/Job/description";
 import Footer from "./Components/Footer/footer";
 import Navbar from "./Components/Navbar/Navbar";
@@ -19,6 +17,10 @@ import { ResProvider } from "./Components/Context/Resturant";
 import { AboutUs } from "./Components/AboutUs/AboutUs";
 import { Terms } from "./Components/Terms/Terms";
 import { Privacy } from "./Components/Terms/Privacy";
+import UserProfile  from './Components/userProfile/userProfile';
+import AccountSetting from './Components/accountSetting/accountSetting'
+import { Provider } from 'react-redux';
+import { Fragment } from 'react';
 function App() {
   const [City, setCity] = useState("Cairo");
   const [Res, setRes] = useState("");
@@ -46,8 +48,8 @@ function App() {
                   <Route path="/AboutUs" exact component={AboutUs} />
                   <Route path="/Terms" exact component={Terms} />
                   <Route path="/Privacy" exact component={Privacy} />
-                  {/* <Route  path="/userProfile" exact component={Userprofile} />        
-          <Route exact path="/accountSetting" component={AccountSetting}  /> */}
+                  <Route  path="/userProfile" exact component={UserProfile} />        
+                  <Route exact path="/accountSetting" component={AccountSetting}  />
                 </Fragment>
               </Switch>
               <Footer />

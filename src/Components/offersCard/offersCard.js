@@ -9,42 +9,40 @@ import "../main-style.css";
 const OffersCard = () => {
   const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
-
+  const [logo, setLogo] = useState([]);
+  const [attract,setAttract] = useState([])
   const RestaurantCollecRef = collection(firestore, "Restaurant");
+  
+  let arr=[]; let arr2=[];
 
-  /* useEffect(() => {
-    const getRes = async () => {
+  useEffect(() => {
+   const getRes = async () => {
       const data = await getDocs(RestaurantCollecRef);
       setRes(
         data.docs.map((doc) => {
-          const bla = async () => {
-            let q = query(collectionGroup(firestore, "Offers"));
-            const querySnapshot = await getDocs(q);
-            setOffer(
-              querySnapshot.forEach((doc) => {
-                return doc.data();
-              })
-            );
-          };
-          bla();
           if (
             doc.data().IsAccepted == undefined ||
             doc.data().IsAccepted == true
           ) {
           }
-          return doc.data();
+          //getLogo(doc.id)
+          return doc;
         })
       );
     };
     getRes();
-  });*/
+    const bla = async () => {
+      let q = query(collectionGroup(firestore, "Offers"));
+      const querySnapshot = await getDocs(q);
+      setOffer(
+        querySnapshot.docs.map((doc)=> {return doc.data()})
+      );
+    };
+    bla();
+  });
 
   return (
     <>
-      {offer.map((i) => {
-        return <div>{console.log( i.Description)}</div>;
-      })}
-
       <section className="container-fluid aTastyOffers">
         {/* <div className="container-fluid" id="aWords">
           <div className="row">
@@ -71,44 +69,51 @@ const OffersCard = () => {
 
         <div className="container-fluid" id="aOfferCards">
           <div className="row mb-3 " id="aOfferCardsrow">
-            <div className="col-lg-12 col-md-4 position-relative aproductDiv">
-              <Link className="aLinkCard" to="/Restaurant/1">
-                <figure className="aFigRes">
-                  <img
-                    id="myimg"
-                    src="	https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/2ee22548-148d-426e-9423-a6150ac149fc.jpg" //{/*url2*/}
-                    className="card-img-top aImgCard"
-                    alt="..."
-                  />
-                  <figcaption className="aImgCaption">
-                    <h4 className="aImgTitle">
-                      Broasted Fried Chicken with Syrian Flavor
-                    </h4>
-                  </figcaption>
-                </figure>
-
-                <div className=" position-relative card-body aCardBody">
-                  <img
-                    id="aImgRes"
-                    src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/7ce1525f-bba1-4434-bd64-22a440fb74fb.jpg" //{/*url1*/}
-                    alt=""
-                    className="rounded-3 me-3 float-start"
-                  />
-
-                  <h3 className="card-title " id="aResName">
-                    {/*Res.ResName*/} RES NAME
-                  </h3>
-                  <div className="mt-3">
-                    <div
-                      className="alert-success aDisAlert aDisAlertof"
-                      role="alert"
-                    >
-                      {/*doc.data().Description*/}
-                    </div>
+            {Res.map((res,index)=>{
+              return(
+                  <div className="col-lg-3 col-md-4 position-relative aproductDiv">
+                    <Link className="aLinkCard" to={`/Restaurant/${res.id}`}>
+                      <figure className="aFigRes">
+                        <img
+                          id="myimg"
+                          src={res.data().ImageURL}
+                          className="card-img-top aImgCard"
+                          alt="..."
+                        />
+                        <figcaption className="aImgCaption">
+                          <h4 className="aImgTitle">
+                            Broasted Fried Chicken with Syrian Flavor
+                          </h4>
+                        </figcaption>
+                      </figure>
+      
+                      <div className=" position-relative card-body aCardBody">
+                        <img
+                          id="aImgRes"
+                   
+                          src={res.data().ImageLogo}
+                          alt=""
+                          className="rounded-3 me-3 float-start"
+                        />
+      
+                        <h3 className="card-title " id="aResName">
+                          {res.data().ResName} 
+                        </h3>
+                        <div className="mt-3">
+                          <div
+                            className="alert-success aDisAlert aDisAlertof"
+                            role="alert"
+                            >
+                              {(typeof offer[index]?.Description != "undefined" ? offer[index]?.Description:" ")}
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
                   </div>
-                </div>
-              </Link>
-
+                  )
+                })
+            }
+          </div>
               {/* <button type="button " id="previous" className="rounded-circle">
                 {" "}
                 <svg
@@ -118,15 +123,15 @@ const OffersCard = () => {
                   fill="white"
                   className="bi bi-chevron-left"
                   viewBox="0 0 20 16"
-                >
+                  >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-                  />
+                    />
                 </svg>{" "}
-              </button> */}
+              </button>  */}
 
-              {/* <button type="button" id="next" className="rounded-circle">
+               {/* <button type="button" id="next" className="rounded-circle">
                 {" "}
                 <b>
                   {" "}
@@ -141,13 +146,10 @@ const OffersCard = () => {
                     <path
                       fill-rule="evenodd"
                       d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                    />
+                      />
                   </svg>{" "}
                 </b>
               </button> */}
-
-            </div>
-          </div>
         </div>
       </section>
     </>

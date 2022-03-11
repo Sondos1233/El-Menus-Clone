@@ -79,7 +79,10 @@ a{
 }
 .slide-img{
     position: relative;
-    
+    width: 500px;
+    height: auto;
+    box-shadow: 1px 1px 10px grey;
+
 }
 
 .slide-img img{
