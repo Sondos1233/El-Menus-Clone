@@ -120,6 +120,7 @@ const Meals = (props) => {
     setIsOpen(false);
   };
 
+  
   return (
     <>
       <div
@@ -203,6 +204,7 @@ const Meals = (props) => {
           })}
         </section>
       </div>
+
       {/* Meal Modal */}
       <Modal show={isOpen} onHide={hideModal} onExiting={exitModel} onc>
         <div className="aDivCoverModel">
