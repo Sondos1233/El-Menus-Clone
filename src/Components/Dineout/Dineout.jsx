@@ -30,6 +30,9 @@ export default function Dineout() {
     const [QueryByMood, setQueryByMood] = useState([]);
     const [QueryByMood2, setQueryByMood2] = useState([]);
 
+    // Query Area
+    const [QueryByArea, setQueryByArea] = useState([]);
+
 
     // QueryCity
     const [QueryByCity, setQueryByCity] = useState([]);
@@ -66,22 +69,8 @@ export default function Dineout() {
         }
         getResByMoodQuery2()
 
-        // Query for City
-        const QueryByCityDocs = query(
-            collectionGroup(db, "Branches"),
-            limit(10),
-            where("LocName", "==", "Nasr City")
-        );
-
-        const getResByCityQuery = async () => {
-            const QueryData = await getDocs(QueryByCityDocs)
-            // console.log(QueryData)
-            setQueryByCity(QueryData.docs.map((doc) => ({ ...doc.data() })))
-
-        }
-        getResByCityQuery()
-
-
+        // Quetry Area
+        filterByArea();
 
     }, [])
 
@@ -159,6 +148,29 @@ export default function Dineout() {
 
     }
 
+    const [x, setx] = useState(localStorage.getItem('areaName'))
+    const filterByArea = () => {
+        // console.log(area)
+
+        var Area = localStorage.getItem('areaName')
+        console.log(Area)
+
+        const QueryByAreaDocs = query(
+            collection(db, "Restaurant"),
+            limit(10),
+            where("Areas", "array-contains", Area.trim())
+        );
+
+        const getResByAreaQuery = async () => {
+            const QueryData = await getDocs(QueryByAreaDocs)
+            // console.log(QueryData)
+            setQueryByArea(QueryData.docs.map((doc) => ({ ...doc.data() })))
+
+        }
+        getResByAreaQuery()
+
+    }
+
     return (
         <>
             {/* FOR TESTING ONLY */}
@@ -167,10 +179,10 @@ export default function Dineout() {
             </div>
             <div>
                 {
-                    QueryByCity.map((test) => {
+                    QueryByArea.map((test) => {
                         return (
                             <div>
-                                {test.LocName}
+                                {test.ResName}
                             </div>
                         )
                     })
@@ -371,7 +383,7 @@ export default function Dineout() {
             <section className="disArear-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
                     <div className="col-12 mx-3 py-3">
-                        <h4 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>Discover Maadi</h4>
+                        <h4 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>Discover {localStorage.getItem('areaName')}</h4>
                     </div>
 
                     <div className="col-12 d-flex">
@@ -380,7 +392,7 @@ export default function Dineout() {
                     
                                 <div class="slider__inner js-slider-inner">
                                     {
-                                        Restaurants.map((Res) => {
+                                        QueryByArea.map((Res) => {
                                             return (
                                                 <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
                                           
@@ -472,6 +484,3 @@ export default function Dineout() {
         </>
     );
 }
-
-
-
