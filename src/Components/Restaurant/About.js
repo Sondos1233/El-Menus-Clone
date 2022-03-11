@@ -11,7 +11,7 @@ import GoogleMapReact from "google-map-react";
 import { faStar, faSun } from "@fortawesome/free-regular-svg-icons";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { firestore , storage} from "../../firebase/firebase-config";
+import { firestore , storage} from "../../Firebase/firebase-config";
 import {
   collection,
   getDoc,

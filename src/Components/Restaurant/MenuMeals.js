@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { firestore } from "../../firebase/firebase-config";
+import { firestore } from "../../Firebase/firebase-config";
 import { Modal } from "react-bootstrap";
 import "../Model.scss";
 import "../Delivery.scss";

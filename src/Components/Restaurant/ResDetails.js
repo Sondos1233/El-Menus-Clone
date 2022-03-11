@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar,faMapMarkerAlt,faPhoneAlt} from "@fortawesome/free-solid-svg-icons";
 import {useEffect,useState} from 'react'
 import {useParams } from 'react-router-dom';
-import { firestore , storage} from "../../firebase/firebase-config";
+import { firestore , storage} from "../../Firebase/firebase-config";
 import {
   collection,
   getDoc,
