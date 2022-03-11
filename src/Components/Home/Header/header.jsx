@@ -342,10 +342,6 @@ export default function Header() {
                       }}
                     />
                    
-
-                    <input type="Search"  placeholder="Find a Restaurant" onChange={(e) => {
-                        handleChangeRes(e);
-                      }} />
                     <span className="search-icon text-secondary">
                       <FontAwesomeIcon icon={faSearch}/>
                     </span>
@@ -394,7 +390,7 @@ export default function Header() {
                 <div className=" col-md-2 col-sm-6 position-relative" >
                   
                     <button
-                      style={{"width":"100%","lineHeight":"55px"}}
+                      style={{"width":"100%"}}
                       className="btn-primary btn "
                     >
                       Go <FontAwesomeIcon icon={faArrowRight} />
