@@ -300,6 +300,7 @@
 
 
 .aDivTopDish {
+  
   cursor: pointer;
   margin:5px;
 
@@ -311,7 +312,9 @@
   img:hover {
     @include mixins.border(10px, 3px solid var(--first-color));
   }
-
+  a{
+    font-size: small;
+  }
   a:focus > img {
     @include mixins.border(10px, 3px solid var(--first-color));
   }
