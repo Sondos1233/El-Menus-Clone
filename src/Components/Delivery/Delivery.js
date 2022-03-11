@@ -23,7 +23,6 @@ const Delivery = () => {
     setType(e.target.text)
   };
   const handleType2=(e)=>{
-    e.preventDefault();
     console.log(e.target.value)
     setType(e.target.value)
   }

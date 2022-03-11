@@ -2,7 +2,9 @@ import {
   faCheck,
   faDotCircle,
   faPlusCircle,
-  faThumbsUp,faShoppingBag,faMinusCircle
+  faThumbsUp,
+  faShoppingBag,
+  faMinusCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
@@ -23,7 +25,6 @@ import MealModal from "./MealModal/mealModal";
 const Meals = (props) => {
   const [Res, setRes] = useState();
   const [Meals, setMeals] = useState();
-  const [MealDet, setMealDet] = useState("Loading");
   let id = useParams();
   id = id.id;
   const RestaurantCollecdocRef = collection(
@@ -89,10 +90,13 @@ const Meals = (props) => {
       sessionStorage.removeItem("reloadCount");
     }
   }, [counter]);
+
+  //model
+  const [MealDet, setMealDet] = useState("Loading");
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("Transitioning...");
-let IsFirst = false;
-
+  let [qty,setQty] = useState(1);
+  let IsFirst = false;
   const showModal = () => {
     setIsOpen(true);
   };
@@ -100,8 +104,7 @@ let IsFirst = false;
   const hideModal = () => {
     setIsOpen(false);
     setTitle("Transitioning..");
-    setIsOpen(false)
-
+    setIsOpen(false);
   };
 
   const modalLoaded = () => {
@@ -114,7 +117,7 @@ let IsFirst = false;
   };
   const exitModel = () => {
     setMealDet("");
-    setIsOpen(false)
+    setIsOpen(false);
   };
 
   return (
@@ -200,116 +203,121 @@ let IsFirst = false;
           })}
         </section>
       </div>
-
-      <Modal
-        show={isOpen}
-        onHide={hideModal}
-        onExiting={exitModel}
-        onc
-      >
+      {/* Meal Modal */}
+      <Modal show={isOpen} onHide={hideModal} onExiting={exitModel} onc>
         <div className="aDivCoverModel">
           <img className="aImgCoverModel" alt="" src={MealDet.ProImg} />
         </div>
         <Modal.Body>
           <div className="container">
             <div className="row">
-          <div className="flex flex-column">
-            <h2 className="mt-2">{MealDet?.ProName}</h2>
-            <p className="aDescPro mt-2">{MealDet.Description}</p>
-            <div className="">
-              <h5>
-                <b>Select Size</b>
-              </h5>
-            </div>
-              {MealDet.Size?.map((i,index) => {
-              if(index===0) IsFirst = true
-              else IsFirst =false
-              console.log(IsFirst,index)
-              index=+1;
-                return (
-                  <>
-                  <div className="mt-3 d-flex justify-content-between">
-                    <div className="row">
-                      <div className="col">
-                        <label className="aRadio">
-                          <input
-                            type="radio"
-                            name="size"
-                            id=""
-                            value={i.Price}
-                            checked={IsFirst}
-                          />
-                          <span className="adot"></span>{" "}
-                          <FontAwesomeIcon
-                            icon={faDotCircle}
-                            className="aCheckdot"
-                          >
-                            {" "}
-                          </FontAwesomeIcon>
-                        </label>
+              <div className="flex flex-column">
+                <h2 className="mt-2">{MealDet?.ProName}</h2>
+                <p className="aDescPro mt-2">{MealDet.Description}</p>
+                <div className="">
+                  <h5>
+                    <b>Select Size</b>
+                  </h5>
+                </div>
+                {MealDet.Size?.map((i, index) => {
+                  if (index === 0) IsFirst = true;
+                  else IsFirst = false;
+                  console.log(IsFirst, index);
+                  index = +1;
+                  return (
+                    <>
+                      <div className="mt-3 d-flex justify-content-between">
+                        <div className="row">
+                          <div className="col">
+                            <label className="aRadio">
+                              <input
+                                type="radio"
+                                name="size"
+                                id=""
+                                value={i.Price}
+                                defaultChecked={IsFirst}
+                              />
+                              <span className="adot"></span>{" "}
+                              <FontAwesomeIcon
+                                icon={faDotCircle}
+                                className="aCheckdot"
+                              >
+                                {" "}
+                              </FontAwesomeIcon>
+                            </label>
+                          </div>
+                          <div className="col aSortType mt-2">{i.Name}</div>
+                        </div>
+                        <div className="aSortType">
+                          <p style={{ color: "grey" }}> {i.Price} EGP</p>
+                        </div>
                       </div>
-                      <div className="col aSortType mt-2">{i.Name}</div>
-                    </div>
-                      <div className="aSortType">
-                    <p style={{color:'grey'}}> {i.Price} EGP</p>
+                    </>
+                  );
+                })}
+                <h5 className="mt-2">
+                  <b>Additions</b>
+                </h5>
+                {MealDet.Extras?.map((i) => {
+                  return (
+                    <>
+                      <div className="mt-3 d-flex justify-content-between">
+                        <div className="row">
+                          <div className="col-3">
+                            <label className="abox position-relative d-block">
+                              <input type="checkbox" name="" value={i.Price} />
+                              <span className="acheck position-absolute">
+                                <FontAwesomeIcon
+                                  icon={faCheck}
+                                  className="acheckmark"
+                                ></FontAwesomeIcon>
+                              </span>
+                            </label>
+                          </div>
+                          <div className="col-9">
+                            <span className="ms-2"> {i.Name}</span>
+                          </div>
+                        </div>
+                        <div className="aSortType">
+                          <p style={{ color: "grey" }}> {i.Price} EGP</p>
+                        </div>
                       </div>
-            </div>
-                  </>
-                );
-              })}
-            <h5 className="mt-2">
-                <b>Additions</b>
-              </h5>
-              {MealDet.Extras?.map((i) => {
-                return (
-                  <>
-                  <div className="mt-3 d-flex justify-content-between">
-                  <div className="row">
-                    <div className="col-3">
-                      <label className="abox position-relative d-block">
-                      <input type="checkbox" name="" value={i.Price} />
-                      <span className="acheck position-absolute">
-                        <FontAwesomeIcon
-                          icon={faCheck}
-                          className="acheckmark"
-                        ></FontAwesomeIcon>
-                      </span>
-                    </label>
-                    </div>
-                    <div className="col-9">
-                        <span className="ms-2"> {i.Name}</span>
-                    </div>
+                    </>
+                  );
+                })}
 
-                  </div>
-                      <div className="aSortType">
-                    <p style={{color:'grey'}}> {i.Price} EGP</p>
-                      </div>
-            </div>
-                  </>
-                );
-              })}
-
-            <h5 className="mt-2">
-                <b>Special Instructions</b>
-            </h5>
-            <div class="mb-3">
-              <label for="" className="form-label"></label>
-              <input type="text"
-                  className="form-control form-control-lg" name="" id="" aria-describedby="helpId" placeholder="eg. Please don't add onion" />
+                <h5 className="mt-2">
+                  <b>Special Instructions</b>
+                </h5>
+                <div class="mb-3">
+                  <label for="" className="form-label"></label>
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    name=""
+                    id=""
+                    aria-describedby="helpId"
+                    placeholder="eg. Please don't add onion"
+                  />
+                </div>
               </div>
-            
-          </div>
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer className="aModalFooter">
           <div className="aPlusMinus">
-            <button className="btn ms-2" ><FontAwesomeIcon icon={faMinusCircle}></FontAwesomeIcon></button>
-            <span style={{color:"#333333",marginTop:'20px'}} > 1 </span>
-            <button className="btn ms-2"><FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon></button>
+            <button className="btn ms-2" onClick={()=>{if(qty>1) setQty(qty-1)}}>
+              <FontAwesomeIcon icon={faMinusCircle}></FontAwesomeIcon>
+            </button>
+            <span style={{ color: "#333333", marginTop: "20px" }}> {qty} </span>
+            <button className="btn ms-2" onClick={()=>{setQty(qty+1)}}>
+              <FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon>
+            </button>
           </div>
-          <button className="btn aBuyButton" onClick={hideModal}><FontAwesomeIcon icon={faShoppingBag}></FontAwesomeIcon><span className="ms-2">ADD TO BASKET</span>
-          <span className='float-end'>price</span>
+          <button className="btn aBuyButton" onClick={hideModal}>
+            <FontAwesomeIcon icon={faShoppingBag}></FontAwesomeIcon>
+            <span className="ms-2">ADD TO BASKET</span>
+            <span className="float-end">price</span>
           </button>
         </Modal.Footer>
       </Modal>
