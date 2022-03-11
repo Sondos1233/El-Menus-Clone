@@ -4,7 +4,19 @@ import OffersCard from '../offersCard/offersCard';
 import OffersFilter from '../offersFilter/OffersFilter';
 import TDishesCard from '../TopDishes/TDishesCard';
 import RestCard from '../RestayrantCard/RestCard';
+import { useState } from 'react';
 const Delivery = () => { 
+  const [Type,setType]=useState('')
+  const handleType = (e) => {
+    e.preventDefault();
+    //  console.log(e.target.text)
+    setType(e.target.text)
+  };
+  const handleType2=(e)=>{
+    e.preventDefault();
+    console.log(e.target.value)
+    setType(e.target.value)
+  }
   return (
     <>
       <section class="container-fluid" id="aDiscountdiv">
@@ -19,15 +31,14 @@ const Delivery = () => {
       <div class="container-fluid mt-4 ">
         <div class="row">
             <div class="col-lg-3">
-                <OffersFilter />
+                <OffersFilter handleType2={handleType2} />
             </div>
             <div class="col-xl-9 col-lg-12">
               <section class="aTopDishes" id="TD">
-                <TDishesCard />
+                <TDishesCard handleType={handleType} />
               </section>
               <section class="aRestaurant mt-4">
-                  <p id="aTastPar">Restaurants <span style={{fontSize:"medium"}}>( 96 )</span> </p>
-                  <RestCard />
+                  <RestCard Type={Type}/>
               </section>
             </div>
         </div>

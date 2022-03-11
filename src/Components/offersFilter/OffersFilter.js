@@ -14,11 +14,10 @@ import {
   collectionGroup,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { useEffect, useState } from "react";
-const OffersFilter = () => {
+const OffersFilter = ({handleType2}) => {
   const [Res, setRes] = useState([]);
-
   const RestaurantCollecRef = collectionGroup(firestore, "Restaurant");
-
+  
   useEffect(() => {
     const getRes = async () => {
       let q = query(RestaurantCollecRef);
@@ -35,11 +34,7 @@ const OffersFilter = () => {
         let arr=[];
         setTypes.forEach(i=>
             arr.push(i))
-        setRes(
-    arr
-    )
-      
-      
+        setRes(arr)
     };
     getRes();
 });
@@ -51,6 +46,11 @@ let types=[]
     return types
 }
 let k ;
+const handleType=(e)=>{
+  e.preventDefault();
+  console.log(e.target.value)
+ 
+}
 return (
     <>
       <section className="aFilterSec container-fluid">
@@ -109,9 +109,9 @@ return (
         <h5 className="aSortbyTitle">Sort by:</h5>
         <div className="container-fluid acontainerSort">
           <div className="row">
-            <RadioButton data="popular" name="sort" />
+            <RadioButton data="popular"  name="sort"  />
 
-            <RadioButton data="Rating" name="sort" />
+            <RadioButton data="Rating" name="sort"  />
 
             <RadioButton data="Delivery Time" name="sort" />
           </div>
@@ -123,9 +123,9 @@ return (
               {
                   Res.map((res,index)=>{
                    // console.log(res)
-                      return <RadioButton data={res} name="type" />
+                      return <RadioButton data={res}  name="type" handleType2={handleType2} />
                     })
-                }
+              }
           </div>
         </div>
       </section>

@@ -1,10 +1,12 @@
 import "../main-style.css";
 import "../Delivery.scss";
-import "../mixins.scss"
-const TDishesCard = () => {
+import "../mixins.scss";
+import {useState } from "react";
+
+const TDishesCard = ({handleType}) => {
   return (
     <>
-      <div className="container-fluid aWords" >
+      <div className="container-fluid aWords">
         <div className="row">
           <div className="col-6">
             <p id="aTastPar">Discover Top Dishes</p>
@@ -26,61 +28,103 @@ const TDishesCard = () => {
           </div>
           <div className="container">
             <div className="row position-relative">
-              <div className="col aDivTopDish">
-                <a href="#">
+              <div className="col aDivTopDish text-center">
+                <a
+                 className="text-dark fs-6"
+                  href="#"
+                  onClick={(e) => {
+                    handleType(e);
+                  }}
+                >
                   <img
                     width="100%"
                     src="https://www.elmenus.com/public/img/should-delete/all-dishes.png"
                     alt=""
                   />
+                  All Dishes
                 </a>
               </div>
-              <div className="col aDivTopDish">
-                <a href="#">
+              <div className="col aDivTopDish text-center">
+                <a
+                  className="text-dark fs-6"
+                  href="#"
+                  onClick={(e) => {
+                    handleType(e);
+                  }}
+                >
                   <img
                     width="100%"
                     src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/b66b9310-bc6c-449c-a163-4c86947568c0.jpg"
                     alt=""
                   />
+                  Pizza
                 </a>
               </div>
-              <div className="col aDivTopDish">
-                <a href="#">
+              <div className="col aDivTopDish text-center text-dark">
+                <a
+                  className="text-dark fs-6"
+                  href="#"
+                  onClick={(e) => {
+                    handleType(e);
+                  }}
+                >
                   <img
                     width="100%"
                     src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/a9dd12fb-782a-40d7-a9b3-34fba2802d2b.jpg"
                     alt=""
                   />
+                  Fried chicken
                 </a>
               </div>
-              <div className="col aDivTopDish">
-                <a href="#">
+              <div className="col aDivTopDish text-center text-dark">
+                <a
+                  className="text-dark fs-6"
+                  href="#"
+                  onClick={(e) => {
+                    handleType(e);
+                  }}
+                >
                   <img
                     width="100%"
                     src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/c4169de0-5ef1-462f-b9da-b190d5616acf.jpg"
                     alt=""
                   />
+                  Pasta
                 </a>
               </div>
-              <div className="col aDivTopDish">
-                <a href="#">
+              <div className="col aDivTopDish text-center text-dark">
+                <a
+                  className="text-dark fs-6"
+                  href="#"
+                  onClick={(e) => {
+                    handleType(e);
+                  }}
+                >
                   <img
                     width="100%"
                     src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/444d49c0-f073-4cba-bbb6-36838b1933f4.jpg"
                     alt=""
                   />
+                  Grill
                 </a>
               </div>
-              <div className="col aDivTopDish">
-                <a href="#">
+              <div className="col aDivTopDish text-center text-dark">
+                <a
+                 className="text-dark fs-6"
+                  href="#"
+                  onClick={(e) => {
+                    handleType(e);
+                  }}
+                >
                   <img
                     width="100%"
                     src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/f7e33790-77d7-4739-8992-d73b810fdc0c.jpg"
                     alt=""
                   />
+                  Burger
                 </a>
               </div>
-              <button type="button" className="aprevious rounded-circle" >
+              <button type="button" className="aprevious rounded-circle">
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +140,7 @@ const TDishesCard = () => {
                   />
                 </svg>{" "}
               </button>
-              <button type="button" className="anext rounded-circle" >
+              <button type="button" className="anext rounded-circle">
                 {" "}
                 <b>
                   {" "}

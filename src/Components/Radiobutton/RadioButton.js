@@ -13,6 +13,7 @@ import {
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import {useState,useEffect} from 'react';
 const RadioButton = (props) => {
+  // console.log(props)
   const [offer, setOffer] = useState([]);
   const [opt, setOpt] = useState(props.data);
   const TestQuery = async(el)=>{
@@ -35,7 +36,9 @@ const RadioButton = (props) => {
     <>
       <div className="col-2">
         <label className="aRadio">
-          <input onClick={TestQuery} type="radio" name={props.name} id="" value={props.data} />
+          <input onClick={(e) => {
+                    props.handleType2(e);
+                  }} type="radio" name={props.name} id="" value={props.data} />
           <span className="adot"></span>{" "}
           <FontAwesomeIcon icon={faDotCircle} className="aCheckdot"> </FontAwesomeIcon>
         </label>
