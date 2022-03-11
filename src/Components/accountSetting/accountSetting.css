@@ -9,11 +9,7 @@ body{
     width: 100%;
 }
 
-.container-fluid{
-    display: flex;
-    flex-direction: column;
-    padding-top: 5%;
-}
+
 
 .container-fluid h1{
     font-weight: 800;

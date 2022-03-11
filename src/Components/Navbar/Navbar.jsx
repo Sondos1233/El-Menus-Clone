@@ -5,28 +5,54 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch, faUser} from "@fortawesome/free-solid-svg-icons";
 import React, {useState, useEffect} from "react";
 import ReactModal from 'react-modal';
-import { auth } from '../firebase/firebase.config';
+import { auth,firestore } from '../firebase/firebase.config'
+import {addDoc, collection, getDocs} from 'firebase/firestore'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
 import { Link } from 'react-router-dom';
 import ModelLocation from '../ModelLocation/modelLoc';
+import DineoutbyCity from '../Dineout/DineoutByCity/DineoutByCity';
 
 export default function Navbar() {
 
 //=======================Handle toggle Buttons With Icons=====================
+  const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
 
-    let user = localStorage.getItem('email')
-    let userName = "";
-    if(user != null){
-        userName = user.split("@")[0];
-        userName = userName[0].toUpperCase() + userName.slice(1);
-    }else{
-      userName = "";
-    }
+   useEffect(()=>{
+            if(localStorage.getItem('email')){
+                console.log("icon");
+                setToggleBtnsWithIcons(false);
+            } else{
+                console.log("btn");
+                setToggleBtnsWithIcons(true);
+            }
+   })
+
+//===============================Get user===================================
+    const [users, setUsers] = useState([]);
+    const usersCollectionRef = collection(firestore, "User");
+    let counter ;
+    useEffect(() => {
+      const getUsers = async() => {
+        const data = await getDocs(usersCollectionRef);
+        console.log(data);
+        setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+      }      
+
+      getUsers();
+
+      counter = ++ counter;
+      if(counter < 1){
+        setTimeout(()=>{
+            window.location.reload();                    
+        },2000)
+      }
 
 
-const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
+   
+    }, [counter]);
+    
 
 //=======================Handle language=====================
 
@@ -67,14 +93,14 @@ const [isSubmit, setIsSubmit] = useState(false);
         setLogInput(initialState);
         setLogModalIsOpen(false);
 
-        setToggleBtnsWithIcons(false);
+        // setToggleBtnsWithIcons(false);
 
       } catch (error) {
         console.log(error);
       }
     };
     useEffect(() => {
-      console.log(formErrors);
+    //   console.log(formErrors);
       if (Object.keys(formErrors).length === 0 && isSubmit) {
         console.log(logInput);
       }
@@ -109,11 +135,31 @@ const [isSubmit, setIsSubmit] = useState(false);
       const [signFormErrors, setSignFormErrors] = useState({});
       const [isSignSubmit, setIsSignSubmit] = useState(false);
 
+        //Add user
+        const [newName, setNewName] = useState("");
+        const [newEmail, setNewEmail] = useState("");
+        const [newPassword, setNewPassword] = useState("");
+        const userCollectionRef = collection(firestore, "User");
+
+        const createUser = async () => {
+            await addDoc(userCollectionRef, { Name: newName, Email: newEmail, Password: newPassword });
+        };
+
       const handleSignChange = ({ target }) => {
       setSignInput({
           ...signInput,
           [target.name]: target.value,
       });
+      if([target.name] == "name"){
+        setNewName(target.value);
+      } else if([target.name] == "email"){
+        setNewEmail(target.value);
+      } else if([target.name] == "password"){
+        setNewPassword(target.value);
+      }
+      
+      
+     
       };
 
       const handleSignSubmit = async (e) => {
@@ -127,7 +173,7 @@ const [isSubmit, setIsSubmit] = useState(false);
           setSignInput(initialSignState);
           setModalIsOpen(false);
 
-          setToggleBtnsWithIcons(false);
+        //   setToggleBtnsWithIcons(false);
 
       } catch (error) {
           console.log(error.message);
@@ -135,7 +181,7 @@ const [isSubmit, setIsSubmit] = useState(false);
       };
 
       useEffect(() => {
-        console.log(signFormErrors);
+        // console.log(signFormErrors);
         if (Object.keys(signFormErrors).length === 0 && isSignSubmit) {
           console.log(signInput);
         }
@@ -159,8 +205,8 @@ const [isSubmit, setIsSubmit] = useState(false);
           signErrors.name = "Username is required!";
         }else if (signValues.name.length < 4) {
             signErrors.name = "Name must be 4 characters or more";
-        }else if (signValues.name.length > 9) {
-            signErrors.name = "Name must be less than 10 characters";
+        }else if (signValues.name.length > 20) {
+            signErrors.name = "Name must be less than 20 characters";
         }
         return signErrors;
       };
@@ -168,6 +214,7 @@ const [isSubmit, setIsSubmit] = useState(false);
         const signout = () =>{
           signOut(auth);
           localStorage.removeItem("email");
+
           setToggleBtnsWithIcons(true);
         //   console.log('user logged out');
         }
@@ -177,16 +224,20 @@ const [isSubmit, setIsSubmit] = useState(false);
     const openModel = () => {
        
     }
+    // const openModel = () => {
+    //     return(
+    //         <>
+    //         <DineoutbyCity></DineoutbyCity>
+    //     </>
+    //     )
+    // }
 
 
     return (
         <>
-        {/* <button >
-                Launch demo modal
-            </button> */}
-        <ModelLocation id= "#exampleModal"></ModelLocation>
+        <ModelLocation></ModelLocation>
             <nav className="nav-lg-Screen sticky-top d-lg-block d-none navCont">
-                <nav class="nav-lg-Screen sticky-top d-lg-block d-none" dir={language == "English" ? "rtl" : "ltr"}>
+                <nav className="nav-lg-Screen sticky-top d-lg-block d-none" dir={language == "English" ? "rtl" : "ltr"}>
 
                     <section
                         className="navbar navbar-expand-lg navbar-light pb-0"
@@ -200,7 +251,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                                 className="navbar-brand p-3"
                                 href="../index.html"
                                 style={{ borderRight: "1px solid #dfe2e6" }}
-                                Link="/Home"
+                                Link to="/Home"
                             >
                                 <img
                                     src="https://elmenus.com/public/img/newLogo.svg"
@@ -230,8 +281,8 @@ const [isSubmit, setIsSubmit] = useState(false);
                                 <div className="rightNav" style={{ display: "flex", marginLeft: "auto" }}>
                                     <div className="services" style={{ margin: "10px 20px"}}>
 
-                                        <div style={{ marginLeft: "auto" }} id="auth" hidden={toggleBtnsWithIcons}>
-                                            <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} >
+                                        <div style={{ marginLeft: "auto" }} id="auth" >
+                                            <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} hidden={toggleBtnsWithIcons} >
                                                 <a
                                                     className="nav-link py-4 px-2 ms-5"
                                                     href=""
@@ -244,20 +295,29 @@ const [isSubmit, setIsSubmit] = useState(false);
                                                     style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.3vw" }}
                                                 ><i className="fas fa-receipt pe-2"></i>My order</a
                                                 >
-                                    {/* ===================================================userIcon================================================================= */}
+                                                 {/* ===================================================userIcon================================================================= */}
                                             
-                                                <div class="dropdown" hidden={toggleBtnsWithIcons}>
-                                                <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style={{background: "transparent", color: "black" ,border: "1px solid #e32207", marginTop: "15px"}}>
-                                                <FontAwesomeIcon icon={faUser}  style={{marginRight: "6px"}}/>
-                                                    Hello {userName}
-                                                </a>
+                                                <div className="dropdown" >
+                                                    {users.map((user) => {
+                        
+                                                        if(localStorage.getItem("email") == user.Email){
+                                                            
+                                                                return (
+                                                                    <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style={{background: "transparent", color: "black" ,border: "1px solid #e32207", marginTop: "15px"}}>
+                                                                    <FontAwesomeIcon icon={faUser}  style={{marginRight: "6px"}}/>
+                                                                    Hello {user.Name}
+                                                                    </a>
+                                                                    
+                                                                )
+                                                        } 
+                                                    
+                                                    })}
 
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <li><a class="dropdown-item" href="#">Your Profile</a></li>
-                                                    <li><a class="dropdown-item" href="#">Account Setting</a></li>
-                                                    <li><a class="dropdown-item" onClick={()=>signout()}>LogOut</a></li>
+                                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <li><Link to="/userProfile" style={{color: "black"}}>Your Profile</Link></li>
+                                                    <li><Link to="/accountSetting" style={{color: "black"}}>Account Setting</Link></li>
+                                                    <li onClick={()=>signout()}><Link to="/" style={{color: "black"}} >LogOut</Link></li>
                                                 </ul>
-                                                </div>
                                             </div>
                                         </div>
                                         {/* ========================================================Buttons============================================================ */}
@@ -303,6 +363,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                                 </div>
 
                             </div>
+                        </div>
                         </div>
                     </section>
                     <section
@@ -463,7 +524,7 @@ const [isSubmit, setIsSubmit] = useState(false);
 
                                 <div className="submitBtn mt-3">
 
-                                    <button type="submit" className="btn crtBtn">Create an account</button>
+                                    <button type="submit" className="btn crtBtn" onClick={createUser}>Create an account</button>
                                 </div>
 
                             </div>

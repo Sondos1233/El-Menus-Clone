@@ -1,26 +1,40 @@
 import './accountSetting.css'
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { firestore } from '../firebase/firebase.config';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 
 function AccountSetting(){
-
+    //===============================Toggle between Buttons===================================
     const [toggleState, setToggleState] = useState(1);
 
     const toggleTab = (index) => {
       setToggleState(index);
     };
 
-
+    //===============================Get user===================================
+    const [users, setUsers] = useState([]);
+    const usersCollectionRef = collection(firestore, "User");
+    useEffect(() => {  
+      const getUsers = async() => {
+        const data = await getDocs(usersCollectionRef);
+        console.log(data);
+        setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+      }
+      getUsers();
       
+      
+    });
+    
 
     return(
         <>
-        <div className='container-fluid d-flex'>
+        <div className='container-fluid' style={{paddingTop: "5%"}}>
             <h1>Account Settings</h1>
 
             <hr />
-            <div className='justify-content-center'>
+            <div style={{paddingLeft: "31%", width: "129%"}}>
                 <button className={toggleState === 1 ? "tab1 active-tab1" : "tab1"}
                 onClick={() => toggleTab(1)}>Change email</button>
                 <button className={toggleState === 2 ? "tab2 active-tab2" : "tab2"}
@@ -33,7 +47,15 @@ function AccountSetting(){
             <div className={toggleState === 1 ? "hide  active-changEmail" : "hide"}>
                 <h2 className='ch'>Change Email</h2>
                 <label htmlFor="email" className='d-block'>Email</label>
-                <input id='email' type="email" placeholder='Enter new Email' className='d-block form-control'/>
+                {users.map((user) => {
+                        
+                        if(localStorage.getItem("email") == user.Email){    
+                            return (
+                            <input id='email' type="email" placeholder='Enter new Email' className='d-block form-control' value={user.Email}/>                                   
+                            ) 
+                        }
+                       
+                    })}
                 <button className='btn btn-danger'>Change Email</button>
             </div>
 
