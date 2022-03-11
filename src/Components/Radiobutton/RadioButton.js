@@ -2,7 +2,7 @@ import "../main-style.css";
 import "../Delivery.scss"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDotCircle} from "@fortawesome/free-solid-svg-icons";
-import { firestore } from "../../firebase/firebase-config";
+import { firestore } from "../../Firebase/firebase-config";
 import {
     collection,
     getDocs,

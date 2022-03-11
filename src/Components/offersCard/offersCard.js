@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { firestore } from "../../firebase/firebase-config";
+import { firestore } from "../../Firebase/firebase-config";
 import {collection,getDocs,docs,query,collectionGroup} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import "../Delivery.scss";
 import "../mixins.scss";

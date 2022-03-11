@@ -257,6 +257,9 @@
   }
   & input:checked ~ .aCheckdot {
     display: block;
+    color: var(--first-color);
+    font-size: 35px;
+    margin-top: 5px;
   }
 }
 .acontainerSort {
