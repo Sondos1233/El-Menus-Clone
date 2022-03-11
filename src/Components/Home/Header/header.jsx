@@ -351,7 +351,7 @@ export default function Header() {
                     {
                        showRes&&<ul className="list-group list-group-flush dropdownRes">
                        {filteredList(ResList,SearchRes).map((Res) => {
-                         return <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item py-2"><span className="logoResDrop p-1 mx-3"><img src={Res.ImageLogo} width="20px" height="20px"/></span>{Res.ResName}</li></Link>;
+                         return <Link to={`/Restaurant/${Res.id}`} style={{"textDecoration":"none"}}><li className="list-group-item py-2"><span className="logoResDrop p-1 mx-3"><img src={Res.ImageLogo} width="20px" height="20px"/></span>{Res.ResName}</li></Link>;
                        })}
                         {/* <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item">Zaks</li></Link>
                         <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Mac</li></Link>

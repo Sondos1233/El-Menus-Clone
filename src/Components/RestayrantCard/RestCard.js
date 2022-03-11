@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
 import { faStar, faCircle, faStreetView } from "@fortawesome/free-solid-svg-icons";
-import { firestore ,storage } from "../../Firebase/firebase-config";
+import { firestore ,storage } from "../../firebase/firebase-config";
 import {
     collection,
     getDocs,getDoc,
     doc,docs,
     query,
     collectionGroup,
+    where
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -23,8 +24,8 @@ const RestCard = (props) => {
       setRes(
         data.docs.map((doc) => {
           if (
-            doc.data().IsAccepted == undefined ||
-            doc.data().IsAccepted == true
+            doc.data().IsActivated == undefined ||
+            doc.data().IsActivated == true
           ) {
           }
           return doc;
