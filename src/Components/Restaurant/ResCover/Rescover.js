@@ -1,7 +1,7 @@
 import '../../main-style.css'
 import '../../Restaurant.scss'
 import '../../mixins.scss'
-import { firestore } from "../../../firebase/firebase-config";
+import { firestore } from "../../../Firebase/firebase-config";
 import {
   collection,
   getDocs,
@@ -44,7 +44,8 @@ const ResCover = (props) => {
         <>
         <div className="aDivImgCover">
         <img className="aImgCover" src={Res.ImgCover} alt="" />
-        {(offer===[])&&
+        {console.log(offer)}
+        {(offer.length!==0)&&
         (<div>
             <div className="aDivPromo">
                     {offer.map(off=>{

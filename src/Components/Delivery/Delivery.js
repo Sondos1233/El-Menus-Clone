@@ -16,16 +16,41 @@ import { useState } from 'react';
 const Delivery = () => { 
   const offersCardsCarouselNumber = 4;
   const tastyCardsCarouselNumber = 6;
-  const [Type,setType]=useState('')
+  const [Type,setType]=useState('');
+  const [Rating,setRating] = useState('');
+  const [Promo, setPromo] = useState(false);
   const handleType = (e) => {
     e.preventDefault();
     //  console.log(e.target.text)
     setType(e.target.text)
   };
+  //filter by type
   const handleType2=(e)=>{
     console.log(e.target.value)
     setType(e.target.value)
   }
+  //order by rating
+  const handleRating = (e)=>{
+    console.log(e.target.value);
+    if(e.target.value ==="Rating" && e.target.checked ){
+      setRating(true)
+    }
+    else{
+      setRating(false)
+    }
+  }
+  //filter by promo
+  const handlePromo = (e)=>{
+    console.log(e.target.checked);
+    if(e.target.checked ){
+      setPromo(true)
+    }
+    else{
+      setPromo(false)
+    }
+  }
+
+
 
   return (
     <>
@@ -85,14 +110,14 @@ const Delivery = () => {
       <div class="container-fluid mt-4 ">
         <div class="row">
             <div class="col-lg-3">
-                <OffersFilter handleType2={handleType2} />
+                <OffersFilter handleType2={handleType2} handleRating={handleRating} handlePromo = {handlePromo} />
             </div>
             <div class="col-xl-9 col-lg-12">
               <section class="aTopDishes" id="TD">
                 <TDishesCard handleType={handleType} />
               </section>
               <section class="aRestaurant mt-4">
-                  <RestCard Type={Type}/>
+                  <RestCard Type={Type} Rating={Rating} Promo={Promo} />
               </section>
             </div>
         </div>
