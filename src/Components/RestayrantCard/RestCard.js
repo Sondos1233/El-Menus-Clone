@@ -40,6 +40,20 @@ const RestCard = (props) => {
       
         );
     }
+    else if(props.Promo){
+      const ResCollec = collection(firestore,'Restaurant');
+      const data = await getDocs(ResCollec);
+      data.docs.map(async(doc1)=>{
+      const Offercollec = collection(firestore,'Restaurant',doc1.id,'Offers');
+      const data2 = await getDocs(Offercollec);
+      if(data2.docs.length){
+        const Resoffer = doc(firestore,'Restaurant',doc1.id);
+        const data3 = await getDoc(Resoffer);
+        //console.log(data3.data())
+       //setRes(data3);
+      }
+      })
+    }
     else{
       const RestaurantCollecRef = query(
         collection(firestore, "Restaurant"),
