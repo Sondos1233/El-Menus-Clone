@@ -74,7 +74,7 @@ const RestCard = (props) => {
  ;
 
  //filter by type
-  const byFilterRes = (Res, Type) => {
+  const byFilterRes = (Res, Type,Rating) => {
     if(Res.IsActivated){
       if (Type && Type !='All Dishes') {
         return Res.Type.includes(Type);

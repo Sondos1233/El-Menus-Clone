@@ -88,7 +88,9 @@ return (
           Open now
           <br />
           <label className="abox position-relative d-block mt-2">
-            <input type="checkbox" name="" />
+            <input type="checkbox" name="" onClick={(e) => {
+                    props.handlePromo(e);
+                  }}/>
             <span className="acheck position-absolute">
               <FontAwesomeIcon
                 icon={faCheck}
