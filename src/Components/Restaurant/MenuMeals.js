@@ -120,7 +120,6 @@ const Meals = (props) => {
     setIsOpen(false);
   };
 
-  
   return (
     <>
       <div
@@ -316,9 +315,14 @@ const Meals = (props) => {
               <FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon>
             </button>
           </div>
+          <p>{MealDet.ProName}</p>
           <button className="btn aBuyButton" onClick={hideModal}>
             <FontAwesomeIcon icon={faShoppingBag}></FontAwesomeIcon>
-            <span className="ms-2">ADD TO BASKET</span>
+            <span className="ms-2" onClick={ 
+              ()=>{
+                console.log(MealDet.ProName)
+              }
+             }>ADD TO BASKET</span>
             <span className="float-end">price</span>
           </button>
         </Modal.Footer>
