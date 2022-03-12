@@ -5,14 +5,15 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch, faUser} from "@fortawesome/free-solid-svg-icons";
 import React, {useState, useEffect} from "react";
 import ReactModal from 'react-modal';
-import { auth,firestore } from '../firebase/firebase.config'
+import { auth } from '../firebase/firebase.config'
+import { firestore } from '../firebase/firebase.config';
 import {addDoc, collection, getDocs} from 'firebase/firestore'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
 import { Link } from 'react-router-dom';
-import ModelLocation from '../ModelLocation/modelLoc';
-import DineoutbyCity from '../Dineout/DineoutByCity/DineoutByCity';
+// import DineoutbyCity from '../Dineout/DineoutByCity/DineoutByCity';
+// import ModelLocation from '../ModelLocation/modelLoc';
 
 export default function Navbar() {
 
@@ -32,7 +33,7 @@ export default function Navbar() {
 //===============================Get user===================================
     const [users, setUsers] = useState([]);
     const usersCollectionRef = collection(firestore, "User");
-    let counter ;
+    let counter = 0 ;
     useEffect(() => {
       const getUsers = async() => {
         const data = await getDocs(usersCollectionRef);
@@ -142,7 +143,7 @@ const [isSubmit, setIsSubmit] = useState(false);
         const userCollectionRef = collection(firestore, "User");
 
         const createUser = async () => {
-            await addDoc(userCollectionRef, { Name: newName, Email: newEmail, Password: newPassword });
+            await addDoc(userCollectionRef, { Name: newName, Email: newEmail, Password: newPassword });            
         };
 
       const handleSignChange = ({ target }) => {
@@ -169,9 +170,14 @@ const [isSubmit, setIsSubmit] = useState(false);
       try {
           await createUserWithEmailAndPassword(auth , signInput.email, signInput.password, signInput.name);
           localStorage.setItem("email", signInput.email);
+          createUser();
 
           setSignInput(initialSignState);
           setModalIsOpen(false);
+
+          setTimeout(()=>{
+            window.location.reload()
+        },1000)
 
         //   setToggleBtnsWithIcons(false);
 
@@ -221,9 +227,6 @@ const [isSubmit, setIsSubmit] = useState(false);
    
     
 
-    const openModel = () => {
-       
-    }
     // const openModel = () => {
     //     return(
     //         <>
@@ -235,7 +238,7 @@ const [isSubmit, setIsSubmit] = useState(false);
 
     return (
         <>
-        <ModelLocation></ModelLocation>
+        {/* <ModelLocation></ModelLocation> */}
             <nav className="nav-lg-Screen sticky-top d-lg-block d-none navCont">
                 <nav className="nav-lg-Screen sticky-top d-lg-block d-none" dir={language == "English" ? "rtl" : "ltr"}>
 
@@ -281,8 +284,8 @@ const [isSubmit, setIsSubmit] = useState(false);
                                 <div className="rightNav" style={{ display: "flex", marginLeft: "auto" }}>
                                     <div className="services" style={{ margin: "10px 20px"}}>
 
-                                        <div style={{ marginLeft: "auto" }} id="auth" >
-                                            <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} hidden={toggleBtnsWithIcons} >
+                                        <div style={{ marginLeft: "auto" }} id="auth">
+                                            <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} hidden={toggleBtnsWithIcons}>
                                                 <a
                                                     className="nav-link py-4 px-2 ms-5"
                                                     href=""
@@ -295,9 +298,9 @@ const [isSubmit, setIsSubmit] = useState(false);
                                                     style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.3vw" }}
                                                 ><i className="fas fa-receipt pe-2"></i>My order</a
                                                 >
-                                                 {/* ===================================================userIcon================================================================= */}
+                                    {/* ===================================================userIcon================================================================= */}
                                             
-                                                <div className="dropdown" >
+                                                <div className="dropdown" hidden={toggleBtnsWithIcons}>
                                                     {users.map((user) => {
                         
                                                         if(localStorage.getItem("email") == user.Email){
@@ -313,10 +316,12 @@ const [isSubmit, setIsSubmit] = useState(false);
                                                     
                                                     })}
 
-                                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style={{padding: "5px"}}>
                                                     <li><Link to="/userProfile" style={{color: "black"}}>Your Profile</Link></li>
+                                                    <hr />
                                                     <li><Link to="/accountSetting" style={{color: "black"}}>Account Setting</Link></li>
-                                                    <li onClick={()=>signout()}><Link to="/" style={{color: "black"}} >LogOut</Link></li>
+                                                    <hr />
+                                                    <li><Link to="/" onClick={()=>signout()} style={{color: "black"}}>LogOut</Link></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -397,7 +402,8 @@ const [isSubmit, setIsSubmit] = useState(false);
                                     className="imgIcon mx-2"
                                 />
                                 <h4 className="headerLocation mx-2">Dine-out in <span>{localStorage.getItem('areaName')}</span></h4>
-                                <button className="btn change-btn mx-2"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">CHANGE</button>
+                                {/* onClick={() => { openModel() }} this onClick event must be put on CHANGE button */}
+                                <button className="btn change-btn mx-2" >CHANGE</button>
                             </div>
                         </div>
                     </section>
@@ -524,7 +530,7 @@ const [isSubmit, setIsSubmit] = useState(false);
 
                                 <div className="submitBtn mt-3">
 
-                                    <button type="submit" className="btn crtBtn" onClick={createUser}>Create an account</button>
+                                    <button type="submit" className="btn crtBtn" >Create an account</button>
                                 </div>
 
                             </div>
@@ -553,6 +559,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                         <div className="form-container">
                             <img id="logLogo" src="images/logowithbg.png" />
                             <form id="log" onSubmit={handleSubmit}>
+                                
                                 <div className="inpt mt-3">
                                     <input type='text' placeholder="email" className="form-control" name="email" onChange={handleChange} value={logInput.email}/>
                                     <p style={{color: "red", fontSize: "12px"}}>{formErrors.email}</p>
@@ -583,7 +590,6 @@ const [isSubmit, setIsSubmit] = useState(false);
                     </div>
                 </ReactModal>
             </div>
-
         </>
     );
   };
