@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
 import { faStar, faCircle, faStreetView } from "@fortawesome/free-solid-svg-icons";
-import { firestore ,storage } from "../../firebase/firebase-config";
+import { firestore ,storage } from "../../Firebase/firebase-config";
 import {
     collection,
     getDocs,getDoc,
     doc,docs,
     query,
     collectionGroup,
-    where,limit
+    where,limit,orderBy
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -20,25 +20,48 @@ const RestCard = (props) => {
 
   
   useEffect(() => {
+    //get restaurants by choosen area
    const getRes = async () => {
-    var Area = localStorage.getItem('areaName')
-    const RestaurantCollecRef = query(
-      collection(firestore, "Restaurant"),
-      limit(10),
-      where("Areas", "array-contains", Area.trim())
-  );
-    
+    var Area = localStorage.getItem('areaName');
+    if(props.Rating){
+      console.log(props.Rating)
+      const RestaurantCollecRef = query(
+        collection(firestore, "Restaurant"),
+        limit(10),
+        where("Areas", "array-contains", Area.trim()),orderBy("Rate", "desc"));
       const data = await getDocs(RestaurantCollecRef);
+      setRes(
+        data.docs.map((doc) => {
+          console.log(doc.data())
+         
+          return doc;
+         
+        })
+      
+        );
+    }
+    else{
+      const RestaurantCollecRef = query(
+        collection(firestore, "Restaurant"),
+        limit(10),
+        where("Areas", "array-contains", Area.trim())
+    );
+    const data = await getDocs(RestaurantCollecRef);
       setRes(
         data.docs.map((doc) => {
          
           return doc;
          
         })
-      );
+      
+        );
+      
+    }
     
      }
     getRes();
+
+    //get offers
     const bla = async () => {
       let q = query(collectionGroup(firestore, "Offers"));
       const querySnapshot = await getDocs(q);
@@ -49,6 +72,8 @@ const RestCard = (props) => {
     bla();
   });
  ;
+
+ //filter by type
   const byFilterRes = (Res, Type) => {
     if(Res.IsActivated){
       if (Type && Type !='All Dishes') {
@@ -73,6 +98,7 @@ const RestCard = (props) => {
 
 let k;
   let counter = 0;
+  //dynamic rating function
 function hello(rate){
     let count = 0 ;
     let span=[];
@@ -100,7 +126,7 @@ function hello(rate){
         <div className="row" id="aResDivrow">
           {filteredList(Res,props.Type).length?(filteredList(Res,props.Type).map((res,index)=>{
               return(
-          <div className="col-lg-4 col-md-12">
+          <div className="col-lg-4 col-md-12 mt-2">
             <div className="aContentCard">
               <Link to={`/Restaurant/${res.id}`} className="aLinkCard">
                 <div className="card aD">
@@ -195,7 +221,7 @@ function hello(rate){
             </div>
           </div>
         )})):(<div className="text-center">
-          <img src={NoData} width="300px" height="300px"/>
+          <img src={NoData} width="300px" height="300px" alt=''/>
         </div>)}
         
         </div>

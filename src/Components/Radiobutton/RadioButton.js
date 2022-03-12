@@ -2,7 +2,7 @@ import "../main-style.css";
 import "../Delivery.scss"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDotCircle} from "@fortawesome/free-solid-svg-icons";
-import { firestore } from "../../firebase/firebase-config";
+import { firestore } from "../../Firebase/firebase-config";
 import {
     collection,
     getDocs,
@@ -38,6 +38,7 @@ const RadioButton = (props) => {
         <label className="aRadio">
           <input onClick={(e) => {
                     props.handleType2(e);
+                    props.handleRating(e);
                   }} type="radio" name={props.name} id="" value={props.data} />
           <span className="adot"></span>{" "}
           <FontAwesomeIcon icon={faDotCircle} className="aCheckdot"> </FontAwesomeIcon>
