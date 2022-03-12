@@ -54,7 +54,7 @@ useEffect(() => {
     getBranches();
   
 
-});
+},[BranchesCollecdocRef, RestaurantCollecdocRef]);
   return (
     <>
       <div class="tab-content" id="myTabContent">

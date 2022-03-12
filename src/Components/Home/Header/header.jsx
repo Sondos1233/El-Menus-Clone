@@ -167,7 +167,6 @@ const [isSubmit, setIsSubmit] = useState(false);
       try {
         await signInWithEmailAndPassword(auth ,logInput.email, logInput.password);
         localStorage.setItem("email", logInput.email);
-        localStorage.setItem("id", auth.id);
 
 
 
@@ -432,7 +431,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                     {
                        showRes&&<ul className="list-group list-group-flush dropdownRes">
                        {filteredList(ResList,SearchRes).map((Res) => {
-                         return <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item py-2"><span className="logoResDrop p-1 mx-3"><img src={Res.ImageLogo} width="20px" height="20px"/></span>{Res.ResName}</li></Link>;
+                         return <Link to={`/Restaurant/${Res.id}`} style={{"textDecoration":"none"}}><li className="list-group-item py-2"><span className="logoResDrop p-1 mx-3"><img src={Res.ImageLogo} width="20px" height="20px"/></span>{Res.ResName}</li></Link>;
                        })}
                         {/* <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item">Zaks</li></Link>
                         <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Mac</li></Link>
@@ -471,7 +470,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                 <div className=" col-md-2 col-sm-6 position-relative" >
                   
                     <button
-                      style={{"width":"100%","lineHeight":"55px"}}
+                      style={{"width":"100%"}}
                       className="btn-primary btn "
                     >
                       Go <FontAwesomeIcon icon={faArrowRight} />

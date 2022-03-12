@@ -8,6 +8,7 @@ import {
     doc,docs,
     query,
     collectionGroup,
+    where,limit,orderBy
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -15,24 +16,66 @@ import NoData from '../../images/NoData.svg'
 const RestCard = (props) => {
   const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
-  const RestaurantCollecRef = collection(firestore, "Restaurant");
+  const [Area,setArea] = useState('Naser City')
+
+  
   useEffect(() => {
+    //get restaurants by choosen area
    const getRes = async () => {
-     
+    var Area = localStorage.getItem('areaName');
+    if(props.Rating){
+      console.log(props.Rating)
+      const RestaurantCollecRef = query(
+        collection(firestore, "Restaurant"),
+        limit(10),
+        where("Areas", "array-contains", Area.trim()),orderBy("Rate", "desc"));
       const data = await getDocs(RestaurantCollecRef);
       setRes(
         data.docs.map((doc) => {
-          if (
-            doc.data().IsAccepted == undefined ||
-            doc.data().IsAccepted == true
-          ) {
-          }
+          console.log(doc.data())
+         
           return doc;
+         
         })
-      );
+      
+        );
+    }
+    else if(props.Promo){
+      const ResCollec = collection(firestore,'Restaurant');
+      const data = await getDocs(ResCollec);
+      data.docs.map(async(doc1)=>{
+      const Offercollec = collection(firestore,'Restaurant',doc1.id,'Offers');
+      const data2 = await getDocs(Offercollec);
+      if(data2.docs.length){
+        const Resoffer = doc(firestore,'Restaurant',doc1.id);
+        const data3 = await getDoc(Resoffer);
+        //console.log(data3.data())
+       //setRes(data3);
+      }
+      })
+    }
+    else{
+      const RestaurantCollecRef = query(
+        collection(firestore, "Restaurant"),
+        limit(10),
+        where("Areas", "array-contains", Area.trim())
+    );
+    const data = await getDocs(RestaurantCollecRef);
+      setRes(
+        data.docs.map((doc) => {
+         
+          return doc;
+         
+        })
+      
+        );
+      
+    }
     
      }
     getRes();
+
+    //get offers
     const bla = async () => {
       let q = query(collectionGroup(firestore, "Offers"));
       const querySnapshot = await getDocs(q);
@@ -41,23 +84,34 @@ const RestCard = (props) => {
       );
     };
     bla();
-  });
-  const byFilterRes = (Res, Type) => {
+  },[props.Promo, props.Rating]);
+
+ //filter by type
+  const byFilterRes = (Res, Type,Rating) => {
     if(Res.IsActivated){
       if (Type && Type !='All Dishes') {
         return Res.Type.includes(Type);
       }else if(Type =='All Dishes'){
-          return Res
+          return Res // const byAreas = (Res, Area) => {
+  //   if(Res.IsActivated){
+  //     if (Area) {
+  //       return Res.Areas.includes(Area);
+  //     } else return Res;
+  //   }
+  // }
       }
        else return Res;
     }
   };
-  const filteredList = (ResList, Type) => {
+  const filteredList = (ResList,Type,Area) => {
     return ResList.filter(Res => byFilterRes(Res.data(), Type));
+    //  ResList.filter(Res => byAreas(Res.data(), Area));
+    
   }
 
 let k;
   let counter = 0;
+  //dynamic rating function
 function hello(rate){
     let count = 0 ;
     let span=[];
@@ -85,7 +139,7 @@ function hello(rate){
         <div className="row" id="aResDivrow">
           {filteredList(Res,props.Type).length?(filteredList(Res,props.Type).map((res,index)=>{
               return(
-          <div className="col-lg-4 col-md-12">
+          <div className="col-lg-4 col-md-12 mt-2">
             <div className="aContentCard">
               <Link to={`/Restaurant/${res.id}`} className="aLinkCard">
                 <div className="card aD">
@@ -180,7 +234,7 @@ function hello(rate){
             </div>
           </div>
         )})):(<div className="text-center">
-          <img src={NoData} width="300px" height="300px"/>
+          <img src={NoData} width="300px" height="300px" alt=''/>
         </div>)}
         
         </div>
