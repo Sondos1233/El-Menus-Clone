@@ -44,7 +44,8 @@ const ResCover = (props) => {
         <>
         <div className="aDivImgCover">
         <img className="aImgCover" src={Res.ImgCover} alt="" />
-        {(offer===[])&&
+        {console.log(offer)}
+        {(offer.length!==0)&&
         (<div>
             <div className="aDivPromo">
                     {offer.map(off=>{
