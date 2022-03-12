@@ -30,11 +30,7 @@ const RestCard = (props) => {
     
       const data = await getDocs(RestaurantCollecRef);
       setRes(
-        data.docs.map((doc) => {
-         
-          return doc;
-         
-        })
+        data.docs.map((doc) => {return doc})
       );
     
      }
