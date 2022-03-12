@@ -84,8 +84,7 @@ const RestCard = (props) => {
       );
     };
     bla();
-  });
- ;
+  },[props.Promo, props.Rating]);
 
  //filter by type
   const byFilterRes = (Res, Type,Rating) => {

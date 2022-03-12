@@ -39,7 +39,7 @@ const ResCover = (props) => {
       };
       getOffer();
    
-  });
+  },[id]);
     return(
         <>
         <div className="aDivImgCover">
