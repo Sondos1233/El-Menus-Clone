@@ -14,7 +14,7 @@ import {
   collectionGroup,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { useEffect, useState } from "react";
-const OffersFilter = ({handleType2}) => {
+const OffersFilter = (props) => {
   const [Res, setRes] = useState([]);
   const RestaurantCollecRef = collectionGroup(firestore, "Restaurant");
   
@@ -37,7 +37,7 @@ const OffersFilter = ({handleType2}) => {
         setRes(arr)
     };
     getRes();
-});
+},[RestaurantCollecRef]);
 function print(){
 let types=[]
     for(let h=0 ; h<Res.length ; h++){
@@ -88,7 +88,9 @@ return (
           Open now
           <br />
           <label className="abox position-relative d-block mt-2">
-            <input type="checkbox" name="" />
+            <input type="checkbox" name="" onClick={(e) => {
+                    props.handlePromo(e);
+                  }}/>
             <span className="acheck position-absolute">
               <FontAwesomeIcon
                 icon={faCheck}
@@ -111,7 +113,7 @@ return (
           <div className="row">
             <RadioButton data="popular"  name="sort"  />
 
-            <RadioButton data="Rating" name="sort"  />
+            <RadioButton data="Rating" name="sort" handleRating={props.handleRating} handleType2={props.handleType2} />
 
             <RadioButton data="Delivery Time" name="sort" />
           </div>
@@ -123,7 +125,7 @@ return (
               {
                   Res.map((res,index)=>{
                    // console.log(res)
-                      return <RadioButton data={res}  name="type" handleType2={handleType2} />
+                      return <RadioButton data={res}  name="type" handleRating={props.handleRating} handleType2={props.handleType2} />
                     })
               }
           </div>

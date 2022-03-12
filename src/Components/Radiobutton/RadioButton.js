@@ -38,6 +38,7 @@ const RadioButton = (props) => {
         <label className="aRadio">
           <input onClick={(e) => {
                     props.handleType2(e);
+                    props.handleRating(e);
                   }} type="radio" name={props.name} id="" value={props.data} />
           <span className="adot"></span>{" "}
           <FontAwesomeIcon icon={faDotCircle} className="aCheckdot"> </FontAwesomeIcon>
