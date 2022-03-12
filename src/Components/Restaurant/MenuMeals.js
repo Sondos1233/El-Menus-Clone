@@ -18,6 +18,9 @@ import {
   getDoc,
   doc,
   docs,
+  addDoc,
+  where,
+  query
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import "../Restaurant.scss";
 import { useParams } from "react-router-dom";
@@ -33,6 +36,7 @@ const Meals = (props) => {
     id,
     "Menu"
   );
+ 
 
   let CategArray = localStorage.getItem("MenuName")?.split(",");
 
@@ -80,6 +84,7 @@ const Meals = (props) => {
 
   let counter = 0;
   const reloadCount = sessionStorage.getItem("reloadCount");
+  // use Effect
   useEffect(() => {
     if (reloadCount < 1) {
       setTimeout(() => {
@@ -89,6 +94,9 @@ const Meals = (props) => {
     } else {
       sessionStorage.removeItem("reloadCount");
     }
+
+  
+
   }, [counter]);
 
   //model
@@ -120,8 +128,10 @@ const Meals = (props) => {
     setIsOpen(false);
   };
 
+ 
   return (
     <>
+
       <div
         className="aItemsDiv ms-3"
         data-bs-spy="scroll"
@@ -150,6 +160,7 @@ const Meals = (props) => {
                             <div>
                               <button
                                 onClick={() => {
+                                  console.log(j)
                                   showModal();
                                   getData(j.id, j);
                                 }}
