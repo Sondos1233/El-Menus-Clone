@@ -11,7 +11,7 @@ import FriedChickenImg from './../../images/Dineout/FriedChicken.jpg'
 import KosharyImg from './../../images/Dineout/koshary.jpg'
 import SandwichesImg from './../../images/Dineout/Sandwiches.jpg'
 // FireStore
-import { db } from './../../firebase/Firebase'
+import { db } from '../../Firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
 
 export default function Dineout() {
