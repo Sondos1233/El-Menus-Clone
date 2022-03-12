@@ -18,6 +18,7 @@ import {
   getDoc,
   doc,
   docs,
+  addDoc
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import "../Restaurant.scss";
 import { useParams } from "react-router-dom";
@@ -33,6 +34,13 @@ const Meals = (props) => {
     id,
     "Menu"
   );
+
+  const  Restcollection= collection(
+    firestore,
+    "User",
+    "7qHGWSCzrOGBC2cqbWid",
+    "Cart"
+    )
 
   let CategArray = localStorage.getItem("MenuName")?.split(",");
 
@@ -120,6 +128,11 @@ const Meals = (props) => {
     setIsOpen(false);
   };
 
+  const [Extras, setExtras] = useState([])
+  const [Size, setSize] = useState({})
+  const [specialAdditions, setSecialAdditions] = useState("")
+
+
   return (
     <>
       <div
@@ -134,6 +147,7 @@ const Meals = (props) => {
           {Meals?.map((i, index) => {
             index += 1;
             // console.log(i)
+            
             return (
               <>
                 <h4 id={CategArray[counter]} className="aItem mt-4 mb-4">
@@ -225,18 +239,31 @@ const Meals = (props) => {
                   else IsFirst = false;
                   console.log(IsFirst, index);
                   index = +1;
+                 
+
                   return (
                     <>
                       <div className="mt-3 d-flex justify-content-between">
                         <div className="row">
                           <div className="col">
                             <label className="aRadio">
+                             
                               <input
                                 type="radio"
                                 name="size"
                                 id=""
                                 value={i.Price}
                                 defaultChecked={IsFirst}
+                                onClick={
+                                  ()=>{
+                                   
+                                    setSize({
+                                      Name: i.Name,
+                                      Price: i.Price
+                                    })
+                                    
+                                  }
+                                }
                               />
                               <span className="adot"></span>{" "}
                               <FontAwesomeIcon
@@ -260,13 +287,23 @@ const Meals = (props) => {
                   <b>Additions</b>
                 </h5>
                 {MealDet.Extras?.map((i) => {
+                  
                   return (
                     <>
                       <div className="mt-3 d-flex justify-content-between">
                         <div className="row">
                           <div className="col-3">
                             <label className="abox position-relative d-block">
-                              <input type="checkbox" name="" value={i.Price} />
+                              <input type="checkbox" name="" value={i.Price} 
+                              onClick={
+                                ()=>{
+                                  setExtras([...Extras, {
+                                    Name: i.Name,
+                                    Price: i.Price
+                                  }])
+                                }
+                              }
+                              />
                               <span className="acheck position-absolute">
                                 <FontAwesomeIcon
                                   icon={faCheck}
@@ -299,6 +336,11 @@ const Meals = (props) => {
                     id=""
                     aria-describedby="helpId"
                     placeholder="eg. Please don't add onion"
+
+                    onChange={(e)=>{
+                      console.log(e.target.value)
+                      setSecialAdditions(e.target.value)
+                    }}
                   />
                 </div>
               </div>
@@ -318,11 +360,26 @@ const Meals = (props) => {
           <p>{MealDet.ProName}</p>
           <button className="btn aBuyButton" onClick={hideModal}>
             <FontAwesomeIcon icon={faShoppingBag}></FontAwesomeIcon>
-            <span className="ms-2" onClick={ 
-              ()=>{
-                console.log(MealDet.ProName)
+            <button className="ms-2" onClick={
+              async ()=>{
+                alert("shrouk")
+                console.log("shrouk")
+                console.log(Size)
+                console.log(Extras)
+                await addDoc(Restcollection,{
+                  ProName: MealDet.ProName, 
+                  ProDescription: MealDet.Description,
+                  Quantity: qty,
+                  Size: Size,
+                  Extras: Extras,
+                  SpecialAdditional: specialAdditions
+                })
+                setSize({})
+                setExtras([])
+                console.log(Extras)
+                alert("Sucess");
               }
-             }>ADD TO BASKET</span>
+            }>ADD TO BASKET</button>
             <span className="float-end">price</span>
           </button>
         </Modal.Footer>
