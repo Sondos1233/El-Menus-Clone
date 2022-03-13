@@ -293,8 +293,9 @@ const [isSubmit, setIsSubmit] = useState(false);
                                                     className="nav-link py-4 px-2 ms-5"
                                                     href=""
                                                     style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.3vw" }}
-                                                ><i className="fas fa-receipt pe-2"></i>My order</a
                                                 >
+                                                <i className="fas fa-receipt pe-2"></i>My order</a>
+                                                
                                                  {/* ===================================================userIcon================================================================= */}
                                             
                                                 <div className="dropdown" >

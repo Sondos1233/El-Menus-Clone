@@ -38,7 +38,7 @@ const Meals = (props) => {
   const  Restcollection= collection(
     firestore,
     "User",
-    "7qHGWSCzrOGBC2cqbWid",
+    localStorage.getItem("userID"),
     "Cart"
     )
 
@@ -235,7 +235,10 @@ const Meals = (props) => {
                   </h5>
                 </div>
                 {MealDet.Size?.map((i, index) => {
-                  if (index === 0) IsFirst = true;
+                  if (index === 0) {
+                    IsFirst = true;
+                  
+                  }
                   else IsFirst = false;
                   console.log(IsFirst, index);
                   index = +1;
@@ -253,7 +256,7 @@ const Meals = (props) => {
                                 name="size"
                                 id=""
                                 value={i.Price}
-                                defaultChecked={IsFirst}
+                                // defaultChecked={IsFirst}
                                 onClick={
                                   ()=>{
                                    
@@ -358,7 +361,8 @@ const Meals = (props) => {
             </button>
           </div>
           <p>{MealDet.ProName}</p>
-          <button className="btn aBuyButton" onClick={hideModal}>
+          {/*  onClick={hideModal} */}
+          <button className="btn aBuyButton">
             <FontAwesomeIcon icon={faShoppingBag}></FontAwesomeIcon>
             <button className="ms-2" onClick={
               async ()=>{
