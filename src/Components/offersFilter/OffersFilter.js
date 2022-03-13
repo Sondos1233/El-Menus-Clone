@@ -37,7 +37,7 @@ const OffersFilter = (props) => {
         setRes(arr)
     };
     getRes();
-});
+},[RestaurantCollecRef]);
 function print(){
 let types=[]
     for(let h=0 ; h<Res.length ; h++){
