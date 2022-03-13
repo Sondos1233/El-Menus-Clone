@@ -42,10 +42,14 @@ export default function Header() {
   const language = useSelector((state) => state.language.lang);
   const dispatch = useDispatch();
 
+//=======================Handle language=====================
+
   const toggleLanguage = () => {
     dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
 
   };
+
+//=======================Handle handleChangeCity=====================
 
   const handleChangeCity = (e) => {
     e.preventDefault();
@@ -81,18 +85,47 @@ export default function Header() {
     getRes();
   }, []);
 
-  //=======================Handle toggle Buttons With Icons=====================
+//=======================Handle toggle Buttons With Icons=====================
+const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
 
-  let userName = "";
-  let user = localStorage.getItem('email')
-  if(user != null){
-      userName = user.split("@")[0];
-      userName = userName[0].toUpperCase() + userName.slice(1);
-  }else{
-    userName = "";
-  }
+useEffect(()=>{
+        setTimeout(()=>{
+          if(localStorage.getItem('email')){
+            console.log("icon");
+            setToggleBtnsWithIcons(false);
+        } else{
+            console.log("btn");
+            setToggleBtnsWithIcons(true);
+        }
+        });
+         
+})
 
-  const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
+  //===============================Get user===================================
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = collection(firestore, "User");
+  let counter = 0 ;
+  useEffect(() => {
+    const getUsers = async() => {
+      const data = await getDocs(usersCollectionRef);
+      console.log(data);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    }      
+
+    getUsers();
+
+    counter = ++ counter;
+    if(counter < 1){
+      setTimeout(()=>{
+          window.location.reload();                    
+      },2000)
+    }
+
+  }, [counter]);
+  
+
+
+  //=======================Search Res=====================
 
   const bySearchRes = (Res, SearchRes) => {
     if(Res.IsActivated){
@@ -115,97 +148,125 @@ export default function Header() {
 
   //=======================LogIn & validation===============================
 
-  const initialState = { email: "", password: "" };
-  const [logInput, setLogInput] = useState(initialState);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
- 
-    const handleChange = ({target}) =>{
-        setLogInput({
-            ...logInput,
-            [target.name]: target.value,
-        });
+const initialState = { email: '', password: '' };
+const [logInput, setLogInput] = useState(initialState);
+const [formErrors, setFormErrors] = useState({});
+const [isSubmit, setIsSubmit] = useState(false);
+
+  const handleChange = ({target}) =>{
+      setLogInput({
+          ...logInput,
+          [target.name]: target.value,
+      });
+  };
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      setFormErrors(validate(logInput));
+      setIsSubmit(true);
+      try {
+        await signInWithEmailAndPassword(auth ,logInput.email, logInput.password);
+        localStorage.setItem("email", logInput.email);
+
+
+
+        setLogInput(initialState);
+        setLogModalIsOpen(false);
+
+        // setToggleBtnsWithIcons(false);
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    useEffect(() => {
+    //   console.log(formErrors);
+      if (Object.keys(formErrors).length === 0 && isSubmit) {
+        console.log(logInput);
+      }
+    }, [formErrors]);
+    const validate = (values) => {
+      const errors = {};
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+      if (!values.email) {
+        errors.email = "Email is required!";
+      } else if (!regex.test(values.email)) {
+        errors.email = "This is not a valid email format!";
+      } else{
+        errors.email = "Email not found";
+      }
+      if (!values.password) {
+        errors.password = "Password is required";
+      } else if (values.password.length < 4) {
+        errors.password = "Password must be more than 4 characters";
+      } else if (values.password.length > 10) {
+        errors.password = "Password cannot exceed more than 10 characters";
+      }else {
+        errors.password = "wrong Password ";
+      }
+      return errors;
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setFormErrors(validate(logInput));
-        setIsSubmit(true);
-        try {
-          await signInWithEmailAndPassword(auth ,logInput.email, logInput.password);
-          localStorage.setItem("email", logInput.email);
+    
+//=======================SignUp & validation===============================
 
-          setLogInput(initialState);
-          setLogModalIsOpen(false);
-
-          setToggleBtnsWithIcons(false);
-
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      useEffect(() => {
-        console.log(formErrors);
-        if (Object.keys(formErrors).length === 0 && isSubmit) {
-          console.log(logInput);
-        }
-      }, [formErrors]);
-      const validate = (values) => {
-        const errors = {};
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-        if (!values.email) {
-          errors.email = "Email is required!";
-        } else if (!regex.test(values.email)) {
-          errors.email = "This is not a valid email format!";
-        } else{
-          errors.email = "Email not found";
-        }
-        if (!values.password) {
-          errors.password = "Password is required";
-        } else if (values.password.length < 4) {
-          errors.password = "Password must be more than 4 characters";
-        } else if (values.password.length > 10) {
-          errors.password = "Password cannot exceed more than 10 characters";
-        } else {
-          errors.password = "wrong Password ";
-        }
-        return errors;
-      };
-
-  //=======================SignUp & validation===============================
-
-      const initialSignState = { email: '', password: '', name: '' };
+      const initialSignState = { email: '', password: '', name: ''};
       const [signInput, setSignInput] = useState(initialSignState);
       const [signFormErrors, setSignFormErrors] = useState({});
       const [isSignSubmit, setIsSignSubmit] = useState(false);
 
-  const handleSignChange = ({ target }) => {
-    setSignInput({
-      ...signInput,
-      [target.name]: target.value,
-    });
-  };
+        //Add user
+        const [newName, setNewName] = useState("");
+        const [newEmail, setNewEmail] = useState("");
+        const [newPassword, setNewPassword] = useState("");
+        const userCollectionRef = collection(firestore, "User");
+
+        const createUser = async () => {
+            await addDoc(userCollectionRef, { Name: newName, Email: newEmail, Password: newPassword });            
+        };
+
+      const handleSignChange = ({ target }) => {
+      setSignInput({
+          ...signInput,
+          [target.name]: target.value,
+      });
+      if([target.name] == "name"){
+        setNewName(target.value);
+      } else if([target.name] == "email"){
+        setNewEmail(target.value);
+      } else if([target.name] == "password"){
+        setNewPassword(target.value);
+      }
+      
+      
+     
+      };
 
       const handleSignSubmit = async (e) => {
-        e.preventDefault();
-        setSignFormErrors(signValidate(signInput));
-        setIsSignSubmit(true);
-        try {
-          await createUserWithEmailAndPassword(auth ,signInput.email, signInput.password, signInput.name);
+      e.preventDefault();
+      setSignFormErrors(signValidate(signInput));
+      setIsSignSubmit(true);
+      try {
+          await createUserWithEmailAndPassword(auth , signInput.email, signInput.password, signInput.name);
           localStorage.setItem("email", signInput.email);
+          createUser();
 
           setSignInput(initialSignState);
           setModalIsOpen(false);
 
-        setToggleBtnsWithIcons(false);
+          setTimeout(()=>{
+            window.location.reload()
+        },1000)
 
-        } catch (error) {
+        //   setToggleBtnsWithIcons(false);
+
+      } catch (error) {
           console.log(error.message);
-        }
+      }
       };
+
       useEffect(() => {
-        console.log(signFormErrors);
+        // console.log(signFormErrors);
         if (Object.keys(signFormErrors).length === 0 && isSignSubmit) {
           console.log(signInput);
         }
@@ -228,19 +289,21 @@ export default function Header() {
         if (!signValues.name) {
           signErrors.name = "Username is required!";
         }else if (signValues.name.length < 4) {
-          signErrors.name = "Name must be 4 characters or more";
-      }else if (signValues.name.length > 9) {
-        signErrors.name = "Name must be less than 10 characters";
-      }
+            signErrors.name = "Name must be 4 characters or more";
+        }else if (signValues.name.length > 20) {
+            signErrors.name = "Name must be less than 20 characters";
+        }
         return signErrors;
       };
 
-      const signout = () =>{
-        signOut(auth);
-        localStorage.removeItem("email");
-        setToggleBtnsWithIcons(true);
-      //   console.log('user logged out');
-      }
+        const signout = () =>{
+          signOut(auth);
+          localStorage.removeItem("email");
+
+          setToggleBtnsWithIcons(true);
+        //   console.log('user logged out');
+        }
+   
 
   return (
     <>
@@ -301,15 +364,28 @@ export default function Header() {
             </div>
   {/* =========================================userIcon============================================== */}
   <div class="dropdown" hidden={toggleBtnsWithIcons}>
-  <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style={{background: "transparent"}}>
-  <FontAwesomeIcon icon={faUser}  style={{marginRight: "6px"}}/>
-    Hello {userName}
-  </a>
+  {users.map((user) => {
+                        
+                        if(localStorage.getItem("email") == user.Email){
+                            
+                                return (
+                                  <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style={{background: "transparent"}}>
+                                    <FontAwesomeIcon icon={faUser}  style={{marginRight: "6px"}}/>
+                                    Hello {user.Name}
+                                    </a>
+                                    
+                                )
+                        } 
+                    
+                    })}
 
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <li><a class="dropdown-item" href="#">Your Profile</a></li>
-    <li><a class="dropdown-item" href="#">Account Setting</a></li>
-    <li><a class="dropdown-item" onClick={()=>signout()}>LogOut</a></li>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style={{padding: "5px"}}>
+      <li><Link to="/userProfile" style={{color: "black"}}>Your Profile</Link></li>
+      <hr />
+      <li><Link to="/accountSetting" style={{color: "black"}}>Account Setting</Link></li>
+      <hr />
+      <li><Link to="/" onClick={()=>signout()} style={{color: "black"}}>LogOut</Link></li>
   </ul>
 </div>
 
@@ -342,6 +418,10 @@ export default function Header() {
                       }}
                     />
                    
+
+                    {/* <input type="Search"  placeholder="Find a Restaurant" onChange={(e) => {
+                        handleChangeRes(e);
+                      }} /> */}
                     <span className="search-icon text-secondary">
                       <FontAwesomeIcon icon={faSearch}/>
                     </span>

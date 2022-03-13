@@ -17,7 +17,8 @@ const firebaseConfig = {
   };
 
 //==================================Test CDN========================================
-//  const firebaseConfig = {
+
+// const firebaseConfig = {
 //   apiKey: "AIzaSyC-5jGgvrgiCrq1lMJId4RwNJYAEg43DJY",
 //   authDomain: "authentication-test-33755.firebaseapp.com",
 //   projectId: "authentication-test-33755",
