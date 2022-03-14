@@ -2,8 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { db } from './../../Firebase/Firebase'
-import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
+import { collection,  getDocs, } from 'firebase/firestore'
 import OrderCard from "./orderCard";
+import { Link } from "react-router-dom";
 
 export default function OrderList({ orderLength }) {
 
@@ -66,7 +67,7 @@ export default function OrderList({ orderLength }) {
 
                             {/* <h3>Total Price: {totalPrice}</h3> */}
 
-                            <button className="btn btn-success mt-5" style={{ width: "27vw", marginLeft:"10px" }}>GO TO CHECKOUT</button>
+                          <Link to="/check"> <button className="btn btn-success mt-5" style={{ width: "27vw", marginLeft:"10px" }}>GO TO CHECKOUT</button></Link> 
                             <button className="btn mb-5" style={{ width: "27vw", marginLeft:"10px" }}>Remove All Items</button>
                         
 
