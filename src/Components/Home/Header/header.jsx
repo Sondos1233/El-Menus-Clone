@@ -109,7 +109,9 @@ useEffect(()=>{
     const getUsers = async() => {
       const data = await getDocs(usersCollectionRef);
       console.log(data);
+
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+
     }      
 
     getUsers();
@@ -376,6 +378,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                                     
                                 )
                         } 
+                       
                     
                     })}
 

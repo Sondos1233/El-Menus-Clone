@@ -1,6 +1,6 @@
 import './accountSetting.css'
 import React, {useState, useEffect} from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase.config';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
@@ -23,11 +23,20 @@ function AccountSetting(){
         setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
       }
       getUsers();
-      
-      
+          
     });
     
-
+    //===============================Update Email===================================
+    // const initialEmail = { email: users.Email};
+    // console.log(initialEmail);
+    // const [update, setUpdate] = useState(initialEmail);
+    // const handleUpdate = ({target}) =>{
+    //     setUpdate({
+    //         ...update,
+    //         [target.name]: target.value,
+    //     });
+    // }
+    
     return(
         <>
         <div className='container-fluid' style={{paddingTop: "5%"}}>
@@ -51,12 +60,15 @@ function AccountSetting(){
                         
                         if(localStorage.getItem("email") == user.Email){    
                             return (
-                            <input id='email' type="email" placeholder='Enter new Email' className='d-block form-control' value={user.Email}/>                                   
+                            <div>
+                            <input id='email' type="email" placeholder='Enter new Email' className='d-block form-control' value={user.Email}/> 
+                            <button className='btn btn-danger' style={{fontSize: "16px"}} >Change Email</button>                                 
+                            </div>
                             ) 
                         }
                        
                     })}
-                <button className='btn btn-danger'>Change Email</button>
+                    
             </div>
 
             <div className={toggleState === 2 ? "hide  active-changPass" : "hide"}>

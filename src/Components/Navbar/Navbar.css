@@ -75,67 +75,24 @@ a{
 }
 
 
-/* *****************SignUp Modal styling ****************/
-
-.modalContainer{
-    position: absolute;
-    z-index: 100;
-}
-
-.navCont{
-    position: relative;
-    z-index: 0;
-}
 
 
-.ReactModal__Overlay {
-    position: absolute;
-    transition: opacity 500ms;
-    margin-top: 4%;
-}
-
-
-
-.ReactModal__Overlay--after-open{
-    opacity: 1;
-}
-
-.ReactModal__Overlay--before-close{
-    opacity: 0;
-    
-}
-
-
-.bgForm{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.075);
-    position: relative;
-}
-
+/* =============================SignUp Modal====================================== */
 .btn-close{
     position: absolute;
     top: 2%;
     right: 1%;
 }
 
-.form-container{
-    position: absolute;
-    top: 9%;
-    background-color: white;
-    width: 31%;
-    padding: 3%;
-    margin-left: 39%;
-    border-radius: 4%;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center; */
-}
-
 #signLogo{
     width: 45%;
     margin-left: 28%;
     margin-bottom: 10%;
+}
+
+#Up{
+    width: 85%;
+    margin-left: 7%;
 }
 
 .inpt input{
@@ -160,62 +117,27 @@ a{
     color: white !important;
 }
 
-.form-container .note{
+.note{
     text-align: center;
     color: #e32207;
     font-size: 12px;
     font-weight: 500;
-    padding-top: 6%;
+    padding-top: 5%;
+    padding-right: 12%;
+    padding-left: 12%;
 }
 
-
-/* *****************LogIn Modal styling ****************/
-
-.ReactModal__Overlay {
-    opacity: 0;
-    transition: opacity 500ms;
-    
-    
-}
-
-
-.ReactModal__Overlay--after-open{
-    opacity: 1;
-}
-
-.ReactModal__Overlay--before-close{
-    opacity: 0;
-    
-}
-
-
-.bgForm{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.075);
-    position: relative;
-}
-
-.btn-close{
-    position: absolute;
-    top: 2%;
-    right: 1%;
-}
-
-.form-container{
-    position: absolute;
-    top: 9%;
-    background-color: white;
-    width: 31%;
-    padding: 3%;
-    margin-left: 39%;
-    border-radius: 4%;
-}
+/* =============================LogIn Modal====================================== */
 
 #logLogo{
     width: 45%;
     margin-left: 28%;
     margin-bottom: 10%;
+}
+
+#log{
+    width: 85%;
+    margin-left: 7%;
 }
 
 .inpt input{
@@ -235,15 +157,28 @@ a{
 
 
 
-.goglBtn{
+.faceBtn{
     background-color: #4267b2 !important;
     color: white !important;
 }
 
-.form-container .frgtPass{
+.googBtn{
+    background-color: #e32207 !important;
+    color: white !important;
+}
+
+.frgtPass{
     color: #e32207;
     font-size: 12px;
     font-weight: 500;
-    padding-left: 33%;
-    padding-top: 6%;
+    padding-left: 37%;
+    padding-top: 4%;
 }
+
+
+
+
+/* .navCont{
+    position: relative;
+    z-index: 0;
+} */

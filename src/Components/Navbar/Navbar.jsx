@@ -47,7 +47,7 @@ export default function Navbar() {
       if(counter < 1){
         setTimeout(()=>{
             window.location.reload();                    
-        },2000)
+        },500)
       }
 
 
@@ -327,14 +327,12 @@ const [isSubmit, setIsSubmit] = useState(false);
                                         {/* ========================================================Buttons============================================================ */}
                                         <div style={{ marginLeft: "auto" }} id="sign_auth" hidden={!toggleBtnsWithIcons}>
                                             <a href="#" style={{ textDecoration: "none" }}>
-                                                <button type="button" className="btn login-btn btn-log" data-bs-toggle="modal" data-bs-target="#LogInModal"
-                                                    onClick={() => { setLogModalIsOpen(true); setModalIsOpen(false) }}>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#logInModal" style={{background: 'transparent', color: '#e32207'}}>
                                                     LogIn
                                                 </button>
                                             </a>
                                             <a href="#" style={{ textDecoration: "none" }}>
-                                                <button type="button" className="btn btn-sign" data-bs-toggle="modal" data-bs-target="#SignModal"
-                                                    onClick={() => { setModalIsOpen(true); setLogModalIsOpen(false) }}>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#signUpModal">
                                                     SignUp
                                                 </button>
                                             </a>
@@ -451,15 +449,13 @@ const [isSubmit, setIsSubmit] = useState(false);
                                         {/* =====================================================Buttons=============================================================== */}
                                         <div style={{ marginLeft: "auto" }} hidden={!toggleBtnsWithIcons}>
                                             <a href="#" style={{ textDecoration: "none" }}>
-                                                <button className="btn" style={{ fontSize: "12px", fontWeight: "700", backgroundColor: "white" }}
-                                                    onClick={() => { setLogModalIsOpen(true); setModalIsOpen(false) }}>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#logInModal" style={{ fontSize: "12px", fontWeight: "700", backgroundColor: "white" }}>
                                                     LOGIN
                                                 </button>
                                             </a>
                                             <a href="#" style={{ textDecoration: "none" }}>
-                                                <button className="btn"
-                                                    style={{ backgroundColor: "#e32207", color: "white", fontSize: "12px", fontWeight: "700" }}
-                                                    onClick={() => { setModalIsOpen(true); setLogModalIsOpen(false) }}>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#signUpModal"
+                                                    style={{ backgroundColor: "#e32207", color: "white", fontSize: "12px", fontWeight: "700" }}>
                                                     SIGNUP
                                                 </button>
                                             </a>
@@ -499,19 +495,19 @@ const [isSubmit, setIsSubmit] = useState(false);
 
             </nav>
 
-            {/* ************************************ٍSignUp Modal******************************* */}
-            <div className="container-fluid modalContainer">
-                {/* This Button instead of signUp button till integration with navbar */}
-                {/* <button className="btn btn-danger" onClick={() => { setModalIsOpen(true) }}>Open Modal</button> */}
-                {/* ****************************************************************************** */}
-
-                <ReactModal isOpen={modalIsOpen} onRequestClose={() => { setModalIsOpen(false) }}>
-                    <div className="bgForm">
-                        <button type="button" className="btn-close" onClick={() => { setModalIsOpen(false) }}></button>
-
-                        <form className="form-container" onSubmit={handleSignSubmit}>
+                    
+                    {/* ************************************ٍSignUp Modal******************************* */}
+                    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" isOpen={modalIsOpen}>
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+      
+                        <form onSubmit={handleSignSubmit}>
                             <img id="signLogo" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397754952/e518a9efa57162be0afd9826667d697e.jpg" />
-                            <div id="log">
+                            <div id="Up">
                                 <div className="inpt mt-3">
                                     <input type='text' placeholder="Name" className="form-control" name='name' value={signInput.name} onChange={handleSignChange} />
                                     <p style={{color: "red", fontSize: "12px"}}>{signFormErrors.name}</p>
@@ -536,27 +532,23 @@ const [isSubmit, setIsSubmit] = useState(false);
                             <div className="note">
                                 <a>By creating an account, you agree to our Terms of service and Privacy policy</a>
                             </div>
-                        </form>
+                        </form>                         
+                    </div>           
                     </div>
-                </ReactModal>
-            </div>
-
-
-
-
+                </div>
+                </div>
             {/* ***********************************LogIn Modal************************************************** */}
-            <div className="container-fluid modalContainer">
-
-                {/* This Button instead of LogIn button till integration with navbar */}
-                {/* <button className="btn btn-danger" onClick={() => { setModalIsOpen(true) }}>Open Modal</button> */}
-                {/* ****************************************************************************** */}
-
-                <ReactModal isOpen={logModalIsOpen} onRequestClose={() => { setLogModalIsOpen(false) }}>
-                    <div className="bgForm">
-                        <button type="button" className="btn-close" onClick={() => { setLogModalIsOpen(false) }}></button>
-
-                        <div className="form-container">
-                            <img id="logLogo" src="images/logowithbg.png" />
+            
+            {/* <!-- Modal --> */}
+            <div class="modal fade" id="logInModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div>
+                            <img id="logLogo" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1397754952/e518a9efa57162be0afd9826667d697e.jpg" />
                             <form id="log" onSubmit={handleSubmit}>
                                 
                                 <div className="inpt mt-3">
@@ -572,23 +564,25 @@ const [isSubmit, setIsSubmit] = useState(false);
                                 <div className="button mt-3">
                                     <button type="submit" className="btn btn-danger">Log in</button>
                                 </div>
-
+{/* 
                                 <div className="button mt-3">
-                                    <button type="submit" className="btn goglBtn">Log in with Facebook</button>
+                                    <button type="submit" className="btn faceBtn">Log in with Facebook</button>
                                 </div>
 
                                 <div className="button mt-3">
-                                    <button type="submit" className="btn btn-primary"  style={{fontSize: "18px", fontWeight: "400"}}>Log in with Google</button>
-                                </div>
+                                    <button type="submit" className="btn googBtn">Log in with Google</button>
+                                </div> */}
 
                             </form>
                             <div className="frgtPass">
                                 <a>I forget my password</a>
                             </div>
                         </div>
-                    </div>
-                </ReactModal>
+                </div>
+                </div>
             </div>
+            </div>
+
         </>
     );
   };
