@@ -70,6 +70,11 @@ export const FormStepper = () => {
     setShow(!show);
   };
 
+  const deleteOrder = ()=>{
+    localStorage.removeItem("myUser")
+    setShow(!show);
+  }
+
   return (
     <>
       <div className="checkOuttoOrder">
@@ -121,6 +126,7 @@ export const FormStepper = () => {
                           next={next}
                           showdetails={showdetails}
                           user={user}
+                          deleteOrder={deleteOrder}
                         />
                       </div>
                     )}
@@ -166,6 +172,7 @@ export const FormStepper = () => {
                 )}
                 <Order handleSubmit={handleSubmit} />
               </div>
+              
             )}
           </div>
         </div>
