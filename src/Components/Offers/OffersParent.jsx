@@ -71,51 +71,9 @@ return (
                         {
                             Restaurants.map((Res,index) => { index++;  
                                 return (
-<<<<<<< HEAD
                                     <Offers Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo} ></Offers>
                                 )
                             })
-=======
-                                    <div class="col" id="wholeCard">
-                <a href="#">
-                    <div class="card h-100">
-                        <img id="bigImg" src={Res.ImageURL} class="card-img-top" alt="Food Img" />
-                        <div class="card-body">
-                            <div id="upperPart">
-                                <img src={Res.ImageLogo} alt="Resrraunt Logo" srcset="" />
-                                <div id="restName">
-                                    <div id="offerDisc">{Res.ResName}</div>
-                                    <h3>{Res.ResName}</h3>
-                                    <span>{Res.ResType}</span>
-                                </div>
-                                <div id="rating">
-                                    <span>
-                                        <FontAwesomeIcon id="faStar" icon={faStar}></FontAwesomeIcon>
-                                        <FontAwesomeIcon id="faStar" icon={faStar}></FontAwesomeIcon>
-                                        <FontAwesomeIcon id="faStar" icon={faStar}></FontAwesomeIcon>
-                                        <FontAwesomeIcon id="faStar" icon={faStar}></FontAwesomeIcon>
-                                        <FontAwesomeIcon id="faStar" icon={faStar}></FontAwesomeIcon>
-                                        <span>{Res.Rate}</span>
-                                    </span>
-
-                                    <span id="criditCardIcon"><FontAwesomeIcon id="faCreditCard" icon={faCreditCard}></FontAwesomeIcon></span>
-                                </div>
-                            </div>
-                            <div id="midPart">
-                                <FontAwesomeIcon icon={faPercentage}></FontAwesomeIcon>
-                                <span> {console.log(offers[index]?.Description)}</span>
-                            </div>
-                            <div id="lowerPart">
-                                <span><FontAwesomeIcon icon={faMotorcycle}></FontAwesomeIcon>50 mins</span>
-                                <span><FontAwesomeIcon icon={faCircle}></FontAwesomeIcon>ORDER ONLINE</span>
-                                <span><FontAwesomeIcon icon={faMapMarkedAlt}></FontAwesomeIcon>Live Tracking</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>)
-                         })
->>>>>>> 0817eec555e828b7da10a015afda5ca7b8621eac
                         }
                     </div>
                 </div>
