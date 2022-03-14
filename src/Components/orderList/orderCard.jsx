@@ -6,12 +6,15 @@ import { collection, collectionGroup, getDocs, limit, query, where } from 'fireb
 import UpdateModal from "../updateOrder/updateModal";
 
 export default function OrderCard(props) {
-
+    const [isOpen, setIsOpen] = useState(false);
 console.log(props.order)
+const showModal = () => {
+    setIsOpen(true);
+  };
 
     return (
         <>
-<UpdateModal />
+<UpdateModal  setIsOpen = {setIsOpen} isOpen={isOpen} mealObj ={props.order} />
 
 
             <div className="card d-flex mt-1" style={{ fontSize: "12px" }}>
@@ -44,9 +47,7 @@ console.log(props.order)
 
                     <div>
 
-                    <button onClick={()=>{
-
-                    }} type="button" data-bs-toggle="modal" data-bs-target="#updateModal" className='btn' style={{width:'fit-content',height:'fit-content',color: "green"}}><FontAwesomeIcon icon={faList}></FontAwesomeIcon> Details </button>
+                    <button onClick={showModal} type="button" data-bs-toggle="modal" data-bs-target="#updateModal" className='btn' style={{width:'fit-content',height:'fit-content',color: "green"}}><FontAwesomeIcon icon={faList}></FontAwesomeIcon> Details </button>
                     </div>
             </div>
         </>

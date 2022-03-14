@@ -221,7 +221,7 @@ const Meals = (props) => {
       </div>
 
       {/* Meal Modal */}
-      <Modal show={isOpen} onHide={hideModal} onExiting={exitModel} onc>
+      <Modal show={isOpen} onHide={hideModal} onExiting={exitModel} >
         <div className="aDivCoverModel">
           <img className="aImgCoverModel" alt="" src={MealDet.ProImg} />
         </div>
@@ -394,6 +394,8 @@ const Meals = (props) => {
                 await addDoc(Restcollection, {
                   ProName: MealDet.ProName,
                   ProDescription: MealDet.Description,
+                  ProSizes:MealDet.Size,
+                  ProExtras:MealDet.Extras,
                   Quantity: qty,
                   TotalPrice: totalPrice?.toFixed(2),
                   Size: Size,
