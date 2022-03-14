@@ -36,7 +36,7 @@ const showModal = () => {
                     </div>
 
                     <div >
-                        <p style={{ color: "green" }}> {props.order.TotalPrice} EGP </p>
+                        <p style={{ color: "green" }}> {parseInt(props.order.TotalPrice)} EGP </p>
                         <div className="d-flex">
                         <span style={{ marginRight: "5px", color: "red" }}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></span>
                         <a href="" style={{ marginRight: "15px" }}> Remove </a>
