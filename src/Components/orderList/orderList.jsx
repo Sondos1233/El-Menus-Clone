@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { db } from './../../Firebase/Firebase'
-import { collection,  getDocs, } from 'firebase/firestore'
+import { collection,  getDocs, deleteDoc } from 'firebase/firestore'
 import OrderCard from "./orderCard";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,13 @@ export default function OrderList({ orderLength }) {
 
     const [orderList, setOrderList] = useState([]);
 
+    
     const UserDoc = collection(db, "User", localStorage.getItem("userID"), "Cart");
+    
+    //delete all
+    const deleteAllCart =async ()=>{
+        await deleteDoc(UserDoc)
+    }
 
     useEffect(() => {
         const getUser = async () => {
@@ -22,6 +28,8 @@ export default function OrderList({ orderLength }) {
 
 
     }, [])
+
+
 
     let total = 0;
     const calcPrice = (price) => {
@@ -83,7 +91,7 @@ export default function OrderList({ orderLength }) {
                             </div>
 
                           <Link to="/check"> <button className="btn btn-success mt-5" style={{ width: "25vw", marginLeft:"10px" }}>GO TO CHECKOUT</button></Link> 
-                            <button className="btn mb-5" style={{ width: "25vw", marginLeft:"10px" }}>Remove All Items</button>
+                            <button className="btn mb-5" style={{ width: "25vw", marginLeft:"10px" }} onClick={(e)=>{deleteAllCart()}} >Remove All Items</button>
                         
 
                         </div>
