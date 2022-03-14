@@ -47,7 +47,7 @@ export default function OfferParent() {
                         {
                             Restaurants.map((Res) => {
                                 return (
-                                    <Offers Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} ></Offers>
+                                    <Offers Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo} ></Offers>
                                 )
                             })
                         }

@@ -18,10 +18,10 @@ export default function Offers(props) {
             <div class="col" id="wholeCard">
                 <a href="#">
                     <div class="card h-100">
-                        <img id="bigImg" src={ResImg} class="card-img-top" alt="Food Img" />
+                        <img id="bigImg" src={props.srcImage} class="card-img-top" alt="Food Img" />
                         <div class="card-body">
                             <div id="upperPart">
-                                <img src={ResLogo} alt="Resrraunt Logo" srcset="" />
+                                <img src={props.ResLogo} alt="Resrraunt Logo" srcset="" />
                                 <div id="restName">
                                     <div id="offerDisc">{props.ResName}</div>
                                     <h3>{props.ResName}</h3>

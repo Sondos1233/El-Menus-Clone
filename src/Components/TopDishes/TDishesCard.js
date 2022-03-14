@@ -3,6 +3,10 @@ import "../Delivery.scss";
 import "../mixins.scss";
 import {useState } from "react";
 
+//Carousel imports
+import { Carousel } from '@trendyol-js/react-carousel';
+
+
 const TDishesCard = ({handleType}) => {
   return (
     <>

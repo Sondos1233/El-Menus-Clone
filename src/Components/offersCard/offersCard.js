@@ -6,6 +6,9 @@ import "../Delivery.scss";
 import "../mixins.scss";
 import "../main-style.css";
 
+//Carousel
+import { Carousel } from '@trendyol-js/react-carousel';
+
 const OffersCard = () => {
   const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
@@ -69,6 +72,7 @@ const OffersCard = () => {
 
         <div className="container-fluid" id="aOfferCards">
           <div className="row mb-3 " id="aOfferCardsrow">
+          <Carousel show={4} slide={2} transition={0.5}>
             {Res.map((res,index)=>{
               return(
                   <div className="col-lg-3 col-md-4 position-relative aproductDiv">
@@ -113,6 +117,7 @@ const OffersCard = () => {
                   )
                 })
             }
+          </Carousel>
           </div>
               {/* <button type="button " id="previous" className="rounded-circle">
                 {" "}
