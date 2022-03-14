@@ -281,11 +281,12 @@ const [isSubmit, setIsSubmit] = useState(false);
                                     <a className=" nav-item nav-link py-4 px-2" >OFFERS</a>
                                 </div>
 
-                                <div className="rightNav" style={{ display: "flex", marginLeft: "auto" }}>
-                                    <div className="services" style={{ margin: "10px 20px"}}>
+                                <div style={{ display: "flex", marginLeft: "auto" }}>
+                                    <div  style={{display: "flex", margin: "10px 20px"}}>
 
-                                        <div style={{ marginLeft: "auto" }} id="auth">
-                                            <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} hidden={toggleBtnsWithIcons}>
+                                        <div style={{ display: "flex" ,marginLeft: "auto" }} id="auth" >
+                                            <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} hidden={toggleBtnsWithIcons} >
+
                                                 <a
                                                     className="nav-link py-4 px-2 ms-5"
                                                     href=""
@@ -342,7 +343,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                                     </div>
                                     <div
                                         className="cart-language"
-                                        style={{ width: "auto", display: "flex", marginLeft: "auto", borderLeft: "1px solid #dfe2e6" }}
+                                        style={{ width: "auto", display: "flex", marginLeft: "auto",  borderLeft: "1px solid #dfe2e6",  marginLeft: "20px" }}
                                     >
                                         <div style={{ marginLeft: "auto" }}>
                                             <a href="#" style={{ textDecoration: "none" }}>
@@ -353,7 +354,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                                             </a>
                                             <a
                                                 href="#"
-                                                style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw" }}
+                                                style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw", marginLeft: "30px" }}
                                                 onClick={() => {
                                                     toggleLanguage();
                                                 }}

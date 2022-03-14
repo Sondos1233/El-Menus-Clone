@@ -11,12 +11,21 @@ import ChinessImg from './../../images/Dineout/Chiness.jpg'
 import FriedChickenImg from './../../images/Dineout/FriedChicken.jpg'
 import KosharyImg from './../../images/Dineout/koshary.jpg'
 import SandwichesImg from './../../images/Dineout/Sandwiches.jpg'
+
+//Carousel
+import { Carousel } from '@trendyol-js/react-carousel';
+
+
 // FireStore
 import { db } from './../../Firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
 import DineoutbyType from './DineoutByType/DineoutByType';
 
 export default function Dineout() {
+
+    //carousel test//
+    let testItems = [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9]
+    
     // //Restaurants Collection
     const [Restaurants, setRestaurants] = useState([]);
     const resturantsCollection = collection(db, "Restaurant")
@@ -160,9 +169,9 @@ export default function Dineout() {
         console.log(Area)
 
         const QueryByAreaDocs = query(
-            collection(db, "Restaurant"),
-            limit(10),
-            where("Areas", "array-contains", Area.trim())
+            // collection(db, "Restaurant"),
+            // limit(10),
+            // where("Areas", "array-contains", Area.trim())
         );
 
         const getResByAreaQuery = async () => {
@@ -353,14 +362,13 @@ export default function Dineout() {
                             <div class="slider__wrapper">
 
                                 <div class="slider__inner js-slider-inner">
-                                    {
-                                        QueryByArea.map((Res) => {
+                                    <Carousel show={4} slide={2} transition={0.5}>
+                                        {QueryByArea.map((Res) => {
                                             return (
                                                 <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
-
                                             )
-                                        })
-                                    }
+                                        })}
+                                    </Carousel>
                                 </div>
 
                             </div>
@@ -384,13 +392,15 @@ export default function Dineout() {
                                     <div className="row">
                                         <div className="col-12 d-flex">
 
-                                            {
-                                                QueryByMood2.map((Res) => {
+                                            <Carousel show={4} slide={2} transition={0.5}>
+                                                {testItems.map((Res) => {
                                                     return (
-                                                        <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
+
+                                                          <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
+
                                                     )
-                                                })
-                                            }
+                                                })}
+                                            </Carousel>
                                         </div>
                                     </div>
                                 </div>
@@ -414,18 +424,19 @@ export default function Dineout() {
                                     <div className="row">
                                         <div className="col-12 d-flex">
 
-                                            {
-                                                Restaurants.map((Res) => {
+                                        <Carousel show={8} slide={2} transition={0.5}>
+                                               { testItems.map((Res) => {
                                                     return (
 
                                                         <div class="item-1 p-2">
-                                                            <div class="box-newResturants" style={{ height: "27vh", width: "13vw" }}>
-                                                                <div class="slide-img" style={{ width: "auto", boxShadow: "none" }}>
+                                                            <div class="box-newResturants" style={{ }}>
+                                                                <div >
                                                                     <img
-                                                                        src={Res.ImageLogo} style={{ height: "19vh", width: "13vw" }}
+                                                                       
+                                                                        src={/*Res.ImageLogo*/'https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/916cbf96-3539-4a46-98f2-86f31be97c5d.jpg'} style={{ height: "19vh", width: "100%" }}
                                                                         alt="" />
                                                                     <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
-                                                                        <a href="#" class="meal-kind" style={{ fontSize: "13px" }}>{Res.ResName}</a>
+                                                                        <a href="#" class="meal-kind" style={{ fontSize: "13px" }}>{/*Res.ResName*/"ARandomNameBoy"}</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -433,6 +444,8 @@ export default function Dineout() {
                                                     )
                                                 })
                                             }
+                                            </Carousel>
+                                            
 
                                         </div>
                                     </div>

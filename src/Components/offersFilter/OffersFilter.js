@@ -13,7 +13,12 @@ import {
   query,
   collectionGroup,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+
+//Carousel
+import { Carousel } from '@trendyol-js/react-carousel';
+
 import { useEffect, useState } from "react";
+
 const OffersFilter = (props) => {
   const [Res, setRes] = useState([]);
   const RestaurantCollecRef = collectionGroup(firestore, "Restaurant");

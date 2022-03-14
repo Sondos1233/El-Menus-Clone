@@ -1,15 +1,44 @@
 import "../Review.scss";
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Star from "../star/star";
+import { firestore , storage} from "../../Firebase/firebase-config";
+import {
+  collection,
+  getDoc,
+  docs,
+  query,doc,getDocs,
+  collectionGroup,addDoc
+} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+import { useParams } from "react-router-dom";
+
 const ReviewForm = ({setAddReview}) => {
-    const Submit = (event) =>{
+  let id = useParams();
+  id = id.id;
+  const [ Branches, setBranches] = useState([]);
+  const ReviewCollec = collection(firestore,'Restaurant',id,'Review');
+  const BranchesCollecRef = collection(firestore,'Restaurant',id,'Branches')
+  useEffect(()=>{
+    const getBranches = async() =>{
+      const data = await getDocs(BranchesCollecRef);
+      setBranches(
+        data.docs.map((document)=>{
+          return document.data()
+        })
+      )
+    };
+    getBranches();
+  },[]);
+  let email = localStorage.getItem('email');
+  const Submit = async (event) =>{
         event.preventDefault();
-        console.log(review)
+        console.log(review);
+        await addDoc(ReviewCollec,{...review})
     }
     const[review,setReview] = useState({
         branch:'',
         comment:'',
-        Rating:0
+        Rating:0,
+        userEmail:email
     });
     const[errors,setErrors]= useState({
         commentErrors:null,
@@ -62,10 +91,14 @@ const ReviewForm = ({setAddReview}) => {
               class="form-select mt-3"
               aria-label="Default select example"
             >
-              <option selected>Branches location</option>
+              <option value='Choose branch'>Choose branch</option>
+              {Branches.map((i)=>{
+                return <option value={i.LocName}>{i.LocName}</option>
+              })}
+              {/* <option selected>Branches location</option>
               <option value="1">One</option>
               <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="3">Three</option> */}
             </select>
           </div>
           <div
