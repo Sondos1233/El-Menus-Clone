@@ -17,6 +17,7 @@ export const FormStepper = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [show, setShow] = useState(true);
   const [showAlert, setShowalert] = useState(false);
+  const [TotalPrice,setTotalPrice] = useState(0)
 
   const sections = [
     { title: "Delivery address", onClick: () => setCurrentPage(1) },
@@ -74,7 +75,10 @@ export const FormStepper = () => {
     localStorage.removeItem("myUser")
     setShow(!show);
   }
-
+ const saveTotalPrice =(price)=>{
+   setTotalPrice(price)
+   
+ }
   return (
     <>
       <div className="checkOuttoOrder">
@@ -136,7 +140,7 @@ export const FormStepper = () => {
                 {currentPage === 2 && (
                   <>
                     <div className="container" style={{ width: "80%" }}>
-                      <ReviewOrder prev={prev} user={user} />
+                      <ReviewOrder prev={prev} user={user} saveTotalPrice={saveTotalPrice} />
                     </div>
                   </>
                 )}
@@ -170,7 +174,7 @@ export const FormStepper = () => {
                 ) : (
                  ""
                 )}
-                <Order handleSubmit={handleSubmit} />
+                <Order handleSubmit={handleSubmit} TotalPrice={TotalPrice} />
               </div>
               
             )}
