@@ -35,12 +35,12 @@ const Meals = (props) => {
     "Menu"
   );
 
-  const  Restcollection= collection(
+  const Restcollection = collection(
     firestore,
     "User",
     localStorage.getItem("userID"),
     "Cart"
-    )
+  )
 
   let CategArray = localStorage.getItem("MenuName")?.split(",");
 
@@ -103,7 +103,7 @@ const Meals = (props) => {
   const [MealDet, setMealDet] = useState("Loading");
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("Transitioning...");
-  let [qty,setQty] = useState(1);
+  let [qty, setQty] = useState(1);
   let IsFirst = false;
   const showModal = () => {
     setIsOpen(true);
@@ -131,6 +131,8 @@ const Meals = (props) => {
   const [Extras, setExtras] = useState([])
   const [Size, setSize] = useState({})
   const [specialAdditions, setSecialAdditions] = useState("")
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [check, setChick] = useState(false)
 
 
   return (
@@ -147,7 +149,7 @@ const Meals = (props) => {
           {Meals?.map((i, index) => {
             index += 1;
             // console.log(i)
-            
+
             return (
               <>
                 <h4 id={CategArray[counter]} className="aItem mt-4 mb-4">
@@ -178,11 +180,11 @@ const Meals = (props) => {
                               {/* <MealModal open={isOpen} /> */}{" "}
                               <p className="d-inline-block aDishPrice">
                                 {j.Size[0].Price ===
-                                j.Size[j.Size.length - 1].Price
+                                  j.Size[j.Size.length - 1].Price
                                   ? j.Size[0].Price
                                   : j.Size[0].Price +
-                                    "-" +
-                                    j.Size[j.Size.length - 1].Price}{" "}
+                                  "-" +
+                                  j.Size[j.Size.length - 1].Price}{" "}
                                 EGP{" "}
                               </p>
                             </div>
@@ -237,12 +239,11 @@ const Meals = (props) => {
                 {MealDet.Size?.map((i, index) => {
                   if (index === 0) {
                     IsFirst = true;
-                  
+
                   }
                   else IsFirst = false;
                   console.log(IsFirst, index);
                   index = +1;
-                 
 
                   return (
                     <>
@@ -250,21 +251,22 @@ const Meals = (props) => {
                         <div className="row">
                           <div className="col">
                             <label className="aRadio">
-                             
+
                               <input
                                 type="radio"
                                 name="size"
                                 id=""
                                 value={i.Price}
                                 // defaultChecked={IsFirst}
+                                
                                 onClick={
-                                  ()=>{
-                                   
+                                  () => {
+                                    setChick(true)
                                     setSize({
                                       Name: i.Name,
                                       Price: i.Price
                                     })
-                                    
+                                    setTotalPrice(i.Price)
                                   }
                                 }
                               />
@@ -290,22 +292,36 @@ const Meals = (props) => {
                   <b>Additions</b>
                 </h5>
                 {MealDet.Extras?.map((i) => {
-                  
+
                   return (
                     <>
                       <div className="mt-3 d-flex justify-content-between">
                         <div className="row">
                           <div className="col-3">
                             <label className="abox position-relative d-block">
-                              <input type="checkbox" name="" value={i.Price} 
-                              onClick={
-                                ()=>{
-                                  setExtras([...Extras, {
-                                    Name: i.Name,
-                                    Price: i.Price
-                                  }])
+                              <input type="checkbox" name="" value={i.Name}
+                                onClick={
+                                  (e) => {
+                                    console.log(e.target.value)
+                                    if (e.target.checked) {
+                                      console.log(i.Price)
+                                      setExtras([...Extras, {
+                                        Name: i.Name,
+                                        Price: i.Price
+                                      }])
+
+                                      
+                                      setTotalPrice((price) => price + i.Price);
+                                    }
+                                    else {
+                                      setTotalPrice((price) => price - i.Price);
+                                      setExtras(Extras.filter((extra) => {return extra.Name != e.target.value}))
+
+                                    }
+
+                                  }
+
                                 }
-                              }
                               />
                               <span className="acheck position-absolute">
                                 <FontAwesomeIcon
@@ -340,7 +356,7 @@ const Meals = (props) => {
                     aria-describedby="helpId"
                     placeholder="eg. Please don't add onion"
 
-                    onChange={(e)=>{
+                    onChange={(e) => {
                       console.log(e.target.value)
                       setSecialAdditions(e.target.value)
                     }}
@@ -352,11 +368,17 @@ const Meals = (props) => {
         </Modal.Body>
         <Modal.Footer className="aModalFooter">
           <div className="aPlusMinus">
-            <button className="btn ms-2" onClick={()=>{if(qty>1) setQty(qty-1)}}>
+            <button className="btn ms-2" onClick={() => { if (qty > 1){
+              setQty(qty - 1) 
+              setTotalPrice((price)=> price - Size.Price)
+            } }}>
               <FontAwesomeIcon icon={faMinusCircle}></FontAwesomeIcon>
             </button>
             <span style={{ color: "#333333", marginTop: "20px" }}> {qty} </span>
-            <button className="btn ms-2" onClick={()=>{setQty(qty+1)}}>
+            <button className="btn ms-2" onClick={() => { 
+              setQty(qty + 1)
+              setTotalPrice((price)=> price + Size.Price)
+               }}>
               <FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon>
             </button>
           </div>
@@ -365,26 +387,27 @@ const Meals = (props) => {
           <button className="btn aBuyButton">
             <FontAwesomeIcon icon={faShoppingBag}></FontAwesomeIcon>
             <button className="ms-2" onClick={
-              async ()=>{
+              async () => {
                 alert("shrouk")
-                console.log("shrouk")
-                console.log(Size)
-                console.log(Extras)
-                await addDoc(Restcollection,{
-                  ProName: MealDet.ProName, 
+                // alert(Size.Price)
+                // console.log(Extras)
+                await addDoc(Restcollection, {
+                  ProName: MealDet.ProName,
                   ProDescription: MealDet.Description,
                   Quantity: qty,
+                  TotalPrice: totalPrice.toFixed(2),
                   Size: Size,
                   Extras: Extras,
-                  SpecialAdditional: specialAdditions
+                  SpecialAdditional: specialAdditions,
                 })
                 setSize({})
                 setExtras([])
                 console.log(Extras)
                 alert("Sucess");
+                window.location.reload(false)
               }
-            }>ADD TO BASKET</button>
-            <span className="float-end">price</span>
+            } disabled={!check}>ADD TO BASKET</button>
+            <span className="float-end"> {totalPrice.toFixed(2)}EGP</span>
           </button>
         </Modal.Footer>
       </Modal>

@@ -1,63 +1,64 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
 // import logo from './../../images/logo-sm.png' 
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSearch, faUser} from "@fortawesome/free-solid-svg-icons";
-import React, {useState, useEffect} from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faUser, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from "react";
 import ReactModal from 'react-modal';
-import { auth,firestore } from '../firebase/firebase.config'
-import {addDoc, collection, getDocs} from 'firebase/firestore'
+import { auth, firestore } from '../firebase/firebase.config'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
 import { Link } from 'react-router-dom';
 import ModelLocation from '../ModelLocation/modelLoc';
 import DineoutbyCity from '../Dineout/DineoutByCity/DineoutByCity';
+import OrderList from '../orderList/orderList';
 
 export default function Navbar() {
 
-//=======================Handle toggle Buttons With Icons=====================
-  const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
+    //=======================Handle toggle Buttons With Icons=====================
+    const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
 
-   useEffect(()=>{
-            if(localStorage.getItem('email')){
-                console.log("icon");
-                setToggleBtnsWithIcons(false);
-            } else{
-                console.log("btn");
-                setToggleBtnsWithIcons(true);
-            }
-   })
+    useEffect(() => {
+        if (localStorage.getItem('email')) {
+            console.log("icon");
+            setToggleBtnsWithIcons(false);
+        } else {
+            console.log("btn");
+            setToggleBtnsWithIcons(true);
+        }
+    })
 
-//===============================Get user===================================
+    //===============================Get user===================================
     const [users, setUsers] = useState([]);
     const usersCollectionRef = collection(firestore, "User");
-    let counter ;
+    let counter;
     useEffect(() => {
-      const getUsers = async() => {
-        const data = await getDocs(usersCollectionRef);
-        console.log(data);
-        setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-      }      
+        const getUsers = async () => {
+            const data = await getDocs(usersCollectionRef);
+            console.log(data);
+            setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        }
 
-      getUsers();
+        getUsers();
 
-      counter = ++ counter;
-      if(counter < 1){
-        setTimeout(()=>{
-            window.location.reload();                    
-        },2000)
-      }
+        counter = ++counter;
+        if (counter < 1) {
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000)
+        }
 
 
-   
+
     }, [counter]);
-    
 
-//=======================Handle language=====================
 
-  const language = useSelector((state) => state.language.lang);
-  const dispatch = useDispatch();
+    //=======================Handle language=====================
+
+    const language = useSelector((state) => state.language.lang);
+    const dispatch = useDispatch();
 
     const toggleLanguage = () => {
         dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
@@ -68,174 +69,168 @@ export default function Navbar() {
 
     const [logModalIsOpen, setLogModalIsOpen] = useState(false);
 
-//=======================LogIn & validation===============================
+    //=======================LogIn & validation===============================
 
-const initialState = { email: '', password: '' };
-const [logInput, setLogInput] = useState(initialState);
-const [formErrors, setFormErrors] = useState({});
-const [isSubmit, setIsSubmit] = useState(false);
+    const initialState = { email: '', password: '' };
+    const [logInput, setLogInput] = useState(initialState);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
 
-  const handleChange = ({target}) =>{
-      setLogInput({
-          ...logInput,
-          [target.name]: target.value,
-      });
-  };
+    const handleChange = ({ target }) => {
+        setLogInput({
+            ...logInput,
+            [target.name]: target.value,
+        });
+    };
 
-  const handleSubmit = async (e) => {
-      e.preventDefault();
-      setFormErrors(validate(logInput));
-      setIsSubmit(true);
-      try {
-        await signInWithEmailAndPassword(auth ,logInput.email, logInput.password);
-        localStorage.setItem("email", logInput.email);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setFormErrors(validate(logInput));
+        setIsSubmit(true);
+        try {
+            await signInWithEmailAndPassword(auth, logInput.email, logInput.password);
+            localStorage.setItem("email", logInput.email);
 
-        setLogInput(initialState);
-        setLogModalIsOpen(false);
+            setLogInput(initialState);
+            setLogModalIsOpen(false);
 
-        // setToggleBtnsWithIcons(false);
+            // setToggleBtnsWithIcons(false);
 
-      } catch (error) {
-        console.log(error);
-      }
+        } catch (error) {
+            console.log(error);
+        }
     };
     useEffect(() => {
-    //   console.log(formErrors);
-      if (Object.keys(formErrors).length === 0 && isSubmit) {
-        console.log(logInput);
-      }
+        //   console.log(formErrors);
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
+            console.log(logInput);
+        }
     }, [formErrors]);
     const validate = (values) => {
-      const errors = {};
-      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-      if (!values.email) {
-        errors.email = "Email is required!";
-      } else if (!regex.test(values.email)) {
-        errors.email = "This is not a valid email format!";
-      } else{
-        errors.email = "Email not found";
-      }
-      if (!values.password) {
-        errors.password = "Password is required";
-      } else if (values.password.length < 4) {
-        errors.password = "Password must be more than 4 characters";
-      } else if (values.password.length > 10) {
-        errors.password = "Password cannot exceed more than 10 characters";
-      }else {
-        errors.password = "wrong Password ";
-      }
-      return errors;
+        const errors = {};
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        if (!values.email) {
+            errors.email = "Email is required!";
+        } else if (!regex.test(values.email)) {
+            errors.email = "This is not a valid email format!";
+        } else {
+            errors.email = "Email not found";
+        }
+        if (!values.password) {
+            errors.password = "Password is required";
+        } else if (values.password.length < 4) {
+            errors.password = "Password must be more than 4 characters";
+        } else if (values.password.length > 10) {
+            errors.password = "Password cannot exceed more than 10 characters";
+        } else {
+            errors.password = "wrong Password ";
+        }
+        return errors;
     };
 
-    
-//=======================SignUp & validation===============================
 
-      const initialSignState = { email: '', password: '', name: ''};
-      const [signInput, setSignInput] = useState(initialSignState);
-      const [signFormErrors, setSignFormErrors] = useState({});
-      const [isSignSubmit, setIsSignSubmit] = useState(false);
+    //=======================SignUp & validation===============================
 
-        //Add user
-        const [newName, setNewName] = useState("");
-        const [newEmail, setNewEmail] = useState("");
-        const [newPassword, setNewPassword] = useState("");
-        const userCollectionRef = collection(firestore, "User");
+    const initialSignState = { email: '', password: '', name: '' };
+    const [signInput, setSignInput] = useState(initialSignState);
+    const [signFormErrors, setSignFormErrors] = useState({});
+    const [isSignSubmit, setIsSignSubmit] = useState(false);
 
-        const createUser = async () => {
-            await addDoc(userCollectionRef, { Name: newName, Email: newEmail, Password: newPassword });
-        };
+    //Add user
+    const [newName, setNewName] = useState("");
+    const [newEmail, setNewEmail] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const userCollectionRef = collection(firestore, "User");
 
-      const handleSignChange = ({ target }) => {
-      setSignInput({
-          ...signInput,
-          [target.name]: target.value,
-      });
-      if([target.name] == "name"){
-        setNewName(target.value);
-      } else if([target.name] == "email"){
-        setNewEmail(target.value);
-      } else if([target.name] == "password"){
-        setNewPassword(target.value);
-      }
-      
-      
-     
-      };
+    const createUser = async () => {
+        await addDoc(userCollectionRef, { Name: newName, Email: newEmail, Password: newPassword });
+    };
 
-      const handleSignSubmit = async (e) => {
-      e.preventDefault();
-      setSignFormErrors(signValidate(signInput));
-      setIsSignSubmit(true);
-      try {
-          await createUserWithEmailAndPassword(auth , signInput.email, signInput.password, signInput.name);
-          localStorage.setItem("email", signInput.email);
+    const handleSignChange = ({ target }) => {
+        setSignInput({
+            ...signInput,
+            [target.name]: target.value,
+        });
+        if ([target.name] == "name") {
+            setNewName(target.value);
+        } else if ([target.name] == "email") {
+            setNewEmail(target.value);
+        } else if ([target.name] == "password") {
+            setNewPassword(target.value);
+        }
 
-          setSignInput(initialSignState);
-          setModalIsOpen(false);
 
-        //   setToggleBtnsWithIcons(false);
 
-      } catch (error) {
-          console.log(error.message);
-      }
-      };
+    };
 
-      useEffect(() => {
+    const handleSignSubmit = async (e) => {
+        e.preventDefault();
+        setSignFormErrors(signValidate(signInput));
+        setIsSignSubmit(true);
+        try {
+            await createUserWithEmailAndPassword(auth, signInput.email, signInput.password, signInput.name);
+            localStorage.setItem("email", signInput.email);
+
+            setSignInput(initialSignState);
+            setModalIsOpen(false);
+
+            //   setToggleBtnsWithIcons(false);
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    useEffect(() => {
         // console.log(signFormErrors);
         if (Object.keys(signFormErrors).length === 0 && isSignSubmit) {
-          console.log(signInput);
+            console.log(signInput);
         }
-      }, [signFormErrors]);
-      const signValidate = (signValues) => {
+    }, [signFormErrors]);
+    const signValidate = (signValues) => {
         const signErrors = {};
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
         if (!signValues.email) {
-          signErrors.email = "Email is required!";
+            signErrors.email = "Email is required!";
         } else if (!regex.test(signValues.email)) {
-          signErrors.email = "This is not a valid email format!";
+            signErrors.email = "This is not a valid email format!";
         }
         if (!signValues.password) {
-          signErrors.password = "Password is required";
+            signErrors.password = "Password is required";
         } else if (signValues.password.length < 4) {
-          signErrors.password = "Password must be more than 4 characters";
+            signErrors.password = "Password must be more than 4 characters";
         } else if (signValues.password.length > 10) {
-          signErrors.password = "Password cannot exceed more than 10 characters";
+            signErrors.password = "Password cannot exceed more than 10 characters";
         }
         if (!signValues.name) {
-          signErrors.name = "Username is required!";
-        }else if (signValues.name.length < 4) {
+            signErrors.name = "Username is required!";
+        } else if (signValues.name.length < 4) {
             signErrors.name = "Name must be 4 characters or more";
-        }else if (signValues.name.length > 20) {
+        } else if (signValues.name.length > 20) {
             signErrors.name = "Name must be less than 20 characters";
         }
         return signErrors;
-      };
+    };
 
-        const signout = () =>{
-          signOut(auth);
-          localStorage.removeItem("email");
+    const signout = () => {
+        signOut(auth);
+        localStorage.removeItem("email");
 
-          setToggleBtnsWithIcons(true);
+        setToggleBtnsWithIcons(true);
         //   console.log('user logged out');
-        }
-   
-    
-
-    const openModel = () => {
-       
     }
-    // const openModel = () => {
-    //     return(
-    //         <>
-    //         <DineoutbyCity></DineoutbyCity>
-    //     </>
-    //     )
-    // }
 
+
+    // shrouk -> order list
+    const [showList, setShowList] = useState(false)
+    const [len , setLen] = useState(0)
+    const orderLength = (length)=>{
+        setLen(length)
+    }
 
     return (
         <>
-        <ModelLocation></ModelLocation>
+            <ModelLocation></ModelLocation>
             <nav className="nav-lg-Screen sticky-top d-lg-block d-none navCont">
                 <nav className="nav-lg-Screen sticky-top d-lg-block d-none" dir={language == "English" ? "rtl" : "ltr"}>
 
@@ -279,9 +274,9 @@ const [isSubmit, setIsSubmit] = useState(false);
                                 </div>
 
                                 <div className="rightNav" style={{ display: "flex", marginLeft: "auto" }}>
-                                    <div className="services" style={{ margin: "10px 20px"}}>
+                                    <div className="services" style={{ display: "flex", margin: "10px 20px" }}>
 
-                                        <div style={{ marginLeft: "auto" }} id="auth" >
+                                        <div style={{ display: "flex", marginLeft: "auto" }} id="auth" >
                                             <div className="navbar-nav ms-5" style={{ marginLeft: "auto" }} hidden={toggleBtnsWithIcons} >
                                                 <a
                                                     className="nav-link py-4 px-2 ms-5"
@@ -291,85 +286,109 @@ const [isSubmit, setIsSubmit] = useState(false);
                                                 >
                                                 <a
                                                     className="nav-link py-4 px-2 ms-5"
-                                                    href=""
                                                     style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.3vw" }}
+                                                    
                                                 >
-                                                <i className="fas fa-receipt pe-2"></i>My order</a>
-                                                
-                                                 {/* ===================================================userIcon================================================================= */}
-                                            
+
+                                                    <i className="fas fa-receipt pe-2"></i>My order </a>
+                                                {/* <FontAwesomeIcon icon={faShoppingBag}  style={{marginRight: "6px", fontSize: "25px", color: "white"}}/> */}
+                                                <button type="button" class="btn btn-primary position-relative" style={{ backgroundColor: "white" }} data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                                <FontAwesomeIcon icon={faShoppingBag}  style={{marginRight: "6px", fontSize: "25px", color: "black"}}
+                                                onClick={
+                                                    () => {
+                                                        showList ? setShowList(false) : setShowList(true)
+                                                    }
+                                                }
+                                                /> 
+                                                    <span class=" translate-middle badge rounded-pill bg-danger" style={{ position: "absolute", top:"20%" }}>
+                                                        {len}
+                                                        <span class="visually-hidden">unread messages</span>
+                                                    </span>
+                                                </button>
+
+
+
+                                                {/* ===================================================userIcon================================================================= */}
+
                                                 <div className="dropdown" >
                                                     {users.map((user) => {
-                        
-                                                        if(localStorage.getItem("email") == user.Email){
+
+                                                        if (localStorage.getItem("email") == user.Email) {
                                                             localStorage.setItem("userID", user.id);
-                                                                return (
-                                                                    <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style={{background: "transparent", color: "black" ,border: "1px solid #e32207", marginTop: "15px"}}>
-                                                                    <FontAwesomeIcon icon={faUser}  style={{marginRight: "6px"}}/>
+                                                            return (
+                                                                <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style={{ background: "transparent", color: "black", border: "1px solid #e32207", marginTop: "15px" }}>
+                                                                    <FontAwesomeIcon icon={faUser} style={{ marginRight: "6px" }} />
                                                                     Hello {user.Name}
-                                                                    </a>
-                                                                    
-                                                                )
-                                                        } 
-                                                    
+                                                                </a>
+
+                                                            )
+                                                        }
+
                                                     })}
 
-                                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <li><Link to="/userProfile" style={{color: "black"}}>Your Profile</Link></li>
-                                                    <li><Link to="/accountSetting" style={{color: "black"}}>Account Setting</Link></li>
-                                                    <li onClick={()=>signout()}><Link to="/" style={{color: "black"}} >LogOut</Link></li>
-                                                </ul>
+                                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <li><Link to="/userProfile" style={{ color: "black" }}>Your Profile</Link></li>
+                                                        <li><Link to="/accountSetting" style={{ color: "black" }}>Account Setting</Link></li>
+                                                        <li onClick={() => signout()}><Link to="/" style={{ color: "black" }} >LogOut</Link></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            {/* ========================================================Buttons============================================================ */}
+                                            <div style={{ marginLeft: "auto" }} id="sign_auth" hidden={!toggleBtnsWithIcons}>
+                                                <a href="#" style={{ textDecoration: "none" }}>
+                                                    <button type="button" className="btn login-btn btn-log" data-bs-toggle="modal" data-bs-target="#LogInModal"
+                                                        onClick={() => { setLogModalIsOpen(true); setModalIsOpen(false) }}>
+                                                        LogIn
+                                                    </button>
+                                                </a>
+                                                <a href="#" style={{ textDecoration: "none" }}>
+                                                    <button type="button" className="btn btn-sign" data-bs-toggle="modal" data-bs-target="#SignModal"
+                                                        onClick={() => { setModalIsOpen(true); setLogModalIsOpen(false) }}>
+                                                        SignUp
+                                                    </button>
+                                                </a>
+
+                                            </div>
+                                            {/* ==================================================================================================================== */}
+                                        </div>
+                                        <div
+                                            className="cart-language"
+                                            style={{ width: "auto", display: "flex", marginLeft: "auto", borderLeft: "1px solid #dfe2e6" }}
+                                        >
+                                            <div style={{ marginLeft: "auto" }}>
+                                                <a href="#" style={{ textDecoration: "none" }}>
+                                                    <i
+                                                        className="fal fa-shopping-bag"
+                                                        style={{ fontSize: "2vw", color: "gray", padding: "0 30px" }}
+                                                    ></i>
+                                                </a>
+                                                <a
+                                                    href="#"
+                                                    style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw" }}
+                                                    onClick={() => {
+                                                        toggleLanguage();
+                                                    }}
+                                                >
+                                                    {language}
+                                                </a>
                                             </div>
                                         </div>
-                                        {/* ========================================================Buttons============================================================ */}
-                                        <div style={{ marginLeft: "auto" }} id="sign_auth" hidden={!toggleBtnsWithIcons}>
-                                            <a href="#" style={{ textDecoration: "none" }}>
-                                                <button type="button" className="btn login-btn btn-log" data-bs-toggle="modal" data-bs-target="#LogInModal"
-                                                    onClick={() => { setLogModalIsOpen(true); setModalIsOpen(false) }}>
-                                                    LogIn
-                                                </button>
-                                            </a>
-                                            <a href="#" style={{ textDecoration: "none" }}>
-                                                <button type="button" className="btn btn-sign" data-bs-toggle="modal" data-bs-target="#SignModal"
-                                                    onClick={() => { setModalIsOpen(true); setLogModalIsOpen(false) }}>
-                                                    SignUp
-                                                </button>
-                                            </a>
+                                    </div>
 
-                                        </div>
-                                        {/* ==================================================================================================================== */}
-                                    </div>
-                                    <div
-                                        className="cart-language"
-                                        style={{ width: "auto", display: "flex", marginLeft: "auto", borderLeft: "1px solid #dfe2e6" }}
-                                    >
-                                        <div style={{ marginLeft: "auto" }}>
-                                            <a href="#" style={{ textDecoration: "none" }}>
-                                                <i
-                                                    className="fal fa-shopping-bag"
-                                                    style={{ fontSize: "2vw", color: "gray", padding: "0 30px" }}
-                                                ></i>
-                                            </a>
-                                            <a
-                                                href="#"
-                                                style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.5vw" }}
-                                                onClick={() => {
-                                                    toggleLanguage();
-                                                }}
-                                            >
-                                                {language}
-                                            </a>
-                                        </div>
-                                    </div>
                                 </div>
-
                             </div>
                         </div>
-                        </div>
                     </section>
+
+
+                    {/* shrouk -> order list */}
+                    
+                     <OrderList orderLength = {orderLength}/>
+                    
+
                     <section
                         className="search-bar container-fluid"
-                        style={{ backgroundColor: "white", borderBottom: "1px solid #dfe2e6" , padding: "0"}}
+                        style={{ backgroundColor: "white", borderBottom: "1px solid #dfe2e6", padding: "0" }}
                     // style="background-color: white; border-bottom: 1px solid var(--border-color)"
                     >
                         <div className="row mx-4">
@@ -398,13 +417,13 @@ const [isSubmit, setIsSubmit] = useState(false);
                                     className="imgIcon mx-2"
                                 />
                                 <h4 className="headerLocation mx-2">Dine-out in <span>{localStorage.getItem('areaName')}</span></h4>
-                                <button className="btn change-btn mx-2"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">CHANGE</button>
+                                <button className="btn change-btn mx-2" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">CHANGE</button>
                             </div>
                         </div>
                     </section>
                 </nav>
             </nav>
-            <section aria-label="breadcrumb" className="container-fluid d-lg-block d-none" style={{ borderBottom: "1px solid #dfe2eb" , padding: "0"}}>
+            <section aria-label="breadcrumb" className="container-fluid d-lg-block d-none" style={{ borderBottom: "1px solid #dfe2eb", padding: "0" }}>
                 <div className="row navCont" style={{ margin: "0 120px" }}>
                     <div className="col-12 pt-2">
                         <ol className="breadcrumb" >
@@ -496,6 +515,7 @@ const [isSubmit, setIsSubmit] = useState(false);
             </nav>
 
             {/* ************************************ٍSignUp Modal******************************* */}
+            {/* modalContainer */}
             <div className="container-fluid modalContainer">
                 {/* This Button instead of signUp button till integration with navbar */}
                 {/* <button className="btn btn-danger" onClick={() => { setModalIsOpen(true) }}>Open Modal</button> */}
@@ -510,17 +530,17 @@ const [isSubmit, setIsSubmit] = useState(false);
                             <div id="log">
                                 <div className="inpt mt-3">
                                     <input type='text' placeholder="Name" className="form-control" name='name' value={signInput.name} onChange={handleSignChange} />
-                                    <p style={{color: "red", fontSize: "12px"}}>{signFormErrors.name}</p>
+                                    <p style={{ color: "red", fontSize: "12px" }}>{signFormErrors.name}</p>
                                 </div>
 
                                 <div className="inpt mt-3">
                                     <input type='text' placeholder="Email" className="form-control" name='email' value={signInput.email} onChange={handleSignChange} />
-                                    <p style={{color: "red", fontSize: "12px"}}>{signFormErrors.email}</p>
+                                    <p style={{ color: "red", fontSize: "12px" }}>{signFormErrors.email}</p>
                                 </div>
 
                                 <div className="inpt mt-3">
                                     <input type='password' placeholder="Password" className="form-control" name='password' value={signInput.password} onChange={handleSignChange} />
-                                    <p style={{color: "red", fontSize: "12px"}}>{signFormErrors.password}</p>
+                                    <p style={{ color: "red", fontSize: "12px" }}>{signFormErrors.password}</p>
                                 </div>
 
                                 <div className="submitBtn mt-3">
@@ -541,6 +561,7 @@ const [isSubmit, setIsSubmit] = useState(false);
 
 
             {/* ***********************************LogIn Modal************************************************** */}
+            {/* modalContainer */}
             <div className="container-fluid modalContainer">
 
                 {/* This Button instead of LogIn button till integration with navbar */}
@@ -555,13 +576,13 @@ const [isSubmit, setIsSubmit] = useState(false);
                             <img id="logLogo" src="images/logowithbg.png" />
                             <form id="log" onSubmit={handleSubmit}>
                                 <div className="inpt mt-3">
-                                    <input type='text' placeholder="email" className="form-control" name="email" onChange={handleChange} value={logInput.email}/>
-                                    <p style={{color: "red", fontSize: "12px"}}>{formErrors.email}</p>
+                                    <input type='text' placeholder="email" className="form-control" name="email" onChange={handleChange} value={logInput.email} />
+                                    <p style={{ color: "red", fontSize: "12px" }}>{formErrors.email}</p>
                                 </div>
 
                                 <div className="inpt mt-3">
-                                    <input type='password' placeholder="password" className="form-control" name='password' onChange={handleChange} value={logInput.password}/>
-                                    <p style={{color: "red", fontSize: "12px"}}>{formErrors.password}</p>
+                                    <input type='password' placeholder="password" className="form-control" name='password' onChange={handleChange} value={logInput.password} />
+                                    <p style={{ color: "red", fontSize: "12px" }}>{formErrors.password}</p>
                                 </div>
 
                                 <div className="button mt-3">
@@ -573,7 +594,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                                 </div>
 
                                 <div className="button mt-3">
-                                    <button type="submit" className="btn btn-primary"  style={{fontSize: "18px", fontWeight: "400"}}>Log in with Google</button>
+                                    <button type="submit" className="btn btn-primary" style={{ fontSize: "18px", fontWeight: "400" }}>Log in with Google</button>
                                 </div>
 
                             </form>
@@ -587,4 +608,4 @@ const [isSubmit, setIsSubmit] = useState(false);
 
         </>
     );
-  };
+};
