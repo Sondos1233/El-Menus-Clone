@@ -49,7 +49,7 @@ const RestCard = (props) => {
       if(data2.docs.length){
         const Resoffer = doc(firestore,'Restaurant',doc1.id);
         const data3 = await getDoc(Resoffer);
-        //console.log(data3.data())
+        console.log(data3.data())
        //setRes(data3);
       }
       })

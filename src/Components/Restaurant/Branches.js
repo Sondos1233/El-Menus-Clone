@@ -34,7 +34,7 @@ const Branches = () => {
         )
       };
       getBranches();
-  },[BranchesCollecdocRef]);
+  },[]);
   return (
     <>
       <div class="tab-content" id="myTabContent">
