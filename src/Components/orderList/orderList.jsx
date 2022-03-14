@@ -82,11 +82,8 @@ export default function OrderList({ orderLength }) {
                                 </div>
                             </div>
 
-                            <button className="btn btn-success mt-3" style={{ width: "25vw", marginLeft: "10px" }}>GO TO CHECKOUT</button>
-                            <button className="btn mb-5" style={{ width: "25vw", marginLeft: "10px" }}>Remove All Items</button>
-
-                          <Link to="/check"> <button className="btn btn-success mt-5" style={{ width: "27vw", marginLeft:"10px" }}>GO TO CHECKOUT</button></Link> 
-                            <button className="btn mb-5" style={{ width: "27vw", marginLeft:"10px" }}>Remove All Items</button>
+                          <Link to="/check"> <button className="btn btn-success mt-5" style={{ width: "25vw", marginLeft:"10px" }}>GO TO CHECKOUT</button></Link> 
+                            <button className="btn mb-5" style={{ width: "25vw", marginLeft:"10px" }}>Remove All Items</button>
                         
 
                         </div>
