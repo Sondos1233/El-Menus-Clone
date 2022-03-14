@@ -131,7 +131,7 @@ const Meals = (props) => {
   const [Extras, setExtras] = useState([])
   const [Size, setSize] = useState({})
   const [specialAdditions, setSecialAdditions] = useState("")
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0.00)
   const [check, setChick] = useState(false)
 
 
@@ -395,7 +395,7 @@ const Meals = (props) => {
                   ProName: MealDet.ProName,
                   ProDescription: MealDet.Description,
                   Quantity: qty,
-                  TotalPrice: totalPrice.toFixed(2),
+                  TotalPrice: totalPrice?.toFixed(2),
                   Size: Size,
                   Extras: Extras,
                   SpecialAdditional: specialAdditions,
@@ -407,7 +407,7 @@ const Meals = (props) => {
                 window.location.reload(false)
               }
             } disabled={!check}>ADD TO BASKET</button>
-            <span className="float-end"> {totalPrice.toFixed(2)}EGP</span>
+            <span className="float-end"> {totalPrice?.toFixed(2)}EGP</span>
           </button>
         </Modal.Footer>
       </Modal>
