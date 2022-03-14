@@ -1,0 +1,122 @@
+.formdetails .input_label{
+    font-size: 12px;
+    font-weight: 600;
+    color: #7d7e7e;
+    letter-spacing: -.01em;
+    line-height: 20px;
+    margin-bottom: 5px;
+}
+.formdetails .has-error .validate-input{
+    border-color: #a94442;
+}
+.formdetails input{
+    border: 1px solid #d5d8db;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+}
+.DetailsUser{
+    border: 1px solid #a94442 ;
+    border-radius: 4px;
+}
+.action_form{
+ margin-top: 75px;
+
+}
+.ReviewOrder_form{
+    border: 1px solid #b8b8b8 ;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+.btn_change_form{
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #e32207;
+    text-decoration: underline;
+}
+.btn_change_form:hover{
+    color: #e32207;
+
+}
+.Apply_promo_code{
+    width: 72px;
+    background-color: #eff0f3;
+    border: 1px solid #e3e5ea;
+    border-radius: 0 3px 0 3px;
+    margin: 0;
+    padding: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: gray;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+}
+.checkOuttoOrder p ,.checkOuttoOrder h6{
+    font-size: 12px;
+}
+.checkOuttoOrder h3,.checkOuttoOrder h4,.checkOuttoOrder h5 {
+    font-size:16px;
+}
+.checkOuttoOrder h3{
+    font-weight: 800;
+}
+.checkOuttoOrder h4,.checkOuttoOrder h5{
+    font-weight: 600;
+}
+.checkOuttoOrder .ale{
+    background-color: #edeff1;
+    font-size: 12px;
+    padding: 12px 3px 12px 8px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.checkOuttoOrder button{
+    font-size: 14px;
+}
+.checkOuttoOrder input::-webkit-input-placeholder { 
+    font-size: 12px; 
+    color: #8b8d8f;
+
+}
+
+.checkOuttoOrder  input:-moz-placeholder { 
+    font-size: 12px;
+    color: #8b8d8f;
+
+}
+
+.checkOuttoOrder input::-moz-placeholder { 
+     font-size: 12px;
+     color: #8b8d8f;
+
+}
+
+.checkOuttoOrder input:-ms-input-placeholder { 
+    font-size: 12px;
+    color: #8b8d8f;
+
+}
+input.checkPayment:checked{
+    color: var(--first-color);
+    
+    
+}
+@media screen and (width:700px) {
+    .action_form{
+        margin-top:0
+    }
+    
+ }

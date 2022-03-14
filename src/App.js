@@ -21,6 +21,7 @@ import UserProfile  from './Components/userProfile/userProfile';
 import AccountSetting from './Components/accountSetting/accountSetting'
 import { Provider } from 'react-redux';
 import { Fragment } from 'react';
+import {CheckOut} from './Components/CheckOut order/checkout'
 function App() {
   const [City, setCity] = useState("Cairo");
   const [Res, setRes] = useState("");
@@ -38,6 +39,7 @@ function App() {
                 <Route path="/description/:Name" exactcomponent={description} />
                 <Route path="/JoinUs" exact component={JoinUs} />
                 <Route path="/Home" exact component={Home} />
+                <Route path='/check' exact component={CheckOut}/>
 
                 <Fragment>
                   <Navbar />
@@ -50,6 +52,7 @@ function App() {
                   <Route path="/Privacy" exact component={Privacy} />
                   <Route  path="/userProfile" exact component={UserProfile} />        
                   <Route exact path="/accountSetting" component={AccountSetting}  />
+                 
                 </Fragment>
               </Switch>
               <Footer />
