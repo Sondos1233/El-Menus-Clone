@@ -8,12 +8,11 @@ import "./check.css";
 import { useState,useEffect } from "react";
 import { db } from "../../Firebase/Firebase";
 import { collection,getDocs } from "firebase/firestore";
-export const ReviewOrder = ({ prev,user }) => {
+export const ReviewOrder = ({ prev,user,saveTotalPrice }) => {
   const userDetails = JSON.parse(localStorage.getItem('myUser'))
   const Location = localStorage.getItem('areaName')
   const [orderList, setOrderList] = useState([]);
-    var total = 0;
-    const [totalPrice, setTotalPrice] = useState(total);
+   
 
     const UserDoc = collection(db, "User", localStorage.getItem("userID"), "Cart");
 
@@ -24,7 +23,15 @@ export const ReviewOrder = ({ prev,user }) => {
             setOrderList(Resdata.docs.map((doc) => ({...doc.data()} )))
         }
         getUser()
+        
     },[])
+    
+let total = 0;
+const calcPrice = (price) => {
+  
+    total += parseInt(price);
+}
+
 
   return (
     <>
@@ -32,7 +39,7 @@ export const ReviewOrder = ({ prev,user }) => {
         <div className="col-4 ps-0 "><h4>Review Your Order</h4></div>
         <div class=" col-8 " >
             <p className="ale"> Your order is not complete until you click the button 'PLACE ORDER'</p></div>
-        <div className="col-7 ReviewOrder_form position-relative">
+        <div className="col-lg-7 col-sm-12 ReviewOrder_form position-relative">
           <h5>{user.Name}</h5>
           <button class="btn btn_change_form" onClick={prev}>
             change
@@ -55,7 +62,7 @@ export const ReviewOrder = ({ prev,user }) => {
             {user.Mobile}
           </p>
         </div>
-        <div className="col-5 ">
+        <div className="col-lg-5 col-sm-12">
           <div className="ReviewOrder_form px-3 pb-3 mb-2 ">
             <h5>Payment Method</h5>
             <div class="form-check">
@@ -97,7 +104,7 @@ export const ReviewOrder = ({ prev,user }) => {
             </div>
           </div>
         </div>
-        <div className="ReviewOrder_form mt-3 pt-2 pb-3 ps-0">
+        <div className="ReviewOrder_form mt-3 pt-2 pb-3 ps-0 col-11">
           <h5>
             <span className="px-3">
               <FontAwesomeIcon
@@ -117,6 +124,7 @@ export const ReviewOrder = ({ prev,user }) => {
             
               {
                 orderList.map((order)=>{
+                  calcPrice(Number(order.TotalPrice))
                   return(
                     <>
                     <div className="d-flex justify-content-between">
@@ -128,6 +136,7 @@ export const ReviewOrder = ({ prev,user }) => {
                   )
                 })
               }
+              <div>{saveTotalPrice(total)}</div>
               
            
           </div>

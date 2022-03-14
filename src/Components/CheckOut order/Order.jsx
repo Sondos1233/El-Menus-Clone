@@ -3,10 +3,8 @@ import { db } from "../../Firebase/Firebase";
 import { collection,getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 
-export const Order = ({handleSubmit}) => {
+export const Order = ({handleSubmit,TotalPrice}) => {
   const [orderList, setOrderList] = useState([]);
-  var total=0
-  const [totalPrice, setTotalPrice] = useState([]);
   const [item,setItem] = useState(0)
   const UserDoc = collection(db, "User", localStorage.getItem("userID"), "Cart");
 
@@ -26,26 +24,33 @@ export const Order = ({handleSubmit}) => {
             
           // })
           
+
+           
+        
+          
 },[])
 
+let total = 0;
+const calcPrice = (price) => {
   
+    total += parseInt(price);
+}
 
   return (
     <>
-    {/* {
-      orderList.map((order)=>{
-        return(
-        setTotalPrice(totalPrice.push(order.TotalPrice))
-        )
-      }) 
-    }
-   */}
+    { orderList.map((order) => {
+              calcPrice(Number(order.TotalPrice))
+      return(
+          <></>
+      )
+    })}
+    
     <div className="px-4" style={{"marginTop": "180px"}}>
     <div className="card border-secondary " style={{"boxShadow":"none", "margin":"auto"}}>
         <div className="card-header py-3"><button className="btn btn-primary py-3" onClick={handleSubmit} style={{"width":"100%"}}>PLACE ORDER</button></div>
         <div className="card-body">
             <h5>Order Summary</h5>
-            <div className="d-flex justify-content-between"><h6><span>Sub-total</span></h6><h5>{totalPrice}<small style={{"fontSize":"12px","color":"grey"}}>EGP</small></h5>
+            <div className="d-flex justify-content-between"><h6><span>Sub-total</span></h6><h5>{TotalPrice}<small style={{"fontSize":"12px","color":"grey"}}>EGP</small></h5>
             </div>
              <div className="d-flex justify-content-between"><h6 ><span>items</span></h6><h5 className="text-center pe-3">{orderList.length}</h5>
              </div>
@@ -53,12 +58,14 @@ export const Order = ({handleSubmit}) => {
              </div>
              
              
-             <div className="d-flex justify-content-between"><h6><span>Delivery Fee</span></h6><h5>15.0<small style={{"fontSize":"12px","color":"grey"}}>EGP</small></h5>
+             <div className="d-flex justify-content-between"><h6><span>Delivery Fee</span></h6><h5>20.0<small style={{"fontSize":"12px","color":"grey"}}>EGP</small></h5>
              </div>
              
              
              <hr />
-             <h4>Order total</h4>
+             <div className="d-flex justify-content-between"><h1>Order total</h1><h1>{TotalPrice+20}<br/><small className="me-0 ps-3" style={{"fontSize":"12px","color":"grey"}}>EGP</small></h1>
+             </div>
+             
         </div>
     </div>
       
