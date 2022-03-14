@@ -1,7 +1,7 @@
 import { faHome, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./check.css";
-export const DetailsUser = ({next,showdetails,user}) => {
+export const DetailsUser = ({next,showdetails,user,deleteOrder}) => {
   return (
     <>
       <div className="DetailsUser mt-5">
@@ -23,7 +23,7 @@ export const DetailsUser = ({next,showdetails,user}) => {
             </div>
             <div className="action_form d-flex justify-content-end pe-3 ">
               <button class="btn" onClick={showdetails}>Edit</button>
-              <button class="btn">Delete</button>
+              <button class="btn" onClick={deleteOrder}>Delete</button>
             </div>
           </div>
         </div>
