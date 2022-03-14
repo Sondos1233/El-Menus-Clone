@@ -30,21 +30,9 @@ export const Order = ({handleSubmit,TotalPrice}) => {
           
 },[])
 
-let total = 0;
-const calcPrice = (price) => {
-  
-    total += parseInt(price);
-}
 
   return (
     <>
-    { orderList.map((order) => {
-              calcPrice(Number(order.TotalPrice))
-      return(
-          <></>
-      )
-    })}
-    
     <div className="px-4" style={{"marginTop": "180px"}}>
     <div className="card border-secondary " style={{"boxShadow":"none", "margin":"auto"}}>
         <div className="card-header py-3"><button className="btn btn-primary py-3" onClick={handleSubmit} style={{"width":"100%"}}>PLACE ORDER</button></div>
