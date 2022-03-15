@@ -69,7 +69,6 @@ export default function Header() {
     setshowRes(true)
     setSearchRes(e.target.value)
    }
-   console.log(ResListbySearch)
  }
   // console.log(City)
   useEffect(() => {

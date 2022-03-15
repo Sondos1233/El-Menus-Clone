@@ -13,10 +13,43 @@ import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
 import { Link } from 'react-router-dom';
 import ProtectedRoute from '../../protectedRoute'
-// import DineoutbyCity from '../Dineout/DineoutByCity/DineoutByCity';
-// import ModelLocation from '../ModelLocation/modelLoc';
+import DineoutbyCity from '../Dineout/DineoutByCity/DineoutByCity';
+import ModelLocation from '../ModelLocation/modelLoc';
 
 export default function Navbar() {
+    //Search Res
+    const[showRes,setshowRes]=useState(false)
+    const[SearchRes,setSearchRes] = useState('');
+    const [ResList, setResList] = useState([]);
+    const listOfRes = collection(firestore,"Restaurant")
+    const bySearchRes = (Res, SearchRes) => {
+        if(Res.IsActivated){
+          if (SearchRes) {
+            return Res.ResName.toLowerCase().includes(SearchRes.toLowerCase());
+          } else return 'Not Match any Res';
+        }
+        
+      };
+    const filteredList = (ResList, SearchRes) => {
+        // console.log(ResList,SearchRes)
+        return ResList.filter(Res => bySearchRes(Res, SearchRes));
+      }
+    const handleChangeRes=(e) =>{
+        if(e.target.value==''){
+        setshowRes(false)
+        }else{
+         setshowRes(true)
+         setSearchRes(e.target.value)
+        }
+      }
+      useEffect(() => {
+       
+        const getRes = async()=>{
+          const data = await getDocs(listOfRes);
+          setResList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        }
+        getRes();
+      }, []);
 
 //=======================Handle toggle Buttons With Icons=====================
   const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
@@ -234,7 +267,7 @@ const [isSubmit, setIsSubmit] = useState(false);
 
     return (
         <>
-        {/* <ModelLocation></ModelLocation> */}
+        <ModelLocation></ModelLocation>
             <nav className="nav-lg-Screen sticky-top d-lg-block d-none navCont">
                 <nav className="nav-lg-Screen sticky-top d-lg-block d-none" dir={language == "English" ? "rtl" : "ltr"}>
 
@@ -371,14 +404,17 @@ const [isSubmit, setIsSubmit] = useState(false);
                     // style="background-color: white; border-bottom: 1px solid var(--border-color)"
                     >
                         <div className="row mx-4">
-                            <div className="col-lg-7 col-md-12 mt-1 pt-1">
+                            <div className="col-lg-7 col-md-12 mt-1 pt-1 position-relative">
                                 <form>
                                     <div className="input-group mb-2 search-side">
                                         <input
-                                            type="text"
+                                            type="Search"
                                             className="form-control"
                                             placeholder="Find A Restaurant"
                                             style={{ padding: "10px" }}
+                                            onChange={(e) => {
+                                                handleChangeRes(e);
+                                              }}
                                         />
                                         <span
                                             className="input-group-text"
@@ -386,8 +422,24 @@ const [isSubmit, setIsSubmit] = useState(false);
                                             style={{ backgroundColor: "white" }}
                                         > <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
                                         </span>
+                                        
                                     </div>
                                 </form>
+                    <span className="position-absolute col-lg-7 col-md-12" style={{"top":50,"zIndex":3}}>
+                    {
+                       showRes&&<ul className="list-group list-group-flush dropdownRes">
+                       {filteredList(ResList,SearchRes).map((Res) => {
+                         return <Link to={`/Restaurant/${Res.id}`} style={{"textDecoration":"none"}}><li className="list-group-item py-2"><span className="logoResDrop p-1 mx-3"><img src={Res.ImageLogo} width="20px" height="20px"/></span>{Res.ResName}</li></Link>;
+                       })}
+                        {/* <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item">Zaks</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Mac</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Kfc</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">blal</li></Link> */}
+ 
+                       </ul>
+                     }
+
+                    </span>
                             </div>
                             <div className="col-lg-5 col-md-12 location-side">
                                 <img
@@ -397,7 +449,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                                 />
                                 <h4 className="headerLocation mx-2">Dine-out in <span>{localStorage.getItem('areaName')}</span></h4>
                                 {/* onClick={() => { openModel() }} this onClick event must be put on CHANGE button */}
-                                <button className="btn change-btn mx-2" >CHANGE</button>
+                                <button className="btn change-btn mx-2" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">CHANGE</button>
                             </div>
                         </div>
                     </section>
