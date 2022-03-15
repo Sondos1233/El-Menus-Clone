@@ -2,6 +2,7 @@ import './accountSetting.css'
 import React, {useState, useEffect} from 'react';
 import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase.config';
+import { withRouter } from 'react-router-dom'
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 
@@ -21,21 +22,24 @@ function AccountSetting(){
         const data = await getDocs(usersCollectionRef);
         console.log(data);
         setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+
       }
       getUsers();
           
-    });
+    },[]);
     
     //===============================Update Email===================================
-    // const initialEmail = { email: users.Email};
-    // console.log(initialEmail);
-    // const [update, setUpdate] = useState(initialEmail);
-    // const handleUpdate = ({target}) =>{
-    //     setUpdate({
-    //         ...update,
-    //         [target.name]: target.value,
-    //     });
-    // }
+
+    const [change, setChange] = useState();
+    const handleUpdate = (e) =>{
+        const {name, value} = e.target;
+        setChange({...change, [name]: value})
+    }
+    const updateUser = async (id) => {
+        const userDoc = doc(firestore, "User", id);
+        const newFields = { Email: change };
+        await updateDoc(userDoc, newFields);
+      };
     
     return(
         <>
@@ -61,8 +65,8 @@ function AccountSetting(){
                         if(localStorage.getItem("email") == user.Email){    
                             return (
                             <div>
-                            <input id='email' type="email" placeholder='Enter new Email' className='d-block form-control' value={user.Email}/> 
-                            <button className='btn btn-danger' style={{fontSize: "16px"}} >Change Email</button>                                 
+                            <input id='email' type="email" placeholder='Enter new Email' className='d-block form-control' onChange={handleUpdate}/> 
+                            <button className='btn btn-danger' onClick={() => {updateUser(user.id);}} style={{fontSize: "16px"}} >Change Email</button>                                 
                             </div>
                             ) 
                         }
@@ -134,7 +138,7 @@ function AccountSetting(){
     )
 }
 
-export default AccountSetting;
+export default withRouter(AccountSetting);
 
 // export default GoogleApiWrapper({
 //     apiKey: ("AIzaSyC0-XXmwY_ScpXq_VJxPvwTjXQ_r0jcF18")

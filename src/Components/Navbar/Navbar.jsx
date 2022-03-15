@@ -12,6 +12,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthState
 import { useSelector, useDispatch } from "react-redux";
 import changeLanguage from '../../store/action/languageAction';
 import { Link } from 'react-router-dom';
+import ProtectedRoute from '../../protectedRoute'
 // import DineoutbyCity from '../Dineout/DineoutByCity/DineoutByCity';
 // import ModelLocation from '../ModelLocation/modelLoc';
 
@@ -64,11 +65,6 @@ export default function Navbar() {
         dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
     };
 
-    //=========================Modals state========================
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-
-    const [logModalIsOpen, setLogModalIsOpen] = useState(false);
-
 //=======================LogIn & validation===============================
 
 const initialState = { email: '', password: '' };
@@ -92,7 +88,7 @@ const [isSubmit, setIsSubmit] = useState(false);
         localStorage.setItem("email", logInput.email);
 
         setLogInput(initialState);
-        setLogModalIsOpen(false);
+
 
         // setToggleBtnsWithIcons(false);
 
@@ -173,7 +169,7 @@ const [isSubmit, setIsSubmit] = useState(false);
           createUser();
 
           setSignInput(initialSignState);
-          setModalIsOpen(false);
+       
 
           setTimeout(()=>{
             window.location.reload()
@@ -455,8 +451,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                                                 </button>
                                             </a>
                                             <a href="#" style={{ textDecoration: "none" }}>
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#signUpModal"
-                                                    style={{ backgroundColor: "#e32207", color: "white", fontSize: "12px", fontWeight: "700" }}>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#signUpModal" style={{ backgroundColor: "#e32207", color: "white", fontSize: "12px", fontWeight: "700" }}>
                                                     SIGNUP
                                                 </button>
                                             </a>
@@ -499,7 +494,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                     
                     {/* ************************************ٍSignUp Modal******************************* */}
                     <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" isOpen={modalIsOpen}>
+                    <div class="modal-dialog">
                         <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

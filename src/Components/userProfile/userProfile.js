@@ -6,6 +6,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faUser} from "@fortawesome/free-solid-svg-icons";
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase.config';
+import { withRouter } from 'react-router-dom'
+
 
 function Userprofile(){
     console.log(localStorage.getItem("email"));
@@ -86,4 +88,4 @@ function Userprofile(){
     )
 }
 
-export default Userprofile;
+export default withRouter(Userprofile);

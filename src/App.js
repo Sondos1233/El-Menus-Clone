@@ -12,7 +12,7 @@ import description from "./Components/Job/description";
 import Footer from "./Components/Footer/footer";
 import Navbar from "./Components/Navbar/Navbar";
 import { CityProvider } from "./Components/Context/City";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ResProvider } from "./Components/Context/Resturant";
 import { AboutUs } from "./Components/AboutUs/AboutUs";
 import { Terms } from "./Components/Terms/Terms";
@@ -21,11 +21,25 @@ import UserProfile  from './Components/userProfile/userProfile';
 import AccountSetting from './Components/accountSetting/accountSetting'
 import { Provider } from 'react-redux';
 import { Fragment } from 'react';
+import ProtectedRoute from './protectedRoute'
+import { boolean } from "yup";
 function App() {
   const [City, setCity] = useState("Cairo");
   const [Res, setRes] = useState("");
 
   console.log(City);
+
+  const [isAuth, setIsAuth] = useState(boolean);
+
+  useEffect(()=>{
+    if(localStorage.getItem('email')){
+        console.log("auth");
+        setIsAuth(true);
+    } else{
+        console.log("not auth");
+        setIsAuth(false);
+    }
+},[isAuth])
   return (
     <>
       <CityProvider value={{ City, setCity }}>
@@ -48,8 +62,8 @@ function App() {
                   <Route path="/AboutUs" exact component={AboutUs} />
                   <Route path="/Terms" exact component={Terms} />
                   <Route path="/Privacy" exact component={Privacy} />
-                  <Route  path="/userProfile" exact component={UserProfile} />        
-                  <Route exact path="/accountSetting" component={AccountSetting}  />
+                  <ProtectedRoute  path="/userProfile" exact component={UserProfile} isAuth={isAuth}/>        
+                  <ProtectedRoute path="/accountSetting" exact component={AccountSetting} isAuth={isAuth} />
                 </Fragment>
               </Switch>
               <Footer />

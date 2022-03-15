@@ -661,7 +661,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                 </button>
               </div>
 
-              <div className="button mt-3">
+              {/* <div className="button mt-3">
                 <button className="btn goglBtn">Log in with Facebook</button>
               </div>
 
@@ -672,7 +672,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                 >
                   Log in with Google
                 </button>
-              </div>
+              </div> */}
             </form>
             <div className="frgtPass">
               <a>I forget my password</a>

@@ -92,13 +92,13 @@ const RestCard = (props) => {
       if (Type && Type !='All Dishes') {
         return Res.Type.includes(Type);
       }else if(Type =='All Dishes'){
-          return Res // const byAreas = (Res, Area) => {
-  //   if(Res.IsActivated){
-  //     if (Area) {
-  //       return Res.Areas.includes(Area);
-  //     } else return Res;
-  //   }
-  // }
+           return Res // const byAreas = (Res, Area) => {
+  // //   if(Res.IsActivated){
+  // //     if (Area) {
+  // //       return Res.Areas.includes(Area);
+  // //     } else return Res;
+  // //   }
+  // // }
       }
        else return Res;
     }
