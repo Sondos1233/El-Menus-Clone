@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { db } from './../../Firebase/Firebase'
-import { collection,  getDocs, deleteDoc } from 'firebase/firestore'
+import { collection,  getDocs, deleteDoc,doc } from 'firebase/firestore'
 import OrderCard from "./orderCard";
 import { Link } from "react-router-dom";
 
@@ -10,24 +10,30 @@ export default function OrderList({ orderLength }) {
 
     const [orderList, setOrderList] = useState([]);
 
+    const userid = localStorage.getItem("userID")
+    const UserDoc = collection(db, "User",userid,"Cart");
+
     
-    const UserDoc = collection(db, "User", localStorage.getItem("userID"), "Cart");
-    
-    //delete all
-    const deleteAllCart =async ()=>{
-        await deleteDoc(UserDoc)
-    }
 
     useEffect(() => {
         const getUser = async () => {
             const Resdata = await getDocs(UserDoc)
             // console.log(Resdata)
-            setOrderList(Resdata.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+            setOrderList(Resdata.docs.map((doc) => ({ 
+                id: doc.id, ...doc.data() 
+            })))
+
         }
         getUser()
 
 
     }, [])
+
+    //delete all
+    const deleteAllCart = async () => {
+        
+        await deleteDoc(doc(db, "User",userid,"Cart",orderList[0].id))
+    }
 
 
 
