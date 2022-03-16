@@ -36,13 +36,12 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.
 //==================================Test CDN========================================
 
  const firebaseConfig = {
-  apiKey: "AIzaSyC-5jGgvrgiCrq1lMJId4RwNJYAEg43DJY",
-  authDomain: "authentication-test-33755.firebaseapp.com",
-  projectId: "authentication-test-33755",
-  storageBucket: "authentication-test-33755.appspot.com",
-  messagingSenderId: "379055240396",
-  appId: "1:379055240396:web:e6dd73c5bbc567f5df3e69",
-  measurementId: "G-4FYS3B5EQF"
+  apiKey: "AIzaSyC1a9CLHoS1ym2dg_1RdmL1eJw1_D1HiN0",
+  authDomain: "elmenus-project.firebaseapp.com",
+  projectId: "elmenus-project",
+  storageBucket: "elmenus-project.appspot.com",
+  messagingSenderId: "729863614527",
+  appId: "1:729863614527:web:e17072c9d467057c0fc88a"
 };
 
 
