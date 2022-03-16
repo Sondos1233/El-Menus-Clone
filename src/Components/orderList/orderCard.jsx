@@ -2,12 +2,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash,faList } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { db } from './../../Firebase/Firebase'
-import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
+import { collection, collectionGroup, deleteDoc, getDocs, limit, query, where ,doc} from 'firebase/firestore'
 import UpdateModal from "../updateOrder/updateModal";
 
 export default function OrderCard(props) {
     const [isOpen, setIsOpen] = useState(false);
-console.log(props.order)
+
+
+
+const deleteOrder = async () => {
+    
+    if(window.confirm("Are you sure ?")){
+     await deleteDoc(doc(db, "User",props.userId,"Cart",props.order.id))
+    }
+}
+
 const showModal = () => {
     setIsOpen(true);
   };
@@ -39,7 +48,7 @@ const showModal = () => {
                         <p style={{ color: "green" }}> {parseInt(props.order.TotalPrice)} EGP </p>
                         <div className="d-flex">
                         <span style={{ marginRight: "5px", color: "red" }}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></span>
-                        <a href="" style={{ marginRight: "15px" }}> Remove </a>
+                        <span href="" style={{ marginRight: "15px" }} onClick={deleteOrder}> Remove </span>
                         </div>
                         
                     </div>

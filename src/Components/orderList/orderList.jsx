@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { db } from './../../Firebase/Firebase'
-import { collection,  getDocs, } from 'firebase/firestore'
+import { collection,  getDocs, deleteDoc,doc } from 'firebase/firestore'
 import OrderCard from "./orderCard";
 import { Link } from "react-router-dom";
 
@@ -10,18 +10,40 @@ export default function OrderList({ orderLength }) {
 
     const [orderList, setOrderList] = useState([]);
 
-    const UserDoc = collection(db, "User", localStorage.getItem("userID"), "Cart");
+    const userid = localStorage.getItem("userID")
+    const UserDoc = collection(db, "User",userid,"Cart");
+
+    
 
     useEffect(() => {
         const getUser = async () => {
             const Resdata = await getDocs(UserDoc)
             // console.log(Resdata)
-            setOrderList(Resdata.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+            setOrderList(Resdata.docs.map((doc) => ({ 
+                id: doc.id, ...doc.data() 
+            })))
+
         }
         getUser()
 
 
     }, [])
+
+    //delete all
+    const deleteAllCart = async () => {
+        
+        if(window.confirm("Are you sure ?")){
+            for(let i = 0 ; i < orderList.length ; i ++) {
+                let orderId = orderList[i].id
+                await deleteDoc(doc(db, "User",userid,"Cart",orderId))
+            }
+        }
+
+        
+        
+    }
+
+
 
     let total = 0;
     const calcPrice = (price) => {
@@ -60,7 +82,7 @@ export default function OrderList({ orderLength }) {
                                     calcPrice(order.TotalPrice)
                                     return (
                                         <>
-                                            <OrderCard order={order} />
+                                            <OrderCard order={order} userId={userid} />
                                         </>
 
                                     )
@@ -83,7 +105,7 @@ export default function OrderList({ orderLength }) {
                             </div>
 
                           <Link to="/check"> <button className="btn btn-success mt-5" style={{ width: "25vw", marginLeft:"10px" }}>GO TO CHECKOUT</button></Link> 
-                            <button className="btn mb-5" style={{ width: "25vw", marginLeft:"10px" }}>Remove All Items</button>
+                            <button className="btn mb-5" style={{ width: "25vw", marginLeft:"10px" }} onClick={deleteAllCart} >Remove All Items</button>
                         
 
                         </div>

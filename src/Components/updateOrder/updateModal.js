@@ -20,15 +20,19 @@ import {
   addDoc,updateDoc
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 const UpdateModal = (props) => {
+
   let [qty, setQty] = useState(props.mealObj.Quantity);
+
   const [Size, setSize] = useState({Name:props.mealObj.Size.Name,Price:props.mealObj.Size?.Price});
   const [Extras,setExtras] = useState(props.mealObj.Extras);
   const [instructions,setInstructions] = useState(" ")
   const [totalPrice, setTotalPrice] = useState(props.mealObj.TotalPrice);
   const [pastSizePrice , setPastSizePrice] = useState(props.mealObj.Size.Price);
-  const hideModal = () => {
-    props.setIsOpen(false);
+
+const hideModal = () => {
+    // props.setIsOpen(false);
   };
+
   const updateMeal =async()=>{
     if(localStorage.getItem('userID')){
       const mealDoc = doc(firestore,'User', localStorage.getItem('userID'),'Cart',props.mealObj.id );
@@ -50,7 +54,7 @@ const UpdateModal = (props) => {
   console.log(props.mealObj)
   let isSizeChoosen;
   let isExtrasChoosen;
-  return (
+return (
     <>
       <Modal show={props.isOpen} dialogClassName="modalDiv" onHide={hideModal}>
         <div className="container p-4">
@@ -99,6 +103,7 @@ const UpdateModal = (props) => {
                     //console.log(size.Name,props.mealObj.Size)
                     if(size.Name === props.mealObj.Size?.Name) isSizeChoosen =true
                     else {isSizeChoosen = false}
+
                     return (
                       <>
                         <div className="row mb-4">
@@ -191,7 +196,7 @@ const UpdateModal = (props) => {
                                       }
                                       else {
                                         setTotalPrice((price) => price - extra.Price);
-                                        setExtras(Extras.filter((extra) => {return extra.Name != e.target.value}))
+                                        setExtras(Extras.filter((extra) => {return extra.Name !== e.target.value}))
 
                                       }
 

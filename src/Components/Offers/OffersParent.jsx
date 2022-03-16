@@ -45,11 +45,11 @@ export default function OfferParent() {
                 <div class="container-lg">
                     <div id="cardsArea" class="row row-cols-1 row-cols-md-1 row-cols-lg-3 g-4">
                         {
-                            Restaurants.map((Res) => {
-                                return (
-                                    <Offers Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} ></Offers>
-                                )
-                            })
+                            // Restaurants.map((Res) => {
+                            //     return (
+                                    // <Offers Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} ></Offers>
+                            //     )
+                            // })
                         }
                     </div>
                 </div>
