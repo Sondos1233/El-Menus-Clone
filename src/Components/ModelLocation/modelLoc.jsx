@@ -44,7 +44,7 @@ export default function ModelLocation() {
     const getAreas = (value) => {
         setShowArea(true)
         // setCity(e.target.text)
-        console.log(value)
+        // console.log(value)
         localStorage.setItem('Name', value)
         setCity(localStorage.getItem("Name"))
 

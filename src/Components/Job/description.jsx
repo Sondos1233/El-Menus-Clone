@@ -22,7 +22,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import List from "./List";
 export default function description(props) {
   const param = reactRouterDom.useParams();
-  console.log(param.Name);
+  // console.log(param.Name);
   const [JobsData, setJobsData] = react.useState([]);
   const CareersData = collectionGroup(db, `${param.Name}`);
   react.useEffect(() => {
@@ -78,7 +78,7 @@ export default function description(props) {
               <strong>Roles and Responsibilities:</strong>
               <ul>
                 {JobsData.map((data) => {
-                  console.log(data.Responsibilities);
+                  // console.log(data.Responsibilities);
                   return (
                    
                       <List data={data.Responsibilities}/>

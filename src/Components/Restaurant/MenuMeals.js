@@ -160,7 +160,7 @@ const Meals = (props) => {
                             <div>
                               <button
                                 onClick={() => {
-                                  console.log(j)
+                                  // console.log(j)
                                   showModal();
                                   getData(j.id, j);
                                 }}
@@ -233,7 +233,7 @@ const Meals = (props) => {
                 {MealDet.Size?.map((i, index) => {
                   if (index === 0) IsFirst = true;
                   else IsFirst = false;
-                  console.log(IsFirst, index);
+                  // console.log(IsFirst, index);
                   index = +1;
                   return (
                     <>

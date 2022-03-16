@@ -53,7 +53,7 @@ let types=[]
 let k ;
 const handleType=(e)=>{
   e.preventDefault();
-  console.log(e.target.value)
+  // console.log(e.target.value)
  
 }
 return (

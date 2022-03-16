@@ -44,7 +44,7 @@ const ResCover = (props) => {
         <>
         <div className="aDivImgCover">
         <img className="aImgCover" src={Res.ImgCover} alt="" />
-        {console.log(offer)}
+        {/* {console.log(offer)} */}
         {(offer.length!==0)&&
         (<div>
             <div className="aDivPromo">

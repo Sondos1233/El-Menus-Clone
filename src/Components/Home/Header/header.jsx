@@ -53,7 +53,7 @@ export default function Header() {
 
   const handleChangeCity = (e) => {
     e.preventDefault();
-    console.log(e.target.value)
+    // console.log(e.target.value)
     let x = e.target.value;
     setCity(e.target.value);
     // console.log(City)
@@ -90,10 +90,10 @@ const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
 useEffect(()=>{
         setTimeout(()=>{
           if(localStorage.getItem('email')){
-            console.log("icon");
+            // console.log("icon");
             setToggleBtnsWithIcons(false);
         } else{
-            console.log("btn");
+            // console.log("btn");
             setToggleBtnsWithIcons(true);
         }
         });
@@ -107,7 +107,7 @@ useEffect(()=>{
   useEffect(() => {
     const getUsers = async() => {
       const data = await getDocs(usersCollectionRef);
-      console.log(data);
+      // console.log(data);
 
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
 
@@ -183,7 +183,7 @@ const [isSubmit, setIsSubmit] = useState(false);
     useEffect(() => {
     //   console.log(formErrors);
       if (Object.keys(formErrors).length === 0 && isSubmit) {
-        console.log(logInput);
+        // console.log(logInput);
       }
     }, [formErrors]);
     const validate = (values) => {
@@ -269,7 +269,7 @@ const [isSubmit, setIsSubmit] = useState(false);
       useEffect(() => {
         // console.log(signFormErrors);
         if (Object.keys(signFormErrors).length === 0 && isSignSubmit) {
-          console.log(signInput);
+          // console.log(signInput);
         }
       }, [signFormErrors]);
       const signValidate = (signValues) => {

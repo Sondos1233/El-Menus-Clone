@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faDotCircle } from '@fortawesome/free-solid-svg-icons';
 
 function MealModal(props) {
-    console.log(props.open)
+    // console.log(props.open)
     const [isOpen, setIsOpen] = useState(false);
     setIsOpen(props.open)
   const [title, setTitle] = useState("Transitioning...");

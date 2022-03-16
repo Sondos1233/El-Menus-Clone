@@ -16,7 +16,7 @@ import {
   collectionGroup,addDoc
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 const Reviews = (props) => {
-console.log(props)
+// console.log(props)
   const[addReview,setAddReview] = useState(true);
   const [Review,setReview] = useState([]);
   let id = useParams();

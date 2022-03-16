@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom'
 
 
 function Userprofile(){
-    console.log(localStorage.getItem("email"));
+    // console.log(localStorage.getItem("email"));
 
     //===============================Toggle between Buttons===================================
     const [toggleState, setToggleState] = useState(1);
@@ -25,7 +25,7 @@ function Userprofile(){
     useEffect(() => {  
       const getUsers = async() => {
         const data = await getDocs(usersCollectionRef);
-        console.log(data);
+        // console.log(data);
         setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
       }
       getUsers();

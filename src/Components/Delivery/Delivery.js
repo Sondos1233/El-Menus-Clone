@@ -26,12 +26,12 @@ const Delivery = () => {
   };
   //filter by type
   const handleType2=(e)=>{
-    console.log(e.target.value)
+    // console.log(e.target.value)
     setType(e.target.value)
   }
   //order by rating
   const handleRating = (e)=>{
-    console.log(e.target.value);
+    // console.log(e.target.value);
     if(e.target.value ==="Rating" && e.target.checked ){
       setRating(true)
     }
@@ -41,7 +41,7 @@ const Delivery = () => {
   }
   //filter by promo
   const handlePromo = (e)=>{
-    console.log(e.target.checked);
+    // console.log(e.target.checked);
     if(e.target.checked ){
       setPromo(true)
     }

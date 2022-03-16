@@ -31,7 +31,7 @@ const ReviewForm = ({setAddReview}) => {
   let email = localStorage.getItem('email');
   const Submit = async (event) =>{
         event.preventDefault();
-        console.log(review);
+        // console.log(review);
         await addDoc(ReviewCollec,{...review})
     }
     const[review,setReview] = useState({

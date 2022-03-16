@@ -24,7 +24,7 @@ const RestCard = (props) => {
    const getRes = async () => {
     var Area = localStorage.getItem('areaName');
     if(props.Rating){
-      console.log(props.Rating)
+      // console.log(props.Rating)
       const RestaurantCollecRef = query(
         collection(firestore, "Restaurant"),
         limit(10),
@@ -32,7 +32,7 @@ const RestCard = (props) => {
       const data = await getDocs(RestaurantCollecRef);
       setRes(
         data.docs.map((doc) => {
-          console.log(doc.data())
+          // console.log(doc.data())
          
           return doc;
          
@@ -49,7 +49,7 @@ const RestCard = (props) => {
       if(data2.docs.length){
         const Resoffer = doc(firestore,'Restaurant',doc1.id);
         const data3 = await getDoc(Resoffer);
-        console.log(data3.data())
+        // console.log(data3.data())
        //setRes(data3);
       }
       })

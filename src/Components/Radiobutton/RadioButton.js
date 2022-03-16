@@ -26,7 +26,7 @@ const RadioButton = (props) => {
     //console.log(queryResult);
     setOffer(
       queryResult.docs.map((doc)=>{
-        console.log(doc.data())
+        // console.log(doc.data())
         return (doc.data())
       })
       )

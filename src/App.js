@@ -27,16 +27,16 @@ function App() {
   const [City, setCity] = useState("Cairo");
   const [Res, setRes] = useState("");
 
-  console.log(City);
+  // console.log(City);
 
   const [isAuth, setIsAuth] = useState(boolean);
 
   useEffect(()=>{
     if(localStorage.getItem('email')){
-        console.log("auth");
+        // console.log("auth");
         setIsAuth(true);
     } else{
-        console.log("not auth");
+        // console.log("not auth");
         setIsAuth(false);
     }
 },[isAuth])
