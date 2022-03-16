@@ -401,6 +401,7 @@ export default function Dineout() {
             </section>
 
             {/* Discover By New Resturants */}
+            
             <section className="newResturants-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
                     <div className="col-12 mx-3 pb-4">
