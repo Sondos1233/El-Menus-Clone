@@ -11,15 +11,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const UpdateModal = (props) => {
+
   let [qty, setQty] = useState(props.mealObj.Quantity);
   let [isSizeChoosen,setSizeChos] = useState(false);
   let [isExtrasChoosen,setExtrasChos] = useState(false);
+
   const hideModal = () => {
-    props.setIsOpen(false);
+    // props.setIsOpen(false);
   };
-  {
-    console.log(props.mealObj);
-  }
+
+  // {
+  //   console.log(props.mealObj);
+  // }
+
   return (
     <>
       <Modal show={props.isOpen} dialogClassName="modalDiv" onHide={hideModal}>
@@ -67,7 +71,7 @@ const UpdateModal = (props) => {
                 <div className="container">
                   {props.mealObj.ProSizes.map((size) => {
                       if(props.mealObj.Size?.Name === size.Name){
-                          setSizeChos(true);
+                          // setSizeChos(true);
                           console.log(props.mealObj.Size?.Name)
                     }
                     return (

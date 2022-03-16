@@ -32,7 +32,15 @@ export default function OrderList({ orderLength }) {
     //delete all
     const deleteAllCart = async () => {
         
-        await deleteDoc(doc(db, "User",userid,"Cart",orderList[0].id))
+        if(window.confirm("Are you sure ?")){
+            for(let i = 0 ; i < orderList.length ; i ++) {
+                let orderId = orderList[i].id
+                await deleteDoc(doc(db, "User",userid,"Cart",orderId))
+            }
+        }
+
+        
+        
     }
 
 
@@ -74,7 +82,7 @@ export default function OrderList({ orderLength }) {
                                     calcPrice(order.TotalPrice)
                                     return (
                                         <>
-                                            <OrderCard order={order} />
+                                            <OrderCard order={order} userId={userid} />
                                         </>
 
                                     )
@@ -97,7 +105,7 @@ export default function OrderList({ orderLength }) {
                             </div>
 
                           <Link to="/check"> <button className="btn btn-success mt-5" style={{ width: "25vw", marginLeft:"10px" }}>GO TO CHECKOUT</button></Link> 
-                            <button className="btn mb-5" style={{ width: "25vw", marginLeft:"10px" }} onClick={(e)=>{deleteAllCart()}} >Remove All Items</button>
+                            <button className="btn mb-5" style={{ width: "25vw", marginLeft:"10px" }} onClick={deleteAllCart} >Remove All Items</button>
                         
 
                         </div>
