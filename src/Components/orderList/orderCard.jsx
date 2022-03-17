@@ -10,13 +10,12 @@ export default function OrderCard(props) {
 
 
 
-const deleteOrder =  () => {
-     const deleteO = async () =>{
+
+     const deleteOrder = async () =>{
         await deleteDoc(doc(db, "User",props.userId,"Cart",props.order.id))
         window.location.reload()
      }
-     deleteO()
-}
+
 
 const showModal = () => {
     setIsOpen(true);

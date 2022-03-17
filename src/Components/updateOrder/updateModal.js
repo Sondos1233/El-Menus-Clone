@@ -251,7 +251,7 @@ return (
             <Modal.Footer className="aModalFooter">
               <button className="btn aBuyButton" onClick={updateMeal}>
             <FontAwesomeIcon icon={faShoppingBag}></FontAwesomeIcon>
-            UPDATE ITEM  <span className="float-end"> {totalPrice.toFixed(1)}EGP</span>
+            UPDATE ITEM  <span className="float-end"> {totalPrice}EGP</span>
           </button>
             </Modal.Footer>
           </div>

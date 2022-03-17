@@ -39,7 +39,7 @@ function Userprofile(){
             <div className="head_content">
                 <div className="user_head">
                     <img src="	https://www.elmenus.com/public/img/arbitrary-user.svg" alt="User name" className="user-profile" />
-                    <Link to="/accountSetting"> <button>Edit Profile</button></Link>
+                    
                 </div>
                 <div className="user_data">
                     <p className='p1'>Your profile</p>
@@ -51,7 +51,7 @@ function Userprofile(){
                                 return (
                                     <>
                                     <p className='p2' style={{display: "inline"}}>{user.Name}</p>
-                                    <a href='#'><FontAwesomeIcon icon={faEdit}  style={{marginLeft: "4%", marginBottom: "3px", fontSize: "18px", color: "black"}}/></a>
+                                   
                                     </>
                                 )
                             
@@ -67,7 +67,7 @@ function Userprofile(){
 
         <div className='clear'></div>
 
-        <section className="container-fluid pills">
+        {/* <section className="container-fluid pills">
             <div className="btns">
                 <button className="btn tabs" className={toggleState === 1 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(1)}>Reviews</button>
                 <button className="btn tabs" className={toggleState === 2 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(2)}>Photo</button>
@@ -81,7 +81,7 @@ function Userprofile(){
             <div className='comingSoon' className={toggleState === 2 ? "comingSoon  active-comingSoon" : "comingSoon"}>
                 <p>coming soon</p>
             </div>
-        </section>
+        </section> */}
 
   
         </>

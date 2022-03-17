@@ -399,7 +399,7 @@ const Meals = (props) => {
             
             <button className="ms-2 btn aBuyButton" onClick={
               async () => {
-                // alert("shrouk")
+                alert("shrouk")
                 // alert(Size.Price)
                 // console.log(Extras)
                 await addDoc(Restcollection, {
@@ -416,7 +416,7 @@ const Meals = (props) => {
                 setSize({})
                 setExtras([])
                 console.log(Extras)
-                // alert("Sucess");
+                alert("Sucess");
                 window.location.reload(false)
               }
             } disabled={!check}><FontAwesomeIcon icon={faShoppingBag}></FontAwesomeIcon>ADD TO BASKET<span className="float-end"> {totalPrice?.toFixed(2)}EGP</span></button>

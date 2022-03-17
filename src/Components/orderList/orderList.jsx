@@ -36,8 +36,8 @@ export default function OrderList({ orderLength }) {
       
             for(let i = 0 ; i < orderList.length ; i ++) {
                 let orderId = orderList[i].id
-              let j=  await deleteDoc(doc(db, "User",userid,"Cart",orderId))
-                console.log(j)
+              = await deleteDoc(doc(db, "User",userid,"Cart",orderId))
+                
             }
         window.location.reload()
         

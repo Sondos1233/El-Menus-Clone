@@ -51,7 +51,7 @@ function App() {
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/Careers" exact component={Career} />
-                <Route path="/description/:Name" exactcomponent={description} />
+                <Route path="/description/:Name" exact component={description} />
                 <Route path="/JoinUs" exact component={JoinUs} />
                 <Route path="/Home" exact component={Home} />
                 <ProtectedRoute path='/check' exact component={CheckOut} isAuth={isAuth}/>
