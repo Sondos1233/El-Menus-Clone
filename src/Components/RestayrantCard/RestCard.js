@@ -17,7 +17,13 @@ const RestCard = (props) => {
   const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
   const [Area,setArea] = useState('Naser City')
-
+  const [Restaurants, setRestaurants] = useState([
+        
+  ]);
+  const [offers, setOffers] = useState([
+      
+  ]);
+  const resturantsCollection = collection(firestore, "Restaurant")
   
   useEffect(() => {
     //get restaurants by choosen area
@@ -41,18 +47,44 @@ const RestCard = (props) => {
         );
     }
     else if(props.Promo){
-      const ResCollec = collection(firestore,'Restaurant');
-      const data = await getDocs(ResCollec);
-      data.docs.map(async(doc1)=>{
-      const Offercollec = collection(firestore,'Restaurant',doc1.id,'Offers');
-      const data2 = await getDocs(Offercollec);
-      if(data2.docs.length){
-        const Resoffer = doc(firestore,'Restaurant',doc1.id);
-        const data3 = await getDoc(Resoffer);
+     
+  
+      let l=0;
+      const getOffers = async(doc1,arr) =>{
+          const Offercollec = await collection(firestore,'Restaurant',doc1.id,'Offers');
+          const data2 = await getDocs(Offercollec);
+          if(data2.docs.length){  
+              setOffers(data2.docs.map((i)=>{
+                  return i.data()
+              }))
+                  const Resoffer = await doc(firestore,'Restaurant',doc1.id);
+                  const data3 = await getDoc(Resoffer);
+                  //console.log(data3.data())
+                  arr.push(data3.data());
+                  setRestaurants(arr);
+          }
+      };
+     
+          const getRestaurants = async () => {
+              let arr = [];
+              const data = await getDocs(resturantsCollection);
+              data.docs.map((doc1)=>{ 
+                  getOffers(doc1,arr);
+                  l++;
+              
+              })
+          // const Resdata = await getDocs(resturantsCollection)
+          // // console.log(Resdata)
+          // setRestaurants(Resdata.docs.map((doc) => ({ ...doc.data() })))
+      }
+      getRestaurants()
+      
+ 
+  
         // console.log(data3.data())
        //setRes(data3);
-      }
-      })
+      
+      
     }
     else{
       const RestaurantCollecRef = query(
@@ -142,9 +174,10 @@ function hello(rate){
           <div className="col-lg-4 col-md-12 mt-2">
             <div className="aContentCard">
               <Link to={`/Restaurant/${res.id}`} className="aLinkCard">
-                <div className="card aD">
+                <div className="card aD" style={{height:"400px"}}>
                   <figure className="aFigRes position-relative"> 
                     <img
+                      height="200px"
                       src={res.data().ImageURL}//{attract[index]}
                       className="aImg card-img-top "
                       alt="..."

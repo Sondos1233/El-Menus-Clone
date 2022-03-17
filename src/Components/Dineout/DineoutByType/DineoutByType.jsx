@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './../Dineout.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 
 export default function DineoutbyType(props) {
 
@@ -10,6 +10,7 @@ export default function DineoutbyType(props) {
         <>
             <div className="my-4 col-md-4 col-6" >
                 <div className="card">
+                    <Link to={`/Restaurant/${props.Res.id}`}></Link>
                     <div className="card-body shadow shadow-lg">
                         <img src={props.Res.ImageURL}
                             alt="" className="card-img" style={{ width: "100%", height: "250px" }} />

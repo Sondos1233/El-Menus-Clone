@@ -28,8 +28,11 @@ import {
 } from "firebase/auth";
 import { useContext } from "react";
 import { cityContext } from "../../Context/City";
+import { useTranslation} from "react-i18next";
+import i18next from "i18next";
 
 export default function Header() {
+  const { t } = useTranslation();
   const[showRes,setshowRes]=useState(false)
   const listOfCities = collection(firestore, "Cities");
   const listOfRes = collection(firestore,"Restaurant")
@@ -45,8 +48,11 @@ export default function Header() {
 //=======================Handle language=====================
 
   const toggleLanguage = () => {
+    i18next.changeLanguage(language == "English" ? "en" : "ar")
+    if(language == "العربية"){
+      document.title = t('app_title')
+    }
     dispatch(changeLanguage(language == "English" ? "العربية" : "English"));
-
   };
 
 //=======================Handle handleChangeCity=====================
@@ -163,11 +169,11 @@ const [isSubmit, setIsSubmit] = useState(false);
 
   const handleSubmit = async (e) => {
       e.preventDefault();
-      setFormErrors(validate(logInput));
       setIsSubmit(true);
       try {
         await signInWithEmailAndPassword(auth ,logInput.email, logInput.password);
         localStorage.setItem("email", logInput.email);
+
 
 
 
@@ -178,7 +184,10 @@ const [isSubmit, setIsSubmit] = useState(false);
 
       } catch (error) {
         console.log(error);
+        setFormErrors(validate(logInput));
+
       }
+      window.Location.reload();
     };
     useEffect(() => {
     //   console.log(formErrors);
@@ -245,7 +254,7 @@ const [isSubmit, setIsSubmit] = useState(false);
 
       const handleSignSubmit = async (e) => {
       e.preventDefault();
-      setSignFormErrors(signValidate(signInput));
+     
       setIsSignSubmit(true);
       try {
           await createUserWithEmailAndPassword(auth , signInput.email, signInput.password, signInput.name);
@@ -263,6 +272,7 @@ const [isSubmit, setIsSubmit] = useState(false);
 
       } catch (error) {
           console.log(error.message);
+          setSignFormErrors(signValidate(signInput));
       }
       };
 
@@ -276,24 +286,24 @@ const [isSubmit, setIsSubmit] = useState(false);
         const signErrors = {};
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
         if (!signValues.email) {
-          signErrors.email = "Email is required!";
+          signErrors.email = t('errors_email1');
         } else if (!regex.test(signValues.email)) {
-          signErrors.email = "This is not a valid email format!";
+          signErrors.email = t('errors_email2');
         }
         if (!signValues.password) {
-          signErrors.password = "Password is required";
+          signErrors.password = t('errors_pass1');
         } else if (signValues.password.length < 4) {
-          signErrors.password = "Password must be more than 4 characters";
+          signErrors.password = t('errors_pass2');
         } else if (signValues.password.length > 10) {
-          signErrors.password = "Password cannot exceed more than 10 characters";
+          signErrors.password = t('errors_pass3');
         }
         if (!signValues.name) {
-          signErrors.name = "Username is required!";
+          signErrors.name = t('errors_name1');
         }else if (signValues.name.length < 4) {
-            signErrors.name = "Name must be 4 characters or more";
-        }else if (signValues.name.length > 20) {
-            signErrors.name = "Name must be less than 20 characters";
-        }
+          signErrors.name = t('errors_name2');
+      }else if (signValues.name.length > 9) {
+        signErrors.name = t('errors_name3');
+      }
         return signErrors;
       };
 
@@ -336,7 +346,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                       setModalIsOpen(false);
                     }}
                   >
-                    LogIn
+                    {t('Log_in')}
                   </button>
                   <button
                     type="button"
@@ -348,7 +358,8 @@ const [isSubmit, setIsSubmit] = useState(false);
                       setLogModalIsOpen(false);
                     }}
                   >
-                    SignUp
+                    {/* SignUp */}
+                    {t('sign_up')}
                   </button>
 
                   <button
@@ -365,6 +376,7 @@ const [isSubmit, setIsSubmit] = useState(false);
             </div>
   {/* =========================================userIcon============================================== */}
   <div class="dropdown" hidden={toggleBtnsWithIcons}>
+
   {users.map((user) => {
                         
                         if(localStorage.getItem("email") == user.Email){
@@ -383,11 +395,12 @@ const [isSubmit, setIsSubmit] = useState(false);
 
 
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style={{padding: "5px"}}>
-      <li><Link to="/userProfile" style={{color: "black"}}>Your Profile</Link></li>
+      <li><Link to="/userProfile" style={{color: "black"}}>{t('dropdown_Profile')}</Link></li>
       <hr />
-      <li><Link to="/accountSetting" style={{color: "black"}}>Account Setting</Link></li>
+      <li><Link to="/accountSetting" style={{color: "black"}}>{t('dropdown_Account_Setting')}</Link></li>
       <hr />
-      <li><Link to="/" onClick={()=>signout()} style={{color: "black"}}>LogOut</Link></li>
+      <li><Link to="/" onClick={()=>signout()} style={{color: "black"}}>{t('dropdown_Account_LogOut')}</Link></li>
+
   </ul>
 </div>
 
@@ -402,7 +415,8 @@ const [isSubmit, setIsSubmit] = useState(false);
             {/* <!--Discover & order--> */}
             <div className="home_main_section_content">
               <h1 className="home_main_title">
-                Discover & Order the food you love.
+                {t('Welcome_message')}
+                {/* Discover & Order the food you love. */}
               </h1>
               <div className="row d-flex justify-content-between" style={{"width":'80%',"marginLeft":"80px"}} >
                 
@@ -475,7 +489,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                       style={{"width":"100%"}}
                       className="btn-primary btn "
                     >
-                      Go <FontAwesomeIcon icon={faArrowRight} />
+                      {t('Go')} <FontAwesomeIcon icon={faArrowRight} />
                       
                     </button>
                   
@@ -485,16 +499,18 @@ const [isSubmit, setIsSubmit] = useState(false);
             <div className="section_footer ">
               <h6 className="section_footer_title text-center mb-4">
 
-                Or explore elmenus
+                {t('explore_elmenus')}
               </h6>
               <div class=" row section_footer_links mx-1 py-3">
                 <Card
+                  link="/Delivery"
                   name="Delivery"
                   iconName={faMotorcycle}
                   iconName2={faArrowRight}
                   para="Get food delivered from amazing restaurants around you "
                 />
                 <Card
+                  link="/Dineout"
                   name="Dine Out"
                   iconName={faUtensils}
                   iconName2={faArrowRight}
@@ -583,14 +599,13 @@ const [isSubmit, setIsSubmit] = useState(false);
 
                 <div className="submitBtn mt-3">
                   <button type="submit" className="btn crtBtn">
-                    Create an account
+                    {t('Create_an_account')}
                   </button>
                 </div>
               </div>
               <div className="note">
                 <a>
-                  By creating an account, you agree to our Terms of service and
-                  Privacy policy
+                  {t('license_msg')}
                 </a>
               </div>
             </form>
@@ -656,12 +671,14 @@ const [isSubmit, setIsSubmit] = useState(false);
 
               <div className="button mt-3">
                 <button type="submit" className="btn btn-danger">
-                  Log in
+                  {t('Log_in')}
                 </button>
               </div>
 
               {/* <div className="button mt-3">
                 <button className="btn goglBtn">Log in with Facebook</button>
+              <div className="button mt-3">
+                <button className="btn goglBtn">{t('Login_face')}</button>
               </div>
 
               <div className="button mt-3">
@@ -669,12 +686,12 @@ const [isSubmit, setIsSubmit] = useState(false);
                   className="btn btn-primary"
                   style={{ fontSize: "17px", fontWeight: "400" }}
                 >
-                  Log in with Google
+                  {t('Login_google')}
                 </button>
               </div> */}
             </form>
             <div className="frgtPass">
-              <a>I forget my password</a>
+              <a>{t('forget_password')}</a>
             </div>
           </div>
         </div>

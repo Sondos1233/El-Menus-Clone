@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import './../Dineout.css'
 
-
+import { Link } from 'react-router-dom';
 export default function FilterCard(props) {
 
     return (
@@ -9,6 +9,7 @@ export default function FilterCard(props) {
 
         <div className="my-4 col-md-4 col-6" >
             <div className="card">
+                <Link to={`/Restaurant/${props.ResID}`}>
                 <div className="card-body shadow shadow-lg">
                     <img src={props.image}
                         alt="" className="card-img" style={{ width: "100%", height: "250px" }} />
@@ -39,6 +40,7 @@ export default function FilterCard(props) {
                         Royal Maadi Hotel, 11 Road 18, Maadi Sarayat
                     </p>
                 </div>
+                </Link>
             </div>
         </div>
     );

@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
 // import logo from './../../images/logo-sm.png' 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSearch, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faSearch, faUser,faShoppingBag} from "@fortawesome/free-solid-svg-icons";
 import React, {useState, useEffect} from "react";
 import ReactModal from 'react-modal';
 import { auth } from '../firebase/firebase.config'
@@ -16,50 +16,22 @@ import ProtectedRoute from '../../protectedRoute'
 import DineoutbyCity from '../Dineout/DineoutByCity/DineoutByCity';
 import ModelLocation from '../ModelLocation/modelLoc';
 
+import OrderList from '../orderList/orderList';
 export default function Navbar() {
-    //Search Res
-    const[showRes,setshowRes]=useState(false)
-    const[SearchRes,setSearchRes] = useState('');
-    const [ResList, setResList] = useState([]);
-    const listOfRes = collection(firestore,"Restaurant")
-    const bySearchRes = (Res, SearchRes) => {
-        if(Res.IsActivated){
-          if (SearchRes) {
-            return Res.ResName.toLowerCase().includes(SearchRes.toLowerCase());
-          } else return 'Not Match any Res';
-        }
-        
-      };
-    const filteredList = (ResList, SearchRes) => {
-        // console.log(ResList,SearchRes)
-        return ResList.filter(Res => bySearchRes(Res, SearchRes));
-      }
-    const handleChangeRes=(e) =>{
-        if(e.target.value==''){
-        setshowRes(false)
-        }else{
-         setshowRes(true)
-         setSearchRes(e.target.value)
-        }
-      }
-      useEffect(() => {
-       
-        const getRes = async()=>{
-          const data = await getDocs(listOfRes);
-          setResList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        }
-        getRes();
-      }, []);
-
+    const [showList, setShowList] = useState(false)
+    const [len , setLen] = useState(0)
+    const orderLength = (length)=>{
+        setLen(length)
+    }
 //=======================Handle toggle Buttons With Icons=====================
   const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
 
    useEffect(()=>{
             if(localStorage.getItem('email')){
-                // console.log("icon");
+                console.log("icon");
                 setToggleBtnsWithIcons(false);
             } else{
-                // console.log("btn");
+                console.log("btn");
                 setToggleBtnsWithIcons(true);
             }
    })
@@ -71,7 +43,7 @@ export default function Navbar() {
     useEffect(() => {
       const getUsers = async() => {
         const data = await getDocs(usersCollectionRef);
-        // console.log(data);
+        console.log(data);
         setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
       }      
 
@@ -114,7 +86,7 @@ const [isSubmit, setIsSubmit] = useState(false);
 
   const handleSubmit = async (e) => {
       e.preventDefault();
-      setFormErrors(validate(logInput));
+      
       setIsSubmit(true);
       try {
         await signInWithEmailAndPassword(auth ,logInput.email, logInput.password);
@@ -127,12 +99,14 @@ const [isSubmit, setIsSubmit] = useState(false);
 
       } catch (error) {
         console.log(error);
+        setFormErrors(validate(logInput));
       }
+      window.location.reload()
     };
     useEffect(() => {
     //   console.log(formErrors);
       if (Object.keys(formErrors).length === 0 && isSubmit) {
-        // console.log(logInput);
+        console.log(logInput);
       }
     }, [formErrors]);
     const validate = (values) => {
@@ -194,7 +168,7 @@ const [isSubmit, setIsSubmit] = useState(false);
 
       const handleSignSubmit = async (e) => {
       e.preventDefault();
-      setSignFormErrors(signValidate(signInput));
+      
       setIsSignSubmit(true);
       try {
           await createUserWithEmailAndPassword(auth , signInput.email, signInput.password, signInput.name);
@@ -212,13 +186,14 @@ const [isSubmit, setIsSubmit] = useState(false);
 
       } catch (error) {
           console.log(error.message);
+          setSignFormErrors(signValidate(signInput));
       }
       };
 
       useEffect(() => {
         // console.log(signFormErrors);
         if (Object.keys(signFormErrors).length === 0 && isSignSubmit) {
-        //   console.log(signInput);
+          console.log(signInput);
         }
       }, [signFormErrors]);
       const signValidate = (signValues) => {
@@ -279,18 +254,18 @@ const [isSubmit, setIsSubmit] = useState(false);
                             className="container-fluid"
                             style={{ flexDirection: "row", padding: "0 10px", backgroundColor: "white", borderBottom: "1px solid #dfe2e6" }}
                         >
-                            <a
+                            <Link
                                 className="navbar-brand p-3"
                                 href="../index.html"
                                 style={{ borderRight: "1px solid #dfe2e6" }}
-                                Link to="/Home"
-                            >
+                                to="/Home"
+                            >   
                                 <img
                                     src="https://elmenus.com/public/img/newLogo.svg"
                                     alt=""
                                     style={{ width: "120px", maxWidth: "100%", height: "auto" }}
                                 />
-                            </a>
+                            </Link>
 
                             <button
                                 className="navbar-toggler"
@@ -305,9 +280,9 @@ const [isSubmit, setIsSubmit] = useState(false);
                             </button>
                             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div className="navbar-nav">
-                                    <a className="nav-item nav-link py-4 px-2" >DELIVERY</a>
-                                    <a className=" nav-item nav-link py-4 px-2 active">DINE OUT</a>
-                                    <a className=" nav-item nav-link py-4 px-2" >OFFERS</a>
+                                    <Link to="/Delivery" className="nav-item nav-link py-4 px-2" >DELIVERY</Link>
+                                    <Link to="/Dineout" className=" nav-item nav-link py-4 px-2 active">DINE OUT</Link>
+                                    <Link to="/Offers" className=" nav-item nav-link py-4 px-2" >OFFERS</Link>
                                 </div>
 
                                 <div style={{ display: "flex", marginLeft: "auto" }}>
@@ -322,18 +297,32 @@ const [isSubmit, setIsSubmit] = useState(false);
                                                     style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.3vw" }}
                                                 ><i className="far fa-bell pe-2"></i>Notification</a
                                                 >
-                                                <a
+                                                <Link
                                                     className="nav-link py-4 px-2 ms-5"
-                                                    href=""
+                                                    to="/Myorder"
                                                     style={{ textDecoration: "none", color: "gray", padding: "10px", fontSize: "1.3vw" }}
-                                                ><i className="fas fa-receipt pe-2"></i>My order</a
+                                                ><i className="fas fa-receipt pe-2"></i>My order</Link
                                                 >
+                                                <button type="button" class="btn btn-primary position-relative" style={{ backgroundColor: "white" }} data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                                <FontAwesomeIcon icon={faShoppingBag}  style={{marginRight: "6px", fontSize: "25px", color: "black"}}
+                                                onClick={
+                                                    () => {
+                                                        showList ? setShowList(false) : setShowList(true)
+                                                    }
+                                                }
+                                                />
+                                                    <span class=" translate-middle badge rounded-pill bg-danger" style={{ position: "absolute", top:"20%" }}>
+                                                        {len}
+                                                        <span class="visually-hidden">unread messages</span>
+                                                    </span>
+                                                </button>
                                     {/* ===================================================userIcon================================================================= */}
                                             
                                                 <div className="dropdown" hidden={toggleBtnsWithIcons}>
                                                     {users.map((user) => {
-                                                        localStorage.setItem("userID", user.id)
+                                                       
                                                         if(localStorage.getItem("email") == user.Email){
+                                                            localStorage.setItem("userID", user.id)
                                                                 return (
                                                                     <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style={{background: "transparent", color: "black" ,border: "1px solid #e32207", marginTop: "15px"}}>
                                                                     <FontAwesomeIcon icon={faUser}  style={{marginRight: "6px"}}/>
@@ -398,23 +387,21 @@ const [isSubmit, setIsSubmit] = useState(false);
                         </div>
                         </div>
                     </section>
+                    <OrderList orderLength={orderLength} />
                     <section
                         className="search-bar container-fluid"
                         style={{ backgroundColor: "white", borderBottom: "1px solid #dfe2e6" , padding: "0"}}
                     // style="background-color: white; border-bottom: 1px solid var(--border-color)"
                     >
                         <div className="row mx-4">
-                            <div className="col-lg-7 col-md-12 mt-1 pt-1 position-relative">
+                            <div className="col-lg-7 col-md-12 mt-1 pt-1">
                                 <form>
                                     <div className="input-group mb-2 search-side">
                                         <input
-                                            type="Search"
+                                            type="text"
                                             className="form-control"
                                             placeholder="Find A Restaurant"
                                             style={{ padding: "10px" }}
-                                            onChange={(e) => {
-                                                handleChangeRes(e);
-                                              }}
                                         />
                                         <span
                                             className="input-group-text"
@@ -422,24 +409,8 @@ const [isSubmit, setIsSubmit] = useState(false);
                                             style={{ backgroundColor: "white" }}
                                         > <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
                                         </span>
-                                        
                                     </div>
                                 </form>
-                    <span className="position-absolute col-lg-7 col-md-12" style={{"top":50,"zIndex":3}}>
-                    {
-                       showRes&&<ul className="list-group list-group-flush dropdownRes">
-                       {filteredList(ResList,SearchRes).map((Res) => {
-                         return <Link to={`/Restaurant/${Res.id}`} style={{"textDecoration":"none"}}><li className="list-group-item py-2"><span className="logoResDrop p-1 mx-3"><img src={Res.ImageLogo} width="20px" height="20px"/></span>{Res.ResName}</li></Link>;
-                       })}
-                        {/* <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item">Zaks</li></Link>
-                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Mac</li></Link>
-                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Kfc</li></Link>
-                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">blal</li></Link> */}
- 
-                       </ul>
-                     }
-
-                    </span>
                             </div>
                             <div className="col-lg-5 col-md-12 location-side">
                                 <img
@@ -449,7 +420,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                                 />
                                 <h4 className="headerLocation mx-2">Dine-out in <span>{localStorage.getItem('areaName')}</span></h4>
                                 {/* onClick={() => { openModel() }} this onClick event must be put on CHANGE button */}
-                                <button className="btn change-btn mx-2" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">CHANGE</button>
+                                <button  type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  >CHANGE</button>
                             </div>
                         </div>
                     </section>
@@ -544,7 +515,7 @@ const [isSubmit, setIsSubmit] = useState(false);
             </nav>
 
                     
-                    {/* ************************************ٍSignUp Modal******************************* */}
+                    {/* ************ٍSignUp Modal*********** */}
                     <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -585,7 +556,7 @@ const [isSubmit, setIsSubmit] = useState(false);
                     </div>
                 </div>
                 </div>
-            {/* ***********************************LogIn Modal************************************************** */}
+            {/* ************LogIn Modal***************** */}
             
             {/* <!-- Modal --> */}
             <div class="modal fade" id="logInModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -630,6 +601,10 @@ const [isSubmit, setIsSubmit] = useState(false);
                 </div>
             </div>
             </div>
+        
+            
+
+
 
         </>
     );

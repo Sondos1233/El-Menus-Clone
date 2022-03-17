@@ -142,9 +142,9 @@ export default function Footer() {
                 <div class="col-xl-8 more-links">
                   <ul>
 
-                    <li><Link to="/"></Link>About Us</li>
-                    <li><Link to="/"></Link>Terms and Conditions</li>
-                    <li><Link to="/"></Link>Privacy</li>
+                    <li><Link to="/AboutUs">About Us</Link></li>
+                    <li><Link to="/Terms">Terms and Conditions</Link></li>
+                    <li><Link to="/Privacy">Privacy</Link></li>
                     <li><Link to="/Careers">Careers</Link></li>
                     <li><Link to="/JoinUs">Join Us</Link></li>
                   </ul>

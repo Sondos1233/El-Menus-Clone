@@ -5,8 +5,12 @@ import ResLogo from '../../images/Offers/Logo_Buffalo_Burger.jpg'
 import { } from '@fortawesome/free-regular-svg-icons'
 import { faChevronLeft, faStar, faMotorcycle, faCircle, faMapMarkedAlt, faPercentage, faCreditCard } from '@fortawesome/free-solid-svg-icons'
 import { } from '@fortawesome/free-brands-svg-icons'
+import { useEffect } from "react";
 
 export default function Offers(props) {
+    useEffect(()=>{
+        
+    },[props.Res])
 
     return (
         <>
@@ -16,7 +20,7 @@ export default function Offers(props) {
             {/*Start Of The Offers Cards it self Markup  */}
 
             <div class="col" id="wholeCard">
-                <a href="#">
+              
                     <div class="card h-100">
                         <img id="bigImg" src={props.srcImage} class="card-img-top" alt="Food Img" />
                         <div class="card-body">
@@ -51,7 +55,7 @@ export default function Offers(props) {
                             </div>
                         </div>
                     </div>
-                </a>
+                
             </div>
 
 

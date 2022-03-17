@@ -23,6 +23,8 @@ import { Provider } from 'react-redux';
 import { Fragment } from 'react';
 import ProtectedRoute from './protectedRoute'
 import { boolean } from "yup";
+import {CheckOut} from './Components/CheckOut order/checkout'
+import {MyOrder} from './Components/MyOrder/order'
 function App() {
   const [City, setCity] = useState("Cairo");
   const [Res, setRes] = useState("");
@@ -52,6 +54,7 @@ function App() {
                 <Route path="/description/:Name" exactcomponent={description} />
                 <Route path="/JoinUs" exact component={JoinUs} />
                 <Route path="/Home" exact component={Home} />
+                <ProtectedRoute path='/check' exact component={CheckOut} isAuth={isAuth}/>
 
                 <Fragment>
                   <Navbar />
@@ -62,6 +65,7 @@ function App() {
                   <Route path="/AboutUs" exact component={AboutUs} />
                   <Route path="/Terms" exact component={Terms} />
                   <Route path="/Privacy" exact component={Privacy} />
+                  <ProtectedRoute path="/Myorder" exact component={MyOrder} isAuth={isAuth} />
                   <ProtectedRoute  path="/userProfile" exact component={UserProfile} isAuth={isAuth}/>        
                   <ProtectedRoute path="/accountSetting" exact component={AccountSetting} isAuth={isAuth} />
                 </Fragment>

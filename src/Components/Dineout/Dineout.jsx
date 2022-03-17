@@ -11,6 +11,7 @@ import ChinessImg from './../../images/Dineout/Chiness.jpg'
 import FriedChickenImg from './../../images/Dineout/FriedChicken.jpg'
 import KosharyImg from './../../images/Dineout/koshary.jpg'
 import SandwichesImg from './../../images/Dineout/Sandwiches.jpg'
+import { Link } from 'react-router-dom';
 // FireStore
 import { db } from './../../Firebase/Firebase'
 import { collection, collectionGroup, getDocs, limit, query, where } from 'firebase/firestore'
@@ -52,7 +53,7 @@ export default function Dineout() {
         const getBranches = async () => {
             const Branchesdata = await getDocs(BranchesCollection)
             // console.log(Branchesdata)
-            setBranches(Branchesdata.docs.map((doc) => ({ ...doc.data() })))
+            setBranches(Branchesdata.docs.map((doc) => ({ ...doc.data(),id: doc.id })))
         }
         getBranches()
 
@@ -66,7 +67,7 @@ export default function Dineout() {
         const getResByMoodQuery2 = async () => {
             const QueryData = await getDocs(QueryByMoodDocs2)
             // console.log(QueryData)
-            setQueryByMood2(QueryData.docs.map((doc) => ({ ...doc.data() })))
+            setQueryByMood2(QueryData.docs.map((doc) => ({ ...doc.data(),id: doc.id })))
 
         }
         getResByMoodQuery2()
@@ -110,7 +111,7 @@ export default function Dineout() {
             const getResByTypeQuery = async () => {
                 const QueryData = await getDocs(QueryByTypeDocs)
                 // console.log(Branchesdata)
-                setQueryByType(QueryData.docs.map((doc) => ({ ...doc.data() })))
+                setQueryByType(QueryData.docs.map((doc) => ({ ...doc.data(),id: doc.id })))
             }
             getResByTypeQuery()
 
@@ -136,7 +137,7 @@ export default function Dineout() {
             const getResByMoodQuery = async () => {
                 const QueryData = await getDocs(QueryByMoodDocs)
                 // console.log(QueryData)
-                setQueryByMood(QueryData.docs.map((doc) => ({ ...doc.data() })))
+                setQueryByMood(QueryData.docs.map((doc) => ({ ...doc.data(),id: doc.id })))
 
             }
             getResByMoodQuery()
@@ -144,8 +145,8 @@ export default function Dineout() {
             setClicked(true)
         }
         else {
-        setClickFirst(false)
-            
+            setClickFirst(false)
+
             setClicked(false)
         }
 
@@ -168,7 +169,7 @@ export default function Dineout() {
         const getResByAreaQuery = async () => {
             const QueryData = await getDocs(QueryByAreaDocs)
             // console.log(QueryData)
-            setQueryByArea(QueryData.docs.map((doc) => ({ ...doc.data() })))
+            setQueryByArea(QueryData.docs.map((doc) => ({ ...doc.data(),id: doc.id })))
 
         }
         getResByAreaQuery()
@@ -213,7 +214,7 @@ export default function Dineout() {
                     <div className="col-12 col-lg-6 d-flex px-0 bg-danger mt-4 dine-coffee" >
                         <div
                             className="inner-coffee">
-                            <h1 className="mt-auto text-light fw-bold p-4" style={{ cursor: "pointer" }}  onClick={(e) => { filterByMood(e) }}>Coffeeshops</h1>
+                            <h1 className="mt-auto text-light fw-bold p-4" style={{ cursor: "pointer" }} onClick={(e) => { filterByMood(e) }}>Coffeeshops</h1>
                         </div>
                     </div>
 
@@ -252,20 +253,20 @@ export default function Dineout() {
                                 {
                                     QueryByMood.length ? (QueryByMood.map((Type) => {
                                         return (
-                                            
+
                                             Type.Areas.includes(localStorage.getItem("areaName").trim())
-                                             && Type.IsActivated && <FilterCard image={Type.ImageURL} logo={Type.ImageLogo} name={Type.ResName} type={Type.Mood}></FilterCard>
+                                            && Type.IsActivated && <FilterCard image={Type.ImageURL} logo={Type.ImageLogo} name={Type.ResName} type={Type.Mood} ResID={Type.id}></FilterCard>
                                         )
                                     })) :
                                         clcikFirst &&
                                         (
-                                        <div className="text-center">
-                                            <img src={NoData} width="300px" height="300px" />
-                                        </div>
+                                            <div className="text-center">
+                                                <img src={NoData} width="300px" height="300px" />
+                                            </div>
                                         )
-                                       
+
                                 }
-                                
+
 
                             </div>
                         </div>
@@ -328,7 +329,7 @@ export default function Dineout() {
                                         {
                                             QueryByType.map((Type) => {
                                                 return (
-                                                    Type.Areas.includes(localStorage.getItem("areaName").trim()) && Type.IsActivated &&  <DineoutbyType Res={Type} />
+                                                    Type.Areas.includes(localStorage.getItem("areaName").trim()) && Type.IsActivated && <DineoutbyType Res={Type}  />
                                                 )
                                             })
                                         }
@@ -344,7 +345,7 @@ export default function Dineout() {
             {/* Discover BY City */}
             <section className="disArear-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
-                    <div className="col-12 mx-3">
+                    <div className="col-12 mx-3 my-2">
                         <h4 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>Discover {localStorage.getItem('areaName')}</h4>
                     </div>
 
@@ -356,7 +357,7 @@ export default function Dineout() {
                                     {
                                         QueryByArea.map((Res) => {
                                             return (
-                                                Res.IsActivated && <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
+                                                Res.IsActivated && <DineoutByCity Address={Branches.Adddress} Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo} ResID={Res.id}></DineoutByCity>
 
                                             )
                                         })
@@ -371,29 +372,26 @@ export default function Dineout() {
 
 
             {/* Discover By MOOD */}
-            <section className="hiddenGems-Slider container-fluid my-5 overflow-hidden">
+            <section className="disArear-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
-                    <div className="col-12 mx-3 pb-4">
-                        <h4 className="fw-bold" style={{ color: "color: rgb(88, 86, 86)" }}>Romantic</h4>
+                    <div className="col-12 mx-3">
+                        <h4 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }}> Romantic </h4>
                     </div>
-                    <div className="col-12">
-                        <div id="hiddenGems-Slider" className="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                            <div className="carousel-inner">
 
-                                <div className="carousel-item active">
-                                    <div className="row">
-                                        <div className="col-12 d-flex">
+                    <div className="col-12 d-flex">
+                        <div class="Shrouk-Slider slider slider--first js-slider">
+                            <div class="slider__wrapper">
 
-                                            {
-                                                QueryByMood2.map((Res) => {
-                                                    return (
-                                                        Res.IsActivated &&  <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo}></DineoutByCity>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                    </div>
+                                <div class="slider__inner js-slider-inner">
+                                    {
+                                        QueryByMood2.map((Res) => {
+                                            return (
+                                                Res.IsActivated && <DineoutByCity Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo} ResID={Res.id}></DineoutByCity>
+                                            )
+                                        })
+                                    }
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -401,43 +399,44 @@ export default function Dineout() {
             </section>
 
             {/* Discover By New Resturants */}
-            
-            <section className="newResturants-Slider container-fluid my-5 overflow-hidden">
+
+            <section className="disArear-Slider container-fluid my-5 overflow-hidden">
                 <div className="row">
-                    <div className="col-12 mx-3 pb-4">
-                        <h3 className="fw-bold" style={{ color: "color: rgb(88, 86, 86)" }}>New Restaurants</h3>
+                    <div className="col-12 mx-3">
+                        <h4 className="fw-bold" style={{ color: "rgb(88, 86, 86)" }}>New Restaurant</h4>
                     </div>
-                    <div className="col-12">
-                        <div id="newResturants-Slider" className="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                            <div className="carousel-inner">
 
-                                <div className="carousel-item active">
-                                    <div className="row">
-                                        <div className="col-12 d-flex">
+                    <div className="col-12 d-flex">
+                        <div class="Shrouk-Slider slider slider--first js-slider">
+                            <div class="slider__wrapper">
 
-                                            {
-                                                Restaurants.map((Res) => {
-                                                    return (
+                                <div class="slider__inner js-slider-inner">
+                                    {
+                                        Restaurants.map((Res) => {
+                                            return (
+                                                Res.IsActivated && <div class="slider__slide">
 
-                                                        Res.IsActivated && <div class="item-1 p-2">
-                                                            <div class="box-newResturants" style={{ height: "27vh", width: "13vw" }}>
-                                                                <div class="slide-img" style={{ width: "auto", boxShadow: "none" }}>
-                                                                    <img
-                                                                        src={Res.ImageLogo} style={{ height: "19vh", width: "13vw" }}
-                                                                        alt="" />
-                                                                    <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
-                                                                        <a href="#" class="meal-kind" style={{ fontSize: "13px" }}>{Res.ResName}</a>
-                                                                    </div>
+                                                    <div class="item-1 p-2 mx-0">
+                                                        <div class="box-newResturants" style={{ height: "27vh", width: "13vw" }}>
+                                                              <Link to={`/Restaurant/${Res.id}`} >
+                                                               <div class="slide-img" style={{ width: "auto", boxShadow: "none" }}>
+                                                                <img
+                                                                    src={Res.ImageLogo} style={{ height: "19vh", width: "13vw" }}
+                                                                    alt="" />
+                                                                <div class="detail-box" style={{ flexDirection: "column", justifyContent: "center" }}>
+                                                                    <a href="#" class="meal-kind" style={{ fontSize: "13px" }}>{Res.ResName}</a>
                                                                 </div>
+                                                                
                                                             </div>
+                                                            </Link>
                                                         </div>
-                                                    )
-                                                })
-                                            }
-
-                                        </div>
-                                    </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </div>
+
                             </div>
                         </div>
                     </div>

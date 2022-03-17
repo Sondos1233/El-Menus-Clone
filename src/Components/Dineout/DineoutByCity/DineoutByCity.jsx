@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './../Dineout.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
+import { Link } from 'react-router-dom';
 export default function DineoutbyCity(props) {
 
 
@@ -11,6 +11,7 @@ export default function DineoutbyCity(props) {
             {/* <div class="box-disArear m-2" > */}
                 <div class="slider__slide mx-2 my-2">
                     {/* <div class="slide__content"> */}
+                    <Link to={`/Restaurant/${props.ResID}`} >
                         <div class="slide-img" style={{ width: "30vw" }}>
                             <img
                             src={props.srcImage} 
@@ -41,6 +42,7 @@ export default function DineoutbyCity(props) {
                                 </p>
                             </div>
                         </div>
+                    </Link>
                     {/* </div> */}
                 </div>
             {/* </div> */}

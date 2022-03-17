@@ -33,11 +33,13 @@ export default function OfferParent() {
         }
     };
     useEffect(() => {
-        const getRestaurants = async () => {l++;
+        const getRestaurants = async () => {
             let arr = [];
             const data = await getDocs(resturantsCollection);
             data.docs.map((doc1)=>{ 
                 getOffers(doc1,arr);
+                l++;
+            
             })
         // const Resdata = await getDocs(resturantsCollection)
         // // console.log(Resdata)
@@ -45,10 +47,11 @@ export default function OfferParent() {
     }
     getRestaurants()
     
-}, [l])
+}, [])
 
 return (
     <>
+    {console.log(Restaurants)}
             {/*  Start Of ToDelivery Section Markup */}
             <section id="toDelivery">
                 <div>
@@ -69,9 +72,9 @@ return (
                     <div id="cardsArea" class="row row-cols-1 row-cols-md-1 row-cols-lg-3 g-4">
                         {/* {console.log(Restaurants)} */}
                         {
-                            Restaurants.map((Res,index) => { index++;  
+                            Restaurants.map((Res,index) => {  
                                 return (
-                                    <Offers Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo} ></Offers>
+                                    <Offers Rate={Res.Rate} ResType={Res.Type} ResName={Res.ResName} srcImage={Res.ImageURL} srcLogo={Res.ImageLogo} Res={Res}></Offers>
                                 )
                             })
                         }
