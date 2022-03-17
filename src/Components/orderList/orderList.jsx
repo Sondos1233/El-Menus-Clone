@@ -54,7 +54,7 @@ export default function OrderList({ orderLength }) {
         <>
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
-                style={{ maxWidth: "70vh" }}
+                style={{ maxWidth: "70vh",zIndex:3000 }}
             >
                 <div class="offcanvas-header ">
                     {/* <h5 id="offcanvasRightLabel" style={{ alignSelf:"center", color:"#e32207" }}>Your Order</h5> */}

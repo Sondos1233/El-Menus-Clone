@@ -65,11 +65,17 @@ function hello(rate){
         >
           {
             addReview?
-            Review.length ===0?
+            (Review.length ===0?
+              <div><div className="float-end mb-3">
+              <button className="btn rounded-3 btnAddReview" onClick={()=>setAddReview(false)}>Add Review</button>
+            </div>
             <div style={{width:'30%', margin:'auto'}}>
+
               <img src={NoData} alt="" />
               <p style={{textAlign:'center'}}>No reviews yet</p>
             </div>
+            </div>
+            
             :
             <div className="container-fluid">
             <div className="float-end mb-3">
@@ -117,10 +123,10 @@ function hello(rate){
                 )
               })}
             </div>
-          </div>
+          </div>)
             :
             <ReviewForm setAddReview={setAddReview} />
-          }
+            }
         </div>
       </div>
     </>

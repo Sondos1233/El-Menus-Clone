@@ -78,7 +78,7 @@ const OffersCard = () => {
                         {Res.map((res, index) => {
                           return (
                              res.data().IsActivated&&<div class="slider__slide" >
-                             <div className="col-lg-3 col-md-4 position-relative aproductDiv" style={{ height:"300px" ,width: "300px" }}>
+                             <div className="col-lg-3 col-md-4 position-relative aproductDiv" style={{ height:"300px" ,width: "300px",zIndex:-3000 }}>
                                <Link className="aLinkCard" to={`/Restaurant/${res.id}`}>
                                  <figure className="aFigRes">
                                    <img

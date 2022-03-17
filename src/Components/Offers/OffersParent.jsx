@@ -28,7 +28,7 @@ export default function OfferParent() {
                 const Resoffer = await doc(db,'Restaurant',doc1.id);
                 const data3 = await getDoc(Resoffer);
                 //console.log(data3.data())
-                arr.push(data3.data());
+                arr.push({...data3.data(),id:data3.id});
                 setRestaurants(arr);
         }
     };

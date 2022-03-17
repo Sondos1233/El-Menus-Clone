@@ -23,6 +23,45 @@ export default function Navbar() {
     const orderLength = (length)=>{
         setLen(length)
     }
+
+    //=======================Search Res=====================
+    const[showRes,setshowRes]=useState(false)
+    const listOfCities = collection(firestore, "Cities");
+    const listOfRes = collection(firestore,"Restaurant")
+    const [CityList, setCityList] = useState([]);
+    const [ResList, setResList] = useState([]);
+    const[SearchRes,setSearchRes] = useState('');
+  const bySearchRes = (Res, SearchRes) => {
+    if(Res.IsActivated){
+      if (SearchRes) {
+        return Res.ResName.toLowerCase().includes(SearchRes.toLowerCase());
+      } else return 'Not Match any Res';
+    }
+    
+  };
+  
+  const filteredList = (ResList, SearchRes) => {
+    // console.log(ResList,SearchRes)
+    return ResList.filter(Res => bySearchRes(Res, SearchRes));
+  }
+  const handleChangeRes=(e) =>{
+    if(e.target.value==''){
+    setshowRes(false)
+    }else{
+     setshowRes(true)
+     setSearchRes(e.target.value)
+    }
+  }
+   // console.log(City)
+   useEffect(() => {
+     
+     const getRes = async()=>{
+       const data = await getDocs(listOfRes);
+       setResList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+     }
+    
+     getRes();
+   }, []);
 //=======================Handle toggle Buttons With Icons=====================
   const [toggleBtnsWithIcons, setToggleBtnsWithIcons] = useState(true);
 
@@ -398,10 +437,13 @@ const [isSubmit, setIsSubmit] = useState(false);
                                 <form>
                                     <div className="input-group mb-2 search-side">
                                         <input
-                                            type="text"
+                                            type="Search"
                                             className="form-control"
                                             placeholder="Find A Restaurant"
                                             style={{ padding: "10px" }}
+                                            onChange={(e) => {
+                                                handleChangeRes(e);
+                                              }}
                                         />
                                         <span
                                             className="input-group-text"
@@ -411,6 +453,21 @@ const [isSubmit, setIsSubmit] = useState(false);
                                         </span>
                                     </div>
                                 </form>
+                                <span className="position-absolute"  style={{zIndex:3000,top:"160px",left:"40px",width:"50%"}} >
+                    {
+                       showRes&&<ul className="list-group list-group-flush dropdownRes">
+                       {filteredList(ResList,SearchRes).map((Res) => {
+                         return <Link to={`/Restaurant/${Res.id}`} style={{"textDecoration":"none"}}><li className="list-group-item py-2"><span className="logoResDrop p-1 mx-3"><img src={Res.ImageLogo} width="20px" height="20px"/></span>{Res.ResName}</li></Link>;
+                       })}
+                        {/* <Link to="/" style={{"textDecoration":"none"}}><li className="list-group-item">Zaks</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Mac</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">Kfc</li></Link>
+                        <Link to="/" style={{"textDecoration":"none"}}><li class="list-group-item">blal</li></Link> */}
+ 
+                       </ul>
+                     }
+
+                    </span>
                             </div>
                             <div className="col-lg-5 col-md-12 location-side">
                                 <img
@@ -428,8 +485,8 @@ const [isSubmit, setIsSubmit] = useState(false);
             </nav>
             <section aria-label="breadcrumb" className="container-fluid d-lg-block d-none" style={{ borderBottom: "1px solid #dfe2eb" , padding: "0"}}>
                 <div className="row navCont" style={{ margin: "0 120px" }}>
-                    <div className="col-12 pt-2">
-                        <ol className="breadcrumb" >
+                    <div className="col-12 pt-2" >
+                        <ol className="breadcrumb" style={{zIndex:-3000}} >
                             <li className="breadcrumb-item" ><Link to="/Home">Home</Link></li>
                             <li className="breadcrumb-item"><a href="#" className='color-a'>{localStorage.getItem('Name')}</a></li>
                             <li className="breadcrumb-item"><a href="#" className='color-a'>{localStorage.getItem('areaName')}</a></li>

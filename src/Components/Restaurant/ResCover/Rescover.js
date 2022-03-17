@@ -42,7 +42,7 @@ const ResCover = (props) => {
   },[id]);
     return(
         <>
-        <div className="aDivImgCover">
+        <div className="aDivImgCover" style={{zIndex:-3000}}>
         <img className="aImgCover" src={Res.ImgCover} alt="" />
         {/* {console.log(offer)} */}
         {(offer.length!==0)&&

@@ -47,7 +47,7 @@ const RestCard = (props) => {
         );
     }
     else if(props.Promo){
-     
+     console.log(props.Promo)
   
       let l=0;
       const getOffers = async(doc1,arr) =>{
@@ -61,7 +61,8 @@ const RestCard = (props) => {
                   const data3 = await getDoc(Resoffer);
                   //console.log(data3.data())
                   arr.push(data3.data());
-                  setRestaurants(arr);
+                  setRes(arr);
+                  console.log(Res)
           }
       };
      

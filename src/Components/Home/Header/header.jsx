@@ -485,13 +485,14 @@ const [isSubmit, setIsSubmit] = useState(false);
                 </div>
                 <div className=" col-md-2 col-sm-6 position-relative" >
                   
-                    <button
+                    <Link
+                     to="/Delivery"
                       style={{"width":"100%"}}
                       className="btn-primary btn "
                     >
                       {t('Go')} <FontAwesomeIcon icon={faArrowRight} />
                       
-                    </button>
+                    </Link>
                   
                 </div>
               </div>
